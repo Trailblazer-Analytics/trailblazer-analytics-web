@@ -67,6 +67,29 @@ const base = import.meta.env.BASE_URL;
         min-height: 100vh;
       }
     </style>
+      <!-- Debug script for asset loading issues -->
+    <script is:inline>
+      // Only run debug logging in development or when explicitly enabled
+      const isDebugMode = window.location.hostname === 'localhost' || 
+                         window.location.search.includes('debug=true');
+      
+      window.addEventListener('DOMContentLoaded', () => {
+        if (isDebugMode) {
+          console.log('[Debug] Base URL:', '${base}');
+          console.log('[Debug] Asset paths:');
+          document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(el => {
+            console.log(el.getAttribute('href') || el.getAttribute('src'));
+          });
+        }
+        
+        // Always check for 404 errors on CSS/JS files
+        window.addEventListener('error', function(e) {
+          if (e.target && (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT')) {
+            console.error('Failed to load:', e.target.getAttribute('href') || e.target.getAttribute('src'));
+          }
+        }, true);
+      });
+    </script>
   </head>
   <body class="min-h-screen flex flex-col">
     <slot />

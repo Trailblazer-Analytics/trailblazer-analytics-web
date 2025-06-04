@@ -11,7 +11,10 @@
     "package:win": "pnpm run build && cd dist && powershell Compress-Archive -Path * -DestinationPath ../trailblazer-analytics-dist.zip -Force && cd ..",
     "package:unix": "pnpm run build && cd dist && zip -r ../trailblazer-analytics-dist.zip . && cd ..",
     "clean": "rmdir /s /q dist 2>nul || rm -rf dist",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "deploy": "astro build && npx gh-pages -d dist && echo '\n✅ Deployed to https://anykolaiszyn.github.io/trailblazer-analytics-devkit/'",
+    "deploy:clean": "astro build && npx gh-pages -d dist --remove \"**\\!(.git|.|..)\" --no-history && echo '\n✅ Clean deployment to https://anykolaiszyn.github.io/trailblazer-analytics-devkit/'",
+    "verify-build": "node scripts/verify-build.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.6",
@@ -25,6 +28,8 @@
     "@astrojs/tailwind": "^6.0.2",
     "@lhci/cli": "^0.14.0",
     "autoprefixer": "10.4.15",
+    "chalk": "^5.4.1",
+    "gh-pages": "^6.3.0",
     "postcss": "8.4.38"
   }
 }
