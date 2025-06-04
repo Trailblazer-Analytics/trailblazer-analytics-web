@@ -8,5 +8,4 @@ export default defineConfig({
   output: "static",
   site: "https://anykolaiszyn.github.io/trailblazer-analytics-devkit",
   base: "/trailblazer-analytics-devkit",
-  trailingSlash: "always",
 });
