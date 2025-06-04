@@ -1,109 +1,13 @@
 ---
-import siteConfig from '../site.config.js';
-const base = import.meta.env.BASE_URL;
-
-// Default meta data
-const defaultTitle = "Trailblazer Analytics";
-const defaultDescription = "Transforming data into actionable insight with BI expertise, AI innovation, and clear storytelling.";
-const defaultImage = "/og-image.png";
-
-// Props for customization
-export interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-  type?: string;
-  noIndex?: boolean;
-}
-
-const { 
-  title = defaultTitle,
-  description = defaultDescription,
-  image = defaultImage,
-  type = "website",
-  noIndex = false
-} = Astro.props;
-
-// Construct full title
-const fullTitle = title === defaultTitle ? title : `${title} | ${defaultTitle}`;
+import '../styles/global.css';
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <base href={base}/>
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {noIndex && <meta name="robots" content="noindex, nofollow" />}
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content={type} />
-    <meta property="og:url" content="https://trailblazer-analytics.com" />
-    <meta property="og:image" content={image} />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content={fullTitle} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
-    
-    <!-- Favicon and Icons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Trailblazer Analytics",
-        "description": "Data strategy consulting, analytics implementation, and AI transformation services",
-        "url": "https://trailblazer-analytics.com",
-        "logo": "https://trailblazer-analytics.com/logo.png",
-        "image": "https://trailblazer-analytics.com/og-image.png",
-        "founder": {
-          "@type": "Person",
-          "name": "Alexander Nykolaiszyn",
-          "jobTitle": "Manager Business Insights",
-          "description": "15+ years transforming raw data into strategic business value through BI, automation, and AI integrations",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "Lennar Corporation"
-          },
-          "alumniOf": "15+ years in business intelligence and analytics",
-          "sameAs": [
-            "https://linkedin.com/in/alexnyk",
-            "https://medium.com/@alex.nykolaiszyn",
-            "https://twitter.com/AlexNyk"
-          ]
-        },
-        "serviceType": [
-          "Data Strategy Consulting",
-          "Business Intelligence",
-          "Analytics Implementation",
-          "AI Transformation"
-        ],
-        "areaServed": "Worldwide",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "business",
-          "url": "https://trailblazer-analytics.com/contact"
-        }
-      }
-    </script>
-    <script defer data-domain={siteConfig.plausibleDomain} src="https://plausible.io/js/plausible.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-      html { font-family: 'Inter', 'Outfit', sans-serif; }
-    </style>
+    <title>Trailblazer Analytics</title>
+    <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
     <slot />
