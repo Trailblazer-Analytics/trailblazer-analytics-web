@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://trailblazer-analytics.com/sitemap.xml
+
+# Disallow API endpoints from indexing
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /about
+Allow: /insights
+Allow: /podcast
+Allow: /white-papers
+Allow: /downloads
+Allow: /tools
+Allow: /tech-notes
+Allow: /contact
+
+# Media files
+Allow: /downloads/*.pdf
+Allow: /images/
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.svg
+Allow: /*.webp

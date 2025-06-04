@@ -1,0 +1,291 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+
+// SEO meta data
+const seoData = {
+  title: "Analytics Software & Solutions - Professional Tools for Data Teams",
+  description: "Professional-grade analytics software, tools, and digital products designed to accelerate your data initiatives. Templates, calculators, and strategic frameworks for data professionals.",
+  image: "/og-image-software.png"
+};
+---
+
+<Base title={seoData.title} description={seoData.description} image={seoData.image}>
+  <Navbar />
+  
+  <!-- Header Section -->
+  <section class="bg-gray-900 text-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional Analytics Software</h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Ready-to-use tools, templates, and software solutions designed by analytics professionals, for analytics professionals.
+        </p>
+        <a href="/tools" class="bg-brandGold text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+          Browse All Tools
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Software Categories -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Software Solutions</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Professional-grade tools and templates that save you time and help you deliver better analytics outcomes.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Product 1 -->
+          <div class="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-brandGreen rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">ROI Calculator Suite</h3>
+            <p class="text-gray-600 mb-6">Calculate and justify the return on investment for any analytics initiative with our comprehensive calculator suite.</p>
+            <ul class="text-sm text-gray-500 space-y-2 mb-6">
+              <li>• Pre-built ROI models</li>
+              <li>• Cost-benefit analysis templates</li>
+              <li>• Executive presentation formats</li>
+              <li>• Industry-specific examples</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-brandGreen">$49</span>
+              <a href="/tools/roi-calculator" class="text-brandGreen font-medium hover:text-green-700 transition-colors">Learn More →</a>
+            </div>
+          </div>          <!-- Product 2 -->
+          <div class="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-brandGreen rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Analytics Maturity Assessment</h3>
+            <p class="text-gray-600 mb-6">Interactive assessment tool that evaluates your organization's analytics capabilities and provides a roadmap for improvement.</p>
+            <ul class="text-sm text-gray-500 space-y-2 mb-6">
+              <li>• 50+ assessment criteria</li>
+              <li>• Automated scoring & benchmarking</li>
+              <li>• Detailed improvement recommendations</li>
+              <li>• Executive summary reports</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-brandGreen">Free</span>
+              <a href="/tools/maturity-assessment" class="text-brandGreen font-medium hover:text-green-700 transition-colors">Try Now →</a>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-brandGreen rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Dashboard Design System</h3>
+            <p class="text-gray-600 mb-6">Complete design system and template library for creating professional, user-friendly analytics dashboards.</p>
+            <ul class="text-sm text-gray-500 space-y-2 mb-6">
+              <li>• 50+ dashboard templates</li>
+              <li>• Design principles guide</li>
+              <li>• Color palettes & typography</li>
+              <li>• Figma & PowerBI files included</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-brandGreen">$79</span>
+              <a href="/tools/dashboard-design-system" class="text-brandGreen font-medium hover:text-green-700 transition-colors">Learn More →</a>
+            </div>
+          </div>          <!-- Product 4 -->
+          <div class="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-brandGreen rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Data Governance Toolkit</h3>
+            <p class="text-gray-600 mb-6">Complete governance framework with templates, policies, and procedures to establish robust data management practices.</p>
+            <ul class="text-sm text-gray-500 space-y-2 mb-6">
+              <li>• Governance policy templates</li>
+              <li>• Data quality frameworks</li>
+              <li>• RACI matrices & workflows</li>
+              <li>• Compliance checklists</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-brandGreen">$129</span>
+              <a href="/tools/data-governance-toolkit" class="text-brandGreen font-medium hover:text-green-700 transition-colors">Learn More →</a>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-brandGreen rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Analytics Career Accelerator</h3>
+            <p class="text-gray-600 mb-6">Comprehensive course and resource pack designed to fast-track your analytics career growth and professional development.</p>
+            <ul class="text-sm text-gray-500 space-y-2 mb-6">
+              <li>• Career roadmap frameworks</li>
+              <li>• Portfolio project templates</li>
+              <li>• Interview preparation guides</li>
+              <li>• Networking strategies</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-brandGreen">$199</span>
+              <a href="/tools/career-accelerator" class="text-brandGreen font-medium hover:text-green-700 transition-colors">Learn More →</a>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-brandGreen rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Cloud Analytics Optimizer</h3>
+            <p class="text-gray-600 mb-6">SaaS tool that analyzes your cloud data platform usage and provides intelligent cost optimization recommendations.</p>
+            <ul class="text-sm text-gray-500 space-y-2 mb-6">
+              <li>• Multi-cloud support</li>
+              <li>• Automated cost analysis</li>
+              <li>• Performance optimization tips</li>
+              <li>• Monthly savings reports</li>
+            </ul>
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-brandGreen">$99<span class="text-base text-gray-500">/mo</span></span>
+              <a href="/tools/cloud-optimizer" class="text-brandGreen font-medium hover:text-green-700 transition-colors">Try Free →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">      <div class="max-w-4xl mx-auto text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How Our Tools Work</h2>
+        <p class="text-xl text-gray-600">
+          Simple, effective tools designed by practitioners who understand real-world analytics challenges.
+        </p>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-4 gap-8">
+          <!-- Step 1 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-brandGreen rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">1</span>
+            </div>            <h3 class="text-lg font-semibold text-gray-900 mb-2">Browse</h3>
+            <p class="text-gray-600 text-sm">Explore our library of tools, templates, and courses designed for analytics professionals.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-brandGreen rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">2</span>
+            </div>            <h3 class="text-lg font-semibold text-gray-900 mb-2">Purchase</h3>
+            <p class="text-gray-600 text-sm">Simple one-click purchasing with instant access to your tools and resources.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-brandGreen rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">3</span>
+            </div>            <h3 class="text-lg font-semibold text-gray-900 mb-2">Download</h3>
+            <p class="text-gray-600 text-sm">Get immediate access to your purchased tools with detailed documentation and examples.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-brandGreen rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-bold text-xl">4</span>
+            </div>            <h3 class="text-lg font-semibold text-gray-900 mb-2">Implement</h3>
+            <p class="text-gray-600 text-sm">Apply the tools to your projects with ongoing support and community access.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Featured Resources Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Resources</h2>
+          <p class="text-xl text-gray-600">
+            The most downloaded and highly-rated tools from our analytics community.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Data Strategy Canvas</h3>
+              <p class="text-gray-600 text-sm mb-4">The most comprehensive framework for developing data strategies</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500">10,000+ downloads</span>
+                <a href="/downloads/data-strategy-canvas" class="text-brandGreen text-sm font-medium hover:text-green-700">Download Free →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">ROI Calculator</h3>
+              <p class="text-gray-600 text-sm mb-4">Calculate and justify analytics investments with confidence</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500">5,000+ uses</span>
+                <a href="/tools/roi-calculator" class="text-brandGreen text-sm font-medium hover:text-green-700">Try Tool →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Analytics Career Guide</h3>
+              <p class="text-gray-600 text-sm mb-4">Complete roadmap for advancing your analytics career</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-500">3,000+ readers</span>
+                <a href="/tools/career-accelerator" class="text-brandGreen text-sm font-medium hover:text-green-700">Learn More →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a href="/tools" class="bg-brandGreen text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors">
+            Browse All Tools
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gray-900 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">        <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Accelerate Your Analytics?</h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Browse our professional tools and resources designed to help you deliver better analytics outcomes faster.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/tools" class="bg-brandGold text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
+            Browse All Tools
+          </a>
+          <a href="/downloads" class="border-2 border-brandGold text-brandGold px-8 py-4 rounded-lg font-semibold hover:bg-brandGold hover:text-gray-900 transition-colors">
+            Free Resources
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

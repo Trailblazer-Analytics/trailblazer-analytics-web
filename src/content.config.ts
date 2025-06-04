@@ -1,0 +1,100 @@
+import { defineCollection, z } from "astro:content";
+
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+  }),
+});
+
+const caseStudies = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    client: z.string().optional(),
+    industry: z.string().optional(),
+    summary: z.string().optional(),
+    description: z.string().optional(),
+    challenge: z.string().optional(),
+    solution: z.string().optional(),
+    results: z.array(z.string()).optional(),
+    technologies: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+  }),
+});
+
+const techNotes = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+    difficulty: z.enum(['Beginner', 'Intermediate', 'Advanced']).optional(),
+    readTime: z.string().optional(),
+    category: z.enum(['Python', 'SQL', 'JavaScript', 'ML', 'Data Engineering', 'Visualization']).optional(),
+    tags: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+  }),
+});
+
+const whitepapers = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+    category: z.string().optional(),
+    pages: z.number().optional(),
+    downloadUrl: z.string().optional(),
+    gated: z.boolean().optional(),
+    featured: z.boolean().optional(),
+    rating: z.number().optional(),
+    downloads: z.number().optional(),
+  }),
+});
+
+const downloads = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+    category: z.enum(['Templates', 'Tools', 'Guides', 'Checklists', 'Frameworks']).optional(),
+    fileType: z.string().optional(),
+    fileSize: z.string().optional(),
+    downloadUrl: z.string().optional(),
+    featured: z.boolean().optional(),
+    rating: z.number().optional(),
+    downloads: z.number().optional(),
+  }),
+});
+
+const tools = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+    category: z.enum(['Frameworks', 'Templates', 'Calculators', 'Courses']).optional(),
+    price: z.string().optional(),
+    demoUrl: z.string().optional(),
+    purchaseUrl: z.string().optional(),
+    featured: z.boolean().optional(),
+    rating: z.number().optional(),
+    technologies: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = {
+  blog,
+  caseStudies,
+  techNotes,
+  whitepapers,
+  downloads,
+  tools,
+};

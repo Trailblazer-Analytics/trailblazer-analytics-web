@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Production
+dist/
+trailblazer-analytics-dist.zip
+
+# Env
+.env

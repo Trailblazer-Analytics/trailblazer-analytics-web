@@ -1,0 +1,57 @@
+{
+  "$ref": "#/definitions/tools",
+  "definitions": {
+    "tools": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Frameworks",
+            "Templates",
+            "Calculators",
+            "Courses"
+          ]
+        },
+        "price": {
+          "type": "string"
+        },
+        "demoUrl": {
+          "type": "string"
+        },
+        "purchaseUrl": {
+          "type": "string"
+        },
+        "featured": {
+          "type": "boolean"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "technologies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

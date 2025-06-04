@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.jsx';
+
+export async function getStaticPaths() {
+  const toolEntries = await getCollection('tools');
+  return toolEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// SEO meta data
+const seoData = {
+  title: `${entry.data.title} - Analytics Tool`,
+  description: entry.data.description || entry.data.excerpt || 'Use this powerful analytics tool to improve your data strategy.',
+  image: entry.data.image || '/og-image.png'
+};
+
+// Format date
+function formatDate(date) {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Base {...seoData}>
+  <Navbar />
+  
+  <article class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Article Header -->
+        <header class="mb-12">
+          <div class="text-center mb-8">
+            <span class="bg-brandGold text-black px-4 py-2 rounded-full text-sm font-semibold">
+              Analytics Tool
+            </span>
+          </div>
+          
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center">
+            {entry.data.title}
+          </h1>
+          
+          {entry.data.description && (
+            <p class="text-xl text-gray-600 text-center mb-8">
+              {entry.data.description}
+            </p>
+          )}
+          
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-gray-500 mb-8">
+            {entry.data.price && (
+              <div class="text-center">
+                <span class="text-3xl font-bold text-brandGreen">{entry.data.price}</span>
+                {entry.data.priceNote && (
+                  <p class="text-sm text-gray-500">{entry.data.priceNote}</p>
+                )}
+              </div>
+            )}
+          </div>
+          
+          {entry.data.downloadUrl && (
+            <div class="text-center">
+              <a 
+                href={entry.data.downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-brandGreen text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center gap-2"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download Tool
+              </a>
+            </div>
+          )}
+        </header>
+        
+        <!-- Article Content -->
+        <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg">
+          <Content />
+        </div>
+        
+        <!-- Navigation -->
+        <div class="mt-12 flex justify-center">
+          <a 
+            href="/tools" 
+            class="bg-brandGreen text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+          >
+            ← Back to Tools
+          </a>
+        </div>
+        
+      </div>
+    </div>
+  </article>
+  
+  <Footer />
+</Base>

@@ -1,0 +1,590 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+
+// SEO meta data
+const seoData = {
+  title: "Insights - Latest Data Strategy & Analytics Articles",
+  description: "Read the latest insights on data strategy, analytics implementation, and business intelligence from Alexander Nykolaiszyn. Fresh perspectives on data transformation and AI adoption.",
+  image: "/og-image-insights.png"
+};
+
+// Medium RSS feed URL (replace with actual Medium username)
+const MEDIUM_RSS_URL = 'https://medium.com/feed/@alex.nykolaiszyn';
+
+// Function to fetch and parse Medium RSS feed
+async function fetchMediumPosts() {
+  try {
+    // Using a CORS proxy for RSS parsing in production
+    const rssToJsonAPI = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(MEDIUM_RSS_URL)}`;
+    const response = await fetch(rssToJsonAPI);
+    const data = await response.json();
+    
+    if (data.status === 'ok') {
+      return data.items.slice(0, 12); // Get latest 12 posts for better pagination
+    }
+    return [];
+  } catch (error) {
+    console.error('Error fetching Medium posts:', error);
+    return [];
+  }
+}
+
+const mediumPosts = await fetchMediumPosts();
+
+// Extract excerpt from content
+function getExcerpt(content, maxLength = 150) {
+  const text = content.replace(/<[^>]*>/g, ''); // Strip HTML
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+// Format date
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Get reading time estimate
+function getReadingTime(content) {
+  const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+  const readingTimeMinutes = Math.ceil(words / 200); // Average reading speed
+  return readingTimeMinutes;
+}
+
+// Extract categories from content (basic implementation)
+function extractCategories(content, title) {
+  const categories = [];
+  const keywordMap = {
+    'Data Strategy': ['strategy', 'governance', 'planning', 'roadmap'],
+    'Analytics': ['analytics', 'analysis', 'insights', 'metrics'],
+    'AI & ML': ['ai', 'artificial intelligence', 'machine learning', 'ml', 'model'],
+    'Business Intelligence': ['bi', 'business intelligence', 'reporting', 'dashboard'],
+    'Technology': ['technology', 'tech', 'tools', 'platform', 'cloud']
+  };
+  
+  const combinedText = (title + ' ' + content).toLowerCase();
+  
+  for (const [category, keywords] of Object.entries(keywordMap)) {
+    if (keywords.some(keyword => combinedText.includes(keyword))) {
+      categories.push(category);
+    }
+  }
+  
+  return categories.length > 0 ? categories : ['General'];
+}
+---
+
+<Base {...seoData}>
+  <Navbar />
+    <!-- Header Section -->
+  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">
+          Insights & <span class="text-brandGold">Analysis</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+          Expert perspectives on data strategy, analytics trends, and technology innovations that are shaping the future of business intelligence.
+        </p>
+        
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+          <div class="relative">
+            <input 
+              type="text" 
+              id="article-search"
+              placeholder="Search articles..." 
+              class="w-full px-6 py-4 pl-12 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:bg-white/20 focus:border-brandGold transition-all"
+            />
+            <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+        
+        <!-- Category Filter Tags -->
+        <div class="flex flex-wrap justify-center gap-4 mb-6">
+          <button class="category-filter active bg-brandGreen/20 text-brandGreen px-4 py-2 rounded-full hover:bg-brandGreen/30 transition-colors" data-category="all">All Articles</button>
+          <button class="category-filter bg-brandGold/20 text-brandGold px-4 py-2 rounded-full hover:bg-brandGold/30 transition-colors" data-category="Data Strategy">Data Strategy</button>
+          <button class="category-filter bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full hover:bg-blue-500/30 transition-colors" data-category="Analytics">Analytics</button>
+          <button class="category-filter bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full hover:bg-purple-500/30 transition-colors" data-category="AI & ML">AI & ML</button>
+          <button class="category-filter bg-green-500/20 text-green-400 px-4 py-2 rounded-full hover:bg-green-500/30 transition-colors" data-category="Business Intelligence">Business Intelligence</button>
+          <button class="category-filter bg-orange-500/20 text-orange-400 px-4 py-2 rounded-full hover:bg-orange-500/30 transition-colors" data-category="Technology">Technology</button>
+        </div>        <!-- External Medium Link -->
+        <div class="mt-6">        <a 
+            href="https://medium.com/@alex.nykolaiszyn" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-brandGold hover:text-yellow-300 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+            </svg>
+            Follow on Medium for more insights
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Featured Article Section -->
+  {mediumPosts.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gradient-to-r from-brandGreen to-green-600 rounded-2xl p-8 text-white relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-4 -translate-x-4"></div>
+            
+            <div class="relative z-10">
+              <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="bg-brandGold text-black px-3 py-1 rounded-full text-sm font-semibold">Featured Article</span>
+                {extractCategories(mediumPosts[0].description, mediumPosts[0].title).slice(0, 2).map(category => (
+                  <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm">
+                    {category}
+                  </span>
+                ))}
+              </div>
+              
+              <h2 class="text-3xl font-bold mb-4">{mediumPosts[0].title}</h2>
+              <p class="text-xl mb-6 opacity-90">{getExcerpt(mediumPosts[0].description, 200)}</p>
+              
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-4 text-sm opacity-75">
+                  <span>{formatDate(mediumPosts[0].pubDate)}</span>
+                  <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    {getReadingTime(mediumPosts[0].description)} min read
+                  </span>
+                </div>
+                
+                <a 
+                  href={mediumPosts[0].link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 bg-white text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Read Full Article
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+  <!-- Articles Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-900">Latest Articles</h2>
+            <p class="text-gray-600 mt-2" id="article-count">
+              {mediumPosts.length > 0 ? `Showing ${mediumPosts.length} articles` : 'No articles found'}
+            </p>
+          </div>
+          <div class="flex items-center gap-4">
+            <!-- Sort Dropdown -->
+            <select id="sort-articles" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandGreen focus:border-transparent">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="title">Title A-Z</option>              </select>
+              <a 
+              href="https://medium.com/@alex.nykolaiszyn" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-brandGreen hover:text-green-700 font-semibold transition-colors"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+              </svg>
+              View All on Medium
+            </a>
+          </div>
+        </div>
+
+        {mediumPosts.length > 0 ? (
+          <div id="articles-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {mediumPosts.slice(1).map((post) => {
+              const categories = extractCategories(post.description, post.title);
+              const readingTime = getReadingTime(post.description);
+              
+              return (
+                <article class="article-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1" 
+                         data-categories={categories.join(',').toLowerCase()}
+                         data-title={post.title.toLowerCase()}
+                         data-date={post.pubDate}>
+                  <div class="p-6">
+                    <!-- Article Categories -->
+                    <div class="flex flex-wrap gap-2 mb-3">
+                      {categories.slice(0, 2).map(category => (
+                        <span class="text-xs px-2 py-1 bg-brandGreen/10 text-brandGreen rounded-full">
+                          {category}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-brandGreen transition-colors">
+                      {post.title}
+                    </h3>
+                    
+                    <p class="text-gray-600 mb-4 line-clamp-3">
+                      {getExcerpt(post.description)}
+                    </p>
+                    
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                      <span>{formatDate(post.pubDate)}</span>
+                      <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        {readingTime} min read
+                      </span>
+                    </div>
+                    
+                    <a 
+                      href={post.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 bg-brandGreen text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium"
+                    >
+                      Read Article
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <div class="bg-white rounded-xl shadow-lg p-12 max-w-2xl mx-auto">
+              <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Articles Coming Soon</h3>              <p class="text-gray-600 mb-6">We're preparing insightful content on data strategy, analytics, and business intelligence. Check back soon or follow us on Medium for updates.</p>              <a
+                href="https://medium.com/@alex.nykolaiszyn" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-brandGreen text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                </svg>
+                Follow on Medium
+              </a>
+            </div>
+          </div>
+        )}
+        
+        <!-- Load More Button for future pagination -->
+        {mediumPosts.length > 9 && (
+          <div class="text-center mt-12">
+            <button 
+              id="load-more-articles"
+              class="bg-white border-2 border-brandGreen text-brandGreen px-8 py-3 rounded-lg hover:bg-brandGreen hover:text-white transition-colors font-semibold"
+            >
+              Load More Articles
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+  <!-- Newsletter Signup -->
+  <section class="py-16 bg-brandGreen text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Never Miss an Insight</h2>
+        <p class="text-xl mb-8 opacity-90">
+          Get exclusive analysis, data strategy tips, and the latest industry trends delivered straight to your inbox. Join 2,000+ data professionals.
+        </p>
+        <div class="bg-white/10 rounded-lg p-6">
+          <form class="flex flex-col sm:flex-row gap-4" action="/api/newsletter" method="POST">
+            <input 
+              type="email" 
+              name="email"
+              placeholder="Enter your email" 
+              class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-brandGold focus:outline-none"
+              required
+            />
+            <button 
+              type="submit"
+              class="bg-brandGold hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-lg transition-colors"
+            >
+              Subscribe Now
+            </button>
+          </form>
+          <div class="flex items-center justify-center gap-6 mt-4 text-sm opacity-75">
+            <span class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              No spam, ever
+            </span>
+            <span class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+              Unsubscribe anytime
+            </span>
+          </div>
+        </div>
+        
+        <!-- Social Follow Options -->
+        <div class="mt-8">
+          <p class="text-lg mb-4 opacity-90">Or follow for updates on:</p>
+          <div class="flex justify-center gap-4">              <a 
+              href="https://medium.com/@alex.nykolaiszyn" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>              </svg>
+              Medium
+            </a>
+            <a 
+              href="https://linkedin.com/in/alexnyk" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a 
+              href="https://twitter.com/@trailblazer_data" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+              Twitter
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .category-filter.active {
+    background-color: rgba(16, 185, 129, 0.3);
+    color: rgb(16, 185, 129);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+  }
+  
+  .article-card.hidden {
+    display: none;
+  }
+  
+  .article-card {
+    transition: all 0.3s ease;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('article-search');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const sortSelect = document.getElementById('sort-articles');
+    const articlesGrid = document.getElementById('articles-grid');
+    const articleCount = document.getElementById('article-count');
+    const loadMoreBtn = document.getElementById('load-more-articles');
+    
+    let currentFilter = 'all';
+    let currentSort = 'newest';
+    let articlesPerPage = 9;
+    let currentPage = 1;
+    
+    // Get all article cards
+    const getAllArticles = () => Array.from(document.querySelectorAll('.article-card'));
+    
+    // Search functionality
+    if (searchInput) {
+      searchInput.addEventListener('input', filterAndSortArticles);
+    }
+    
+    // Category filter functionality
+    categoryFilters.forEach(button => {
+      button.addEventListener('click', function() {
+        // Update active state
+        categoryFilters.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        currentFilter = this.dataset.category;
+        currentPage = 1; // Reset pagination
+        filterAndSortArticles();
+      });
+    });
+    
+    // Sort functionality
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function() {
+        currentSort = this.value;
+        filterAndSortArticles();
+      });
+    }
+    
+    // Load more functionality
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', function() {
+        currentPage++;
+        filterAndSortArticles();
+      });
+    }
+    
+    function filterAndSortArticles() {
+      const articles = getAllArticles();
+      const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+      
+      // Filter articles
+      const filteredArticles = articles.filter(article => {
+        const matchesSearch = searchTerm === '' || 
+          article.dataset.title.includes(searchTerm) ||
+          article.textContent.toLowerCase().includes(searchTerm);
+          
+        const matchesCategory = currentFilter === 'all' || 
+          article.dataset.categories.includes(currentFilter.toLowerCase());
+          
+        return matchesSearch && matchesCategory;
+      });
+      
+      // Sort articles
+      filteredArticles.sort((a, b) => {
+        switch (currentSort) {
+          case 'oldest':
+            return new Date(a.dataset.date) - new Date(b.dataset.date);
+          case 'title':
+            return a.dataset.title.localeCompare(b.dataset.title);
+          case 'newest':
+          default:
+            return new Date(b.dataset.date) - new Date(a.dataset.date);
+        }
+      });
+      
+      // Hide all articles first
+      articles.forEach(article => {
+        article.classList.add('hidden');
+      });
+      
+      // Show filtered and sorted articles with pagination
+      const startIndex = 0;
+      const endIndex = currentPage * articlesPerPage;
+      const articlesToShow = filteredArticles.slice(startIndex, endIndex);
+      
+      articlesToShow.forEach(article => {
+        article.classList.remove('hidden');
+      });
+      
+      // Update article count
+      if (articleCount) {
+        const totalCount = filteredArticles.length;
+        const showingCount = Math.min(endIndex, totalCount);
+        articleCount.textContent = `Showing ${showingCount} of ${totalCount} articles`;
+      }
+      
+      // Show/hide load more button
+      if (loadMoreBtn) {
+        if (filteredArticles.length > endIndex) {
+          loadMoreBtn.style.display = 'block';
+        } else {
+          loadMoreBtn.style.display = 'none';
+        }
+      }
+      
+      // Show "no results" message if needed
+      if (filteredArticles.length === 0) {
+        showNoResultsMessage();
+      } else {
+        hideNoResultsMessage();
+      }
+    }
+    
+    function showNoResultsMessage() {
+      const existingMessage = document.getElementById('no-results-message');
+      if (existingMessage) return;
+      
+      const message = document.createElement('div');
+      message.id = 'no-results-message';
+      message.className = 'col-span-full text-center py-16';
+      message.innerHTML = `
+        <div class="bg-white rounded-xl shadow-lg p-12 max-w-lg mx-auto">
+          <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">No Articles Found</h3>
+          <p class="text-gray-600 mb-6">Try adjusting your search terms or filters to find what you're looking for.</p>
+          <button onclick="clearFilters()" class="bg-brandGreen text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+            Clear Filters
+          </button>
+        </div>
+      `;
+      
+      if (articlesGrid) {
+        articlesGrid.appendChild(message);
+      }
+    }
+    
+    function hideNoResultsMessage() {
+      const message = document.getElementById('no-results-message');
+      if (message) {
+        message.remove();
+      }
+    }
+    
+    // Global function to clear filters
+    window.clearFilters = function() {
+      if (searchInput) searchInput.value = '';
+      categoryFilters.forEach(btn => btn.classList.remove('active'));
+      categoryFilters[0]?.classList.add('active'); // Activate "All Articles"
+      if (sortSelect) sortSelect.value = 'newest';
+      
+      currentFilter = 'all';
+      currentSort = 'newest';
+      currentPage = 1;
+      
+      filterAndSortArticles();
+    };
+    
+    // Initialize
+    filterAndSortArticles();
+  });
+</script>
