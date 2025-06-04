@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
+const base = import.meta.env.BASE_URL;
 
 const techNotes = await getCollection('techNotes');
 

@@ -6,6 +6,8 @@ import { getCollection } from 'astro:content';
 import CaseStudyCard from '../components/CaseStudyCard.jsx';
 import NewsletterSignup from '../components/NewsletterSignup.jsx';
 
+const base = import.meta.env.BASE_URL;
+
 const caseStudies = await getCollection('caseStudies');
 
 // SEO meta data
@@ -31,10 +33,10 @@ const seoData = {
           In-depth articles, practical tools, and strategic frameworks to advance your data and analytics career.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/insights" class="bg-brandGold hover:bg-yellow-600 text-black font-semibold py-4 px-8 rounded-lg transition-colors">
+          <a href={base + '/insights'} class="bg-brandGold hover:bg-yellow-600 text-black font-semibold py-4 px-8 rounded-lg transition-colors">
             Read Latest Articles
           </a>
-          <a href="/tools" class="border-2 border-brandGold text-brandGold hover:bg-brandGold hover:text-black font-semibold py-4 px-8 rounded-lg transition-colors">
+          <a href={base + '/tools'} class="border-2 border-brandGold text-brandGold hover:bg-brandGold hover:text-black font-semibold py-4 px-8 rounded-lg transition-colors">
             Explore Tools
           </a>
         </div>
@@ -61,7 +63,7 @@ const seoData = {
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-2">In-Depth Articles</h3>
             <p class="text-gray-600 mb-4">Weekly insights on data strategy, analytics trends, and career advancement from a practicing professional.</p>
-            <a href="/insights" class="text-brandGreen font-semibold hover:text-green-700">Read Articles →</a>
+            <a href={base + '/insights'} class="text-brandGreen font-semibold hover:text-green-700">Read Articles →</a>
           </div>
         </div>
         
@@ -74,7 +76,7 @@ const seoData = {
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-2">Practical Tools</h3>
             <p class="text-gray-600 mb-4">Ready-to-use calculators, frameworks, and templates that solve real analytics challenges.</p>
-            <a href="/tools" class="text-brandGreen font-semibold hover:text-green-700">Explore Tools →</a>
+            <a href={base + '/tools'} class="text-brandGreen font-semibold hover:text-green-700">Explore Tools →</a>
           </div>
         </div>
         
@@ -87,7 +89,7 @@ const seoData = {
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-2">Podcast Discussions</h3>
             <p class="text-gray-600 mb-4">Deep conversations with data leaders about trends, challenges, and career insights.</p>
-            <a href="/podcast" class="text-brandGreen font-semibold hover:text-green-700">Listen Now →</a>
+            <a href={base + '/podcast'} class="text-brandGreen font-semibold hover:text-green-700">Listen Now →</a>
           </div>
         </div>
       </div>
