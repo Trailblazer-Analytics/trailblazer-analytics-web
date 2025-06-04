@@ -7,5 +7,9 @@ export default defineConfig({
   integrations: [react(), tailwind(), mdx()],
   output: "static",
   site: "https://anykolaiszyn.github.io/trailblazer-analytics-devkit",
-  base: "/trailblazer-analytics-devkit"
+  base: "/trailblazer-analytics-devkit",
+  trailingSlash: "always",
+  build: {
+    assetsPrefix: "/trailblazer-analytics-devkit",
+  }
 });
