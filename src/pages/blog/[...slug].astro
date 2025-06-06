@@ -3,6 +3,12 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.jsx';
+import OptimizedImage from '../../components/OptimizedImage.astro';
+import RelatedContent from '../../components/RelatedContent.astro';
+import LazyLoad from '../../components/LazyLoad.astro';
+import SocialShare from '../../components/SocialShare.astro';
+
+import siteConfig from '../../site.config.js';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -14,14 +20,10 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-// SEO meta data
-const seoData = {
-  title: `${entry.data.title} - Trailblazer Analytics`,
-  description: entry.data.description || entry.data.excerpt || 'Read this insightful blog post about data analytics and business intelligence.',
-  image: entry.data.image || '/og-image.png'
-};
+// Current URL for social sharing
+const currentUrl = Astro.url.href;
 
-// Format date
+// Format date for display
 function formatDate(date) {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -29,6 +31,28 @@ function formatDate(date) {
     day: 'numeric'
   });
 }
+
+// Format date for schema.org
+function formatISODate(date) {
+  if (!date) return new Date().toISOString();
+  try {
+    return new Date(date).toISOString();
+  } catch (e) {
+    console.error("Invalid date:", date);
+    return new Date().toISOString();
+  }
+}
+
+// SEO meta data with structured data
+const seoData = {
+  title: `${entry.data.title} - Trailblazer Analytics`,
+  description: entry.data.description || entry.data.excerpt || 'Read this insightful blog post about data analytics and business intelligence.',
+  image: entry.data.image || '/og-image.png',
+  schemaType: "Article",
+  datePublished: formatISODate(entry.data.date),
+  dateModified: entry.data.lastModified ? formatISODate(entry.data.lastModified) : formatISODate(entry.data.date),
+  author: entry.data.author || 'Alexander Nykolaiszyn'
+};
 ---
 
 <Base {...seoData}>
@@ -73,10 +97,20 @@ function formatDate(date) {
             )}
           </div>
         </header>
-        
-        <!-- Article Content -->
+          <!-- Article Content -->
         <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg">
           <Content />
+        </div>
+        
+        <!-- Social Sharing -->
+        <div class="mt-12 border-t border-b border-gray-200 py-6">
+          <SocialShare 
+            url={currentUrl}
+            title={entry.data.title}
+            summary={entry.data.description || `Read this article on ${siteConfig.title}`}
+            twitterHandle={siteConfig.twitter ? siteConfig.twitter.replace('@', '') : ''}
+            className="flex justify-center"
+          />
         </div>
         
         <!-- Author Bio -->
@@ -101,8 +135,7 @@ function formatDate(date) {
             </div>
           </div>
         </div>
-        
-        <!-- Navigation -->
+          <!-- Navigation -->
         <div class="mt-12 flex justify-center">
           <a 
             href="/blog" 
@@ -115,6 +148,26 @@ function formatDate(date) {
       </div>
     </div>
   </article>
+  
+  <!-- Related Content Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <LazyLoad className="max-w-6xl mx-auto" threshold={0.1} rootMargin="200px">
+        <RelatedContent 
+          contentType="blog"
+          currentSlug={entry.slug}
+          keywords={entry.data.keywords || []}
+          title="You might also like"
+          maxItems={3}
+        >
+          <div slot="fallback">
+            <h2 class="text-2xl font-bold mb-6">Latest Articles</h2>
+            <!-- This will only show if there are no related articles -->
+          </div>
+        </RelatedContent>
+      </LazyLoad>
+    </div>
+  </section>
   
   <Footer />
 </Base>

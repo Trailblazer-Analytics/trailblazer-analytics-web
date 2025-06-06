@@ -5,16 +5,19 @@ import Footer from '../components/Footer.jsx';
 import { getCollection } from 'astro:content';
 import CaseStudyCard from '../components/CaseStudyCard.jsx';
 import NewsletterSignup from '../components/NewsletterSignup.jsx';
+import OptimizedImage from '../components/OptimizedImage.astro';
 
 const base = import.meta.env.BASE_URL;
 
 const caseStudies = await getCollection('caseStudies');
 
-// SEO meta data
+// SEO meta data with structured data
 const seoData = {
   title: "Trailblazer Analytics - Where Data Strategy Meets Action",
   description: "Transform your business with expert data strategy, analytics implementation, and AI innovation. Get actionable insights, not just reports. Download free tools and connect with Alexander Nykolaiszyn.",
-  image: "/og-image-home.png"
+  image: "/og-image-home.png",
+  schemaType: "WebSite",
+  canonicalUrl: "/"
 };
 ---
 

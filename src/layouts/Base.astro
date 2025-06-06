@@ -1,13 +1,121 @@
 ---
 import '../styles/global.css';
+import siteConfig from '../site.config.js';
 const base = import.meta.env.BASE_URL;
+
+// Determine if analytics should be enabled
+// Disable in development, enable in production
+const isProduction = import.meta.env.PROD;
+const enableAnalytics = isProduction;
+
+// Default SEO props that can be overridden by pages
+const {
+  title = "Trailblazer Analytics | Data Strategy & Business Intelligence",
+  description = siteConfig.description,
+  image = siteConfig.defaultImage,
+  type = "website",
+  schemaType = "WebSite",
+  canonicalUrl,
+  author = siteConfig.author
+} = Astro.props;
+
+// Compute full URL for social media
+const siteUrl = siteConfig.url || (isProduction ? "https://anykolaiszyn.github.io/trailblazer-analytics-devkit" : "http://localhost:4321");
+const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${base}${image.startsWith('/') ? image.slice(1) : image}`;
+const canonical = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${siteUrl}${canonicalUrl}`) : Astro.url.href;
+
+// Structured data (schema.org)
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": schemaType,
+};
+
+// Add different properties based on schema type
+if (schemaType === "WebSite") {
+  Object.assign(schemaData, {
+    name: title,
+    description: description,
+    url: siteUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      "target": `${siteUrl}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  });
+} else if (schemaType === "Person") {
+  Object.assign(schemaData, {
+    name: author,
+    description: description,
+    url: siteUrl,
+    sameAs: [
+      `https://linkedin.com/in/${siteConfig.linkedin}`,
+      `https://medium.com/@${siteConfig.medium}`
+    ]
+  });
+} else if (schemaType === "Article") {
+  Object.assign(schemaData, {
+    headline: title,
+    description: description,
+    image: ogImageUrl,
+    author: {
+      "@type": "Person",
+      name: author
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteConfig.author,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}${base}favicon.ico`
+      }
+    },
+    datePublished: Astro.props.datePublished || new Date().toISOString(),
+    dateModified: Astro.props.dateModified || new Date().toISOString()
+  });
+}
+
+const structuredData = JSON.stringify(schemaData);
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Trailblazer Analytics</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonical} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageUrl} />
+      <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${base}apple-touch-icon.png`} />
+    <link rel="manifest" href={`${base}site.webmanifest`} />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href={`${base}assets/styles.css`} as="style" />
+    <link rel="preload" href={`${base}fonts/inter-var.woff2`} as="font" type="font/woff2" crossorigin />
+    {image && !image.startsWith('http') && (
+      <link rel="preload" href={`${base}${image.startsWith('/') ? image.slice(1) : image}`} as="image" />
+    )}
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={structuredData} />
+    
     <slot name="head" />
     <!-- Adding inline styles for critical CSS -->
     <style is:global>
@@ -88,8 +196,37 @@ const base = import.meta.env.BASE_URL;
             console.error('Failed to load:', e.target.getAttribute('href') || e.target.getAttribute('src'));
           }
         }, true);
-      });
-    </script>
+      });    </script>
+    
+    {/* Google Analytics */}
+    {enableAnalytics && siteConfig.googleAnalyticsId && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.googleAnalyticsId}`}></script>
+      <script is:inline define:vars={{ googleAnalyticsId: siteConfig.googleAnalyticsId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', googleAnalyticsId);
+      </script>
+    )}
+    
+    {/* Hotjar */}
+    {enableAnalytics && siteConfig.hotjarId && (
+      <script is:inline define:vars={{ hotjarId: siteConfig.hotjarId }}>
+        (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:hotjarId,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      </script>
+    )}
+    
+    {/* Plausible Analytics - privacy-focused alternative */}
+    {enableAnalytics && siteConfig.plausibleDomain && (
+      <script defer data-domain={siteConfig.plausibleDomain} src="https://plausible.io/js/script.js"></script>
+    )}
   </head>
   <body class="min-h-screen flex flex-col">
     <slot />
