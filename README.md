@@ -19,6 +19,20 @@ A modern, responsive website built with Astro + React + Tailwind CSS for data st
 - **SEO Optimization**: Complete meta tags, structured data, and performance optimization
 - **Mobile-First Design**: Responsive navigation and mobile-optimized experience
 
+## 📚 Documentation
+
+For comprehensive project documentation, please refer to these guides:
+
+- [**Project Documentation**](./docs/PROJECT_DOCUMENTATION.md) - Central hub for all project information
+- [**Current Status Summary**](./docs/CURRENT_STATUS_SUMMARY.md) - Overview of current project status
+- [**To-Do List**](./docs/TODO.md) - Current tasks and priorities
+- [**Admin Guide**](./docs/ADMIN_GUIDE.md) - Guide for site administration and maintenance
+- [**Deployment Checklist**](./docs/DEPLOYMENT_CHECKLIST.md) - Pre-deployment checklist
+- [**GitHub Pages Deployment**](./docs/GITHUB_PAGES_DEPLOYMENT.md) - Guide for deploying to GitHub Pages
+- [**Development Setup**](./docs/DEV_SETUP.md) - How to set up the development environment
+- [**Case Study Guide**](./docs/CASE_STUDY_GUIDE.md) - Guide for creating case studies
+- [**Blog Post Guide**](./docs/BLOG_POST_GUIDE.md) - Guide for creating blog posts
+
 ## 🛠️ Quick Start
 
 ### Prerequisites
