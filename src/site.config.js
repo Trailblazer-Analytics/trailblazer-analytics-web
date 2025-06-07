@@ -1,12 +1,11 @@
 // Centralized site config for analytics, SEO, and other go-live settings
-export default {
-  // Site Information
+export default {  // Site Information
   title: "Trailblazer Analytics",
   description: "Manager Business Insights at Lennar | Host of Trailblazer Analytics Podcast | 15+ years transforming raw data into strategic business value through BI, automation, and AI integrations.",
   url: "https://trailblazer-analytics.com",
   author: "Alexander Nykolaiszyn",  // Content Sources
   mediumUsername: "alex.nykolaiszyn", // Real Medium username
-  spotifyShowId: "6OqrYng96bFqlhKKjeDhBx", // Real Spotify podcast ID for Data Strategy Show
+  spotifyShowId: "7r1DNHAYJr4Xme88DvMBuX", // Real Spotify podcast ID for Data Strategy Show
     // Analytics & Tracking
   plausibleDomain: "trailblazer-analytics.com", // Update when domain is ready
   googleAnalyticsId: "G-XYZABC1234", // Analytics ID

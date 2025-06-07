@@ -1,0 +1,131 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+import OptimizedImage from '../components/OptimizedImage.astro';
+import { getCollection } from 'astro:content';
+
+// Get sitemap data
+const pages = [
+  { url: '/', name: 'Home', priority: 1.0, changefreq: 'monthly' },
+  { url: '/about', name: 'About', priority: 0.8, changefreq: 'monthly' },
+  { url: '/services', name: 'Services', priority: 0.8, changefreq: 'monthly' },
+  { url: '/blog', name: 'Blog', priority: 0.9, changefreq: 'weekly' },
+  { url: '/downloads', name: 'Downloads', priority: 0.9, changefreq: 'weekly' },
+  { url: '/white-papers', name: 'White Papers', priority: 0.9, changefreq: 'monthly' },
+  { url: '/tools', name: 'Tools', priority: 0.7, changefreq: 'monthly' },
+  { url: '/podcast', name: 'Podcast', priority: 0.7, changefreq: 'weekly' },
+  { url: '/tech-notes', name: 'Tech Notes', priority: 0.7, changefreq: 'weekly' },
+  { url: '/contact', name: 'Contact', priority: 0.6, changefreq: 'monthly' },
+];
+
+// Get blog posts
+const blogPosts = await getCollection('blog');
+const whitepapers = await getCollection('whitepapers');
+const downloads = await getCollection('downloads');
+const caseStudies = await getCollection('caseStudies');
+
+// Merge all content for the sitemap
+const allContent = [
+  ...pages,
+  ...blogPosts.map(post => ({ 
+    url: `/blog/${post.slug}`, 
+    name: post.data.title, 
+    priority: 0.7, 
+    changefreq: 'monthly',
+    lastmod: post.data.lastModified || post.data.date
+  })),
+  ...whitepapers.map(whitepaper => ({ 
+    url: `/whitepapers/${whitepaper.slug}`, 
+    name: whitepaper.data.title, 
+    priority: 0.6, 
+    changefreq: 'monthly',
+    lastmod: whitepaper.data.date
+  })),
+  ...downloads.map(download => ({ 
+    url: `/downloads/${download.slug}`, 
+    name: download.data.title, 
+    priority: 0.6, 
+    changefreq: 'monthly',
+    lastmod: download.data.date
+  })),
+  ...caseStudies.map(caseStudy => ({ 
+    url: `/case-studies/${caseStudy.slug}`, 
+    name: caseStudy.data.title, 
+    priority: 0.7, 
+    changefreq: 'monthly',
+    lastmod: caseStudy.data.date
+  }))
+];
+
+// SEO data
+const seoData = {
+  title: "Sitemap - Trailblazer Analytics",
+  description: "A complete sitemap of the Trailblazer Analytics website.",
+  noindex: true
+};
+---
+
+<Base {...seoData}>
+  <Navbar />
+  
+  <main class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8">Sitemap</h1>
+        
+        <div class="prose prose-lg max-w-none">
+          <p>This sitemap provides links to all pages and content on the Trailblazer Analytics website.</p>
+          
+          <h2>Main Pages</h2>
+          <ul>
+            {pages.map(page => (
+              <li>
+                <a href={page.url}>{page.name}</a>
+              </li>
+            ))}
+          </ul>
+          
+          <h2>Blog Posts</h2>
+          <ul>
+            {blogPosts.map(post => (
+              <li>
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                {post.data.date && <span class="text-gray-500 text-sm ml-2">({new Date(post.data.date).toLocaleDateString()})</span>}
+              </li>
+            ))}
+          </ul>
+          
+          <h2>White Papers</h2>
+          <ul>
+            {whitepapers.map(whitepaper => (
+              <li>
+                <a href={`/whitepapers/${whitepaper.slug}`}>{whitepaper.data.title}</a>
+              </li>
+            ))}
+          </ul>
+          
+          <h2>Downloads</h2>
+          <ul>
+            {downloads.map(download => (
+              <li>
+                <a href={`/downloads/${download.slug}`}>{download.data.title}</a>
+              </li>
+            ))}
+          </ul>
+          
+          <h2>Case Studies</h2>
+          <ul>
+            {caseStudies.map(caseStudy => (
+              <li>
+                <a href={`/case-studies/${caseStudy.slug}`}>{caseStudy.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Base>

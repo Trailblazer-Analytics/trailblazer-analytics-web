@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
+import { fileURLToPath } from 'url';
+
+// Get current directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Config
 const BASE_PATH = '/trailblazer-analytics-devkit';
-const DIST_DIR = path.join(process.cwd(), 'dist');
+const DIST_DIR = path.join(path.resolve(__dirname, '..'), 'dist');
 const ASSET_DIR = path.join(DIST_DIR, 'assets');
 
 // Check if assets directory exists

@@ -1,0 +1,70 @@
+---
+// OptimizedImage.astro - A responsive image component with lazy loading and proper attributes
+
+// Props definition with defaults
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  sizes?: string;
+  loading?: "lazy" | "eager";
+  decoding?: "async" | "sync" | "auto";
+  format?: "webp" | "avif" | "jpeg" | "png" | "original";
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className = "",
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  loading = "lazy",
+  decoding = "async",
+  format = "webp"
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+
+// Ensure src has the correct base path
+const fullSrc = src.startsWith('http') 
+  ? src 
+  : `${base}${src.startsWith('/') ? src.substring(1) : src}`;
+
+// Generate srcset for responsive images (if width is provided)
+let srcset = "";
+if (width) {
+  const breakpoints = [320, 640, 768, 1024, 1280, 1536];
+  const filteredBreakpoints = breakpoints.filter(bp => bp <= width * 2);
+  
+  // Add original size and 2x for high-res displays
+  if (!filteredBreakpoints.includes(width)) {
+    filteredBreakpoints.push(width);
+  }
+  if (!filteredBreakpoints.includes(width * 2) && width * 2 <= 1920) {
+    filteredBreakpoints.push(width * 2);
+  }
+  
+  // Sort and deduplicate
+  const uniqueBreakpoints = [...new Set(filteredBreakpoints)].sort((a, b) => a - b);
+  
+  srcset = uniqueBreakpoints
+    .map(bp => `${fullSrc} ${bp}w`)
+    .join(", ");
+}
+---
+
+<img 
+  src={fullSrc}
+  alt={alt}
+  width={width}
+  height={height}
+  class={className}
+  loading={loading}
+  decoding={decoding}
+  sizes={sizes}
+  srcset={srcset || undefined}
+  style={width && height ? `aspect-ratio: ${width}/${height};` : undefined}
+/>

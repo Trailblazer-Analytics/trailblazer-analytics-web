@@ -1,0 +1,241 @@
+---
+import Base from '../layouts/Base.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+import siteConfig from '../site.config.js';
+
+const title = "Search Results | Trailblazer Analytics";
+const description = "Find articles, white papers, tech notes, downloads, and other resources on Trailblazer Analytics.";
+---
+
+<Base 
+  title={title}
+  description={description}
+  image="/images/search-cover.jpg"
+  type="website"
+  schemaType="SearchResultsPage"
+>
+  <div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center">Search Results</h1>
+    
+    <div class="max-w-2xl mx-auto mb-8">
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <input
+          type="text"
+          id="search-input"
+          class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 dark:focus:placeholder-gray-500 focus:ring-2 focus:ring-brandGreen dark:focus:ring-brandGold focus:border-transparent"
+          placeholder="Search posts, guides, and more..."
+          aria-label="Search"
+        />
+      </div>
+    </div>
+    
+    <div id="results-status" class="text-center py-8 text-gray-500">
+      Enter a search term above to find content
+    </div>
+    
+    <div id="results-container" class="max-w-4xl mx-auto grid gap-6 lg:grid-cols-2 hidden">
+      <!-- Results will be inserted here -->
+    </div>
+    
+    <div id="no-results" class="text-center py-12 hidden">
+      <OptimizedImage
+        src="/images/no-results.svg"
+        alt="No results found"
+        width={300}
+        height={300}
+        className="mx-auto mb-6 w-48 h-48"
+      />
+      <h2 class="text-2xl font-bold mb-2">No results found</h2>
+      <p class="text-gray-600 mb-6">Try different keywords or browse our content categories below</p>
+      
+      <div class="grid gap-4 md:grid-cols-3 max-w-2xl mx-auto">
+        <a href="/insights" class="border border-gray-300 rounded-lg p-4 hover:border-brandGreen hover:shadow-md transition">
+          <h3 class="font-bold mb-1">Blog & Insights</h3>
+          <p class="text-sm text-gray-600">Articles and thoughts on data strategy</p>
+        </a>
+        <a href="/tech-notes" class="border border-gray-300 rounded-lg p-4 hover:border-brandGreen hover:shadow-md transition">
+          <h3 class="font-bold mb-1">Tech Notes</h3>
+          <p class="text-sm text-gray-600">Tutorials and technical guides</p>
+        </a>
+        <a href="/downloads" class="border border-gray-300 rounded-lg p-4 hover:border-brandGreen hover:shadow-md transition">
+          <h3 class="font-bold mb-1">Downloads</h3>
+          <p class="text-sm text-gray-600">Templates and resources</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  // DOM elements
+  const searchInput = document.getElementById('search-input');
+  const resultsStatus = document.getElementById('results-status');
+  const resultsContainer = document.getElementById('results-container');
+  const noResults = document.getElementById('no-results');
+  const base = import.meta.env.BASE_URL || '';
+  
+  // Search state
+  let searchTimeout = null;
+  let currentSearchQuery = '';
+  
+  // Check for query parameter on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q');
+    
+    if (query && query.length >= 2) {
+      searchInput.value = query;
+      performSearch(query);
+    }
+  });
+  
+  // Debounced search
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    currentSearchQuery = query;
+    
+    // Clear previous timeout
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+    
+    // Update URL
+    const url = new URL(window.location);
+    if (query.length >= 2) {
+      url.searchParams.set('q', query);
+    } else {
+      url.searchParams.delete('q');
+    }
+    window.history.replaceState({}, '', url);
+    
+    // Clear results if query is too short
+    if (query.length < 2) {
+      clearResults();
+      return;
+    }
+    
+    // Set loading state
+    resultsStatus.textContent = 'Searching...';
+    resultsStatus.classList.remove('hidden');
+    resultsContainer.classList.add('hidden');
+    noResults.classList.add('hidden');
+    
+    // Debounce search request
+    searchTimeout = setTimeout(() => {
+      // Only search if the query hasn't changed (prevents race conditions)
+      if (currentSearchQuery === query) {
+        performSearch(query);
+      }
+    }, 300);
+  });
+  
+  // Clear results
+  function clearResults() {
+    resultsStatus.textContent = 'Enter a search term above to find content';
+    resultsStatus.classList.remove('hidden');
+    resultsContainer.classList.add('hidden');
+    resultsContainer.innerHTML = '';
+    noResults.classList.add('hidden');
+  }
+  
+  // Perform search request
+  async function performSearch(query) {
+    try {
+      const response = await fetch(`${base}/api/search?q=${encodeURIComponent(query)}`);
+      
+      if (!response.ok) {
+        throw new Error('Search request failed');
+      }
+      
+      const data = await response.json();
+      
+      // Display results
+      if (data.results.length === 0) {
+        resultsStatus.classList.add('hidden');
+        resultsContainer.classList.add('hidden');
+        noResults.classList.remove('hidden');
+      } else {
+        resultsStatus.classList.add('hidden');
+        resultsContainer.classList.remove('hidden');
+        noResults.classList.add('hidden');
+        
+        // Clear previous results
+        resultsContainer.innerHTML = '';
+        
+        // Add new results
+        data.results.forEach(result => {
+          const resultItem = document.createElement('a');
+          resultItem.href = base + result.slug;
+          resultItem.className = 'border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md hover:border-brandGreen transition-colors';
+          
+          // Format date if available
+          let dateDisplay = '';
+          if (result.date) {
+            const date = new Date(result.date);
+            dateDisplay = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+          }
+          
+          // Set icon based on content type
+          let icon = '';
+          switch(result.type) {
+            case 'Blog Post':
+              icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>';
+              break;
+            case 'Tech Note':
+              icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>';
+              break;
+            case 'White Paper':
+              icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>';
+              break;
+            case 'Download':
+              icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>';
+              break;
+            case 'Case Study':
+              icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>';
+              break;
+            case 'Tool':
+              icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>';
+              break;
+            default:
+              icon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>';
+          }
+          
+          resultItem.innerHTML = `
+            <div class="flex justify-between items-start mb-3">
+              <span class="inline-flex items-center text-sm font-medium text-brandGreen dark:text-brandGold">
+                ${icon}
+                <span class="ml-1">${result.type}</span>
+              </span>
+              ${dateDisplay ? `<span class="text-xs text-gray-500 dark:text-gray-400">${dateDisplay}</span>` : ''}
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">${result.title}</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-2">${result.description}</p>
+            <span class="text-brandGreen dark:text-brandGold text-sm font-medium flex items-center">
+              Read more
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
+          `;
+          
+          resultsContainer.appendChild(resultItem);
+        });
+        
+        // Show count
+        resultsStatus.textContent = `Found ${data.count} result${data.count === 1 ? '' : 's'} for "${data.query}"`;
+        resultsStatus.classList.remove('hidden');
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      resultsStatus.textContent = 'An error occurred while searching. Please try again.';
+      resultsStatus.classList.remove('hidden');
+      resultsContainer.classList.add('hidden');
+      noResults.classList.add('hidden');
+    }
+  }
+</script>

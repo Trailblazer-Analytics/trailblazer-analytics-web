@@ -1,0 +1,33 @@
+# Custom headers for GitHub Pages
+# This file is used by GitHub Pages to set cache-control headers for the site
+# See: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/creating-a-custom-404-page-for-your-github-pages-site
+
+# Cache static assets for 1 year (max-age=31536000)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Link: </assets/styles.css>; rel=preload; as=style
+
+# Cache images for 1 week
+/images/*
+  Cache-Control: public, max-age=604800
+
+# Cache fonts for 6 months
+/fonts/*
+  Cache-Control: public, max-age=15768000
+  Link: </fonts/inter-var.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+
+# Cache favicon and web manifest for 1 day
+/favicon.svg
+  Cache-Control: public, max-age=86400
+/site.webmanifest
+  Cache-Control: public, max-age=86400
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+# Don't cache HTML files
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Cache downloadable files
+/downloads/*
+  Cache-Control: public, max-age=86400
