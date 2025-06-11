@@ -2,12 +2,12 @@
 export default {  // Site Information
   title: "Trailblazer Analytics",
   description: "Manager Business Insights at Lennar | Host of Trailblazer Analytics Podcast | 15+ years transforming raw data into strategic business value through BI, automation, and AI integrations.",
-  url: "https://trailblazer-analytics.com",
+  url: "https://www.trailblazeranalytics.com",
   author: "Alexander Nykolaiszyn",  // Content Sources
   mediumUsername: "alex.nykolaiszyn", // Real Medium username
   spotifyShowId: "7r1DNHAYJr4Xme88DvMBuX", // Real Spotify podcast ID for Data Strategy Show
     // Analytics & Tracking
-  plausibleDomain: "trailblazer-analytics.com", // Update when domain is ready
+  plausibleDomain: "trailblazeranalytics.com", // Updated for custom domain
   googleAnalyticsId: "G-XYZABC1234", // Analytics ID
   hotjarId: "3654789", // Hotjar site ID// Social Media
   twitter: "@AlexNyk", // Real Twitter handle
@@ -31,5 +31,5 @@ export default {  // Site Information
   convertkitFormId: "3421788", // Replace with actual form ID
   
   // API Settings
-  corsOrigins: ["https://trailblazer-analytics.com", "http://localhost:4321", "http://localhost:4322", "http://localhost:4323", "http://localhost:4324"]
+  corsOrigins: ["https://www.trailblazeranalytics.com", "http://localhost:4321", "http://localhost:4322", "http://localhost:4323", "http://localhost:4324"]
 };
