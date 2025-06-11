@@ -36,11 +36,11 @@ const schemaData = {
 if (schemaType === "WebSite") {
   Object.assign(schemaData, {
     name: title,
-    description: description,
+    description: description,    
     url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",
-      "target": `${siteUrl}${base}search?q={search_term_string}`,
+      "target": siteUrl + base + "search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   });
@@ -51,7 +51,7 @@ if (schemaType === "WebSite") {
     url: siteUrl,
     sameAs: [
       `https://linkedin.com/in/${siteConfig.linkedin}`,
-      `https://medium.com/@${siteConfig.medium}``
+      `https://medium.com/@${siteConfig.medium}`
     ]
   });
 } else if (schemaType === "Article") {
@@ -62,13 +62,12 @@ if (schemaType === "WebSite") {
     author: {
       "@type": "Person",
       name: author
-    },
-    publisher: {
+    },    publisher: {
       "@type": "Person",
       name: siteConfig.author,
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}${base}favicon.ico`
+        url: siteUrl + base + "favicon.ico"
       }
     },
     datePublished: Astro.props.datePublished || new Date().toISOString(),
@@ -186,7 +185,7 @@ const structuredData = JSON.stringify(schemaData);
       
       window.addEventListener('DOMContentLoaded', () => {
         if (isDebugMode) {
-          console.log('[Debug] Base URL:', '${base}');
+          console.log('[Debug] Base URL:', window.location.origin + document.querySelector('base')?.getAttribute('href') || '');
           console.log('[Debug] Asset paths:');
           document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(el => {
             console.log(el.getAttribute('href') || el.getAttribute('src'));
@@ -203,13 +202,15 @@ const structuredData = JSON.stringify(schemaData);
     
     {/* Google Analytics */}
     {enableAnalytics && siteConfig.googleAnalyticsId && (
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.googleAnalyticsId}`}></script>
-      <script is:inline define:vars={{ googleAnalyticsId: siteConfig.googleAnalyticsId }}>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', googleAnalyticsId);
-      </script>
+      <Fragment>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.googleAnalyticsId}`}></script>
+        <script is:inline define:vars={{ googleAnalyticsId: siteConfig.googleAnalyticsId }}>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', googleAnalyticsId);
+       </script>
+      </Fragment>
     )}
     
     {/* Hotjar */}
