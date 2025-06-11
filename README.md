@@ -3,7 +3,7 @@
 A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, newsletter integration, and production-ready deployment.
 
 ## 🌐 Live Site
-**Production URL:** https://anykolaiszyn.github.io/trailblazer-analytics-devkit/
+**Production URL:** https://www.trailblazeranalytics.com/
 
 ## 📊 Current Status
 ✅ **DEPLOYED & OPERATIONAL**
