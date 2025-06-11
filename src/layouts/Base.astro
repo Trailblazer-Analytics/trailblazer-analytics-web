@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import siteConfig from '../site.config.js';
+import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget.astro';
+
 const base = import.meta.env.BASE_URL;
 
 // Determine if analytics should be enabled
@@ -230,5 +232,6 @@ const structuredData = JSON.stringify(schemaData);
   </head>
   <body class="min-h-screen flex flex-col">
     <slot />
+    <BuyMeCoffeeWidget />
   </body>
 </html>

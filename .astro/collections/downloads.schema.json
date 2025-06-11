@@ -40,6 +40,9 @@
         },
         "downloads": {
           "type": "number"
+        },
+        "$schema": {
+          "type": "string"
         }
       },
       "required": [

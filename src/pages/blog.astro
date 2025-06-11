@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+import BlogPostCard from '../components/BlogPostCard.jsx';
+
+const blogPosts = await getCollection('blog');
+
+// Sort by date, newest first
+const sortedPosts = blogPosts.sort((a, b) => 
+  new Date(b.data.date) - new Date(a.data.date)
+);
+
+// Get featured posts
+const featuredPosts = sortedPosts.filter(post => post.data.featured);
+const regularPosts = sortedPosts.filter(post => !post.data.featured);
+
+// SEO meta data
+const seoData = {
+  title: "Blog - Internal Updates & Development Notes",
+  description: "Internal project logs, tool development updates, and commentary from Alexander Nykolaiszyn. Raw insights into the Trailblazer Analytics journey.",
+  image: "/og-image-blog.png"
+};
+---
+
+<Base {...seoData}>
+  <Navbar />
+  
+  <!-- Header Section -->
+  <section class="bg-gray-900 text-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Blog</h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Internal project logs, tool development updates, and raw insights from the Trailblazer journey.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-12 bg-gray-100 text-center">
+    <div class="container mx-auto px-6">
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+        This is where I share WIP logs, tools in progress, day-to-day BI lessons, and commentary.
+        For polished long-form articles, check out my 
+        <a href="/insights" class="text-brandGreen hover:underline">Medium publications</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Posts -->
+  {featuredPosts.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Posts</h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredPosts.map((post) => (
+              <BlogPostCard
+                key={post.slug}
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                readTime={post.data.readTime}
+                tags={post.data.tags}
+                slug={post.slug}
+                featured={true}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- All Posts -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Posts</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {regularPosts.map((post) => (
+            <BlogPostCard
+              key={post.slug}
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              readTime={post.data.readTime}
+              tags={post.data.tags}
+              slug={post.slug}
+              featured={false}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-16 bg-gray-900 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Get notified when new tools, updates, and insights are published.
+        </p>
+        <div class="max-w-md mx-auto flex gap-4">
+          <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg text-gray-900">
+          <button class="bg-brandGold text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-yellow-500 transition-colors">
+            Subscribe
+          </button>
+        </div>
+        <p class="text-sm text-gray-400 mt-4">
+          Join 2,500+ data professionals. Unsubscribe anytime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

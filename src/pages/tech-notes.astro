@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
-const base = import.meta.env.BASE_URL;
 
 const techNotes = await getCollection('techNotes');
 
@@ -26,14 +25,18 @@ const seoData = {
         <p class="text-xl text-gray-300 mb-8">
           Technical insights, code snippets, and developer resources for data professionals and analytics engineers.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span class="bg-brandGreen px-4 py-2 rounded-full text-sm">Python</span>
-          <span class="bg-brandGreen px-4 py-2 rounded-full text-sm">SQL</span>
-          <span class="bg-brandGreen px-4 py-2 rounded-full text-sm">JavaScript</span>
-          <span class="bg-brandGreen px-4 py-2 rounded-full text-sm">Machine Learning</span>
-          <span class="bg-brandGreen px-4 py-2 rounded-full text-sm">Data Engineering</span>
-        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-12 bg-gray-100 text-center">
+    <div class="container mx-auto px-6">
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+        This is where I share raw updates, tool dev notes, Trailblazer experiments, and personal takes on BI.  
+        For polished essays, check out my  
+        <a href="/insights" class="text-brandGreen hover:underline">featured articles</a>.
+      </p>
     </div>
   </section>
 
@@ -60,7 +63,7 @@ const seoData = {
                 <span>Updated Dec 2024</span>
               </div>
             </div>
-          </div>          <a href="/tech-notes/pandas-performance-tips" class="inline-flex items-center text-brandGreen font-medium hover:text-green-700 transition-colors">
+          </div>          <a href="./pandas-performance-tips/" class="inline-flex items-center text-brandGreen font-medium hover:text-green-700 transition-colors">
             Read Full Guide
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -106,7 +109,7 @@ const seoData = {
                     <span class="text-xs text-gray-500">{note.data.readTime}</span>
                   )}
                   <a 
-                    href={`/tech-notes/${note.slug}`} 
+                    href={`./${note.slug}/`} 
                     class="text-brandGreen text-sm font-medium hover:text-green-700"
                   >
                     Read →
@@ -114,38 +117,7 @@ const seoData = {
                 </div>
               </div>
             </article>
-          ))}          <!-- Tech Note 5 -->
-          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-tags="Python">
-            <div class="p-6">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Python</span>
-                <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Intermediate</span>
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">FastAPI for Data APIs</h3>
-              <p class="text-gray-600 text-sm mb-4">Build high-performance data APIs with FastAPI, including authentication and validation.</p>
-              <div class="flex items-center justify-between">
-                <span class="text-xs text-gray-500">15 min read</span>
-                <a href="#" class="text-brandGreen text-sm font-medium hover:text-green-700">Read →</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Tech Note 6 -->
-          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-tags="SQL">
-            <div class="p-6">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">SQL</span>
-                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">Beginner</span>
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Database Indexing Strategies</h3>
-              <p class="text-gray-600 text-sm mb-4">Optimize query performance with proper indexing strategies for large datasets.</p>
-              <div class="flex items-center justify-between">
-                <span class="text-xs text-gray-500">10 min read</span>
-                <a href="#" class="text-brandGreen text-sm font-medium hover:text-green-700">Read →</a>
-              </div>
-            </div>
-          </article>
-        </div>
+          ))}        </div>
 
         <!-- Load More Button -->
         <div class="text-center mt-12">
