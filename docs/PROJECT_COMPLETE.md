@@ -1,5 +1,11 @@
 # 🎉 COMPLETE: Trailblazer Analytics Site & Documentation
 
+## 🆕 Latest Updates (June 11, 2025)
+**✅ GITHUB ACTIONS DEPLOYMENT FIXED**
+- Fixed pnpm vs npm configuration issue in workflow
+- All documentation consolidated in `/docs` folder
+- Site now auto-deploys correctly on push to master branch
+
 ## ✅ What's Been Accomplished
 
 ### 🌐 Site Status
