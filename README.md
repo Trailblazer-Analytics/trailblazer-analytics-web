@@ -2,6 +2,16 @@
 
 A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, newsletter integration, and production-ready deployment.
 
+## 🌐 Live Site
+**Production URL:** https://anykolaiszyn.github.io/trailblazer-analytics-devkit/
+
+## 📊 Current Status
+✅ **DEPLOYED & OPERATIONAL**
+- All 45 pages building successfully
+- GitHub Pages deployment working
+- Clean navigation structure implemented
+- All monetization features active
+
 ## 🚀 Features
 
 ### Content Management
@@ -86,13 +96,39 @@ public/                 # Static assets and downloads
 
 ## 🚀 Deployment
 
-The site is designed for easy deployment to various hosting platforms:
+### Current Deployment Setup
+- **Production Site:** https://anykolaiszyn.github.io/trailblazer-analytics-devkit/
+- **Repository:** https://github.com/anykolaiszyn/trailblazer-analytics-devkit
+- **Auto-Deploy:** GitHub Actions (on push to main branch)
+- **Build Status:** ✅ All 45 pages building successfully
 
-- **Static Hosting**: Netlify, Vercel, GitHub Pages
+### Deployment Methods
+
+#### Automatic (Recommended)
+Changes automatically deploy when pushed to main branch via GitHub Actions.
+
+```bash
+git add .
+git commit -m "Your changes"
+git push origin main
+# Site updates automatically in 2-3 minutes
+```
+
+#### Manual Deployment
+For emergency deployments or when GitHub Actions is down:
+
+```bash
+npm run build
+npm run deploy:clean
+```
+
+### File Storage
+All files are currently small (<2KB each) and stored directly in Git. No external storage needed.
+
+The site supports deployment to various hosting platforms:
+- **Static Hosting**: Netlify, Vercel, GitHub Pages ✅ (current)
 - **Traditional Hosting**: HostGator, cPanel-based hosts
 - **CDN**: Cloudflare Pages, AWS S3 + CloudFront
-
-See `DEPLOYMENT_CHECKLIST.md` for detailed deployment instructions.
 
 ## 🔧 Built With
 
