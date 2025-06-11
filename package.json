@@ -4,8 +4,8 @@
   "type": "module",  "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "pnpm run fetch:medium && astro build",
-    "build:safe": "node scripts/fetch-medium.js && astro build",
+    "build": "pnpm run fetch:medium && astro build --silent && node scripts/fix-urls.js",
+    "build:safe": "node scripts/fetch-medium.js && astro build --silent && node scripts/fix-urls.js",
     "preview": "astro preview",
     "check": "astro check",
     "lighthouse": "lhci autorun",
@@ -14,7 +14,7 @@
     "clean": "rmdir /s /q dist 2>nul || rm -rf dist",
     "typecheck": "astro check",
     "deploy": "npm run build && npx gh-pages -d dist",
-    "deploy:clean": "astro build && npx gh-pages -d dist --remove \"**\\!(.git|.|..)\" --no-history && echo '\n✅ Clean deployment to https://anykolaiszyn.github.io/trailblazer-analytics-devkit/'",
+    "deploy:clean": "astro build --silent && npx gh-pages -d dist --remove \"**\\!(.git|.|..)\" --no-history && echo '\n✅ Clean deployment to https://anykolaiszyn.github.io/trailblazer-analytics-devkit/'",
     "verify-build": "node scripts/verify-build.js",
     "fetch:medium": "node scripts/fetch-medium.js"
   },

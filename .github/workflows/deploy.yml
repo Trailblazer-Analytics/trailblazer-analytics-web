@@ -1,12 +1,12 @@
-﻿name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["master", "main"]
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
-  contents: write  # Changed to write to allow branch creation
+  contents: read
   pages: write
   id-token: write
 
@@ -14,29 +14,58 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  BUILD_PATH: "."
+
 jobs:
-  build-and-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node.js
+      
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+          node-version: 18
+          cache: 'npm'
+          
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+        
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build with Astro
+        run: npm run build
+        
+      - name: Verify URLs
+        run: |
+          echo "Checking for protocol-relative URLs in HTML files..."
+          if grep -r 'href="//' --include="*.html" ./dist; then
+            echo "ERROR: Found protocol-relative URLs that were not fixed!"
+            exit 1
+          else
+            echo "All URLs look good!"
+          fi
+          
+          echo "Running the URL verification script..."
+          node scripts/verify-urls.js
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          version: 8
-      - name: Install Dependencies
-        run: pnpm install
-      - name: Build
-        run: pnpm run build
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          cname: www.trailblazeranalytics.com
-          force_orphan: true
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

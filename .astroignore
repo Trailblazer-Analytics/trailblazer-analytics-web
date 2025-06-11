@@ -1,0 +1,20 @@
+# Ignore documentation files from Astro processing
+docs/**/*.md
+docs/**/*.mdx
+docs/README.md
+docs/ADMIN_GUIDE.md
+docs/BLOG_POST_GUIDE.md
+docs/CASE_STUDY_GUIDE.md
+docs/CONSOLIDATION_COMPLETE.md
+docs/CONTENT_MANAGEMENT_GUIDE.md
+docs/CONTENT_WORKFLOW.md
+docs/DEPLOYMENT_CHECKLIST.md
+docs/DEV_SETUP.md
+docs/DOCUMENTATION_CONSOLIDATION.md
+docs/GITHUB_PAGES_DEPLOYMENT.md
+docs/LIGHTHOUSE_CI_GUIDE.md
+docs/PROJECT_COMPLETE.md
+docs/QUICK_REFERENCE.md
+docs/SEO_PERFORMANCE_SUMMARY.md
+docs/SITE_DASHBOARD.md
+docs/TODO.md
