@@ -9,9 +9,9 @@ const base = import.meta.env.BASE_URL;
       </div>
       Trailblazer Analytics
     </a>
-    
-    <!-- Desktop Navigation -->
-    <div class="hidden md:flex space-x-8">      <a href={base + '/insights'} class="hover:text-brandGold transition-colors">Insights</a>
+      <!-- Desktop Navigation -->
+    <div class="hidden md:flex space-x-8">
+      <a href={base + '/insights'} class="hover:text-brandGold transition-colors">Insights</a>
       <a href={base + '/blog'} class="hover:text-brandGold transition-colors">Blog</a>
       <a href={base + '/podcast'} class="hover:text-brandGold transition-colors">Podcast</a>
       <a href={base + '/about'} class="hover:text-brandGold transition-colors">About</a>
@@ -90,9 +90,10 @@ const base = import.meta.env.BASE_URL;
       </svg>
       <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-  </div>  <!-- Mobile Navigation Menu -->
+      </svg>    </button>
+  </div>
+  
+  <!-- Mobile Navigation Menu -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-gray-800 bg-gray-900">
     <div class="container mx-auto px-6 py-4 space-y-4">
       <a href={base + '/insights'} class="block text-white hover:text-brandGold transition-colors py-2">Insights</a>
@@ -161,9 +162,8 @@ const base = import.meta.env.BASE_URL;
             </div>
           </a>
         </div>
-      </div>
-      
-      <div class="border-t border-gray-700 pt-4">        
+      </div>      
+      <div class="border-t border-gray-700 pt-4">
         <a href={base + '/support'} class="block text-white hover:text-brandGold transition-colors py-2">Support</a>
         <a href={base + '/contact'} class="block bg-brandGold text-gray-900 px-4 py-3 rounded-lg hover:bg-yellow-500 transition-colors font-medium text-center mt-4">Connect</a>
       </div>
