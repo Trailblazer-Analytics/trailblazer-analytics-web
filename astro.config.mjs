@@ -7,8 +7,7 @@ export default defineConfig({
   integrations: [react(), tailwind(), mdx()],
   output: "static",
   site: "https://www.trailblazeranalytics.com",
-  base: "/",
-  build: {
-    assets: "assets",
+  base: "/",  build: {
+    assets: `assets-${Date.now()}`,
   },
 });
