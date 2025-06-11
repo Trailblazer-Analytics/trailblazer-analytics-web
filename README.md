@@ -33,13 +33,20 @@ A modern, responsive website built with Astro + React + Tailwind CSS for data st
 
 For comprehensive project documentation, please refer to these guides:
 
+- [**Content Management Guide**](./docs/CONTENT_MANAGEMENT_GUIDE.md) - Complete step-by-step content creation guide
+- [**Quick Reference**](./docs/QUICK_REFERENCE.md) - Common tasks and quick fixes
+- [**Content Workflow**](./docs/CONTENT_WORKFLOW.md) - Editorial workflow and processes  
+- [**Site Dashboard**](./docs/SITE_DASHBOARD.md) - Site management overview and maintenance
+- [**Project Complete Summary**](./docs/PROJECT_COMPLETE.md) - Current project status and achievements
+
+### Technical Documentation
 - [**Project Documentation**](./docs/PROJECT_DOCUMENTATION.md) - Central hub for all project information
-- [**Current Status Summary**](./docs/CURRENT_STATUS_SUMMARY.md) - Overview of current project status
-- [**To-Do List**](./docs/TODO.md) - Current tasks and priorities
 - [**Admin Guide**](./docs/ADMIN_GUIDE.md) - Guide for site administration and maintenance
 - [**Deployment Checklist**](./docs/DEPLOYMENT_CHECKLIST.md) - Pre-deployment checklist
 - [**GitHub Pages Deployment**](./docs/GITHUB_PAGES_DEPLOYMENT.md) - Guide for deploying to GitHub Pages
 - [**Development Setup**](./docs/DEV_SETUP.md) - How to set up the development environment
+
+### Content Creation Guides
 - [**Case Study Guide**](./docs/CASE_STUDY_GUIDE.md) - Guide for creating case studies
 - [**Blog Post Guide**](./docs/BLOG_POST_GUIDE.md) - Guide for creating blog posts
 
