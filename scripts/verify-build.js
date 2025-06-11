@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Config
-const BASE_PATH = '/trailblazer-analytics-devkit';
+const BASE_PATH = '/';
 const DIST_DIR = path.join(path.resolve(__dirname, '..'), 'dist');
 const ASSET_DIR = path.join(DIST_DIR, 'assets');
 
