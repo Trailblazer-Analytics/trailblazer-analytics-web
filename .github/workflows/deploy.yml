@@ -45,9 +45,10 @@ jobs:
         run: touch dist/.nojekyll
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.6.1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: dist
-          clean: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
+          # Force using orphan branch for fresh deploy
+          force_orphan: true
