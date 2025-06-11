@@ -91,10 +91,10 @@ export default function Footer() {
               &copy; 2025 Trailblazer Analytics. All rights reserved.
             </div>
             <nav className="flex flex-wrap gap-6 text-sm">
-              <a href="/privacy" className="text-gray-400 hover:text-brandGold transition-colors">Privacy Policy</a>
-              <a href="/terms" className="text-gray-400 hover:text-brandGold transition-colors">Terms of Service</a>
-              <a href="/cookies" className="text-gray-400 hover:text-brandGold transition-colors">Cookie Policy</a>
-              <a href="/sitemap" className="text-gray-400 hover:text-brandGold transition-colors">Sitemap</a>
+              <a href={base + '/privacy'} className="text-gray-400 hover:text-brandGold transition-colors">Privacy Policy</a>
+              <a href={base + '/terms'} className="text-gray-400 hover:text-brandGold transition-colors">Terms of Service</a>
+              <a href={base + '/cookies'} className="text-gray-400 hover:text-brandGold transition-colors">Cookie Policy</a>
+              <a href={base + '/sitemap'} className="text-gray-400 hover:text-brandGold transition-colors">Sitemap</a>
             </nav>
           </div>
         </div>

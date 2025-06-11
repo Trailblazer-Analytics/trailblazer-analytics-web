@@ -40,7 +40,7 @@ if (schemaType === "WebSite") {
     url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",
-      "target": `${siteUrl}/search?q={search_term_string}`,
+      "target": `${siteUrl}${base}search?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   });
@@ -51,7 +51,7 @@ if (schemaType === "WebSite") {
     url: siteUrl,
     sameAs: [
       `https://linkedin.com/in/${siteConfig.linkedin}`,
-      `https://medium.com/@${siteConfig.medium}`
+      `https://medium.com/@${siteConfig.medium}``
     ]
   });
 } else if (schemaType === "Article") {
