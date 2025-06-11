@@ -1,11 +1,11 @@
 {
   "name": "trailblazer-analytics",
   "version": "0.0.1",
-  "type": "module",
-  "scripts": {
+  "type": "module",  "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run fetch:medium && astro build",
+    "build": "pnpm run fetch:medium && astro build",
+    "build:safe": "node scripts/fetch-medium.js && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "lighthouse": "lhci autorun",

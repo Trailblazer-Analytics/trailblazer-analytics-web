@@ -10,6 +10,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function fetchMedium() {
+  const outPath = path.resolve(__dirname, '../src/data/medium.json');
+  
   try {
     console.log(`Fetching Medium RSS feed for @${siteConfig.mediumUsername}`);
     const parser = new Parser();
@@ -28,12 +30,26 @@ async function fetchMedium() {
       };
     });
 
-    const outPath = path.resolve(__dirname, '../src/data/medium.json');
     await fs.promises.writeFile(outPath, JSON.stringify(articles, null, 2));
-    console.log(`Wrote ${articles.length} articles to ${outPath}`);
+    console.log(`✅ Successfully fetched and wrote ${articles.length} articles to ${outPath}`);
   } catch (error) {
-    console.error('Error fetching Medium RSS feed:', error);
-    process.exit(1);
+    console.error('⚠️  Error fetching Medium RSS feed:', error.message);
+    
+    // Check if we have cached data to fall back to
+    try {
+      const existingData = await fs.promises.readFile(outPath, 'utf8');
+      const cachedArticles = JSON.parse(existingData);
+      console.log(`📋 Using cached data with ${cachedArticles.length} articles`);
+      console.log('🏗️  Build will continue with existing Medium data');
+    } catch (cacheError) {
+      // If no cached data exists, create empty array to prevent build failure
+      console.log('⚠️  No cached data found, creating empty Medium data file');
+      await fs.promises.writeFile(outPath, JSON.stringify([], null, 2));
+      console.log('🏗️  Build will continue with empty Medium data');
+    }
+    
+    // Don't exit with error - let the build continue
+    console.log('✅ Medium fetch completed (using fallback data)');
   }
 }
 
