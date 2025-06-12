@@ -41,6 +41,9 @@
         "downloads": {
           "type": "number"
         },
+        "image": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

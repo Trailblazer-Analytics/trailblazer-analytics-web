@@ -33,14 +33,14 @@ The three types serve different purposes:
 
 **Business Challenge**: Calculate each customer's total lifetime value regardless of the current view's filters or dimensions.
 
-```tableau
+```text
 {FIXED [Customer ID] : SUM([Order Total])}
 ```
 
 **Use Case**: Create a customer segmentation dashboard where you can filter by product category while still seeing each customer's total lifetime value across all categories.
 
 **Advanced Application**:
-```tableau
+```text
 // Customer LTV Ranking
 {FIXED [Customer ID] : SUM([Order Total])} / 
 WINDOW_SUM({FIXED [Customer ID] : SUM([Order Total])})
@@ -50,7 +50,7 @@ WINDOW_SUM({FIXED [Customer ID] : SUM([Order Total])})
 
 **Business Challenge**: Calculate regional market share that remains constant regardless of product filtering.
 
-```tableau
+```text
 SUM([Sales]) / {FIXED [Region] : SUM([Sales])}
 ```
 
@@ -62,7 +62,7 @@ SUM([Sales]) / {FIXED [Region] : SUM([Sales])}
 
 **Business Challenge**: Compare individual product performance against store averages.
 
-```tableau
+```text
 // Individual Product Sales
 SUM([Sales])
 
@@ -74,7 +74,7 @@ SUM([Sales]) - {INCLUDE [Product] : AVG(SUM([Sales]))}
 ```
 
 **Advanced Pattern - Cohort Analysis**:
-```tableau
+```text
 // Monthly cohort retention
 {INCLUDE [Customer Acquisition Month] : 
  COUNTD(IF [Order Month] = [Customer Acquisition Month] THEN [Customer ID] END)} /
@@ -85,7 +85,7 @@ SUM([Sales]) - {INCLUDE [Product] : AVG(SUM([Sales]))}
 
 **Business Challenge**: Show current period performance against historical context.
 
-```tableau
+```text
 // Current Quarter Performance
 SUM([Revenue])
 
@@ -99,7 +99,7 @@ SUM([Revenue])
 
 **Business Challenge**: Compare subcategory performance against overall category performance.
 
-```tableau
+```text
 // Subcategory Sales
 SUM([Sales])
 
@@ -114,7 +114,7 @@ SUM([Sales]) / {EXCLUDE [Sub-Category] : SUM([Sales])}
 
 **Business Challenge**: Understand regional trends without city-level variations affecting the analysis.
 
-```tableau
+```text
 // Regional Average Excluding City Variations
 {EXCLUDE [City] : AVG([Profit Margin])}
 ```
@@ -125,7 +125,7 @@ SUM([Sales]) / {EXCLUDE [Sub-Category] : SUM([Sales])}
 
 **Business Challenge**: Calculate accurate customer acquisition cost considering customer lifetime across multiple touchpoints.
 
-```tableau
+```text
 // Total Marketing Spend by Channel
 {FIXED [Marketing Channel], [Month] : SUM([Marketing Spend])}
 
@@ -143,7 +143,7 @@ SUM([Sales]) / {EXCLUDE [Sub-Category] : SUM([Sales])}
 
 **Business Challenge**: Create a 12-month rolling average that's independent of date filters.
 
-```tableau
+```text
 {FIXED [Customer ID] : 
  AVG(IF DATEDIFF('month', [Order Date], MAX([Order Date])) <= 12 
      THEN [Monthly Revenue] END)}
@@ -155,7 +155,7 @@ SUM([Sales]) / {EXCLUDE [Sub-Category] : SUM([Sales])}
 When using FIXED expressions, context filters are applied before LOD calculations, making them more efficient than regular filters.
 
 ### 2. Minimize Nested LOD Expressions
-```tableau
+```text
 // Inefficient
 {FIXED [Region] : SUM({FIXED [Customer] : SUM([Sales])})}
 
@@ -170,7 +170,7 @@ For large datasets, push calculations to the data source when possible.
 
 ### Pitfall 1: Aggregation Confusion
 **Problem**: Mixing aggregated and non-aggregated expressions
-```tableau
+```text
 // Incorrect
 {FIXED [Customer] : [Sales]}
 
@@ -180,7 +180,7 @@ For large datasets, push calculations to the data source when possible.
 
 ### Pitfall 2: Date Truncation Issues
 **Problem**: Date functions in LOD expressions can cause unexpected results
-```tableau
+```text
 // Potential Issue
 {FIXED YEAR([Order Date]) : SUM([Sales])}
 
@@ -191,7 +191,7 @@ For large datasets, push calculations to the data source when possible.
 ## Advanced Use Cases
 
 ### Customer Journey Analytics
-```tableau
+```text
 // First Purchase Channel
 {FIXED [Customer ID] : 
  MIN(IF [Order Rank] = 1 THEN [Marketing Channel] END)}
@@ -203,7 +203,7 @@ For large datasets, push calculations to the data source when possible.
 ```
 
 ### Inventory Turnover Analysis
-```tableau
+```text
 // Days of Inventory
 {FIXED [Product], [Location] : 
  AVG([Inventory Quantity])} / 

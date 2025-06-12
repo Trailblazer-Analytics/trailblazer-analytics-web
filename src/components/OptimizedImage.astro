@@ -1,17 +1,22 @@
 ---
-// OptimizedImage.astro - A responsive image component with lazy loading and proper attributes
+// OptimizedImage.astro - A responsive image component using astro:assets
+import { Image } from 'astro:assets';
 
 // Props definition with defaults
 export interface Props {
-  src: string;
+  src: ImageMetadata | string; // ImageMetadata for local images, string for remote or public/
   alt: string;
   width?: number;
   height?: number;
   class?: string;
-  sizes?: string;
+  // sizes?: string; // astro:assets <Image> handles sizes automatically based on widths or a densities prop
   loading?: "lazy" | "eager";
   decoding?: "async" | "sync" | "auto";
-  format?: "webp" | "avif" | "jpeg" | "png" | "original";
+  format?: "webp" | "avif" | "jpeg" | "png" | "svg" | "gif"; // Supported formats by astro:assets
+  quality?: number | "low" | "mid" | "high" | "max";
+  aspectRatio?: string | number; // e.g., "16:9" or 1.77
+  densities?: number[];
+  widths?: number[];
 }
 
 const {
@@ -20,51 +25,48 @@ const {
   width,
   height,
   class: className = "",
-  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
   loading = "lazy",
   decoding = "async",
-  format = "webp"
+  format,
+  quality,
+  aspectRatio,
+  densities,
+  widths
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
 
-// Ensure src has the correct base path
-const fullSrc = src.startsWith('http') 
-  ? src 
-  : `${base}${src.startsWith('/') ? src.substring(1) : src}`;
+// Determine if src is a string (remote or public path) or ImageMetadata (local import)
+let imageProps: any = {
+  src,
+  alt,
+  loading,
+  decoding,
+  class: className,
+};
 
-// Generate srcset for responsive images (if width is provided)
-let srcset = "";
-if (width) {
-  const breakpoints = [320, 640, 768, 1024, 1280, 1536];
-  const filteredBreakpoints = breakpoints.filter(bp => bp <= width * 2);
-  
-  // Add original size and 2x for high-res displays
-  if (!filteredBreakpoints.includes(width)) {
-    filteredBreakpoints.push(width);
-  }
-  if (!filteredBreakpoints.includes(width * 2) && width * 2 <= 1920) {
-    filteredBreakpoints.push(width * 2);
-  }
-  
-  // Sort and deduplicate
-  const uniqueBreakpoints = [...new Set(filteredBreakpoints)].sort((a, b) => a - b);
-  
-  srcset = uniqueBreakpoints
-    .map(bp => `${fullSrc} ${bp}w`)
-    .join(", ");
+if (typeof src === 'string') {
+  // Handle public or remote images - astro:assets <Image> doesn't optimize these directly
+  // but we can still use it as a regular <img> tag wrapper with benefits like loading/decoding.
+  // For public images, ensure the path is correct.
+  imageProps.src = src.startsWith('http') || src.startsWith('/') ? src : `${base}${src}`;
+  if (width) imageProps.width = width;
+  if (height) imageProps.height = height;
+  // astro:assets specific props like format, quality, widths, densities are not applicable here
+} else {
+  // Local images (ImageMetadata)
+  if (width) imageProps.width = width;
+  if (height) imageProps.height = height;
+  if (format) imageProps.format = format;
+  if (quality) imageProps.quality = quality;
+  if (aspectRatio) imageProps.aspectRatio = aspectRatio;
+  if (densities) imageProps.densities = densities;
+  if (widths) imageProps.widths = widths;
 }
 ---
 
-<img 
-  src={fullSrc}
-  alt={alt}
-  width={width}
-  height={height}
-  class={className}
-  loading={loading}
-  decoding={decoding}
-  sizes={sizes}
-  srcset={srcset || undefined}
-  style={width && height ? `aspect-ratio: ${width}/${height};` : undefined}
-/>
+{typeof src === 'string' ? (
+  <img {...imageProps} />
+) : (
+  <Image {...imageProps} />
+)}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatDate } from '../utils/date'; // Import the centralized formatDate function
 
 const BlogPostCard = ({ 
   title, 
@@ -9,14 +10,6 @@ const BlogPostCard = ({
   slug, 
   featured = false 
 }) => {
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
   return (
     <article className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow ${featured ? 'border-2 border-brandGold' : ''}`}>
       {featured && (

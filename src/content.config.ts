@@ -8,6 +8,7 @@ const blog = defineCollection({
     description: z.string().optional(),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
+    image: z.string().optional(), // Added image field
   }),
 });
 
@@ -25,6 +26,7 @@ const caseStudies = defineCollection({
     results: z.array(z.string()).optional(),
     technologies: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
+    image: z.string().optional(), // Added image field
   }),
 });
 
@@ -39,6 +41,7 @@ const techNotes = defineCollection({
     category: z.enum(['Python', 'SQL', 'JavaScript', 'ML', 'Data Engineering', 'Visualization']).optional(),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
+    image: z.string().optional(), // Added image field
   }),
 });
 
@@ -55,6 +58,7 @@ const whitepapers = defineCollection({
     featured: z.boolean().optional(),
     rating: z.number().optional(),
     downloads: z.number().optional(),
+    image: z.string().optional(), // Added image field
   }),
 });
 
@@ -71,6 +75,7 @@ const downloads = defineCollection({
     featured: z.boolean().optional(),
     rating: z.number().optional(),
     downloads: z.number().optional(),
+    image: z.string().optional(), // Added image field
   }),
 });
 
@@ -87,6 +92,7 @@ const tools = defineCollection({
     featured: z.boolean().optional(),
     rating: z.number().optional(),
     technologies: z.array(z.string()).optional(),
+    image: z.string().optional(), // Added image field
   }),
 });
 

@@ -43,7 +43,7 @@ Profit = SUM(Sales[Revenue]) - SUM(Sales[Cost])
 **Problem:** Refreshing entire datasets when only recent data changes.
 
 **Solution:**
-```m
+```powerquery
 // Set up parameters
 RangeStart = DateTime.From(0)
 RangeEnd = DateTime.From(DateTime.LocalNow())
@@ -130,7 +130,7 @@ GROUP BY YEAR(Date), MONTH(Date), Product_Category
 **Problem:** Power Query transformations not pushed to source database.
 
 **Solution:**
-```m
+```powerquery
 // Check if query folding works
 Table.View(Source, [
     GetRowCount = () => Table.RowCount(Source),

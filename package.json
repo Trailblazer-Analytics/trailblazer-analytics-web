@@ -1,7 +1,8 @@
 {
   "name": "trailblazer-analytics",
   "version": "0.0.1",
-  "type": "module",  "scripts": {
+  "type": "module",
+  "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "pnpm run fetch:medium && astro build --silent && node scripts/fix-urls.js",
@@ -14,28 +15,29 @@
     "clean": "rmdir /s /q dist 2>nul || rm -rf dist",
     "typecheck": "astro check",
     "deploy": "npm run build && npx gh-pages -d dist",
-    "deploy:clean": "astro build --silent && npx gh-pages -d dist --remove \"**\\!(.git|.|..)\" --no-history && echo '\n✅ Clean deployment to https://anykolaiszyn.github.io/trailblazer-analytics-devkit/'",
+    "deploy:clean": "astro build --silent && npx gh-pages -d dist --remove \"**\\!(.git|.|..)\" --no-history && echo '\n✅ Clean deployment to www.trailblazeranalytics.com completed.'",
     "verify-build": "node scripts/verify-build.js",
     "fetch:medium": "node scripts/fetch-medium.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.2.6",
-    "@astrojs/react": "^4.2.7",
+    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/react": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
-    "astro": "^5.7.13",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
+    "@astrojs/sitemap": "^3.4.1",
+    "astro": "^5.9.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "rss-parser": "^3.13.0",
-    "tailwindcss": "^3.4.2",
+    "tailwindcss": "^3.4.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
-    "@lhci/cli": "^0.14.0",
-    "autoprefixer": "10.4.15",
+    "@lhci/cli": "^0.15.0",
+    "autoprefixer": "^10.4.15",
     "chalk": "^5.4.1",
     "gh-pages": "^6.3.0",
-    "postcss": "8.4.38"
+    "postcss": "^8.4.38"
   }
 }

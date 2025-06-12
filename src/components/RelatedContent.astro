@@ -3,17 +3,22 @@
 // This component finds and displays related content based on tags/keywords
 
 const { 
-  contentType = 'blog',     // Type of content: blog, techNotes, whitepapers, etc.
-  currentSlug,              // Current content slug to exclude from related results
-  keywords = [],            // Keywords/tags to match
-  title = "Related Content", // Section title
-  maxItems = 3,             // Maximum number of items to display
-  className = ""            // Additional CSS classes
+  contentType = 'blog',
+  currentSlug,
+  keywords = [],
+  title = "Related Content",
+  maxItems = 3,
+  className = ""
 } = Astro.props;
 
-// Import collections as needed
 import { getCollection } from 'astro:content';
 import OptimizedImage from './OptimizedImage.astro';
+import type { ImageMetadata } from 'astro'; // Or from 'astro:assets' if preferred
+import { formatDate } from '../utils/date'; // Import the centralized formatDate function
+
+// 1. Glob all potential local content images
+// Adjust the path according to your project structure, e.g., /src/assets/images/content/
+const localContentImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/content/**/*.{jpeg,jpg,png,gif,webp,svg,avif}');
 
 // Get all content of the specified type
 let allContent = [];
@@ -28,17 +33,15 @@ const otherContent = allContent.filter(item => item.slug !== currentSlug);
 
 // Score each content item based on matching keywords
 const scoredContent = otherContent.map(item => {
-  const itemKeywords = item.data.keywords || [];
+  const itemKeywords = item.data.tags || item.data.keywords || []; // Use tags or keywords
   let score = 0;
   
-  // Calculate score based on keyword matches
   keywords.forEach(keyword => {
     if (itemKeywords.includes(keyword)) {
       score += 1;
     }
   });
   
-  // Also check title and description for partial matches
   keywords.forEach(keyword => {
     const keywordLower = keyword.toLowerCase();
     if (item.data.title.toLowerCase().includes(keywordLower)) {
@@ -53,36 +56,56 @@ const scoredContent = otherContent.map(item => {
 });
 
 // Sort by score (highest first) and take the top N items
-const relatedContent = scoredContent
-  .filter(item => item.score > 0)  // Only include items with at least some relevance
-  .sort((a, b) => b.score - a.score)
-  .slice(0, maxItems);
-
-// Format date for display
-function formatDate(date) {
-  if (!date) return '';
-  return new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  });
-}
+const relatedByScore = scoredContent
+  .filter(item => item.score > 0)
+  .sort((a, b) => b.score - a.score);
 
 // If we don't have enough related content by keywords, add recent content
-let displayContent = [...relatedContent];
-if (displayContent.length < maxItems) {
+let tempDisplayContent = [...relatedByScore];
+
+if (tempDisplayContent.length < maxItems) {
   const recentContent = otherContent
-    .filter(item => !displayContent.some(rc => rc.item.slug === item.slug))
+    .filter(item => !tempDisplayContent.some(rc => rc.item.slug === item.slug)) // Exclude already selected
     .sort((a, b) => {
       const dateA = a.data.date ? new Date(a.data.date) : new Date(0);
       const dateB = b.data.date ? new Date(b.data.date) : new Date(0);
-      return dateB - dateA;
+      return dateB.getTime() - dateA.getTime();
     })
-    .slice(0, maxItems - displayContent.length)
-    .map(item => ({ item, score: 0 }));
-  
-  displayContent = [...displayContent, ...recentContent];
+    .slice(0, maxItems - tempDisplayContent.length)
+    .map(item => ({ item, score: 0 })); // Add score 0 for recent items  
+    
+  tempDisplayContent = [...tempDisplayContent, ...recentContent];
 }
+
+// Limit to maxItems after combining
+const finalContentList = tempDisplayContent.slice(0, maxItems);
+
+// Prepare display content with resolved image metadata
+const displayContent = await Promise.all(finalContentList.map(async ({ item, score }) => {
+  let imageSrc: ImageMetadata | string | undefined = item.data.image; // Default to the string path
+
+  if (item.data.image && !item.data.image.startsWith('/') && !item.data.image.startsWith('http')) {
+    // Assumed to be a local image filename in /src/assets/images/content/
+    const globKey = `/src/assets/images/content/${item.data.image}`;
+    if (localContentImages[globKey]) {
+      try {
+        const imageModule = await localContentImages[globKey]();
+        imageSrc = imageModule.default;
+      } catch (e) {
+        console.error(`Failed to load image module for ${globKey}:`, e);
+        // Keep imageSrc as the string path, OptimizedImage will handle it as a public/remote path
+      }
+    } else {
+      // console.warn(`Local image ${item.data.image} not found in glob /src/assets/images/content/`);
+      // If not found in glob, treat as a public path (OptimizedImage will prepend base if needed)
+      // Or, you might want to force it to be a public path if that's your convention for non-globbed local images
+      // For now, we let OptimizedImage handle it based on its string content.
+    }
+  }
+  return { item, score, imageSrc };
+}));
+
+
 ---
 
 {displayContent.length > 0 && (
@@ -90,16 +113,18 @@ if (displayContent.length < maxItems) {
     <h2 class="text-2xl font-bold mb-6">{title}</h2>
     
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {displayContent.map(({ item }) => (
+      {displayContent.map(({ item, imageSrc }) => (
         <a href={`/${contentType}/${item.slug}`} class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-          {item.data.image && (
+          {imageSrc && ( // Use the resolved imageSrc
             <div class="relative h-40 w-full overflow-hidden">
               <OptimizedImage
-                src={item.data.image}
+                src={imageSrc}
                 alt={item.data.title}
-                width={400}
-                height={225}
-                className="object-cover w-full h-full"
+                width={400} // Example width, adjust as needed
+                height={225} // Example height, adjust for aspect ratio
+                class="object-cover w-full h-full"
+                // Pass 'avif', 'webp' to prioritize, or let OptimizedImage use defaults from astro.config
+                // format="webp" 
               />
             </div>
           )}

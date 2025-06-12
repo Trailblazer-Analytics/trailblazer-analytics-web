@@ -2,12 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
-
-// Add custom language aliases for languages that Prism doesn't recognize
-const customLanguages = {
-  'm': 'clike',          // Alias m to C-like syntax
-  'tableau': 'javascript', // Alias tableau to JavaScript syntax
-};
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   integrations: [react(), tailwind(), mdx({
@@ -21,10 +16,15 @@ export default defineConfig({
       // Silence warnings from unknown directives
       passThrough: ['mdxJsxFlowElement', 'mdxJsxTextElement']
     }
-  })],
+  }), sitemap()],
   output: "static",
   site: "https://www.trailblazeranalytics.com",
-  base: "/",  build: {
+  base: "/",
+  image: {
+    // Enable AVIF and WebP formats for local images
+    formats: ['avif', 'webp'],
+  },
+  build: {
     assets: `assets-${Date.now()}`,
   },  markdown: {
     // Suppress rehype warnings
@@ -40,10 +40,6 @@ export default defineConfig({
       // Suppress warnings about duplicate IDs
       clobberPrefix: ''
     },
-    // Custom language handling for syntax highlighting
-    prism: {
-      handleMissingLanguage: true, // Don't warn for missing languages
-    }
   },
   // Exclude docs folder from processing to reduce warnings
   excludeFiles: {

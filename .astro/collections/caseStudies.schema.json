@@ -43,6 +43,9 @@
         "featured": {
           "type": "boolean"
         },
+        "image": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

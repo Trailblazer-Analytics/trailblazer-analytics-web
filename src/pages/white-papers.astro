@@ -124,7 +124,10 @@ function formatDownloadCount(count) {
         <!-- Category Filter -->
         <div class="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
-            <button class="px-4 py-2 rounded-full border-2 border-gray-300 text-gray-600 hover:border-brandGreen hover:text-brandGreen transition-colors">
+            <button 
+              class="filter-btn px-4 py-2 rounded-full border-2 border-gray-300 text-gray-600 hover:border-brandGreen hover:text-brandGreen transition-colors"
+              data-filter={category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}
+            >
               {category}
             </button>
           ))}
@@ -132,7 +135,10 @@ function formatDownloadCount(count) {
           <!-- White Papers Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {whitepapers.map((paper) => (
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div 
+              class="whitepaper-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              data-category={paper.data.category ? paper.data.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-') : 'research'}
+            >
               {/* Preview Image Placeholder */}
               <div class="h-48 bg-gray-100 flex items-center justify-center">
                 <div class="text-center">
@@ -208,7 +214,7 @@ function formatDownloadCount(count) {
         <div class="bg-gray-50 rounded-2xl p-8">
           <div class="w-16 h-16 bg-brandGreen rounded-full flex items-center justify-center mx-auto mb-6">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
             </svg>
           </div>
           <h3 class="text-2xl font-bold text-gray-900 mb-4">Custom Research & Analysis</h3>
@@ -286,6 +292,37 @@ function formatDownloadCount(count) {
     </div>
   </section>
 
+  <!-- Newsletter CTA -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Stay Updated with Our Research</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Subscribe to our newsletter for the latest insights and exclusive content.
+        </p>
+        <div class="bg-gray-50 rounded-2xl p-8">
+          <form class="flex flex-col sm:flex-row gap-4">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500"
+              required
+            />
+            <button 
+              type="submit"
+              class="bg-brandGreen hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            >
+              Subscribe Now
+            </button>
+          </form>
+          <p class="text-sm text-gray-500 mt-4">
+            We respect your privacy. Unsubscribe at any time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <Footer />
 </Base>
 
@@ -297,3 +334,41 @@ function formatDownloadCount(count) {
     overflow: hidden;
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const whitepaperCards = document.querySelectorAll('.whitepaper-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const filterValue = this.getAttribute('data-filter');
+
+        // Update button states
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-brandGreen', 'text-white', 'border-brandGreen');
+          btn.classList.add('text-gray-600', 'border-gray-300', 'hover:border-brandGreen', 'hover:text-brandGreen');
+        });
+        this.classList.add('bg-brandGreen', 'text-white', 'border-brandGreen');
+        this.classList.remove('hover:border-brandGreen', 'hover:text-brandGreen');
+
+
+        // Filter whitepaper cards
+        whitepaperCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (filterValue === 'all' || cardCategory === filterValue) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Initialize with "All" selected
+    const allButton = document.querySelector('.filter-btn[data-filter=\"all\"]');
+    if (allButton) {
+      allButton.click();
+    }
+  });
+</script>
