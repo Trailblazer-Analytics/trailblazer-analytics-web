@@ -2,7 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,15 +12,15 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Build
+    name: Build and Upload
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install pnpm
@@ -27,47 +28,45 @@ jobs:
         with:
           version: 8
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm'
+          cache: pnpm
 
-      - name: Setup Pages
+      - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v4
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build with Astro
+      - name: Build site with Astro
         run: pnpm run build
 
-      - name: Verify URLs
+      - name: Verify for protocol-relative URLs
         run: |
           echo "Checking for protocol-relative URLs in HTML files..."
-          if grep -r 'href="//' --include="*.html" ./dist; then
+          if grep -r 'href=\"//' --include='*.html' ./dist; then
             echo "ERROR: Found protocol-relative URLs that were not fixed!"
             exit 1
           else
             echo "All URLs look good!"
           fi
-          
-          echo "Running the URL verification script..."
-          node scripts/verify-urls.js
 
-      - name: Upload artifact
+      - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: dist
 
   deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v3
