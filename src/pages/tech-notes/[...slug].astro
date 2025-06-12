@@ -3,10 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.jsx';
-import RelatedContent from '../../components/RelatedContent.astro';
-import LazyLoad from '../../components/LazyLoad.astro';
-import SocialShare from '../../components/SocialShare.astro';
-import siteConfig from '../../site.config.js';
 
 export async function getStaticPaths() {
   const techNoteEntries = await getCollection('techNotes');
@@ -18,15 +14,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-// Current URL for social sharing
-const currentUrl = Astro.url.href;
-
 // SEO meta data
 const seoData = {
   title: `${entry.data.title} - Tech Note`,
   description: entry.data.description || entry.data.excerpt || 'Technical insights and tips for data analytics and business intelligence.',
-  image: entry.data.image || '/og-image.png',
-  schemaType: "TechArticle"
+  image: entry.data.image || '/og-image.png'
 };
 
 // Format date
@@ -97,20 +89,10 @@ function formatDate(date) {
             </div>
           )}
         </header>
-          <!-- Article Content -->
+        
+        <!-- Article Content -->
         <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100">
           <Content />
-        </div>
-        
-        <!-- Social Sharing -->
-        <div class="mt-12 border-t border-b border-gray-200 py-6">
-          <SocialShare 
-            url={currentUrl}
-            title={entry.data.title}
-            summary={entry.data.description || `Read this tech note on ${siteConfig.title}`}
-            twitterHandle={siteConfig.twitter ? siteConfig.twitter.replace('@', '') : ''}
-            className="flex justify-center"
-          />
         </div>
         
         <!-- Author Bio -->
@@ -135,10 +117,11 @@ function formatDate(date) {
             </div>
           </div>
         </div>
-          <!-- Navigation -->
+        
+        <!-- Navigation -->
         <div class="mt-12 flex justify-center">
           <a 
-            href="/tech-notes/" 
+            href="/tech-notes" 
             class="bg-brandGreen text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
           >
             ← Back to Tech Notes
@@ -148,26 +131,6 @@ function formatDate(date) {
       </div>
     </div>
   </article>
-  
-  <!-- Related Content Section -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-6">
-      <LazyLoad className="max-w-6xl mx-auto" threshold={0.1} rootMargin="200px">
-        <RelatedContent 
-          contentType="techNotes"
-          currentSlug={entry.slug}
-          keywords={entry.data.keywords || entry.data.tags || []}
-          title="Related Tech Notes"
-          maxItems={3}
-        >
-          <div slot="fallback">
-            <h2 class="text-2xl font-bold mb-6">Latest Tech Notes</h2>
-            <!-- This will only show if there are no related tech notes -->
-          </div>
-        </RelatedContent>
-      </LazyLoad>
-    </div>
-  </section>
   
   <Footer />
 </Base>

@@ -2,16 +2,6 @@
 
 A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, newsletter integration, and production-ready deployment.
 
-## 🌐 Live Site
-**Production URL:** https://www.trailblazeranalytics.com/
-
-## 📊 Current Status
-✅ **DEPLOYED & OPERATIONAL**
-- All 45 pages building successfully
-- GitHub Pages deployment working
-- Clean navigation structure implemented
-- All monetization features active
-
 ## 🚀 Features
 
 ### Content Management
@@ -28,27 +18,6 @@ A modern, responsive website built with Astro + React + Tailwind CSS for data st
 - **Download Tracking**: Analytics for resource downloads with optional lead capture
 - **SEO Optimization**: Complete meta tags, structured data, and performance optimization
 - **Mobile-First Design**: Responsive navigation and mobile-optimized experience
-
-## 📚 Documentation
-
-For comprehensive project documentation, please refer to these guides:
-
-- [**Content Management Guide**](./docs/CONTENT_MANAGEMENT_GUIDE.md) - Complete step-by-step content creation guide
-- [**Quick Reference**](./docs/QUICK_REFERENCE.md) - Common tasks and quick fixes
-- [**Content Workflow**](./docs/CONTENT_WORKFLOW.md) - Editorial workflow and processes  
-- [**Site Dashboard**](./docs/SITE_DASHBOARD.md) - Site management overview and maintenance
-- [**Project Complete Summary**](./docs/PROJECT_COMPLETE.md) - Current project status and achievements
-
-### Technical Documentation
-- [**Project Documentation**](./docs/PROJECT_DOCUMENTATION.md) - Central hub for all project information
-- [**Admin Guide**](./docs/ADMIN_GUIDE.md) - Guide for site administration and maintenance
-- [**Deployment Checklist**](./docs/DEPLOYMENT_CHECKLIST.md) - Pre-deployment checklist
-- [**GitHub Pages Deployment**](./docs/GITHUB_PAGES_DEPLOYMENT.md) - Guide for deploying to GitHub Pages
-- [**Development Setup**](./docs/DEV_SETUP.md) - How to set up the development environment
-
-### Content Creation Guides
-- [**Case Study Guide**](./docs/CASE_STUDY_GUIDE.md) - Guide for creating case studies
-- [**Blog Post Guide**](./docs/BLOG_POST_GUIDE.md) - Guide for creating blog posts
 
 ## 🛠️ Quick Start
 
@@ -103,39 +72,13 @@ public/                 # Static assets and downloads
 
 ## 🚀 Deployment
 
-### Current Deployment Setup
-- **Production Site:** https://anykolaiszyn.github.io/trailblazer-analytics-devkit/
-- **Repository:** https://github.com/anykolaiszyn/trailblazer-analytics-devkit
-- **Auto-Deploy:** GitHub Actions (on push to main branch)
-- **Build Status:** ✅ All 45 pages building successfully
+The site is designed for easy deployment to various hosting platforms:
 
-### Deployment Methods
-
-#### Automatic (Recommended)
-Changes automatically deploy when pushed to main branch via GitHub Actions.
-
-```bash
-git add .
-git commit -m "Your changes"
-git push origin main
-# Site updates automatically in 2-3 minutes
-```
-
-#### Manual Deployment
-For emergency deployments or when GitHub Actions is down:
-
-```bash
-npm run build
-npm run deploy:clean
-```
-
-### File Storage
-All files are currently small (<2KB each) and stored directly in Git. No external storage needed.
-
-The site supports deployment to various hosting platforms:
-- **Static Hosting**: Netlify, Vercel, GitHub Pages ✅ (current)
+- **Static Hosting**: Netlify, Vercel, GitHub Pages
 - **Traditional Hosting**: HostGator, cPanel-based hosts
 - **CDN**: Cloudflare Pages, AWS S3 + CloudFront
+
+See `DEPLOYMENT_CHECKLIST.md` for detailed deployment instructions.
 
 ## 🔧 Built With
 

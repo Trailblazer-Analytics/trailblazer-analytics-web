@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
 import BlogPostCard from '../components/BlogPostCard.jsx';
-const base = import.meta.env.BASE_URL;
 ---
 
 <Base>
@@ -17,19 +16,19 @@ const base = import.meta.env.BASE_URL;
       <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
         <h3 class="text-xl font-bold text-gray-900 mb-4">Downloads</h3>
         <p class="text-gray-600 mb-4">Free templates, guides, and frameworks</p>
-        <a href={base + '/downloads'} class="text-brandGreen font-semibold hover:text-green-700">Browse Downloads →</a>
+        <a href="/downloads" class="text-brandGreen font-semibold hover:text-green-700">Browse Downloads →</a>
       </div>
       
       <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
         <h3 class="text-xl font-bold text-gray-900 mb-4">Tools & Software</h3>
         <p class="text-gray-600 mb-4">Analytics tools and software solutions</p>
-        <a href={base + '/tools'} class="text-brandGreen font-semibold hover:text-green-700">Explore Tools →</a>
+        <a href="/tools" class="text-brandGreen font-semibold hover:text-green-700">Explore Tools →</a>
       </div>
       
       <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
         <h3 class="text-xl font-bold text-gray-900 mb-4">White Papers</h3>
         <p class="text-gray-600 mb-4">In-depth research and strategic insights</p>
-        <a href={base + '/white-papers'} class="text-brandGreen font-semibold hover:text-green-700">Read Papers →</a>
+        <a href="/white-papers" class="text-brandGreen font-semibold hover:text-green-700">Read Papers →</a>
       </div>
     </div>
   </section>

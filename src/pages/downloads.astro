@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
-const base = import.meta.env.BASE_URL;
 
 const downloads = await getCollection('downloads');
 
@@ -71,7 +70,7 @@ const seoData = {
               <h3 class="font-bold mb-2">{download.data.title}</h3>
               <p class="text-sm opacity-90 mb-3">{download.data.downloads || 1200} downloads</p>
               <a 
-                href={download.data.downloadUrl || (base + `/downloads/${download.slug}.pdf`)}
+                href={download.data.downloadUrl || `/downloads/${download.slug}.pdf`}
                 class="inline-block bg-white text-brandGreen px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -148,7 +147,7 @@ const seoData = {
                       
                       <div class="flex gap-3">
                         <a 
-                          href={download.data.downloadUrl || (base + `/downloads/${download.slug}.pdf`)}
+                          href={download.data.downloadUrl || `/downloads/${download.slug}.pdf`}
                           class="flex-1 bg-brandGreen hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -156,7 +155,7 @@ const seoData = {
                           Download Free
                         </a>
                         <a 
-                          href={base + `/downloads/${download.slug}`}
+                          href={`/downloads/${download.slug}`}
                           class="border-2 border-gray-300 hover:border-brandGreen text-gray-700 hover:text-brandGreen px-4 py-3 rounded-lg transition-colors"
                         >
                           Preview
@@ -181,7 +180,7 @@ const seoData = {
               We're constantly developing new templates, frameworks, and tools. <strong>Starter Kits</strong>, <strong>Advanced Calculators</strong>, and <strong>Industry-Specific Guides</strong> are on the way.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={base + '/contact'} class="bg-brandGreen text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+              <a href="/contact" class="bg-brandGreen text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
                 Request Specific Resource
               </a>
               <button class="border-2 border-brandGreen text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-brandGreen hover:text-white transition-colors">

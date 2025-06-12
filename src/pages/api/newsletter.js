@@ -14,7 +14,8 @@ export async function POST({ request }) {
 
     // Choose your newsletter provider
     const provider = import.meta.env.NEWSLETTER_PROVIDER || 'beehiiv';
-      let result;
+    
+    let result;
     
     switch (provider) {
       case 'beehiiv':

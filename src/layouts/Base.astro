@@ -1,239 +1,110 @@
 ---
 import '../styles/global.css';
 import siteConfig from '../site.config.js';
-import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget.astro';
 
-const base = import.meta.env.BASE_URL;
+// Default meta data
+const defaultTitle = "Trailblazer Analytics";
+const defaultDescription = "Transforming data into actionable insight with BI expertise, AI innovation, and clear storytelling.";
+const defaultImage = "/og-image.png";
 
-// Determine if analytics should be enabled
-// Disable in development, enable in production
-const isProduction = import.meta.env.PROD;
-const enableAnalytics = isProduction;
-
-// Default SEO props that can be overridden by pages
-const {
-  title = "Trailblazer Analytics | Data Strategy & Business Intelligence",
-  description = siteConfig.description,
-  image = siteConfig.defaultImage,
-  type = "website",
-  schemaType = "WebSite",
-  canonicalUrl,
-  author = siteConfig.author
-} = Astro.props;
-
-// Compute full URL for social media
-const siteUrl = siteConfig.url || (isProduction ? "https://www.trailblazeranalytics.com" : "http://localhost:4321");
-const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${base}${image.startsWith('/') ? image.slice(1) : image}`;
-const canonical = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${siteUrl}${canonicalUrl}`) : Astro.url.href;
-
-// Structured data (schema.org)
-const schemaData = {
-  "@context": "https://schema.org",
-  "@type": schemaType,
-};
-
-// Add different properties based on schema type
-if (schemaType === "WebSite") {
-  Object.assign(schemaData, {
-    name: title,
-    description: description,    
-    url: siteUrl,
-    potentialAction: {
-      "@type": "SearchAction",
-      "target": siteUrl + base + "search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  });
-} else if (schemaType === "Person") {
-  Object.assign(schemaData, {
-    name: author,
-    description: description,
-    url: siteUrl,
-    sameAs: [
-      `https://linkedin.com/in/${siteConfig.linkedin}`,
-      `https://medium.com/@${siteConfig.medium}`
-    ]
-  });
-} else if (schemaType === "Article") {
-  Object.assign(schemaData, {
-    headline: title,
-    description: description,
-    image: ogImageUrl,
-    author: {
-      "@type": "Person",
-      name: author
-    },    publisher: {
-      "@type": "Person",
-      name: siteConfig.author,
-      logo: {
-        "@type": "ImageObject",
-        url: siteUrl + base + "favicon.ico"
-      }
-    },
-    datePublished: Astro.props.datePublished || new Date().toISOString(),
-    dateModified: Astro.props.dateModified || new Date().toISOString()
-  });
+// Props for customization
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  noIndex?: boolean;
 }
 
-const structuredData = JSON.stringify(schemaData);
+const { 
+  title = defaultTitle,
+  description = defaultDescription,
+  image = defaultImage,
+  type = "website",
+  noIndex = false
+} = Astro.props;
+
+// Construct full title
+const fullTitle = title === defaultTitle ? title : `${title} | ${defaultTitle}`;
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <meta charset="UTF-8">
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="author" content={author} />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href={canonical} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content={type} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content="https://trailblazer-analytics.com" />
+    <meta property="og:image" content={image} />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonical} />
-    <meta property="twitter:title" content={title} />
+    <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImageUrl} />
-      <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-    <link rel="apple-touch-icon" sizes="180x180" href={`${base}apple-touch-icon.png`} />
-    <link rel="manifest" href={`${base}site.webmanifest`} />
+    <meta property="twitter:image" content={image} />
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href={`${base}assets/styles.css`} as="style" />
-    <link rel="stylesheet" href={`${base}assets/styles.css`} />
-    <link rel="preload" href={`${base}fonts/inter-var.woff2`} as="font" type="font/woff2" crossorigin />
-    {image && !image.startsWith('http') && (
-      <link rel="preload" href={`${base}${image.startsWith('/') ? image.slice(1) : image}`} as="image" />
-    )}
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={structuredData} />
-    
-    <slot name="head" />
-    <!-- Adding inline styles for critical CSS -->
-    <style is:global>
-      /* Inlining basic Tailwind utilities to ensure base styling works */
-      :root {
-        --color-brand-green: #006A3E; /* Updated for better contrast */
-        --color-brand-gold: #CFB53B;
-      }
-      
-      body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      }
-      
-      .container {
-        width: 100%;
-        max-width: 1280px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-      
-      .bg-brandGreen {
-        background-color: var(--color-brand-green);
-      }
-      
-      .bg-brandGold {
-        background-color: var(--color-brand-gold);
-      }
-      
-      .text-brandGold {
-        color: var(--color-brand-gold);
-      }
-      
-      .hover\:text-brandGold:hover {
-        color: var(--color-brand-gold);
-      }
-      
-      .rounded-lg {
-        border-radius: 0.5rem;
-      }
-
-      .flex {
-        display: flex;
-      }
-      
-      .flex-col {
-        flex-direction: column;
-      }
-
-      .min-h-screen {
-        min-height: 100vh;
-      }
-    </style>
-      <!-- Debug script for asset loading issues -->
-    <script is:inline>
-      // Only run debug logging in development or when explicitly enabled
-      const isDebugMode = window.location.hostname === 'localhost' || 
-                         window.location.search.includes('debug=true');
-      
-      window.addEventListener('DOMContentLoaded', () => {
-        if (isDebugMode) {
-          console.log('[Debug] Base URL:', window.location.origin + document.querySelector('base')?.getAttribute('href') || '');
-          console.log('[Debug] Asset paths:');
-          document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(el => {
-            console.log(el.getAttribute('href') || el.getAttribute('src'));
-          });
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Trailblazer Analytics",
+        "description": "Data strategy consulting, analytics implementation, and AI transformation services",
+        "url": "https://trailblazer-analytics.com",
+        "logo": "https://trailblazer-analytics.com/logo.png",
+        "image": "https://trailblazer-analytics.com/og-image.png",
+        "founder": {
+          "@type": "Person",
+          "name": "Alexander Nykolaiszyn",
+          "jobTitle": "Manager Business Insights",
+          "description": "15+ years transforming raw data into strategic business value through BI, automation, and AI integrations",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Lennar Corporation"
+          },
+          "alumniOf": "15+ years in business intelligence and analytics",
+          "sameAs": [
+            "https://linkedin.com/in/alexnyk",
+            "https://medium.com/@alex.nykolaiszyn",
+            "https://twitter.com/AlexNyk"
+          ]
+        },
+        "serviceType": [
+          "Data Strategy Consulting",
+          "Business Intelligence",
+          "Analytics Implementation",
+          "AI Transformation"
+        ],
+        "areaServed": "Worldwide",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "business",
+          "url": "https://trailblazer-analytics.com/contact"
         }
-        
-        // Always check for 404 errors on CSS/JS files
-        window.addEventListener('error', function(e) {
-          if (e.target && (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT')) {
-            console.error('Failed to load:', e.target.getAttribute('href') || e.target.getAttribute('src'));
-          }
-        }, true);
-      });    </script>
-    
-    {/* Google Analytics */}
-    {enableAnalytics && siteConfig.googleAnalyticsId && (
-      <Fragment>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.googleAnalyticsId}`}></script>
-        <script is:inline define:vars={{ googleAnalyticsId: siteConfig.googleAnalyticsId }}>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         gtag('config', googleAnalyticsId);
-       </script>
-      </Fragment>
-    )}
-    
-    {/* Hotjar */}
-    {enableAnalytics && siteConfig.hotjarId && (
-      <script is:inline define:vars={{ hotjarId: siteConfig.hotjarId }}>
-        (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:hotjarId,hjsv:6};
-          a=o.getElementsByTagName('head')[0];
-          r=o.createElement('script');r.async=1;
-          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-          a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-      </script>
-    )}
-    
-    {/* Plausible Analytics - privacy-focused alternative */}
-    {enableAnalytics && siteConfig.plausibleDomain && (
-      <script defer data-domain={siteConfig.plausibleDomain} src="https://plausible.io/js/script.js"></script>
-    )}
+      }
+    </script>
+    <script defer data-domain={siteConfig.plausibleDomain} src="https://plausible.io/js/plausible.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html { font-family: 'Inter', 'Outfit', sans-serif; }
+    </style>
   </head>
   <body class="min-h-screen flex flex-col">
     <slot />
-    <BuyMeCoffeeWidget />
   </body>
 </html>
