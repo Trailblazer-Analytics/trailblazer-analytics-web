@@ -1,7 +1,8 @@
 {
   "name": "trailblazer-analytics",
   "version": "0.0.1",
-  "type": "module",  "scripts": {
+  "type": "module",
+  "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -16,6 +17,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.2.6",
     "@astrojs/react": "^4.2.7",
+    "@astrojs/rss": "^4.0.12",
     "astro": "^5.7.13",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
