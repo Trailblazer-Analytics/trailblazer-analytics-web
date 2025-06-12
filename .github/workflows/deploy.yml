@@ -7,7 +7,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -15,22 +17,25 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node.js and cache npm
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install dependencies and build
         run: |
-          pnpm install
-          pnpm run build
+          npm ci
+          npm run build
+
+      - name: Copy CNAME
+        run: cp public/CNAME dist/CNAME
+
+      - name: Create .nojekyll
+        run: echo "" > dist/.nojekyll
 
       - name: Deploy to GitHub Pages (gh-pages branch)
         uses: peaceiris/actions-gh-pages@v3
