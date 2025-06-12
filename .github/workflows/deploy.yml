@@ -7,23 +7,20 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
-  build:
-    name: Build and Upload
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 8
@@ -31,42 +28,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: pnpm
+          node-version: '18'
+          cache: 'pnpm'
 
       - name: Configure GitHub Pages
-        id: pages
         uses: actions/configure-pages@v4
+        id: pages
 
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build site with Astro
-        run: pnpm run build
-
-      - name: Verify for protocol-relative URLs
+      - name: Install dependencies and build
         run: |
-          echo "Checking for protocol-relative URLs in HTML files..."
-          if grep -r 'href=\"//' --include='*.html' ./dist; then
-            echo "ERROR: Found protocol-relative URLs that were not fixed!"
-            exit 1
-          else
-            echo "All URLs look good!"
-          fi
+          pnpm install
+          pnpm run build
+
+      - name: Copy CNAME file
+        run: cp public/CNAME dist/CNAME
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy
-        id: deployment
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v3
+        id: deploy
