@@ -14,9 +14,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
-env:
-  BUILD_PATH: "."
-
 jobs:
   build:
     name: Build
@@ -24,28 +21,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm' # Changed from npm to pnpm
+          cache: 'pnpm'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8 # Specify pnpm version (optional)
-          
+          version: 8
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-        
+
       - name: Install dependencies
-        run: pnpm install # Changed from npm install
-        
+        run: pnpm install
+
       - name: Build with Astro
-        run: pnpm run build # Changed from npm run build
-        
+        run: pnpm run build
+
       - name: Verify URLs
         run: |
           echo "Checking for protocol-relative URLs in HTML files..."
@@ -58,7 +55,7 @@ jobs:
           
           echo "Running the URL verification script..."
           node scripts/verify-urls.js
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
