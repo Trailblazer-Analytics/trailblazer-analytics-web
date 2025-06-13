@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import siteConfig from '../site.config.js';
+import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget.astro';
 
 // Default meta data
 const defaultTitle = "Trailblazer Analytics";
@@ -102,9 +103,11 @@ const fullTitle = title === defaultTitle ? title : `${title} | ${defaultTitle}`;
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
       html { font-family: 'Inter', 'Outfit', sans-serif; }
-    </style>
-  </head>
+    </style>  </head>
   <body class="min-h-screen flex flex-col">
     <slot />
+    
+    <!-- Global Buy Me a Coffee Widget -->
+    <BuyMeCoffeeWidget />
   </body>
 </html>

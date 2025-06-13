@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+
+const seoData = {
+  title: "Terms of Service - Trailblazer Analytics",
+  description: "Terms of service and usage agreement for Trailblazer Analytics content and services.",
+  image: "/og-image-legal.png"
+};
+---
+
+<Base {...seoData}>
+  <Navbar />
+  
+  <!-- Header Section -->
+  <section class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Terms of Service</h1>
+        <p class="text-xl text-gray-300">
+          Last updated: January 2025
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terms Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Acceptance of Terms -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">1. Acceptance of Terms</h2>
+          <p class="text-gray-700 mb-4">
+            By accessing and using Trailblazer Analytics ("the Site"), you accept and agree to be bound by the terms and provision of this agreement.
+          </p>
+        </div>
+
+        <!-- Use License -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">2. Use License</h2>
+          <p class="text-gray-700 mb-4">
+            Permission is granted to temporarily download one copy of the materials on Trailblazer Analytics for personal, non-commercial transitory viewing only.
+          </p>
+          <p class="text-gray-700 mb-4">This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+          <ul class="list-disc pl-6 text-gray-700 mb-4">
+            <li>modify or copy the materials</li>
+            <li>use the materials for any commercial purpose or for any public display (commercial or non-commercial)</li>
+            <li>attempt to decompile or reverse engineer any software contained on the website</li>
+            <li>remove any copyright or other proprietary notations from the materials</li>
+          </ul>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">3. Disclaimer</h2>
+          <p class="text-gray-700 mb-4">
+            The materials on Trailblazer Analytics are provided on an 'as is' basis. Trailblazer Analytics makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+          </p>
+        </div>
+
+        <!-- Content and Services -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">4. Content and Services</h2>
+          <p class="text-gray-700 mb-4">
+            Trailblazer Analytics provides educational content, tools, and resources related to business intelligence and data analytics. All content is for informational purposes only and should not be considered as professional advice without proper consultation.
+          </p>
+        </div>
+
+        <!-- User Responsibilities -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">5. User Responsibilities</h2>
+          <p class="text-gray-700 mb-4">Users agree to:</p>
+          <ul class="list-disc pl-6 text-gray-700 mb-4">
+            <li>Use the site and content responsibly and legally</li>
+            <li>Not attempt to hack, disrupt, or misuse the website</li>
+            <li>Respect intellectual property rights</li>
+            <li>Provide accurate information when submitting forms or requests</li>
+          </ul>
+        </div>
+
+        <!-- Limitations -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">6. Limitations</h2>
+          <p class="text-gray-700 mb-4">
+            In no event shall Trailblazer Analytics or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on the website, even if Trailblazer Analytics or an authorized representative has been notified orally or in writing of the possibility of such damage.
+          </p>
+        </div>
+
+        <!-- Third-Party Services -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">7. Third-Party Services</h2>
+          <p class="text-gray-700 mb-4">
+            This site may contain links to third-party websites or integrate with third-party services (such as Buy Me a Coffee, newsletter providers, etc.). We are not responsible for the content, privacy policies, or practices of third-party sites or services.
+          </p>
+        </div>
+
+        <!-- Modifications -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">8. Modifications</h2>
+          <p class="text-gray-700 mb-4">
+            Trailblazer Analytics may revise these terms of service at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.
+          </p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">9. Contact Information</h2>
+          <p class="text-gray-700 mb-4">
+            If you have any questions about these Terms of Service, please contact us through our <a href="/connect" class="text-brandBlue hover:underline">Connect page</a>.
+          </p>
+        </div>
+
+        <!-- Back to Top -->
+        <div class="text-center pt-8 border-t border-gray-200">
+          <a href="#top" class="text-brandBlue hover:underline">Back to Top</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

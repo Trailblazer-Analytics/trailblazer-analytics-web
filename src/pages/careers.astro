@@ -1,0 +1,195 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+
+const seoData = {
+  title: "Careers - Trailblazer Analytics",
+  description: "Explore collaboration opportunities and career paths in business intelligence and data analytics.",
+  image: "/og-image-careers.png"
+};
+---
+
+<Base {...seoData}>
+  <Navbar />
+  
+  <!-- Header Section -->
+  <section class="bg-gradient-to-r from-brandBlue to-blue-700 text-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Careers & Collaboration</h1>
+        <p class="text-xl text-blue-100 mb-8">
+          Building the future of business intelligence through strategic partnerships and talent development.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Current Opportunities -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold mb-6">Current Opportunities</h2>
+          <div class="bg-gray-50 rounded-lg p-8 text-center">
+            <div class="text-6xl mb-4">🚀</div>
+            <h3 class="text-xl font-semibold mb-4">Growing Our Network</h3>
+            <p class="text-gray-700 mb-6">
+              We're always looking for talented individuals and strategic partners to join our mission of democratizing business intelligence insights.
+            </p>
+            <p class="text-gray-600 italic">
+              No formal positions available at the moment, but we welcome conversations about collaboration opportunities.
+            </p>
+          </div>
+        </div>
+
+        <!-- What We Look For -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold mb-6">What We Value</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            
+            <div class="bg-brandBlue/10 border border-brandBlue/20 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-4 text-brandBlue">Technical Excellence</h3>
+              <ul class="text-gray-700 space-y-2">
+                <li>• Business Intelligence & Analytics</li>
+                <li>• Data Engineering & Architecture</li>
+                <li>• Modern BI Tools (Power BI, Tableau, Looker)</li>
+                <li>• Cloud Platforms (Azure, AWS, GCP)</li>
+                <li>• Programming (Python, R, SQL, JavaScript)</li>
+              </ul>
+            </div>
+
+            <div class="bg-brandGreen/10 border border-brandGreen/20 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-4 text-brandGreen">Strategic Thinking</h3>
+              <ul class="text-gray-700 space-y-2">
+                <li>• Data Strategy & Governance</li>
+                <li>• Business Process Optimization</li>
+                <li>• Stakeholder Communication</li>
+                <li>• Change Management</li>
+                <li>• Thought Leadership</li>
+              </ul>
+            </div>
+
+            <div class="bg-brandGold/10 border border-brandGold/20 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-4" style="color: #d4af37;">Content Creation</h3>
+              <ul class="text-gray-700 space-y-2">
+                <li>• Technical Writing</li>
+                <li>• Video & Podcast Production</li>
+                <li>• Educational Content Design</li>
+                <li>• Community Building</li>
+                <li>• SEO & Digital Marketing</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-100 border border-purple-200 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-4 text-purple-700">Innovation Mindset</h3>
+              <ul class="text-gray-700 space-y-2">
+                <li>• Emerging Technologies</li>
+                <li>• AI & Machine Learning</li>
+                <li>• Automation & Efficiency</li>
+                <li>• Industry Trends</li>
+                <li>• Continuous Learning</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Collaboration Types -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold mb-6">Collaboration Opportunities</h2>
+          
+          <div class="space-y-6">
+            
+            <!-- Guest Content -->
+            <div class="border border-gray-200 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-3">🎯 Guest Content Creator</h3>
+              <p class="text-gray-700 mb-4">
+                Share your expertise through guest blog posts, podcast appearances, or webinar presentations. Perfect for established professionals looking to expand their thought leadership.
+              </p>
+              <div class="text-sm text-gray-600">
+                <strong>Ideal for:</strong> Senior analysts, consultants, tool vendors, academic researchers
+              </div>
+            </div>
+
+            <!-- Strategic Partnerships -->
+            <div class="border border-gray-200 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-3">🤝 Strategic Partnership</h3>
+              <p class="text-gray-700 mb-4">
+                Long-term collaboration on content series, joint tools, or co-branded resources. Share audiences and expertise for mutual growth.
+              </p>
+              <div class="text-sm text-gray-600">
+                <strong>Ideal for:</strong> BI tool companies, training organizations, consulting firms, complementary content creators
+              </div>
+            </div>
+
+            <!-- Project Collaboration -->
+            <div class="border border-gray-200 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-3">💼 Project Collaboration</h3>
+              <p class="text-gray-700 mb-4">
+                Work together on specific initiatives like research reports, tool development, or educational content series.
+              </p>
+              <div class="text-sm text-gray-600">
+                <strong>Ideal for:</strong> Freelancers, developers, researchers, specialized experts
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- How to Connect -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold mb-6">Ready to Collaborate?</h2>
+          <div class="bg-gradient-to-r from-brandBlue/10 to-brandGreen/10 rounded-lg p-8 text-center">
+            <p class="text-lg text-gray-700 mb-6">
+              We believe great work happens when passionate people come together. If you're interested in joining our mission to make business intelligence more accessible and actionable, let's talk.
+            </p>
+            
+            <div class="space-y-4">
+              <a 
+                href="/connect" 
+                class="inline-block bg-brandBlue text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Get in Touch
+              </a>
+              <p class="text-gray-600 text-sm">
+                Include details about your background, what you're interested in, and how you'd like to contribute.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Culture & Values -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold mb-6">Our Culture</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            
+            <div class="text-center">
+              <div class="text-4xl mb-4">🎯</div>
+              <h3 class="font-semibold mb-2">Impact-Focused</h3>
+              <p class="text-gray-600 text-sm">Every piece of content and tool should help someone make better data-driven decisions.</p>
+            </div>
+
+            <div class="text-center">
+              <div class="text-4xl mb-4">🚀</div>
+              <h3 class="font-semibold mb-2">Innovation-Driven</h3>
+              <p class="text-gray-600 text-sm">Always exploring new ways to explain complex concepts and solve real problems.</p>
+            </div>
+
+            <div class="text-center">
+              <div class="text-4xl mb-4">🤝</div>
+              <h3 class="font-semibold mb-2">Community-Minded</h3>
+              <p class="text-gray-600 text-sm">Building relationships and lifting others up in the BI and analytics community.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

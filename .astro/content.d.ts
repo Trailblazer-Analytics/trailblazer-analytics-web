@@ -168,13 +168,21 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
-"caseStudies": Record<string, {
+"case-studies": Record<string, {
   id: string;
   render(): Render[".md"];
   slug: string;
   body: string;
+  collection: "case-studies";
+  data: InferEntrySchema<"case-studies">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"caseStudies": Record<string, {
+  id: string;
+  body?: string;
   collection: "caseStudies";
-  data: InferEntrySchema<"caseStudies">;
+  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
@@ -188,13 +196,21 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
-"techNotes": Record<string, {
+"tech-notes": Record<string, {
   id: string;
   render(): Render[".md"];
   slug: string;
   body: string;
+  collection: "tech-notes";
+  data: InferEntrySchema<"tech-notes">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"techNotes": Record<string, {
+  id: string;
+  body?: string;
   collection: "techNotes";
-  data: InferEntrySchema<"techNotes">;
+  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;

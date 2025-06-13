@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
+import GatedModal from '../components/GatedModal.astro';
 
 const whitepapers = await getCollection('whitepapers');
 
@@ -91,13 +92,22 @@ function formatDownloadCount(count) {
                   )}
                 </div>
               </div>
-              
-              <div class="flex gap-3">
-                <a 
-                  href={`/whitepapers/${paper.slug}`}
-                  class="bg-white text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-                >
-                  Download Free
+                <div class="flex gap-3">
+                {paper.data.gated ? (
+                  <button 
+                    onclick={`openGatedModal('${paper.data.title}', '${paper.data.description}', '/downloads/${paper.slug}.pdf')`}
+                    class="bg-white text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                  >
+                    Get PDF 🔒
+                  </button>
+                ) : (
+                  <a 
+                    href={`/whitepapers/${paper.slug}`}
+                    class="bg-white text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                  >
+                    Download Free
+                  </a>
+                )}
                 </a>
                 {paper.data.preview && (
                   <a href={paper.data.preview} class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-brandGreen transition-colors">
@@ -184,14 +194,22 @@ function formatDownloadCount(count) {
                     <span class="text-sm text-gray-500">{paper.data.pages} pages</span>
                   )}
                 </div>
-                
-                <div class="flex gap-2">
-                  <a 
-                    href={`/whitepapers/${paper.slug}`}
-                    class="flex-1 bg-brandGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm text-center"
-                  >
-                    Download
-                  </a>
+                  <div class="flex gap-2">
+                  {paper.data.gated ? (
+                    <button 
+                      onclick={`openGatedModal('${paper.data.title}', '${paper.data.description}', '/downloads/${paper.slug}.pdf')`}
+                      class="flex-1 bg-brandGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm text-center"
+                    >
+                      Get PDF 🔒
+                    </button>
+                  ) : (
+                    <a 
+                      href={`/whitepapers/${paper.slug}`}
+                      class="flex-1 bg-brandGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm text-center"
+                    >
+                      Download
+                    </a>
+                  )}
                   {paper.data.preview && (
                     <a href={paper.data.preview} class="border-2 border-gray-300 hover:border-brandGreen text-gray-700 hover:text-brandGreen px-4 py-2 rounded-lg transition-colors text-sm">
                       Preview
@@ -322,6 +340,12 @@ function formatDownloadCount(count) {
       </div>
     </div>
   </section>
+
+  <!-- Gated Content Modal -->
+  <GatedModal 
+    title="Premium White Paper" 
+    description="Enter your email to receive the download link instantly."
+  />
 
   <Footer />
 </Base>

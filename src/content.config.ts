@@ -98,8 +98,8 @@ const tools = defineCollection({
 
 export const collections = {
   blog,
-  caseStudies,
-  techNotes,
+  'case-studies': caseStudies,
+  'tech-notes': techNotes,
   whitepapers,
   downloads,
   tools,

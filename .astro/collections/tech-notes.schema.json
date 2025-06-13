@@ -1,0 +1,61 @@
+{
+  "$ref": "#/definitions/tech-notes",
+  "definitions": {
+    "tech-notes": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": [
+            "Beginner",
+            "Intermediate",
+            "Advanced"
+          ]
+        },
+        "readTime": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Python",
+            "SQL",
+            "JavaScript",
+            "ML",
+            "Data Engineering",
+            "Visualization"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featured": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

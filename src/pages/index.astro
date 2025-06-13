@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 import CaseStudyCard from '../components/CaseStudyCard.jsx';
 import NewsletterSignup from '../components/NewsletterSignup.jsx';
 
-const caseStudies = await getCollection('caseStudies');
+const caseStudies = await getCollection('case-studies');
 
 // SEO meta data
 const seoData = {
@@ -22,20 +22,19 @@ const seoData = {
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen flex items-center">
     <div class="absolute inset-0 bg-black opacity-50"></div>
-    <div class="container mx-auto px-6 relative z-10">      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6">
-          Data Insights & Tools
-          <span class="text-brandGold block">For Analytics Professionals</span>
+    <div class="container mx-auto px-6 relative z-10">      <div class="max-w-4xl mx-auto text-center">        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+          Where Data Strategy
+          <span class="text-brandGold block">Meets Action</span>
         </h1>
         <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
-          In-depth articles, practical tools, and strategic frameworks to advance your data and analytics career.
+          Expert insights, practical tools, and strategic frameworks to transform your business intelligence capabilities and accelerate growth.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/insights" class="bg-brandGold hover:bg-yellow-600 text-black font-semibold py-4 px-8 rounded-lg transition-colors">
-            Read Latest Articles
+          <a href="/blog" class="bg-brandGold hover:bg-yellow-600 text-black font-semibold py-4 px-8 rounded-lg transition-colors">
+            Explore Insights
           </a>
-          <a href="/tools" class="border-2 border-brandGold text-brandGold hover:bg-brandGold hover:text-black font-semibold py-4 px-8 rounded-lg transition-colors">
-            Explore Tools
+          <a href="/downloads" class="border-2 border-brandGold text-brandGold hover:bg-brandGold hover:text-black font-semibold py-4 px-8 rounded-lg transition-colors">
+            Download Now
           </a>
         </div>
       </div>

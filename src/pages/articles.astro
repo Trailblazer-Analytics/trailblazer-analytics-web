@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+
+const seoData = {
+  title: "Articles - Professional Insights from Medium",
+  description: "Curated collection of professional articles and thought leadership pieces published on Medium by Alexander Nykolaiszyn.",
+  image: "/og-image-articles.png"
+};
+
+// Medium articles data (you can later fetch this from Medium RSS or API)
+const articles = [
+  {
+    title: "The Future of Data Governance in 2025",
+    abstract: "Exploring emerging frameworks and compliance strategies for modern data teams.",
+    mediumUrl: "https://medium.com/@alexander/future-data-governance-2025",
+    publishDate: "2024-12-15",
+    readTime: "8 min",
+    tags: ["Data Governance", "Strategy", "Compliance"]
+  },
+  {
+    title: "Building Scalable Analytics Architecture",
+    abstract: "A comprehensive guide to designing analytics systems that grow with your business.",
+    mediumUrl: "https://medium.com/@alexander/scalable-analytics-architecture",
+    publishDate: "2024-11-28",
+    readTime: "12 min", 
+    tags: ["Architecture", "Analytics", "Engineering"]
+  },
+  {
+    title: "AI-Driven Business Intelligence Trends",
+    abstract: "How artificial intelligence is transforming traditional BI practices and workflows.",
+    mediumUrl: "https://medium.com/@alexander/ai-driven-bi-trends",
+    publishDate: "2024-11-10",
+    readTime: "6 min",
+    tags: ["AI", "Business Intelligence", "Trends"]
+  }
+];
+---
+
+<Base {...seoData}>
+  <Navbar />
+  
+  <!-- Header Section -->
+  <section class="bg-gray-900 text-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Articles</h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Professional insights and thought leadership published on Medium
+        </p>
+        <a 
+          href="https://medium.com/@alexander" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-brandGold text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-yellow-500 transition-colors"
+        >
+          Follow on Medium
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-12 bg-gray-100 text-center">
+    <div class="container mx-auto px-6">
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+        These are my polished, professional articles published on Medium. 
+        For more informal updates and behind-the-scenes content, check out my 
+        <a href="/blog" class="text-brandGreen hover:underline">internal blog</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Articles Grid -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map((article) => (
+            <article class="bg-white border border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                <time>{new Date(article.publishDate).toLocaleDateString()}</time>
+                <span>•</span>
+                <span>{article.readTime} read</span>
+              </div>
+              
+              <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                {article.title}
+              </h2>
+              
+              <p class="text-gray-600 mb-4 line-clamp-3">
+                {article.abstract}
+              </p>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                {article.tags.map((tag) => (
+                  <span class="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              
+              <a 
+                href={article.mediumUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-brandGreen font-medium hover:text-green-700 transition-colors"
+              >
+                Read on Medium
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-16 bg-gray-900 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Get notified when new articles and insights are published.
+        </p>
+        <div class="max-w-md mx-auto flex gap-4">
+          <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg text-gray-900">
+          <button class="bg-brandGold text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-yellow-500 transition-colors">
+            Subscribe
+          </button>
+        </div>
+        <p class="text-sm text-gray-400 mt-4">
+          Join 2,500+ data professionals. Unsubscribe anytime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

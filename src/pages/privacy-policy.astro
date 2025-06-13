@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+
+const seoData = {
+  title: "Privacy Policy - Trailblazer Analytics",
+  description: "How we collect, use, and protect your information on Trailblazer Analytics.",
+  image: "/og-image.png"
+};
+---
+
+<Base {...seoData}>
+  <Navbar />
+  
+  <!-- Header Section -->
+  <section class="bg-gray-900 text-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Privacy Policy</h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Last updated: {new Date().toLocaleDateString()}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto prose prose-lg">
+        
+        <h2>Information We Collect</h2>
+        
+        <h3>Information You Provide</h3>
+        <ul>
+          <li><strong>Contact Information:</strong> When you contact us or subscribe to our newsletter, we collect your name and email address.</li>
+          <li><strong>Download Information:</strong> When you download gated content, we collect your email address for delivery purposes.</li>
+        </ul>
+        
+        <h3>Automatically Collected Information</h3>
+        <ul>
+          <li><strong>Analytics:</strong> We use privacy-focused analytics to understand how visitors interact with our site.</li>
+          <li><strong>Cookies:</strong> We use essential cookies for site functionality. No tracking or advertising cookies are used.</li>
+        </ul>
+        
+        <h2>How We Use Your Information</h2>
+        
+        <ul>
+          <li><strong>Communication:</strong> To respond to your inquiries and send newsletters (with your consent).</li>
+          <li><strong>Content Delivery:</strong> To deliver requested downloads and resources.</li>
+          <li><strong>Site Improvement:</strong> To understand how our content is used and improve the user experience.</li>
+        </ul>
+        
+        <h2>Information Sharing</h2>
+        
+        <p>We do not sell, trade, or otherwise transfer your personal information to third parties, except:</p>
+        <ul>
+          <li>Newsletter service providers (ConvertKit, Beehiiv) for email delivery</li>
+          <li>Form processing services (Formspree) for contact forms</li>
+          <li>When required by law or to protect our rights</li>
+        </ul>
+        
+        <h2>Data Security</h2>
+        
+        <p>We implement appropriate security measures to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
+        
+        <h2>Your Rights</h2>
+        
+        <ul>
+          <li><strong>Access:</strong> You can request access to your personal information.</li>
+          <li><strong>Correction:</strong> You can request correction of inaccurate information.</li>
+          <li><strong>Deletion:</strong> You can request deletion of your personal information.</li>
+          <li><strong>Unsubscribe:</strong> You can unsubscribe from our newsletters at any time.</li>
+        </ul>
+        
+        <h2>Third-Party Services</h2>
+        
+        <p>This site may contain links to third-party websites. We are not responsible for the privacy practices of these external sites.</p>
+        
+        <h2>Changes to This Policy</h2>
+        
+        <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.</p>
+        
+        <h2>Contact Us</h2>
+        
+        <p>If you have questions about this privacy policy, please contact us at:</p>
+        <ul>
+          <li>Email: privacy@trailblazeranalytics.com</li>
+          <li>Contact form: <a href="/connect">Connect page</a></li>
+        </ul>
+        
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
