@@ -1,6 +1,6 @@
 # Trailblazer Analytics - Professional Data Strategy Hub
 
-A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, newsletter integration, and production-ready deployment.
+A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, newsletter integration, and static hosting deployment.
 
 ## 🚀 Features
 
@@ -68,15 +68,25 @@ src/
 
 docs/                   # User and admin documentation
 public/                 # Static assets and downloads
+dist/                   # Built site files (for deployment)
 ```
 
 ## 🚀 Deployment
 
-The site is designed for easy deployment to various hosting platforms:
+The site is designed for static hosting deployment to various platforms:
 
-- **Static Hosting**: Netlify, Vercel, GitHub Pages
-- **Traditional Hosting**: HostGator, cPanel-based hosts
+### Static Hosting Options
+- **HostGator**: Upload `dist/` folder contents to public_html
+- **Netlify**: Connect repository and deploy automatically
+- **Vercel**: Connect repository and deploy automatically  
+- **Traditional Hosting**: Upload `dist/` folder to web root
 - **CDN**: Cloudflare Pages, AWS S3 + CloudFront
+
+### Deployment Steps
+1. Run `pnpm run build` to generate the `dist/` folder
+2. Upload contents of `dist/` folder to your hosting provider
+3. Configure environment variables on your hosting platform
+4. Set up custom domain and SSL certificate
 
 See `DEPLOYMENT_CHECKLIST.md` for detailed deployment instructions.
 

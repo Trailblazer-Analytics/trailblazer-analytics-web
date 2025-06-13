@@ -3,18 +3,17 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
-import BlogPostCard from '../components/BlogPostCard.jsx';
 
 const blogPosts = await getCollection('blog');
 
 // Sort by date, newest first
-const sortedPosts = blogPosts.sort((a, b) => 
-  new Date(b.data.date) - new Date(a.data.date)
+const sortedPosts = blogPosts.sort((a: any, b: any) => 
+  +new Date(b.data.date) - +new Date(a.data.date)
 );
 
 // Get featured posts
-const featuredPosts = sortedPosts.filter(post => post.data.featured);
-const regularPosts = sortedPosts.filter(post => !post.data.featured);
+const featuredPosts = sortedPosts.filter((post: any) => post.data.featured);
+const regularPosts = sortedPosts.filter((post: any) => !post.data.featured);
 
 // SEO meta data
 const seoData = {
@@ -49,7 +48,6 @@ const seoData = {
       </p>
     </div>
   </section>
-
   <!-- Featured Posts -->
   {featuredPosts.length > 0 && (
     <section class="py-16 bg-white">
@@ -57,17 +55,36 @@ const seoData = {
         <div class="max-w-6xl mx-auto">
           <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Posts</h2>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPosts.map((post) => (
-              <BlogPostCard
-                key={post.slug}
-                title={post.data.title}
-                description={post.data.description}
-                date={post.data.date}
-                readTime={post.data.readTime}
-                tags={post.data.tags}
-                slug={post.slug}
-                featured={true}
-              />
+            {featuredPosts.map((post: any) => (
+              <a 
+                href={`/blog/${post.slug}`}
+                class="block bg-brandBlue border-brandBlue border rounded-2xl p-6 shadow-lg hover:border-brandGold transition-colors"
+              >
+                <h3 class="font-semibold text-xl mb-2 text-white">
+                  {post.data.title}
+                </h3>
+                <p class="mb-4 text-gray-200">
+                  {post.data.description}
+                </p>
+                {post.data.date && (
+                  <div class="text-sm mb-2 text-gray-300">
+                    {new Date(post.data.date).toLocaleDateString()}
+                    {post.data.readTime && ` • ${post.data.readTime} read`}
+                  </div>
+                )}
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {post.data.tags.slice(0, 3).map((tag: any) => (
+                      <span class="px-2 py-1 text-xs rounded-full bg-white/20 text-white">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <span class="text-brandGold font-medium">
+                  Read more →
+                </span>
+              </a>
             ))}
           </div>
         </div>
@@ -81,22 +98,41 @@ const seoData = {
       <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Posts</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {regularPosts.map((post) => (
-            <BlogPostCard
-              key={post.slug}
-              title={post.data.title}
-              description={post.data.description}
-              date={post.data.date}
-              readTime={post.data.readTime}
-              tags={post.data.tags}
-              slug={post.slug}
-              featured={false}
-            />
+          {regularPosts.map((post: any) => (
+            <a 
+              href={`/blog/${post.slug}`}
+              class="block bg-white border-gray-200 border rounded-2xl p-6 shadow-lg hover:border-brandGold transition-colors"
+            >
+              <h3 class="font-semibold text-xl mb-2 text-gray-900">
+                {post.data.title}
+              </h3>
+              <p class="mb-4 text-gray-600">
+                {post.data.description}
+              </p>
+              {post.data.date && (
+                <div class="text-sm mb-2 text-gray-500">
+                  {new Date(post.data.date).toLocaleDateString()}
+                  {post.data.readTime && ` • ${post.data.readTime} read`}
+                </div>
+              )}
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {post.data.tags.slice(0, 3).map((tag: any) => (
+                    <span class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-600">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <span class="text-brandGold font-medium">
+                Read more →
+              </span>
+            </a>
           ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Newsletter Section -->
   <section class="py-16 bg-gray-900 text-white">
