@@ -6,8 +6,5 @@ pnpm-lock.yaml
 dist/
 trailblazer-analytics-dist.zip
 
-# GitHub Pages
-public/.nojekyll
-
 # Env
 .env
