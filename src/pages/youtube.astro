@@ -1,11 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
 ---
 
 <Base
   title="YouTube Channel - Trailblazer Analytics" 
   description="Watch analytics tutorials, data strategy insights, and business intelligence content on the Trailblazer Analytics YouTube channel."
 >
+  <Navbar />
+  
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-24">
     <div class="container mx-auto px-6">
@@ -237,9 +241,10 @@ import Base from '../layouts/Base.astro';
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
             </svg>            Get in Touch
-          </a>
-        </div>
+          </a>        </div>
       </div>
     </div>
   </section>
+  
+  <Footer />
 </Base>
