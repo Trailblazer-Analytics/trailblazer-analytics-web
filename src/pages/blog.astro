@@ -54,20 +54,18 @@ const seoData = {
       <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
           <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Posts</h2>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPosts.map((post: any) => (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">            {featuredPosts.map((post: any) => (
               <a 
                 href={`/blog/${post.slug}`}
-                class="block bg-brandBlue border-brandBlue border rounded-2xl p-6 shadow-lg hover:border-brandGold transition-colors"
+                class="block bg-white border-gray-200 border rounded-2xl p-6 shadow-lg hover:border-brandGold hover:shadow-xl transition-all"
               >
-                <h3 class="font-semibold text-xl mb-2 text-white">
+                <h3 class="font-semibold text-xl mb-2 text-gray-900">
                   {post.data.title}
                 </h3>
-                <p class="mb-4 text-gray-200">
+                <p class="mb-4 text-gray-600">
                   {post.data.description}
-                </p>
-                {post.data.date && (
-                  <div class="text-sm mb-2 text-gray-300">
+                </p>                {post.data.date && (
+                  <div class="text-sm mb-2 text-gray-500">
                     {new Date(post.data.date).toLocaleDateString()}
                     {post.data.readTime && ` • ${post.data.readTime} read`}
                   </div>
@@ -75,13 +73,13 @@ const seoData = {
                 {post.data.tags && post.data.tags.length > 0 && (
                   <div class="flex flex-wrap gap-2 mb-4">
                     {post.data.tags.slice(0, 3).map((tag: any) => (
-                      <span class="px-2 py-1 text-xs rounded-full bg-white/20 text-white">
+                      <span class="px-2 py-1 text-xs rounded-full bg-brandGold/20 text-brandGold font-medium">
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
-                <span class="text-brandGold font-medium">
+                <span class="text-brandGreen font-medium">
                   Read more →
                 </span>
               </a>
@@ -98,10 +96,9 @@ const seoData = {
       <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Posts</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {regularPosts.map((post: any) => (
-            <a 
+          {regularPosts.map((post: any) => (            <a 
               href={`/blog/${post.slug}`}
-              class="block bg-white border-gray-200 border rounded-2xl p-6 shadow-lg hover:border-brandGold transition-colors"
+              class="block bg-white border-gray-200 border rounded-2xl p-6 shadow-lg hover:border-brandGold hover:shadow-xl transition-all"
             >
               <h3 class="font-semibold text-xl mb-2 text-gray-900">
                 {post.data.title}
@@ -123,8 +120,7 @@ const seoData = {
                     </span>
                   ))}
                 </div>
-              )}
-              <span class="text-brandGold font-medium">
+              )}              <span class="text-brandGreen font-medium">
                 Read more →
               </span>
             </a>

@@ -1,33 +1,221 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
+
+// Get all resource collections
+const downloads = await getCollection('downloads');
+const tools = await getCollection('tools');
+const whitepapers = await getCollection('whitepapers');
+const caseStudies = await getCollection('case-studies');
+
+// SEO data
+const seoData = {
+  title: "Resources - Analytics Tools, Downloads & Research",
+  description: "Comprehensive collection of free analytics tools, white papers, case studies, and downloadable resources for data professionals and business leaders.",
+  image: "/og-image-resources.png"
+};
 ---
 
-<Base>
+<Base {...seoData}>
   <Navbar />
   
-  <section class="container mx-auto py-16 text-center">
-    <h1 class="text-4xl font-extrabold text-brandGreen mb-4">Resources</h1>
-    <p class="max-w-2xl mx-auto text-lg mb-8">Free downloads, guides, and tools to help you succeed with BI and analytics. Browse our growing resource library below.</p>
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-10">
-      <!-- Redirect users to the new sections -->
-      <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Downloads</h3>
-        <p class="text-gray-600 mb-4">Free templates, guides, and frameworks</p>
-        <a href="/downloads" class="text-brandGreen font-semibold hover:text-green-700">Browse Downloads →</a>
+  <!-- Header Section -->
+  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">
+          <span class="text-brandGold">Resources</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+          Everything you need to excel in analytics and business intelligence. Free tools, guides, research, and real-world case studies.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <span class="bg-brandGreen/20 text-brandGreen px-4 py-2 rounded-full">Free Downloads</span>
+          <span class="bg-brandGold/20 text-brandGold px-4 py-2 rounded-full">Research Papers</span>
+          <span class="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full">Case Studies</span>
+          <span class="bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full">Analytics Tools</span>
+        </div>
       </div>
-      
-      <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Tools & Software</h3>
-        <p class="text-gray-600 mb-4">Analytics tools and software solutions</p>
-        <a href="/tools" class="text-brandGreen font-semibold hover:text-green-700">Explore Tools →</a>
+    </div>
+  </section>
+
+  <!-- Downloads Section -->
+  {downloads.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">📥 Free Downloads</h2>
+            <p class="text-lg text-gray-600">Templates, frameworks, and practical guides to accelerate your analytics projects</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {downloads.map((download) => (
+              <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-900 mb-3">{download.data.title}</h3>
+                <p class="text-gray-600 mb-4">{download.data.description}</p>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-sm text-gray-500">{download.data.fileType}</span>
+                  <span class="text-sm text-gray-500">{download.data.fileSize}</span>
+                </div>
+                <a 
+                  href={`/downloads/${download.slug}`}
+                  class="inline-flex items-center gap-2 bg-brandGreen hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                  Download
+                </a>
+              </div>
+            ))}
+          </div>
+          <div class="text-center mt-8">
+            <a href="/downloads" class="text-brandGreen font-semibold hover:text-green-700">View All Downloads →</a>
+          </div>
+        </div>
       </div>
-      
-      <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">White Papers</h3>
-        <p class="text-gray-600 mb-4">In-depth research and strategic insights</p>
-        <a href="/white-papers" class="text-brandGreen font-semibold hover:text-green-700">Read Papers →</a>
+    </section>
+  )}
+
+  <!-- Tools Section -->
+  {tools.length > 0 && (
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">🛠️ Analytics Tools</h2>
+            <p class="text-lg text-gray-600">Curated tools and software recommendations for modern analytics teams</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {tools.map((tool) => (
+              <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-900 mb-3">{tool.data.title}</h3>
+                <p class="text-gray-600 mb-4">{tool.data.description}</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {tool.data.categories?.map((category) => (
+                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">{category}</span>
+                  ))}
+                </div>
+                <a 
+                  href={`/tools/${tool.slug}`}
+                  class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                  Learn More
+                </a>
+              </div>
+            ))}
+          </div>
+          <div class="text-center mt-8">
+            <a href="/tools" class="text-blue-600 font-semibold hover:text-blue-700">View All Tools →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- White Papers Section -->
+  {whitepapers.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">📄 Research & White Papers</h2>
+            <p class="text-lg text-gray-600">In-depth research and strategic frameworks for data-driven transformation</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {whitepapers.slice(0, 6).map((paper) => (
+              <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-900 mb-3">{paper.data.title}</h3>
+                <p class="text-gray-600 mb-4">{paper.data.description}</p>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">{paper.data.category}</span>
+                  <span class="text-sm text-gray-500">{paper.data.pages} pages</span>
+                </div>
+                <a 
+                  href={`/whitepapers/${paper.slug}`}
+                  class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                  Read Paper
+                </a>
+              </div>
+            ))}
+          </div>
+          <div class="text-center mt-8">
+            <a href="/white-papers" class="text-purple-600 font-semibold hover:text-purple-700">View All Papers →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Case Studies Section -->
+  {caseStudies.length > 0 && (
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">📊 Case Studies</h2>
+            <p class="text-lg text-gray-600">Real-world success stories and proven analytics implementations</p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {caseStudies.slice(0, 6).map((study) => (
+              <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <h3 class="text-xl font-bold text-gray-900 mb-3">{study.data.title}</h3>
+                <p class="text-gray-600 mb-4">{study.data.description}</p>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">{study.data.industry}</span>
+                  <span class="text-sm text-gray-500">{study.data.results}</span>
+                </div>
+                <a 
+                  href={`/case-studies/${study.slug}`}
+                  class="inline-flex items-center gap-2 bg-brandGreen hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                  </svg>
+                  View Study
+                </a>
+              </div>
+            ))}
+          </div>
+          <div class="text-center mt-8">
+            <a href="/case-studies" class="text-brandGreen font-semibold hover:text-green-700">View All Case Studies →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-brandGold to-yellow-600">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-black mb-4">Need Custom Analytics Solutions?</h2>
+        <p class="text-black text-opacity-80 mb-8 text-lg">
+          Looking for tailored analytics strategies, custom implementations, or strategic consulting? Let's discuss your specific needs.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/connect"
+            class="bg-black text-brandGold font-semibold px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            Get In Touch
+          </a>
+          <a 
+            href="/support"
+            class="border-2 border-black text-black font-semibold px-8 py-3 rounded-lg hover:bg-black hover:text-brandGold transition-colors"
+          >
+            Support This Work
+          </a>
+        </div>
       </div>
     </div>
   </section>
