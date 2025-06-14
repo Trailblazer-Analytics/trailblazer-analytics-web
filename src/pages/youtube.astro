@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="YouTube Channel - Trailblazer Analytics" 
+  description="Watch analytics tutorials, data strategy insights, and business intelligence content on the Trailblazer Analytics YouTube channel."
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-24">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <svg class="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          <h1 class="text-5xl font-bold">YouTube Channel</h1>
+        </div>
+        <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+          Join me on YouTube for in-depth analytics tutorials, data strategy insights, and practical business intelligence content. 
+          From beginner-friendly guides to advanced techniques, there's something for every level of analytics professional.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="https://www.youtube.com/@trailblazeranalytics" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-lg hover:bg-red-700 transition-colors font-semibold text-lg"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            Subscribe to Channel
+          </a>
+          <a 
+            href="https://www.youtube.com/@trailblazeranalytics/videos" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 bg-gray-700 text-white px-8 py-4 rounded-lg hover:bg-gray-600 transition-colors font-semibold text-lg"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m6-7V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3h12a3 3 0 003-3V8a3 3 0 00-3-3z"></path>
+            </svg>
+            Browse All Videos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Video Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Video</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Check out the latest video from the Trailblazer Analytics channel
+          </p>
+        </div>
+        
+        <!-- Embedded YouTube Video -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="aspect-video">
+            <iframe 
+              src="https://www.youtube.com/embed?listType=playlist&list=UU_CHANNEL_ID" 
+              title="Latest Trailblazer Analytics Videos"
+              class="w-full h-full"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-600 text-center">
+              Visit our <a href="https://www.youtube.com/@trailblazeranalytics" target="_blank" class="text-red-600 hover:text-red-700 font-semibold">YouTube channel</a> 
+              to see all videos and subscribe for the latest content.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Categories -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Video Content Categories</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Explore different types of content available on the channel
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Analytics Tutorials -->
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100">
+            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Analytics Tutorials</h3>
+            <p class="text-gray-600 mb-4">
+              Step-by-step tutorials on data analysis, visualization, and business intelligence tools.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Power BI deep dives</li>
+              <li>• Excel advanced techniques</li>
+              <li>• SQL query optimization</li>
+              <li>• Dashboard design principles</li>
+            </ul>
+          </div>
+
+          <!-- Data Strategy -->
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl border border-green-100">
+            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Data Strategy</h3>
+            <p class="text-gray-600 mb-4">
+              Strategic insights on building data-driven organizations and analytics frameworks.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Data governance best practices</li>
+              <li>• Analytics ROI measurement</li>
+              <li>• Organizational change management</li>
+              <li>• Executive presentations</li>
+            </ul>
+          </div>
+
+          <!-- Career Development -->
+          <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-2xl border border-purple-100">
+            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Career Development</h3>
+            <p class="text-gray-600 mb-4">
+              Guidance for analytics professionals looking to advance their careers.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Interview preparation</li>
+              <li>• Portfolio building</li>
+              <li>• Skill development roadmaps</li>
+              <li>• Industry insights</li>
+            </ul>
+          </div>
+
+          <!-- Tool Reviews -->
+          <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border border-orange-100">
+            <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Tool Reviews</h3>
+            <p class="text-gray-600 mb-4">
+              Honest reviews and comparisons of analytics tools and software platforms.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• BI platform comparisons</li>
+              <li>• New tool evaluations</li>
+              <li>• Cost-benefit analyses</li>
+              <li>• Implementation guides</li>
+            </ul>
+          </div>
+
+          <!-- Case Studies -->
+          <div class="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-2xl border border-teal-100">
+            <div class="w-12 h-12 bg-teal-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Case Studies</h3>
+            <p class="text-gray-600 mb-4">
+              Real-world examples of successful analytics implementations and lessons learned.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Project walkthroughs</li>
+              <li>• Problem-solving approaches</li>
+              <li>• Results and impact</li>
+              <li>• Lessons learned</li>
+            </ul>
+          </div>
+
+          <!-- Live Sessions -->
+          <div class="bg-gradient-to-br from-pink-50 to-rose-50 p-6 rounded-2xl border border-pink-100">
+            <div class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Live Sessions</h3>
+            <p class="text-gray-600 mb-4">
+              Interactive live streams, Q&A sessions, and community discussions.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Monthly Q&A sessions</li>
+              <li>• Live problem solving</li>
+              <li>• Community spotlights</li>
+              <li>• Guest interviews</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gray-900 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-6">Ready to Level Up Your Analytics Skills?</h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Subscribe to the channel and turn on notifications to never miss new content.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="https://www.youtube.com/@trailblazeranalytics?sub_confirmation=1" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-lg hover:bg-red-700 transition-colors font-semibold text-lg"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            Subscribe Now
+          </a>
+          <a href="/connect" class="inline-flex items-center gap-3 bg-gray-700 text-white px-8 py-4 rounded-lg hover:bg-gray-600 transition-colors font-semibold text-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            Get in Touch
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
