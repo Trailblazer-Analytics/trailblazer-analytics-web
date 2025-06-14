@@ -9,33 +9,77 @@ const seoData = {
   image: "/og-image-articles.png"
 };
 
-// Medium articles data (you can later fetch this from Medium RSS or API)
-const articles = [
-  {
-    title: "The Future of Data Governance in 2025",
-    abstract: "Exploring emerging frameworks and compliance strategies for modern data teams.",
-    mediumUrl: "https://medium.com/@alex.nykolaiszyn/future-data-governance-2025",
-    publishDate: "2024-12-15",
-    readTime: "8 min",
-    tags: ["Data Governance", "Strategy", "Compliance"]
-  },
-  {
-    title: "Building Scalable Analytics Architecture",
-    abstract: "A comprehensive guide to designing analytics systems that grow with your business.",
-    mediumUrl: "https://medium.com/@alex.nykolaiszyn/scalable-analytics-architecture",
-    publishDate: "2024-11-28",
-    readTime: "12 min", 
-    tags: ["Architecture", "Analytics", "Engineering"]
-  },
-  {
-    title: "AI-Driven Business Intelligence Trends",
-    abstract: "How artificial intelligence is transforming traditional BI practices and workflows.",
-    mediumUrl: "https://medium.com/@alex.nykolaiszyn/ai-driven-bi-trends",
-    publishDate: "2024-11-10",
-    readTime: "6 min",
-    tags: ["AI", "Business Intelligence", "Trends"]
+// Fetch real Medium articles or fallback to placeholders
+const MEDIUM_RSS_URL = 'https://medium.com/feed/@alex.nykolaiszyn';
+
+async function fetchMediumArticles() {
+  try {
+    // Use RSS2JSON API to bypass CORS restrictions
+    const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=';
+    const response = await fetch(`${proxyUrl}${encodeURIComponent(MEDIUM_RSS_URL)}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    return data.items.slice(0, 6).map(item => {
+      // Calculate read time
+      const wordsPerMinute = 200;
+      const wordCount = item.content.split(' ').length;
+      const readTime = Math.ceil(wordCount / wordsPerMinute);
+      
+      // Clean description
+      const cleanDescription = item.description
+        .replace(/<[^>]*>/g, '')
+        .replace(/&[^;]+;/g, '')
+        .substring(0, 150) + '...';
+      
+      return {
+        title: item.title,
+        abstract: cleanDescription,
+        mediumUrl: item.link,
+        publishDate: item.pubDate,
+        readTime: `${readTime} min`,
+        tags: item.categories || ["Medium", "Analytics"]
+      };
+    });
+    
+  } catch (error) {
+    console.error('Error fetching Medium articles:', error);
+    // Return fallback placeholder articles
+    return [
+      {
+        title: "The Future of Data Governance in 2025",
+        abstract: "Exploring emerging frameworks and compliance strategies for modern data teams.",
+        mediumUrl: "https://medium.com/@alex.nykolaiszyn",
+        publishDate: "2024-12-15",
+        readTime: "8 min",
+        tags: ["Data Governance", "Strategy", "Compliance"]
+      },
+      {
+        title: "Building Scalable Analytics Architecture",
+        abstract: "A comprehensive guide to designing analytics systems that grow with your business.",
+        mediumUrl: "https://medium.com/@alex.nykolaiszyn",
+        publishDate: "2024-11-28",
+        readTime: "12 min", 
+        tags: ["Architecture", "Analytics", "Engineering"]
+      },
+      {
+        title: "AI-Driven Business Intelligence Trends",
+        abstract: "How artificial intelligence is transforming traditional BI practices and workflows.",
+        mediumUrl: "https://medium.com/@alex.nykolaiszyn",
+        publishDate: "2024-11-10",
+        readTime: "6 min",
+        tags: ["AI", "Business Intelligence", "Trends"]
+      }
+    ];
   }
-];
+}
+
+// Fetch articles at build time
+const articles = await fetchMediumArticles();
 ---
 
 <Base {...seoData}>
@@ -77,15 +121,14 @@ const articles = [
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
       <div class="max-w-6xl mx-auto">
-        
-        <!-- Note about placeholder content -->
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
-          <p class="text-blue-800 text-sm">
-            <strong>Note:</strong> These are placeholder articles. To display your actual Medium articles, 
-            we can integrate with Medium's RSS feed at 
+          <!-- Note about live Medium integration -->
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
+          <p class="text-green-800 text-sm">
+            <strong>✅ Live Integration:</strong> Articles are automatically fetched from Medium RSS feed 
             <a href="https://medium.com/feed/@alex.nykolaiszyn" class="underline" target="_blank">
-              https://medium.com/feed/@alex.nykolaiszyn
-            </a>
+              @alex.nykolaiszyn
+            </a>. 
+            If the feed is unavailable, fallback articles are displayed.
           </p>
         </div>
         
