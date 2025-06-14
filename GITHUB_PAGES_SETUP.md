@@ -33,8 +33,10 @@ export default defineConfig({
 - Uses Node.js 20 and npm for builds
 - Deploys to GitHub Pages using official actions
 
-#### 4. `public/.nojekyll`
-- Created to prevent Jekyll processing
+#### 4. `.nojekyll` File Handling
+- Added to `.gitignore` to prevent tracking
+- Automatically created during GitHub Actions build process
+- Prevents Jekyll processing on GitHub Pages
 
 ## Deployment Process
 
