@@ -116,22 +116,10 @@ const articles = await fetchMediumArticles();
         <a href="/blog" class="text-brandGreen hover:underline">internal blog</a>.
       </p>
     </div>
-  </section>
-  <!-- Articles Grid -->
+  </section>  <!-- Articles Grid -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
       <div class="max-w-6xl mx-auto">
-          <!-- Note about live Medium integration -->
-        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
-          <p class="text-green-800 text-sm">
-            <strong>✅ Live Integration:</strong> Articles are automatically fetched from Medium RSS feed 
-            <a href="https://medium.com/feed/@alex.nykolaiszyn" class="underline" target="_blank">
-              @alex.nykolaiszyn
-            </a>. 
-            If the feed is unavailable, fallback articles are displayed.
-          </p>
-        </div>
-        
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.map((article) => (
             <article class="bg-white border border-gray-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
