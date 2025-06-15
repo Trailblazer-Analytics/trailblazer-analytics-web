@@ -49,13 +49,15 @@ const fullTitle = title === defaultTitle ? title : `${title} | ${defaultTitle}`;
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
-    
-    <!-- Favicon and Icons -->
+      <!-- Favicon and Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Trailblazer Analytics RSS Feed" href="/rss.xml" />
     
     <!-- Structured Data -->
     <script type="application/ld+json">
