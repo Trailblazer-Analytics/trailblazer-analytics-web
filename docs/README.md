@@ -23,6 +23,8 @@ Welcome to the comprehensive documentation for the Trailblazer Analytics project
 - **[Development Setup](./DEV_SETUP.md)** - How to set up the development environment
 - **[GitHub Pages Deployment](./GITHUB_PAGES_DEPLOYMENT.md)** - Deployment configuration and troubleshooting
 - **[Deployment Checklist](./DEPLOYMENT_CHECKLIST.md)** - Pre-deployment verification steps
+- **[Build Warnings Guide](./BUILD_WARNINGS.md)** - Troubleshooting build warnings and configuration issues
+- **[RSS Feed Implementation](./RSS_FEED_IMPLEMENTATION.md)** - RSS feed setup and SEO optimization
 
 ### Content Creation Guides
 
@@ -33,6 +35,14 @@ Welcome to the comprehensive documentation for the Trailblazer Analytics project
 
 - **[SEO Performance Summary](./SEO_PERFORMANCE_SUMMARY.md)** - SEO optimization strategies and results
 - **[Lighthouse CI Guide](./LIGHTHOUSE_CI_GUIDE.md)** - Performance monitoring and optimization
+- **[Features Summary](./FEATURES_SUMMARY.md)** - Complete overview of all site features and capabilities
+
+### Additional Resources
+
+- **[DOCS Summary](./DOCS_SUMMARY.md)** - Documentation structure overview
+- **[GitHub Pages Setup](./GITHUB_PAGES_SETUP.md)** - Initial GitHub Pages configuration
+- **[HostGator Deployment](./HOSTGATOR_DEPLOYMENT.md)** - Alternative hosting setup
+- **[Spotify Integration](./SPOTIFY_INTEGRATION.md)** - Podcast and music integration guide
 
 ## 📊 Project Status
 

@@ -14,7 +14,11 @@
     "clean": "rmdir /s /q dist 2>nul || rm -rf dist",
     "typecheck": "astro check",
     "fix-warnings": "node scripts/fix-build-warnings.js",
-    "verify-rss": "node scripts/verify-rss.js"
+    "verify-rss": "node scripts/verify-rss.js",
+    "consolidate-docs": "node scripts/consolidate-docs.js",
+    "organize-docs": "node scripts/organize-docs.js",
+    "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
+    "fix:md": "markdownlint \"**/*.md\" --ignore node_modules --fix"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -32,6 +36,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "@lhci/cli": "^0.14.0",
     "autoprefixer": "10.4.15",
+    "markdownlint-cli": "^0.45.0",
     "postcss": "8.4.38"
   }
 }

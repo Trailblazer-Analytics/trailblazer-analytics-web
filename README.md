@@ -55,21 +55,21 @@ pnpm run preview
 
 ## 📚 Documentation
 
-### Complete Documentation Suite
-- **[Main Documentation Hub](docs/README.md)** - Central documentation index
-- **[Project Status & Features](docs/PROJECT_COMPLETE.md)** - Current project status and achievements
-- **[Current Deployment Status](docs/CURRENT_DEPLOYMENT_STATUS.md)** - Deployment configuration and status
-- **[Features Summary](docs/FEATURES_SUMMARY.md)** - Comprehensive feature overview
+Complete documentation is available in the [`docs/`](./docs/) folder:
 
-### User Guides
-- **[Content Management Guide](docs/CONTENT_MANAGEMENT_GUIDE.md)** - Step-by-step content creation
-- **[Quick Reference](docs/QUICK_REFERENCE.md)** - Common tasks and troubleshooting
-- **[Site Dashboard Guide](docs/SITE_DASHBOARD.md)** - Site management and maintenance
+- **[Documentation Hub](./docs/README.md)** - Main documentation index
+- **[Quick Reference](./docs/QUICK_REFERENCE.md)** - Common tasks and quick fixes
+- **[Content Management Guide](./docs/CONTENT_MANAGEMENT_GUIDE.md)** - Step-by-step content creation
+- **[Development Setup](./docs/DEV_SETUP.md)** - Development environment configuration
+- **[Deployment Guide](./docs/GITHUB_PAGES_DEPLOYMENT.md)** - Production deployment
+- **[Project Status](./docs/PROJECT_COMPLETE.md)** - Complete project achievements
 
-### Developer Resources
-- **[Development Setup](docs/DEV_SETUP.md)** - Development environment setup
-- **[GitHub Pages Deployment](docs/GITHUB_PAGES_DEPLOYMENT.md)** - Deployment guides
-- **[TODO List](docs/TODO.md)** - Current roadmap and planned features
+### Additional Resources
+
+- **[Site Dashboard](./docs/SITE_DASHBOARD.md)** - Site management overview
+- **[RSS Feed Implementation](./docs/RSS_FEED_IMPLEMENTATION.md)** - RSS feed setup
+- **[Build Warnings Guide](./docs/BUILD_WARNINGS.md)** - Troubleshooting
+- **[Features Summary](./docs/FEATURES_SUMMARY.md)** - Complete feature list
 
 ## 🏗️ Project Structure
 

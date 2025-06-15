@@ -3,6 +3,7 @@
 ## Content Publishing Workflow
 
 ### Pre-Publishing Checklist
+
 - [ ] Content aligns with site goals (data strategy, analytics insights)
 - [ ] SEO keywords identified and included naturally
 - [ ] Images optimized and properly named
@@ -11,6 +12,7 @@
 - [ ] Content proofread and formatted
 
 ### Publishing Steps
+
 1. **Create Content File**
    - Choose appropriate directory (`blog/`, `insights/`, etc.)
    - Use consistent naming convention
@@ -37,9 +39,11 @@
 ## Content Types & Workflows
 
 ### 📝 Blog Posts
+
 **Purpose:** Industry insights, how-to guides, thought leadership
 **Frequency:** 2-3 per month
 **Workflow:**
+
 1. Identify trending topic or client question
 2. Research and outline key points
 3. Write 800-1500 word article
@@ -48,6 +52,7 @@
 6. Optimize for SEO keywords
 
 **Template Structure:**
+
 - Introduction with hook
 - Problem/challenge description
 - Solution or insight
@@ -57,9 +62,11 @@
 - Call to action
 
 ### 🎯 Insights Articles
+
 **Purpose:** Executive-level analysis, market trends, strategic guidance
 **Frequency:** 1-2 per month
 **Workflow:**
+
 1. Analyze market data or trends
 2. Identify executive implications
 3. Write concise, high-level insights
@@ -67,6 +74,7 @@
 5. Focus on strategic recommendations
 
 **Template Structure:**
+
 - Executive summary
 - Current state analysis
 - Key insights (3-5 bullet points)
@@ -77,6 +85,7 @@
 **Purpose:** Expert interviews, deep dives, industry discussions
 **Frequency:** Weekly/bi-weekly
 **Workflow:**
+
 1. Schedule and conduct interview
 2. Edit audio content
 3. Upload to podcast hosting platform
@@ -88,9 +97,11 @@
    - Full transcript (if available)
 
 ### 📊 Case Studies
+
 **Purpose:** Demonstrate expertise, showcase results
 **Frequency:** Monthly
 **Workflow:**
+
 1. Select completed project (with client permission)
 2. Anonymize sensitive information
 3. Structure with clear problem/solution/results
@@ -98,6 +109,7 @@
 5. Add lessons learned section
 
 **Template Structure:**
+
 - Client background (anonymized)
 - Challenge description
 - Approach and methodology
@@ -107,9 +119,11 @@
 - Key takeaways for readers
 
 ### 🔧 Tech Notes
+
 **Purpose:** Technical tutorials, tool reviews, code examples
 **Frequency:** As needed
 **Workflow:**
+
 1. Identify common technical question
 2. Create step-by-step tutorial
 3. Include code examples with syntax highlighting
