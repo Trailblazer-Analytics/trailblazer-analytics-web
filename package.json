@@ -2,7 +2,8 @@
   "name": "trailblazer-analytics",
   "version": "0.0.1",
   "type": "module",
-  "scripts": {    "preinstall": "node scripts/enforce-pnpm.js",
+  "scripts": {
+    "preinstall": "node scripts/enforce-pnpm.js",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && node scripts/build.js",
@@ -20,17 +21,19 @@
     "pre-build": "node scripts/pre-build.js",
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "fix:md": "markdownlint \"**/*.md\" --ignore node_modules --fix",
-    "validate-content": "node scripts/validate-content.js",    "tags:build": "astro build && echo 'Tag pages generated successfully'",    "tags:dev": "astro dev --host 0.0.0.0",
+    "validate-content": "node scripts/validate-content.js",
+    "tags:build": "astro build && echo 'Tag pages generated successfully'",
+    "tags:dev": "astro dev --host 0.0.0.0",
     "content:validate": "node scripts/pre-build.js",
     "deploy:preview": "pnpm run build && pnpm run preview",
     "deploy": "pnpm run build",
     "deploy:gh-pages": "touch dist/.nojekyll && gh-pages -d dist -t"
-  },
-  "dependencies": {
+  },"dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.2.6",
     "@astrojs/react": "^4.2.7",
     "@astrojs/rss": "^4.0.12",
+    "@astrojs/tailwind": "^6.0.2",
     "astro": "^5.7.13",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
@@ -39,7 +42,6 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@astrojs/tailwind": "^6.0.2",
     "@lhci/cli": "^0.14.0",
     "autoprefixer": "10.4.15",
     "markdownlint-cli": "^0.45.0",
