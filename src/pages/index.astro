@@ -19,8 +19,14 @@ const seoData = {
 <Base {...seoData}>
   <Navbar />
   
-    <!-- Hero Section - Rebel Edition -->
-  <section class="relative bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900 text-white min-h-screen flex items-center overflow-hidden">
+  <!-- Debug info for GitHub Pages -->
+  <div style="position: fixed; top: 0; left: 0; background: red; color: white; padding: 10px; z-index: 9999; font-size: 14px;">
+    <div>BASE_URL: {import.meta.env.BASE_URL}</div>
+    <div>SITE: {import.meta.env.SITE}</div>
+    <div>MODE: {import.meta.env.MODE}</div>
+  </div>
+  <!-- Hero Section - Rebel Edition -->
+  <section style="background: linear-gradient(135deg, #4c1d95, #1e3a8a, #374151); color: white; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;" class="relative bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900 text-white min-h-screen flex items-center overflow-hidden">
     <!-- Chaotic Background Elements -->
     <div class="absolute inset-0 opacity-20">
       <div class="absolute top-20 left-10 w-32 h-32 bg-brandGold rounded-full transform rotate-45 animate-pulse"></div>
@@ -29,9 +35,14 @@ const seoData = {
       <div class="absolute bottom-40 right-1/4 w-20 h-20 bg-pink-400 rounded-full transform -rotate-45"></div>
       <div class="absolute top-1/2 left-1/2 w-36 h-36 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-30"></div>
     </div>
-    
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+      <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <!-- Basic fallback text that should show even if CSS fails -->
+        <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 2rem;">Trailblazer Analytics</h1>
+        <p style="font-size: 1.5rem; margin-bottom: 2rem;">Where Data Trailblazers Unite</p>
+        
+        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
           <span class="inline-block transform -rotate-2 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
             Where Data
           </span>

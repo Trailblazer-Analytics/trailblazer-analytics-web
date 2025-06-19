@@ -60,11 +60,8 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={imageSrc} />      <!-- Favicon and Icons -->
-    <link rel="icon" type="image/x-icon" href={buildAssetUrl('favicon.ico')} />
-    <link rel="apple-touch-icon" sizes="180x180" href={buildAssetUrl('apple-touch-icon.png')} />
-    <link rel="icon" type="image/png" sizes="32x32" href={buildAssetUrl('favicon-32x32.png')} />
-    <link rel="icon" type="image/png" sizes="16x16" href={buildAssetUrl('favicon-16x16.png')} />
+    <meta property="twitter:image" content={imageSrc} />    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/svg+xml" href={buildAssetUrl('favicon.svg')} />
     <link rel="manifest" href={buildAssetUrl('site.webmanifest')} />
     
     <!-- RSS Feed -->
