@@ -9,7 +9,10 @@ const isProd = process.env.NODE_ENV === 'production' || process.env.GITHUB_ACTIO
 export default defineConfig({
   integrations: [react(), tailwind(), mdx()],
   output: "static",
-  site: "https://anykolaiszyn.github.io",
-  base: isProd ? "/trailblazer-analytics-devkit" : "/",
-  trailingSlash: "ignore"
+  site: "https://trailblazeranalytics.com",
+  base: "/",
+  trailingSlash: "ignore",
+  build: {
+    assets: 'assets'
+  }
 });
