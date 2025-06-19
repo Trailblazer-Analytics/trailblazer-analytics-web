@@ -6,8 +6,8 @@ import siteConfig from '../site.config.js';
 
 // SEO meta data
 const seoData = {
-  title: "Podcast - Morning Metrics",
-  description: "Listen to Morning Metrics: in-depth conversations with data leaders, analytics experts, and AI innovators. Get practical insights on building data-driven organizations.",
+  title: "Podcast - Morning Metrics | Trailblazer Analytics",
+  description: "Listen to Morning Metrics: in-depth conversations with data trailblazers, analytics experts, and AI innovators. Get practical insights on building data-driven organizations. Find episodes by topic!",
   image: "/og-image-podcast.png"
 };
 
@@ -57,18 +57,48 @@ function formatDate(dateString) {
 
 <Base {...seoData}>
   <Navbar />
-  
-  <!-- Header Section -->
-  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
-    <div class="container mx-auto px-6">
+    <!-- Header Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-green-900 to-blue-900 text-white py-20 relative overflow-hidden">
+    <!-- Creative Background Elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-green-500 rounded-full transform rotate-45 animate-pulse"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-brandGold rounded-full transform -rotate-12 animate-bounce"></div>
+      <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-blue-400 rounded-full transform rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">
-          <span class="text-brandGold">{showInfo.title}</span>
-        </h1>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-5xl">🎙️</span>
+          <h1 class="text-5xl md:text-6xl font-bold">
+            <span class="text-brandGold">Morning Metrics</span>
+          </h1>
+        </div>
         <p class="text-xl md:text-2xl text-gray-300 mb-8">
-          {showInfo.description}. Conversations with analytics leaders, BI experts, and innovators shaping the future of business intelligence.
+          Your daily dose of data strategy insights! Conversations with analytics trailblazers, BI experts, and innovators shaping the future of business intelligence.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        
+        <!-- Podcast Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-green-400">Weekly</div>
+            <div class="text-sm text-gray-400">New Episodes</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-brandGold">20-30</div>
+            <div class="text-sm text-gray-400">Minutes</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-blue-400">100%</div>
+            <div class="text-sm text-gray-400">Actionable</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-purple-400">Free</div>
+            <div class="text-sm text-gray-400">Always</div>
+          </div>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <a 
             href={`https://open.spotify.com/show/${siteConfig.spotifyShowId}`}
             target="_blank" 
@@ -89,6 +119,17 @@ function formatDate(dateString) {
             Apple Podcasts
           </a>
         </div>
+        
+        <!-- Quick Topic Navigation -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <p class="text-brandGold font-semibold mb-4">🎯 Find Episodes by Topic</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <a href="/tags/podcast" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Podcast</a>
+            <a href="/tags/data-strategy" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Data Strategy</a>
+            <a href="/tags/interviews" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Interviews</a>
+            <a href="/tags/business-intelligence" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">BI</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -96,11 +137,10 @@ function formatDate(dateString) {
   <!-- Featured Podcast Player -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-8">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Listen to {showInfo.title}</h2>
+      <div class="max-w-4xl mx-auto">        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">🎧 Listen to Morning Metrics</h2>
           <p class="text-lg text-gray-600">
-            Start your day with data strategy insights. Episodes feature practical advice, industry trends, and conversations with BI leaders.
+            Start your day with data strategy insights. Episodes feature practical advice, industry trends, and conversations with trailblazing BI leaders.
           </p>
         </div>
         
@@ -118,12 +158,11 @@ function formatDate(dateString) {
         </div>
       </div>
     </div>
-  </section>
-  <!-- Live Spotify Integration -->
+  </section>  <!-- Live Spotify Integration -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-6">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">All Episodes Available on Spotify</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">🚀 All Episodes Available on Spotify</h2>
         
         <!-- Live Integration Note -->
         <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
@@ -134,8 +173,8 @@ function formatDate(dateString) {
             <h3 class="text-xl font-semibold text-green-800">🎧 Live Spotify Integration</h3>
           </div>
           <p class="text-green-800 mb-4">
-            All episodes of <strong>{showInfo.title}</strong> are available directly through the Spotify player above. 
-            The podcast feed is live and automatically updates with new episodes.
+            All episodes of <strong>Morning Metrics</strong> are available directly through the Spotify player above. 
+            The podcast feed is live and automatically updates with new episodes for our trailblazing community.
           </p>
           <a 
             href={`https://open.spotify.com/show/${siteConfig.spotifyShowId}`} 
@@ -151,20 +190,72 @@ function formatDate(dateString) {
         </div>
         
         <p class="text-gray-600 text-lg">
-          Episodes cover data strategy, business intelligence, analytics implementation, and conversations with industry leaders. 
-          Perfect for your morning commute or data strategy planning sessions.
+          Episodes cover data strategy, business intelligence, analytics implementation, and conversations with industry trailblazers. 
+          Perfect for your morning commute, workout, or data strategy planning sessions.
         </p>
       </div>
     </div>
   </section>
-
-  <!-- Newsletter CTA -->
-  <section class="py-16 bg-gradient-to-r from-brandGold to-yellow-600">
-    <div class="container mx-auto px-6">
+  <!-- Cross-link to Tags Experience -->
+  <section class="py-16 bg-gradient-to-br from-green-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-brandGold rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-green-500 rounded-full transform -rotate-12"></div>
+      <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-20"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-black mb-4">Never Miss an Episode</h2>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-4xl">🎙️</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            <span class="inline-block transform rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+              Find Episodes by Topic
+            </span>
+          </h2>
+        </div>
+        
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+          Navigate our entire podcast library by topic and guest expertise.
+          <br />
+          <span class="text-brandGold font-semibold">
+            From data strategy deep-dives to BI implementation stories - find exactly what you need to hear.
+          </span>
+        </p>
+        
+        <!-- Podcast-focused topic bubbles -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎙️ Podcast</span>
+          <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎯 Strategy</span>
+          <span class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">👥 Interviews</span>
+          <span class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📊 BI</span>
+          <span class="bg-gradient-to-r from-yellow-400 to-green-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🔧 Implementation</span>
+        </div>
+        
+        <a 
+          href="/tags" 
+          class="inline-flex items-center gap-3 bg-brandGold hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+        >
+          Explore Episode Topics
+          <span class="transform rotate-12 text-xl">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- Newsletter CTA -->
+  <section class="py-16 bg-gradient-to-r from-brandGold via-yellow-500 to-orange-500 relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-10 left-10 w-16 h-16 bg-white rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-10 right-10 w-20 h-20 bg-white rounded-full transform -rotate-12"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">🚀 Never Miss an Episode</h2>
         <p class="text-black text-opacity-80 mb-8 text-lg">
-          Get notified when new episodes of Morning Metrics are released, plus exclusive data strategy insights delivered weekly.
+          Get notified when new episodes of Morning Metrics are released, plus exclusive data strategy insights delivered weekly to fellow trailblazers.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
           <input 
@@ -172,12 +263,13 @@ function formatDate(dateString) {
             placeholder="Your email address"
             class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button class="bg-black text-brandGold font-semibold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+          <button class="bg-black text-brandGold font-semibold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors inline-flex items-center gap-2">
+            <span>🎯</span>
             Subscribe
           </button>
         </div>
         <p class="text-xs text-black text-opacity-60 mt-4">
-          No spam, unsubscribe at any time. Powered by analytics, not guesswork.
+          No fluff, unsubscribe at any time. Powered by analytics, not guesswork.
         </p>
       </div>
     </div>
