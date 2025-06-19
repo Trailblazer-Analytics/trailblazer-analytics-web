@@ -5,11 +5,13 @@
 We've standardized on **pnpm** as our package manager for the following benefits:
 
 ### Performance Benefits
+
 - **Faster installations**: Up to 2x faster than npm
 - **Disk space efficiency**: Shared dependency storage across projects
 - **Network efficiency**: Better caching and fewer downloads
 
-### Developer Experience  
+### Developer Experience
+
 - **Strict dependency resolution**: Prevents phantom dependencies
 - **Better monorepo support**: If we expand to multiple packages
 - **Faster CI/CD**: Reduced build times in GitHub Actions
@@ -17,11 +19,13 @@ We've standardized on **pnpm** as our package manager for the following benefits
 ## 🧹 What We've Cleaned Up
 
 ### ✅ Removed
+
 - `package-lock.json` (npm lock file)
 - All `npm run` commands from scripts
 - npm cache references in GitHub Actions
 
 ### ✅ Updated
+
 - **package.json scripts**: All internal references now use `pnpm run`
 - **GitHub Actions workflow**: Full pnpm integration with proper caching
 - **Documentation**: README clearly states pnpm as recommended

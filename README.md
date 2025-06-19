@@ -2,9 +2,14 @@
 
 A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, YouTube integration, resource consolidation, and automated deployment.
 
+# Trailblazer Analytics - Professional Data Strategy Hub
+
+A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, YouTube integration, resource consolidation, and automated deployment.
+
 ## 🚀 Current Features (December 2024)
 
 ### 🎨 Enhanced User Experience
+
 - **Professional Navigation**: Resource-centric structure with clean dropdown menus
 - **YouTube Integration**: Dedicated channel page with full social media integration
 - **Enhanced Blog**: White cards, improved readability, and mobile optimization
@@ -12,6 +17,7 @@ A modern, responsive website built with Astro + React + Tailwind CSS for data st
 - **Mobile-First Design**: Responsive navigation with hamburger menu and touch-friendly UX
 
 ### 📱 Content Management
+
 - **Unified Resource Hub**: Tech notes, case studies, white papers, downloads, and tools
 - **Blog System**: Enhanced blog with improved typography and tag system
 - **YouTube Content**: Video tutorials and channel integration throughout site
@@ -19,6 +25,7 @@ A modern, responsive website built with Astro + React + Tailwind CSS for data st
 - **Newsletter Integration**: Multi-provider support (Beehiiv, Mailchimp, ConvertKit)
 
 ### 🚀 Technical Excellence
+
 - **GitHub Actions Deployment**: Automated CI/CD with latest action versions
 - **Custom Domain Ready**: CNAME configured for trailblazeranalytics.com
 - **Asset Optimization**: Efficient loading and GitHub Pages compatibility
@@ -28,10 +35,12 @@ A modern, responsive website built with Astro + React + Tailwind CSS for data st
 ## 🛠️ Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - pnpm (recommended) or npm
 
 ### Development Setup
+
 ```bash
 # Clone and install dependencies
 git clone <repository-url>

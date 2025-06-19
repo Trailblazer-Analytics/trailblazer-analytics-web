@@ -5,8 +5,8 @@ import Footer from '../components/Footer.jsx';
 
 // SEO meta data
 const seoData = {
-  title: "Insights - Latest Data Strategy & Analytics Articles",
-  description: "Read the latest insights on data strategy, analytics implementation, and business intelligence from Alexander Nykolaiszyn. Fresh perspectives on data transformation and AI adoption.",
+  title: "Insights - Trailblazer Perspectives on Analytics & Data Strategy",
+  description: "Discover cutting-edge insights on data strategy, analytics implementation, and business intelligence from a trailblazer's perspective. Fresh takes on data transformation and AI adoption.",
   image: "/og-image-insights.png"
 };
 
@@ -79,16 +79,26 @@ function extractCategories(content, title) {
 ---
 
 <Base {...seoData}>
-  <Navbar />
-    <!-- Header Section -->
-  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
-    <div class="container mx-auto px-6">
+  <Navbar />  <section class="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white py-20 relative overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-brandGold rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+      <div class="absolute top-20 right-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+      <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative">
       <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-6">
+          <span class="inline-block px-4 py-2 bg-brandGold text-gray-900 rounded-full text-sm font-bold uppercase tracking-wide">
+            🧠 Trailblazer Insights
+          </span>
+        </div>
         <h1 class="text-5xl md:text-6xl font-bold mb-6">
           Insights & <span class="text-brandGold">Analysis</span>
         </h1>
         <p class="text-xl md:text-2xl text-gray-300 mb-8">
-          Expert perspectives on data strategy, analytics trends, and technology innovations that are shaping the future of business intelligence.
+          🚀 Trailblazer perspectives on data strategy, analytics trends, and technology innovations that are shaping the future of intelligent business decisions.
         </p>
         
         <!-- Search Bar -->

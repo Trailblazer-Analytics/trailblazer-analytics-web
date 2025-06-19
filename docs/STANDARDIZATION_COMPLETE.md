@@ -12,7 +12,8 @@ We have successfully standardized the Trailblazer Analytics project on **pnpm** 
 - ✅ Cleaned up node_modules from previous npm installations
 
 ### 📝 Configuration Updates
-- ✅ **package.json**: All scripts now use `pnpm run` 
+
+- ✅ **package.json**: All scripts now use `pnpm run`
 - ✅ **GitHub Actions**: Full pnpm integration with proper caching
 - ✅ **Pre-install enforcement**: Added script to ensure developers use pnpm
 - ✅ **Lock file tracking**: `pnpm-lock.yaml` now properly tracked in git

@@ -52,6 +52,7 @@ To test the RSS feed:
 During the build process, several warnings related to content collections may appear:
 
 1. **Auto-generated Collections Warning**:
+
    ```bash
    Auto-generating collections for folders in "src/content/" that are not defined as collections.
    This is deprecated, so you should define these collections yourself in "src/content.config.ts".
@@ -59,6 +60,7 @@ During the build process, several warnings related to content collections may ap
    ```
 
 2. **Missing Content Directories Warning**:
+
    ```bash
    [WARN] [glob-loader] The base directory "src/content/tech-notes" does not exist.
    ```
