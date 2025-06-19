@@ -1,0 +1,167 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.jsx';
+import { getCollection } from 'astro:content';
+
+// HOOK: Fetch all blog posts to extract tags - customize this query later
+const allPosts = await getCollection('blog');
+
+// HOOK: Extract and count tags with some data personality
+const tagCounts: Record<string, number> = {};
+allPosts.forEach(post => {
+  post.data.tags?.forEach((tag: string) => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+const sortedTags = Object.entries(tagCounts)
+  .sort(([,a], [,b]) => b - a) // Most popular first, like a trending algorithm
+  .map(([tag, count]) => ({ tag, count }));
+
+// HOOK: Add data-themed emojis - customize these to match your personality
+const tagEmojis = {
+  'analytics': '📊',
+  'data': '🔢', 
+  'sql': '🗃️',
+  'python': '🐍',
+  'bi': '💡',
+  'powerbi': '⚡',
+  'tableau': '📈',
+  'strategy': '🎯',
+  'career': '🚀',
+  'tools': '🛠️',
+  'rant': '🔥',
+  'story': '📚',
+  'insight': '💭'
+};
+
+function getTagEmoji(tag: string): string {
+  return tagEmojis[tag.toLowerCase()] || '🏷️';
+}
+
+// HOOK: Raw color palette - not your typical design system
+const vibeColors = [
+  'bg-gradient-to-r from-blue-500 to-purple-600 text-white',
+  'bg-gradient-to-r from-green-400 to-blue-500 text-white', 
+  'bg-gradient-to-r from-pink-500 to-orange-400 text-white',
+  'bg-gradient-to-r from-yellow-400 to-red-500 text-white',
+  'bg-gradient-to-r from-indigo-500 to-purple-600 text-white',
+  'bg-gradient-to-r from-teal-400 to-blue-500 text-white',
+];
+---
+
+<Base 
+  title="Blog Tags | Data Chaos Navigator"
+  description="Navigate the beautiful chaos of data insights, one tag at a time"
+>
+  <Navbar />
+  
+  <!-- HOOK: Raw, handmade hero section with personality -->
+  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div class="container mx-auto px-4 py-16">
+      
+      <!-- HOOK: Quirky data-themed header -->
+      <div class="text-center mb-16">
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
+          <span class="inline-block transform -rotate-2 bg-yellow-400 px-6 py-3 text-gray-900 rounded-lg">
+            #TAGS
+          </span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <!-- HOOK: Add your personality to this copy -->
+          Welcome to the beautiful chaos of organized thoughts.
+          <br />
+          <span class="text-yellow-400 font-semibold">
+            Because even data rebels need some structure.
+          </span>
+        </p>
+        
+        <!-- HOOK: Fun data stats dashboard -->
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div class="text-3xl font-bold text-yellow-400">{sortedTags.length}</div>
+            <div class="text-sm text-gray-300 font-medium">UNIQUE TAGS</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div class="text-3xl font-bold text-yellow-400">{allPosts.length}</div>
+            <div class="text-sm text-gray-300 font-medium">TOTAL POSTS</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div class="text-3xl font-bold text-yellow-400">
+              {Math.max(...Object.values(tagCounts))}
+            </div>
+            <div class="text-sm text-gray-300 font-medium">MOST USED</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div class="text-3xl font-bold text-yellow-400">∞</div>
+            <div class="text-sm text-gray-300 font-medium">INSIGHTS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOOK: Tag cloud with handmade, organic styling -->
+      <div class="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8 md:p-16 border-4 border-white/50">
+        <h2 class="text-4xl font-black text-gray-800 mb-4 text-center">
+          <!-- HOOK: Add SQL humor because why not -->
+          <code class="bg-gray-100 px-4 py-2 rounded text-2xl md:text-3xl font-mono">
+            SELECT * FROM insights WHERE vibe = 'immaculate';
+          </code>
+        </h2>
+        <p class="text-center text-gray-600 mb-12 text-lg">
+          Click any tag to dive into that rabbit hole →
+        </p>
+        
+        <!-- HOOK: Organic tag layout - not your typical boring grid -->
+        <div class="flex flex-wrap gap-4 justify-center items-center">
+          {sortedTags.map((tagData, index) => {
+            const rotation = (index * 7) % 21 - 10; // -10 to 10 degrees
+            const colorClass = vibeColors[index % vibeColors.length];
+            
+            return (
+              <a 
+                href={`/tags/${tagData.tag.toLowerCase().replace(/\s+/g, '-')}`}
+                class={`
+                  inline-flex items-center gap-3 px-6 py-4 rounded-2xl
+                  font-bold text-lg shadow-lg hover:shadow-xl 
+                  transform hover:scale-110 transition-all duration-300 ease-out
+                  border-2 border-gray-800/20 hover:border-gray-800
+                  ${colorClass}
+                `}
+                style={`transform: rotate(${rotation}deg); margin: ${Math.abs(rotation)}px;`}
+              >
+                <span class="text-2xl">{getTagEmoji(tagData.tag)}</span>
+                <span>{tagData.tag}</span>
+                <span class="bg-white/30 px-3 py-1 rounded-full text-sm font-black">
+                  {tagData.count}
+                </span>
+              </a>
+            );
+          })}
+        </div>
+
+        <!-- HOOK: Add some raw personality and humor -->
+        <div class="mt-16 text-center text-gray-700">
+          <div class="max-w-2xl mx-auto">
+            <p class="text-lg italic font-medium mb-4">
+              "Data without context is just expensive noise."
+            </p>
+            <p class="text-sm text-gray-500">
+              — Every data analyst after their third cup of coffee
+            </p>
+            
+            <!-- HOOK: Add a fun CTA -->
+            <div class="mt-8 p-6 bg-yellow-100 rounded-2xl border-2 border-yellow-400">
+              <p class="text-gray-800 font-semibold">
+                🎯 <strong>Pro Tip:</strong> Tags are like spices for content. 
+                Use them wisely, or everything tastes the same.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Base>

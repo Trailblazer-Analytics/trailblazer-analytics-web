@@ -10,43 +10,96 @@ const caseStudies = await getCollection('case-studies');
 
 // SEO meta data
 const seoData = {
-  title: "Trailblazer Analytics - Where Data Strategy Meets Action",
-  description: "Transform your business with expert data strategy, analytics implementation, and AI innovation. Get actionable insights, not just reports. Download free tools and connect with Alexander Nykolaiszyn.",
+  title: "Trailblazer Analytics - Where Data Trailblazers Unite",
+  description: "Join the personal analytics journey! Creative insights, practical tools, and strategic frameworks that actually work. Welcome fellow trailblazers to the adventure.",
   image: "/og-image-home.png"
 };
 ---
 
 <Base {...seoData}>
   <Navbar />
-  
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen flex items-center">
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-    <div class="container mx-auto px-6 relative z-10">      <div class="max-w-4xl mx-auto text-center">        <h1 class="text-5xl md:text-7xl font-bold mb-6">
-          Where Data Strategy
-          <span class="text-brandGold block">Meets Action</span>
+    <!-- Hero Section - Rebel Edition -->
+  <section class="relative bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900 text-white min-h-screen flex items-center overflow-hidden">
+    <!-- Chaotic Background Elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-20 left-10 w-32 h-32 bg-brandGold rounded-full transform rotate-45 animate-pulse"></div>
+      <div class="absolute top-40 right-20 w-24 h-24 bg-brandGreen rounded-full transform -rotate-12 animate-bounce"></div>
+      <div class="absolute bottom-20 left-1/3 w-28 h-28 bg-yellow-400 rounded-full transform rotate-12"></div>
+      <div class="absolute bottom-40 right-1/4 w-20 h-20 bg-pink-400 rounded-full transform -rotate-45"></div>
+      <div class="absolute top-1/2 left-1/2 w-36 h-36 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-30"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+          <span class="inline-block transform -rotate-2 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+            Where Data
+          </span>
+          <br />
+          <span class="inline-block transform rotate-1 bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-3 rounded-xl shadow-2xl mt-4">
+            Trailblazers Unite
+          </span>
         </h1>
-        <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
-          Expert insights, practical tools, and strategic frameworks to transform your business intelligence capabilities and accelerate growth.
+        <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Welcome to my personal analytics journey! 
+          <br />
+          <span class="text-brandGold font-semibold">
+            Creative insights, practical tools, and frameworks that actually work.
+          </span>
         </p>
+          <!-- Trailblazer Stats Dashboard -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">100%</div>
+            <div class="text-xs text-gray-300 font-medium">AUTHENTIC</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">100%</div>
+            <div class="text-xs text-gray-300 font-medium">REAL RESULTS</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">15+</div>
+            <div class="text-xs text-gray-300 font-medium">YEARS TRAILBLAZING</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">∞</div>
+            <div class="text-xs text-gray-300 font-medium">COFFEE CUPS</div>
+          </div>
+        </div>
+          <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎨 Creative Analytics</span>
+          <span class="bg-pink-500/20 text-pink-300 px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">☕ Coffee Powered</span>
+          <span class="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🚀 Authentic Journey</span>
+        </div>
+        
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/blog" class="bg-brandGold hover:bg-yellow-600 text-black font-semibold py-4 px-8 rounded-lg transition-colors">
-            Explore Insights
+          <a href="/blog" class="bg-brandGold hover:bg-yellow-600 text-black font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+            Join the Journey
           </a>
-          <a href="/downloads" class="border-2 border-brandGold text-brandGold hover:bg-brandGold hover:text-black font-semibold py-4 px-8 rounded-lg transition-colors">
-            Download Now
+          <a href="/tags" class="border-2 border-brandGold text-brandGold hover:bg-brandGold hover:text-black font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+            <span>🏷️</span>
+            Explore Topics
+            <span class="bg-yellow-400 text-black px-2 py-1 rounded-full text-xs font-bold transform -rotate-12">HOT</span>
           </a>
         </div>
       </div>
     </div>
-  </section>
-  <!-- Value Proposition Section -->
-  <section class="py-20 bg-white">
-    <div class="container mx-auto px-6">
+  </section>  <!-- Value Proposition Section - Rebel Edition -->
+  <section class="py-20 bg-white relative overflow-hidden">
+    <!-- Background chaos elements -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-brandGold/10 to-transparent rounded-full transform translate-x-32 -translate-y-32"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-brandGreen/10 to-transparent rounded-full transform -translate-x-24 translate-y-24"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-900 mb-4">Your Data Career Advancement Hub</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Deep insights, practical tools, and strategic frameworks to help you excel in the rapidly evolving world of data and analytics.
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+          <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Your Analytics Rebellion HQ
+          </span>
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Where data professionals come to escape corporate boredom and build something amazing.
+          <br />
+          <span class="text-purple-600 font-semibold">No spreadsheet nightmares here!</span>
         </p>
       </div>
       
@@ -100,12 +153,27 @@ const seoData = {
         <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Insights & Resources</h2>
         <p class="text-xl text-gray-600">Stay ahead with expert analysis, tools, and strategies.</p>
       </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-900 mb-2">Insights</h3>
             <p class="text-gray-600 mb-4">Expert analysis on data trends, technology, and business strategy.</p>
             <a href="/insights" class="text-brandGreen font-semibold hover:text-green-700">Explore Insights →</a>
+          </div>
+        </div>
+        
+        <!-- FEATURED: Amazing Tags Page -->
+        <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg overflow-hidden text-white transform hover:scale-105 transition-all duration-300">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">🏷️</span>
+              <h3 class="text-xl font-bold">Explore Topics</h3>
+              <span class="bg-yellow-400 text-black px-2 py-1 rounded-full text-xs font-bold">HOT</span>
+            </div>
+            <p class="mb-4 opacity-90">Navigate the beautiful chaos of data insights, one tag at a time. Our most creative discovery experience!</p>
+            <a href="/tags" class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg font-semibold transition-colors">
+              Dive Into Topics 
+              <span class="transform rotate-12">→</span>
+            </a>
           </div>
         </div>
         
@@ -134,19 +202,31 @@ const seoData = {
         </div>
       </div>
     </div>
-  </section>
-  <!-- Newsletter Section -->
-  <section class="py-20 bg-brandGreen text-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-4">Stay Ahead of the Data Curve</h2>
-      <p class="text-xl mb-8 max-w-2xl mx-auto">
-        Get weekly insights, tool updates, and career tips delivered to your inbox.
+  </section>  <!-- Newsletter Section - Rebel Edition -->
+  <section class="py-20 bg-gradient-to-br from-brandGreen via-blue-600 to-purple-600 text-white relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 right-10 w-24 h-24 bg-brandGold rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-10 left-10 w-32 h-32 bg-white rounded-full transform -rotate-12"></div>
+      <div class="absolute top-1/2 left-1/2 w-20 h-20 bg-pink-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 text-center relative z-10">
+      <h2 class="text-4xl md:text-5xl font-black mb-4">
+        <span class="inline-block transform -rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+          Join the Rebellion
+        </span>
+      </h2>
+      <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
+        Get weekly doses of rebellious insights, creative tools, and career-boosting tips.
+        <br />
+        <span class="text-brandGold font-semibold">No boring corporate newsletters here!</span>
       </p>
       <div class="max-w-md mx-auto">
         <NewsletterSignup 
-          placeholder="Enter your email for weekly insights"
-          buttonText="Subscribe"
-          source="homepage-cta"
+          title="Join the Rebellion"
+          description="Get weekly doses of rebellious insights, creative tools, and career-boosting tips."
+          theme="light"
         />
       </div>
     </div>

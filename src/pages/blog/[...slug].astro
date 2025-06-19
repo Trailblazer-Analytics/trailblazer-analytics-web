@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.jsx';
@@ -11,7 +11,11 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry } = Astro.props;
+type Props = {
+  entry: CollectionEntry<'blog'>;
+};
+
+const { entry } = Astro.props as Props;
 const { Content } = await entry.render();
 
 // SEO meta data
@@ -21,14 +25,18 @@ const seoData = {
   image: entry.data.image || '/og-image.png'
 };
 
-// Format date
-function formatDate(date) {
-  return new Date(date).toLocaleDateString('en-US', {
+// Format date - handle both date and publishDate fields
+function formatDate(dateString: string | Date | null | undefined): string {
+  if (!dateString) return 'Date TBD';
+  return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
 }
+
+// HOOK: Get the actual date from either field
+const postDate = entry.data.date || entry.data.publishDate;
 ---
 
 <Base {...seoData}>
@@ -78,6 +86,54 @@ function formatDate(date) {
         <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg">
           <Content />
         </div>
+        
+        <!-- HOOK: Enhanced tag display with personality -->
+        {entry.data.tags && entry.data.tags.length > 0 && (
+          <div class="mt-12 mb-8">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
+              🏷️ Filed Under:
+            </h3>            <div class="flex flex-wrap gap-3">
+              {entry.data.tags.map((tag: string, index: number) => {
+                // HOOK: Add some organic rotation for that handmade feel
+                const rotation = (index * 3) % 7 - 3; // -3 to 3 degrees
+                const colors = [
+                  'bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200',
+                  'bg-green-100 text-green-800 border-green-300 hover:bg-green-200',
+                  'bg-purple-100 text-purple-800 border-purple-300 hover:bg-purple-200',
+                  'bg-orange-100 text-orange-800 border-orange-300 hover:bg-orange-200',
+                  'bg-pink-100 text-pink-800 border-pink-300 hover:bg-pink-200',
+                ];
+                const colorClass = colors[index % colors.length];
+                
+                return (
+                  <a
+                    href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                    class={`
+                      inline-flex items-center gap-2 px-4 py-2 rounded-full 
+                      border-2 font-semibold text-sm transition-all duration-200
+                      transform hover:scale-105 hover:shadow-md
+                      ${colorClass}
+                    `}
+                    style={`transform: rotate(${rotation}deg);`}
+                  >
+                    <span class="text-lg">#</span>
+                    {tag}
+                  </a>
+                );
+              })}
+            </div>
+            
+            <!-- HOOK: Link to all tags -->
+            <div class="mt-6">
+              <a 
+                href="/tags" 
+                class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 font-medium text-sm transition-colors"
+              >
+                Browse all tags →
+              </a>
+            </div>
+          </div>
+        )}
         
         <!-- Author Bio -->
         <div class="mt-16 p-8 bg-gray-50 rounded-2xl">

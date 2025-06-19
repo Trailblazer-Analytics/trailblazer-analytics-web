@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "preinstall": "node scripts/enforce-pnpm.js",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -17,8 +18,14 @@
     "verify-rss": "node scripts/verify-rss.js",
     "consolidate-docs": "node scripts/consolidate-docs.js",
     "organize-docs": "node scripts/organize-docs.js",
+    "pre-build": "node scripts/pre-build.js",
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
-    "fix:md": "markdownlint \"**/*.md\" --ignore node_modules --fix"
+    "fix:md": "markdownlint \"**/*.md\" --ignore node_modules --fix",
+    "validate-content": "node scripts/validate-content.js",
+    "tags:build": "astro build && echo 'Tag pages generated successfully'",
+    "tags:dev": "astro dev --host 0.0.0.0",
+    "content:validate": "node scripts/pre-build.js",
+    "deploy:preview": "pnpm run build && pnpm run preview"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

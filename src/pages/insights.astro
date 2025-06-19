@@ -183,8 +183,57 @@ function extractCategories(content, title) {
           </div>
         </div>
       </div>
-    </section>
-  )}
+    </section>  )}
+
+  <!-- Cross-link to Tags Experience -->
+  <section class="py-16 bg-gradient-to-br from-purple-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
+    <!-- Background elements for creative flair -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 right-20 w-16 h-16 bg-brandGold rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-20 left-10 w-20 h-20 bg-brandGreen rounded-full transform -rotate-12"></div>
+      <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-purple-400 rounded-full transform rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-4xl">🏷️</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            <span class="inline-block transform rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+              Explore by Topic
+            </span>
+          </h2>
+          <span class="bg-yellow-400 text-black px-3 py-2 rounded-full text-sm font-bold transform -rotate-12">HOT</span>
+        </div>
+        
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+          Lost in the sea of insights? Navigate our content universe by topic.
+          <br />
+          <span class="text-brandGold font-semibold">
+            Our most creative discovery experience - where chaos meets order.
+          </span>
+        </p>
+        
+        <!-- Sample topic bubbles with analytics focus -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📊 Analytics</span>
+          <span class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎯 Strategy</span>
+          <span class="bg-gradient-to-r from-pink-500 to-orange-400 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🤖 AI & ML</span>
+          <span class="bg-gradient-to-r from-yellow-400 to-red-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">💡 Insights</span>
+          <span class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📈 BI</span>
+        </div>
+        
+        <a 
+          href="/tags" 
+          class="inline-flex items-center gap-3 bg-brandGold hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+        >
+          Dive Into Topics
+          <span class="transform rotate-12 text-xl">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Articles Grid -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-6">
@@ -454,11 +503,10 @@ function extractCategories(content, title) {
         filterAndSortArticles();
       });
     });
-    
-    // Sort functionality
+      // Sort functionality
     if (sortSelect) {
       sortSelect.addEventListener('change', function() {
-        currentSort = this.value;
+        currentSort = (this as HTMLSelectElement).value;
         filterAndSortArticles();
       });
     }
@@ -470,33 +518,34 @@ function extractCategories(content, title) {
         filterAndSortArticles();
       });
     }
-    
-    function filterAndSortArticles() {
+      function filterAndSortArticles() {
       const articles = getAllArticles();
-      const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+      const searchTerm = searchInput ? (searchInput as HTMLInputElement).value.toLowerCase() : '';
       
       // Filter articles
       const filteredArticles = articles.filter(article => {
+        const htmlArticle = article as HTMLElement;
         const matchesSearch = searchTerm === '' || 
-          article.dataset.title.includes(searchTerm) ||
-          article.textContent.toLowerCase().includes(searchTerm);
+          htmlArticle.dataset.title?.includes(searchTerm) ||
+          article.textContent?.toLowerCase().includes(searchTerm);
           
         const matchesCategory = currentFilter === 'all' || 
-          article.dataset.categories.includes(currentFilter.toLowerCase());
+          htmlArticle.dataset.categories?.includes(currentFilter.toLowerCase());
           
         return matchesSearch && matchesCategory;
       });
-      
-      // Sort articles
+        // Sort articles
       filteredArticles.sort((a, b) => {
+        const htmlA = a as HTMLElement;
+        const htmlB = b as HTMLElement;
         switch (currentSort) {
           case 'oldest':
-            return new Date(a.dataset.date) - new Date(b.dataset.date);
+            return new Date(htmlA.dataset.date || '').getTime() - new Date(htmlB.dataset.date || '').getTime();
           case 'title':
-            return a.dataset.title.localeCompare(b.dataset.title);
+            return (htmlA.dataset.title || '').localeCompare(htmlB.dataset.title || '');
           case 'newest':
           default:
-            return new Date(b.dataset.date) - new Date(a.dataset.date);
+            return new Date(htmlB.dataset.date || '').getTime() - new Date(htmlA.dataset.date || '').getTime();
         }
       });
       
@@ -568,14 +617,12 @@ function extractCategories(content, title) {
       if (message) {
         message.remove();
       }
-    }
-    
-    // Global function to clear filters
-    window.clearFilters = function() {
-      if (searchInput) searchInput.value = '';
+    }      // Global function to clear filters
+    (window as any).clearFilters = function() {
+      if (searchInput) (searchInput as HTMLInputElement).value = '';
       categoryFilters.forEach(btn => btn.classList.remove('active'));
       categoryFilters[0]?.classList.add('active'); // Activate "All Articles"
-      if (sortSelect) sortSelect.value = 'newest';
+      if (sortSelect) (sortSelect as HTMLSelectElement).value = 'newest';
       
       currentFilter = 'all';
       currentSort = 'newest';

@@ -1,0 +1,212 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.jsx';
+
+// HOOK: Random data jokes and messages - add more personality here
+const dataJokes = [
+  "NULL pointer exception in your navigation skills",
+  "Data not found. Have you tried turning reality off and on again?", 
+  "ERROR 404: Your query returned zero results",
+  "This page is like a missing index - theoretically should exist, but...",
+  "Looks like you've hit a data dead end. Time for some exploratory analysis!",
+  "HTTP 404: Even our algorithms can't find this page",
+  "This URL is more elusive than clean data",
+  "Page not found. Unlike your browser history, which we definitely don't track 👀",
+  "Roses are red, violets are blue, unexpected ')' on line 42",
+  "Your request has been processed by our ML model and classified as: 'Nope'"
+];
+
+// HOOK: Random data-themed emojis for visual flair
+const dataEmojis = ['📊', '📈', '📉', '💾', '🔢', '⚡', '🤖', '🔍', '💻', '📱', '🌐', '⚙️'];
+
+// HOOK: Pick random elements for that unpredictable, handmade feel
+function getRandomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+const randomJoke = getRandomElement(dataJokes);
+const randomEmoji1 = getRandomElement(dataEmojis);
+const randomEmoji2 = getRandomElement(dataEmojis);
+const randomEmoji3 = getRandomElement(dataEmojis);
+
+// HOOK: Current timestamp for that real-time data vibe
+const currentTime = new Date().toISOString();
+const errorCode = Math.floor(Math.random() * 9999) + 1000;
+---
+
+<Base 
+  title="404 - Page Not Found | Data Detective Work Required"
+  description="Oops! Looks like this page got lost in the data pipeline. Let's debug this together."
+>
+  <Navbar />
+  
+  <!-- HOOK: Raw, glitchy 404 experience with data personality -->
+  <div class="min-h-screen bg-gradient-to-br from-red-900 via-gray-900 to-black relative overflow-hidden">
+    
+    <!-- HOOK: Animated background elements for that digital chaos feel -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="animate-pulse text-green-400 font-mono text-xs leading-tight p-4">
+        {/* HOOK: Fake terminal output - customize this data stream */}
+        ERROR: Page not found at {currentTime}<br/>
+        STACK TRACE:<br/>
+        &nbsp;&nbsp;at Router.navigate(index.js:404)<br/>
+        &nbsp;&nbsp;at UserBrain.process(reality.js:undefined)<br/>
+        &nbsp;&nbsp;at Universe.render(existence.js:∞)<br/>
+        STATUS: 404 NOT_FOUND<br/>
+        REQUEST_ID: {errorCode}<br/>
+        CORRELATION_ID: why-did-you-click-that-link<br/>
+        RETRY_AFTER: never (probably)<br/>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      
+      <!-- HOOK: Main 404 content with serious data personality -->
+      <div class="text-center mb-16">
+        
+        <!-- HOOK: Glitchy 404 title -->
+        <div class="mb-8">
+          <h1 class="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 animate-pulse tracking-wider">
+            4<span class="inline-block animate-bounce">0</span>4
+          </h1>
+          <div class="text-xl md:text-2xl text-red-400 font-mono mt-4 animate-pulse">
+            PAGE_NOT_FOUND
+          </div>
+        </div>
+
+        <!-- HOOK: Random data joke with personality -->
+        <div class="bg-black/50 backdrop-blur rounded-3xl p-8 md:p-12 border-2 border-red-500/30 mb-12 max-w-4xl mx-auto">
+          <div class="text-6xl mb-6">
+            {randomEmoji1}{randomEmoji2}{randomEmoji3}
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed">
+            {randomJoke}
+          </h2>
+          <div class="text-gray-400 font-mono text-sm">
+            <!-- HOOK: Add technical details for that authentic dev feel -->
+            Error ID: #{errorCode} | Timestamp: {currentTime.split('T')[0]} | Source: reality.exe
+          </div>
+        </div>
+
+        <!-- HOOK: Debugging suggestions with humor -->
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+          
+          <!-- HOOK: Left panel - "Debugging Steps" -->
+          <div class="bg-gray-900/80 backdrop-blur rounded-2xl p-8 border border-gray-700">
+            <h3 class="text-xl font-bold text-yellow-400 mb-6 flex items-center gap-3">
+              🔧 Debugging Suggestions
+            </h3>
+            <ul class="text-gray-300 space-y-3 text-left">
+              <li class="flex items-start gap-3">
+                <span class="text-green-400 font-mono">></span>
+                Check your URL for typos (we've all been there)
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-green-400 font-mono">></span>
+                Clear your cache (the developer's duct tape)
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-green-400 font-mono">></span>
+                Try the navigation menu (it actually works)
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-green-400 font-mono">></span>
+                Blame it on the JavaScript (we won't judge)
+              </li>
+            </ul>
+          </div>
+
+          <!-- HOOK: Right panel - "Available Endpoints" -->
+          <div class="bg-gray-900/80 backdrop-blur rounded-2xl p-8 border border-gray-700">
+            <h3 class="text-xl font-bold text-blue-400 mb-6 flex items-center gap-3">
+              📡 Available Endpoints
+            </h3>
+            <div class="text-gray-300 space-y-3 text-left font-mono text-sm">
+              <div>
+                <span class="text-green-400">GET</span> 
+                <a href="/" class="text-blue-400 hover:text-blue-300 ml-2">/home</a>
+              </div>
+              <div>
+                <span class="text-green-400">GET</span> 
+                <a href="/blog" class="text-blue-400 hover:text-blue-300 ml-2">/blog</a>
+              </div>
+              <div>
+                <span class="text-green-400">GET</span> 
+                <a href="/tags" class="text-blue-400 hover:text-blue-300 ml-2">/tags</a>
+              </div>
+              <div>
+                <span class="text-green-400">GET</span> 
+                <a href="/about" class="text-blue-400 hover:text-blue-300 ml-2">/about</a>
+              </div>
+              <div>
+                <span class="text-red-400">GET</span> 
+                <span class="text-gray-500 ml-2">/your-page → 404</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOOK: Call-to-action buttons with data personality -->
+        <div class="flex flex-wrap gap-6 justify-center">
+          <a 
+            href="/"
+            class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-700 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            🏠 Return to Base
+          </a>
+          
+          <a 
+            href="/blog"
+            class="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-teal-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            📚 Browse Posts
+          </a>
+          
+          <a 
+            href="/tags"
+            class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            🏷️ Explore Tags
+          </a>
+        </div>
+
+        <!-- HOOK: Fun data fact or quote -->
+        <div class="mt-16 max-w-2xl mx-auto">
+          <div class="bg-yellow-400/10 border-2 border-yellow-400/30 rounded-2xl p-8">
+            <div class="text-4xl mb-4">💡</div>
+            <p class="text-yellow-200 text-lg font-medium mb-2">
+              Fun Data Fact While You're Here:
+            </p>
+            <p class="text-white text-lg">
+              <!-- HOOK: Rotate through different data facts -->
+              The average person creates 2.5 quintillion bytes of data every day. 
+              You just added a 404 error to that statistic. Thanks for contributing! 📊
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOOK: Terminal-style footer for that authentic dev experience -->
+      <div class="bg-black/80 rounded-2xl p-6 font-mono text-green-400 text-sm border border-green-500/30 max-w-2xl mx-auto">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+          <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+          <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+          <span class="ml-4 text-gray-400">terminal ~ 404_handler</span>
+        </div>
+        <div class="border-t border-green-500/30 pt-4">
+          <div class="animate-pulse">
+            $ investigating_404_error --verbose<br/>
+            └── user_action: random_click<br/>
+            └── result: page_not_found<br/>
+            └── recommendation: try_again_with_valid_url<br/>
+            └── status: <span class="text-red-400">DEBUGGING_REQUIRED</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Base>

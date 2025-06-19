@@ -73,15 +73,15 @@ const { threshold = 0.1, rootMargin = "100px", className = "" } = Astro.props;
   }
 </style>
 
-<script>
-  // Initialize lazy loading for all elements with the lazy-load class
+<script>  // Initialize lazy loading for all elements with the lazy-load class
   function initLazyLoad() {
     const lazyLoadElements = document.querySelectorAll('.lazy-load');
     
     if ('IntersectionObserver' in window) {
       lazyLoadElements.forEach(lazyElement => {
-        const threshold = parseFloat(lazyElement.dataset.threshold || 0.1);
-        const rootMargin = lazyElement.dataset.rootMargin || '100px';
+        const htmlElement = lazyElement as HTMLElement;
+        const threshold = parseFloat(htmlElement.dataset.threshold || '0.1');
+        const rootMargin = htmlElement.dataset.rootMargin || '100px';
         
         const observer = new IntersectionObserver(
           (entries, observer) => {
@@ -94,10 +94,9 @@ const { threshold = 0.1, rootMargin = "100px", className = "" } = Astro.props;
                 if (content) {
                   content.classList.remove('hidden');
                 }
-                
-                // Hide the placeholder
+                  // Hide the placeholder
                 if (placeholder) {
-                  placeholder.style.display = 'none';
+                  (placeholder as HTMLElement).style.display = 'none';
                 }
                 
                 // Stop observing once loaded
@@ -122,9 +121,8 @@ const { threshold = 0.1, rootMargin = "100px", className = "" } = Astro.props;
         if (content) {
           content.classList.remove('hidden');
         }
-        
-        if (placeholder) {
-          placeholder.style.display = 'none';
+          if (placeholder) {
+          (placeholder as HTMLElement).style.display = 'none';
         }
       });
     }

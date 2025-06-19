@@ -11,30 +11,50 @@ const featuredTools = tools.filter(tool => tool.data.featured);
 
 // SEO meta data
 const seoData = {
-  title: "Analytics Tools & Software - Data Strategy Resources",
-  description: "Explore powerful analytics tools, BI software recommendations, and strategic frameworks. Interactive calculators, assessment tools, and curated resources for data professionals.",
+  title: "Analytics Tools & Software - Trailblazer Data Strategy Resources",
+  description: "Explore powerful analytics tools, BI software recommendations, and strategic frameworks for trailblazers. Interactive calculators, assessment tools, and curated resources for data professionals. Find by topic!",
   image: "/og-image-tools.png"
 };
 ---
 
 <Base {...seoData}>
   <Navbar />
-  
-  <!-- Header Section -->
-  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
-    <div class="container mx-auto px-6">
+    <!-- Header Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 text-white py-20 relative overflow-hidden">
+    <!-- Creative Background Elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-brandGold rounded-full transform rotate-45 animate-pulse"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-brandGreen rounded-full transform -rotate-12 animate-bounce"></div>
+      <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-orange-400 rounded-full transform rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">
-          Analytics <span class="text-brandGold">Tools</span>
-        </h1>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-5xl">🛠️</span>
+          <h1 class="text-5xl md:text-6xl font-bold">
+            <span class="text-brandGold">Trailblazer</span> Analytics Tools
+          </h1>
+        </div>
         <p class="text-xl md:text-2xl text-gray-300 mb-8">
-          Powerful tools and frameworks to accelerate your data analytics journey.
+          Powerful tools and frameworks to accelerate your data analytics journey. Interactive calculators, assessment frameworks, and strategic planning tools - all designed for trailblazers.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
           <span class="bg-brandGreen/20 text-brandGreen px-4 py-2 rounded-full">Interactive Tools</span>
           <span class="bg-brandGold/20 text-brandGold px-4 py-2 rounded-full">Calculators</span>
           <span class="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full">Templates</span>
           <span class="bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full">Frameworks</span>
+        </div>
+        
+        <!-- Quick Topic Navigation -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <p class="text-brandGold font-semibold mb-4">🎯 Find Tools by Topic</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <a href="/tags/analytics-tools" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Analytics Tools</a>
+            <a href="/tags/calculators" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Calculators</a>
+            <a href="/tags/frameworks" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Frameworks</a>
+            <a href="/tags/assessment" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Assessment</a>
+          </div>
         </div>
       </div>
     </div>
@@ -80,8 +100,56 @@ const seoData = {
           </div>
         </div>
       </div>
-    </section>
-  )}
+    </section>  )}
+
+  <!-- Cross-link to Tags Experience -->
+  <section class="py-16 bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 left-20 w-16 h-16 bg-brandGold rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-10 right-10 w-20 h-20 bg-brandGreen rounded-full transform -rotate-12"></div>
+      <div class="absolute top-1/2 right-1/4 w-12 h-12 bg-purple-400 rounded-full transform rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-4xl">🛠️</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            <span class="inline-block transform -rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+              Browse by Topic
+            </span>
+          </h2>
+          <span class="bg-yellow-400 text-black px-3 py-2 rounded-full text-sm font-bold transform rotate-12">HOT</span>
+        </div>
+        
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+          Find tools, insights, and resources organized by topic.
+          <br />
+          <span class="text-brandGold font-semibold">
+            Tools are just the beginning - explore the full ecosystem.
+          </span>
+        </p>
+        
+        <!-- Tool-focused topic bubbles -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🛠️ Tools</span>
+          <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📊 Analytics</span>
+          <span class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">⚡ PowerBI</span>
+          <span class="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🐍 Python</span>
+          <span class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🗃️ SQL</span>
+        </div>
+        
+        <a 
+          href="/tags" 
+          class="inline-flex items-center gap-3 bg-brandGold hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+        >
+          Explore All Topics
+          <span class="transform rotate-12 text-xl">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- All Tools Grid -->
   <section class="py-16 bg-gray-50">

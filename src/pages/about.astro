@@ -5,142 +5,285 @@ import Footer from '../components/Footer.jsx';
 
 // SEO meta data
 const seoData = {
-  title: "About - Data & Analytics Professional | Thought Leadership & Tools",
-  description: "Learn about this analytics professional sharing insights, tools, and frameworks to help data professionals advance their careers. Practical resources for the modern data practitioner.",
+  title: "About the Analytics Trailblazer - Data Journey Navigator | Alexander Nykolaiszyn",
+  description: "Meet the human behind the trailblazing analytics journey. 15+ years of turning data chaos into business gold. Leading the charge in data-driven transformation and empowering analytics professionals.",
   image: "/og-image-about.png"
 };
 ---
 
 <Base {...seoData}>
   <Navbar />
-  
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
-    <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto text-center">        <div class="w-32 h-32 bg-brandGold rounded-full flex items-center justify-center mx-auto mb-6">
-          <span class="text-black font-bold text-4xl">AN</span>
+    <!-- Hero Section - Trailblazer Edition -->
+  <section class="relative bg-gradient-to-br from-purple-900 via-blue-900 to-pink-900 text-white py-20 overflow-hidden">
+    <!-- Creative Background Elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-20 left-10 w-24 h-24 bg-brandGold rounded-full transform rotate-45 animate-pulse"></div>
+      <div class="absolute top-40 right-20 w-32 h-32 bg-brandGreen rounded-full transform -rotate-12 animate-bounce"></div>
+      <div class="absolute bottom-20 left-1/3 w-20 h-20 bg-yellow-400 rounded-full transform rotate-12"></div>
+      <div class="absolute bottom-40 right-1/4 w-16 h-16 bg-pink-400 rounded-full transform -rotate-45"></div>
+      <div class="absolute top-1/2 left-1/2 w-28 h-28 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-30"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Creative Avatar -->
+        <div class="relative inline-block mb-8">
+          <div class="w-40 h-40 bg-gradient-to-br from-brandGold to-orange-500 rounded-full flex items-center justify-center transform hover:rotate-12 transition-all duration-500 shadow-2xl">
+            <span class="text-black font-black text-5xl">AN</span>
+          </div>
+          <div class="absolute -top-2 -right-2 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold transform rotate-12">
+            Analytics Trailblazer
+          </div>
         </div>
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">
-          Building <span class="text-brandGold">Analytics Careers</span>
-        </h1>        <p class="text-xl md:text-2xl text-gray-300 mb-8">
-          Manager Business Insights at Lennar | Host of Trailblazer Analytics Podcast | 15+ years transforming raw data into strategic business value through BI, automation, and AI integrations.
+
+        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+          <span class="inline-block transform -rotate-2 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+            Data Journey
+          </span>
+          <br />
+          <span class="inline-block transform rotate-1 bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-3 rounded-xl shadow-2xl mt-4">
+            Navigator
+          </span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+          15+ years turning spreadsheet nightmares into business gold.
+          <br />
+          <span class="text-brandGold font-semibold">
+            Leading the charge in data-driven transformation and empowering analytics professionals.
+          </span>
         </p>
+        
+        <!-- Rebel Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">15+</div>
+            <div class="text-xs text-gray-300 font-medium">YEARS REBELLING</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">∞</div>
+            <div class="text-xs text-gray-300 font-medium">COFFEE CUPS</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">100%</div>
+            <div class="text-xs text-gray-300 font-medium">ANTI-BORING</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 transform hover:scale-105 transition-all duration-300">
+            <div class="text-2xl font-bold text-brandGold">24/7</div>
+            <div class="text-xs text-gray-300 font-medium">CHAOS MODE</div>
+          </div>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🚀 Active Practitioner</span>
+          <span class="bg-pink-500/20 text-pink-300 px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎭 Creative Disruptor</span>
+          <span class="bg-orange-500/20 text-orange-300 px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">☕ Caffeine Powered</span>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- About Section -->
-  <section class="py-20 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">          <div>            <h2 class="text-3xl font-bold text-gray-900 mb-6">From Data Analyst to Business Insights Leader</h2>
-            <p class="text-lg text-gray-600 mb-6">
-              With over 15 years in business intelligence and analytics, I've evolved from a data analyst to a strategic business insights leader. My journey includes building BI capabilities from the ground up, leading enterprise-scale analytics transformations, and developing innovative solutions that bridge the gap between complex data and actionable business intelligence.
+  <!-- The Rebel Story -->
+  <section class="py-20 bg-white relative overflow-hidden">
+    <!-- Background chaos elements -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-brandGold/10 to-transparent rounded-full transform translate-x-32 -translate-y-32"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-brandGreen/10 to-transparent rounded-full transform -translate-x-24 translate-y-24"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div>            <h2 class="text-4xl font-black text-gray-900 mb-6">
+              <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                The Analytics Trailblazer Story
+              </span>
+            </h2>
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+              Started as a data analyst drowning in spreadsheets, evolved into a strategic business insights leader who refuses to make analytics boring. 
+              <span class="text-purple-600 font-semibold">Because life's too short for ugly dashboards and soul-crushing reports.</span>
             </p>
-            <p class="text-lg text-gray-600 mb-6">
-              Currently serving as Manager Business Insights at Lennar, I lead data strategy and analytics initiatives for one of the largest homebuilders in the United States. My approach combines deep technical expertise with business acumen, focusing on sustainable, scalable solutions that drive real business outcomes.
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+              Currently leading the charge in strategic business insights, where I'm transforming how organizations think about data one creative visualization at a time. 
+              <span class="text-brandGold font-semibold">Turns out, even the most complex data can be fun and engaging!</span>
             </p>
-            <p class="text-lg text-gray-600 mb-6">
-              Through the Trailblazer Analytics platform, I share practical insights, frameworks, and tools that help data professionals advance their careers and build better solutions. Every piece of content is grounded in real-world experience and designed to be immediately actionable in your day-to-day work.
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+              Through Trailblazer Analytics, I'm on a mission to prove that data work doesn't have to be dry, boring, or soul-crushing. 
+              <span class="text-brandGreen font-semibold">We're building a community of creative analytics trailblazers, one coffee-fueled insight at a time.</span>
             </p>
-            <div class="flex flex-wrap gap-4">
-              <span class="bg-brandGreen/10 text-brandGreen px-4 py-2 rounded-full font-semibold">Active Practitioner</span>
-              <span class="bg-brandGold/10 text-orange-700 px-4 py-2 rounded-full font-semibold">Thought Leadership</span>
-              <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-semibold">Practical Tools</span>
-            </div>
-          </div>            <div class="bg-gray-50 rounded-2xl p-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6">Current Focus</h3>
-            <div class="space-y-6">
-              <div class="border-l-4 border-brandGold pl-6">
-                <h4 class="text-lg font-semibold text-gray-900 mb-2">Manager Business Insights - Data at Lennar</h4>
-                <p class="text-gray-600 text-sm mb-2">March 2025 - Present | Miami, Florida</p>
-                <p class="text-gray-600">Leading data insights and business intelligence initiatives for one of the largest homebuilders in the United States.</p>
-              </div>
-              
-              <div class="border-l-4 border-brandGreen pl-6">
-                <h4 class="text-lg font-semibold text-gray-900 mb-2">Data & Analytics Host @ Trailblazer Analytics</h4>
-                <p class="text-gray-600 text-sm mb-2">January 2025 - Present | Podcast & Content Platform</p>
-                <p class="text-gray-600">Continuing my expertise sharing as a Data & Analytics thought leader through online content and podcast discussions.</p>
-              </div>
+            
+            <!-- Personality Badges -->
+            <div class="flex flex-wrap gap-3 mb-8">
+              <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-semibold transform hover:scale-110 transition-all duration-300">🎨 Creative Disruptor</span>
+              <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full font-semibold transform hover:scale-110 transition-all duration-300">☕ Coffee Addict</span>
+              <span class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded-full font-semibold transform hover:scale-110 transition-all duration-300">🚀 Practical Visionary</span>
             </div>
           </div>
           
-          <div class="bg-gray-50 rounded-2xl p-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6">Areas of Focus</h3>
-            <div class="space-y-4">
-              <div class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-brandGreen rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-gray-900">Analytics Strategy & Architecture</h4>
-                  <p class="text-gray-600 text-sm">Frameworks for building scalable analytics capabilities and data strategies</p>
-                </div>
+          <!-- Current Mission -->
+          <div class="bg-gradient-to-br from-brandGreen/20 to-blue-200 rounded-2xl p-8 transform hover:scale-105 transition-all duration-300">
+            <h3 class="text-2xl font-black text-gray-900 mb-6">
+              <span class="flex items-center gap-3">
+                🎯 Current Mission
+                <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold animate-pulse">LIVE</span>
+              </span>
+            </h3>
+            <div class="space-y-6">
+              <div class="bg-white/50 rounded-xl p-6 transform hover:rotate-1 transition-all duration-300">
+                <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <span class="text-2xl">🏗️</span>
+                  Manager Business Insights @ Lennar
+                </h4>
+                <p class="text-gray-600 text-sm mb-2">March 2025 - Present | Miami, Florida</p>
+                <p class="text-gray-700">Disrupting the homebuilding industry with creative data solutions and strategic insights that actually make sense.</p>
               </div>
               
-              <div class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-brandGreen rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-gray-900">Career Development in Analytics</h4>
-                  <p class="text-gray-600 text-sm">Insights on advancing your career as a data professional</p>
-                </div>
-              </div>
-              
-              <div class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-brandGreen rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-gray-900">Practical Tools & Frameworks</h4>
-                  <p class="text-gray-600 text-sm">Ready-to-use resources for analytics professionals</p>
-                </div>
-              </div>
-              
-              <div class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-brandGreen rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-gray-900">Industry Insights & Trends</h4>
-                  <p class="text-gray-600 text-sm">Analysis of emerging trends in data and analytics</p>
-                </div>
+              <div class="bg-white/50 rounded-xl p-6 transform hover:-rotate-1 transition-all duration-300">
+                <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
+                  <span class="text-2xl">🎙️</span>
+                  Analytics Rebel @ Trailblazer Analytics
+                </h4>
+                <p class="text-gray-600 text-sm mb-2">January 2025 - Present | The Internet</p>
+                <p class="text-gray-700">Leading the rebellion against boring analytics through creative content, podcasts, and community building.</p>
               </div>
             </div>
+          </div>
+        </div>
+        
+        <!-- The Rebel's Focus Areas -->
+        <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:rotate-1">
+            <div class="text-4xl mb-4">🚀</div>
+            <h4 class="font-bold mb-2">Strategy & Architecture</h4>
+            <p class="text-sm opacity-90">Building scalable analytics that don't suck</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:-rotate-1">
+            <div class="text-4xl mb-4">💼</div>
+            <h4 class="font-bold mb-2">Career Rebellion</h4>
+            <p class="text-sm opacity-90">Advancing careers without losing your soul</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:rotate-1">
+            <div class="text-4xl mb-4">🛠️</div>
+            <h4 class="font-bold mb-2">Practical Magic</h4>
+            <p class="text-sm opacity-90">Tools and frameworks that actually work</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl p-6 text-white transform hover:scale-105 transition-all duration-300 hover:-rotate-1">
+            <div class="text-4xl mb-4">🔮</div>
+            <h4 class="font-bold mb-2">Future Insights</h4>
+            <p class="text-sm opacity-90">Trend analysis that's not just buzzwords</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Philosophy Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-6">      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">Content Philosophy</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="bg-white rounded-xl p-8 shadow-lg">
-            <div class="w-16 h-16 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Immediately Actionable</h3>
-            <p class="text-gray-600">
-              Every piece of content is designed to be directly applicable to your current work. No fluff, just practical insights you can use today.
+  <!-- The Rebel's Manifesto -->
+  <section class="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 text-white relative overflow-hidden">
+    <!-- Background chaos elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 left-10 w-24 h-24 bg-brandGold rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-20 right-20 w-32 h-32 bg-brandGreen rounded-full transform -rotate-12"></div>
+      <div class="absolute top-1/2 left-1/2 w-20 h-20 bg-pink-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-black mb-8">
+          <span class="inline-block transform -rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+            The Rebel's Manifesto
+          </span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-12 leading-relaxed">
+          Why we do what we do (and why boring analytics must die)
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 transform hover:scale-105 transition-all duration-300 hover:rotate-1">
+            <div class="text-5xl mb-6">⚡</div>
+            <h3 class="text-xl font-bold mb-4 text-brandGold">Immediately Usable</h3>
+            <p class="text-gray-300 leading-relaxed">
+              No academic theory BS. Everything here is battle-tested in real trenches. 
+              <span class="text-white font-semibold">If you can't use it Monday morning, it doesn't belong here.</span>
             </p>
           </div>
           
-          <div class="bg-white rounded-xl p-8 shadow-lg">
-            <div class="w-16 h-16 bg-brandGold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 transform hover:scale-105 transition-all duration-300 hover:-rotate-1">
+            <div class="text-5xl mb-6">🎯</div>
+            <h3 class="text-xl font-bold mb-4 text-brandGold">Practitioner First</h3>
+            <p class="text-gray-300 leading-relaxed">
+              Written by someone who's still in the data trenches daily. 
+              <span class="text-white font-semibold">Real problems, real solutions, zero consultant fluff.</span>
+            </p>
+          </div>
+          
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 transform hover:scale-105 transition-all duration-300 hover:rotate-1">
+            <div class="text-5xl mb-6">🎨</div>
+            <h3 class="text-xl font-bold mb-4 text-brandGold">Creatively Chaotic</h3>
+            <p class="text-gray-300 leading-relaxed">
+              Analytics doesn't have to be boring spreadsheets and corporate beige. 
+              <span class="text-white font-semibold">Let's make data beautiful, fun, and rebelliously effective.</span>
+            </p>
+          </div>
+        </div>
+        
+        <!-- The Mission Statement -->
+        <div class="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl p-8 border border-purple-400/30">
+          <h3 class="text-2xl font-bold mb-4 text-brandGold">The Mission</h3>
+          <p class="text-lg text-gray-300 leading-relaxed">
+            To prove that analytics can be creative, engaging, and soul-fulfilling. 
+            To build a community where data professionals can grow without losing their humanity. 
+            To rebel against the boring, corporate, soul-crushing approach to data work.
+            <br /><br />
+            <span class="text-white font-bold text-xl">Because life's too short for ugly dashboards.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-link to Tags Experience -->
+  <section class="py-16 bg-white relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-brandGold/10 to-transparent rounded-full transform translate-x-32 -translate-y-32"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-brandGreen/10 to-transparent rounded-full transform -translate-x-24 translate-y-24"></div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-4xl">🏷️</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            <span class="inline-block transform rotate-1 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Explore the Chaos
+            </span>
+          </h2>
+          <span class="bg-yellow-400 text-black px-3 py-2 rounded-full text-sm font-bold transform -rotate-12">HOT</span>
+        </div>
+        
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          Want to see how we organize this beautiful chaos? 
+          <br />
+          <span class="text-purple-600 font-semibold">
+            Check out our most creative content discovery experience!
+          </span>
+        </p>
+        
+        <!-- Sample topic bubbles -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🚀 Career</span>
+          <span class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎯 Strategy</span>
+          <span class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🛠️ Tools</span>
+          <span class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🔥 Insights</span>
+        </div>
+        
+        <a 
+          href="/tags" 
+          class="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+        >
+          Dive Into Topics
+          <span class="transform rotate-12 text-xl">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
               <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
               </svg>

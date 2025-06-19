@@ -116,15 +116,13 @@ const displayContent = await Promise.all(finalContentList.map(async ({ item, sco
       {displayContent.map(({ item, imageSrc }) => (
         <a href={`/${contentType}/${item.slug}`} class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
           {imageSrc && ( // Use the resolved imageSrc
-            <div class="relative h-40 w-full overflow-hidden">
-              <OptimizedImage
+            <div class="relative h-40 w-full overflow-hidden">              <OptimizedImage
                 src={imageSrc}
                 alt={item.data.title}
-                width={400} // Example width, adjust as needed
-                height={225} // Example height, adjust for aspect ratio
+                width={400}
+                height={225}
                 class="object-cover w-full h-full"
-                // Pass 'avif', 'webp' to prioritize, or let OptimizedImage use defaults from astro.config
-                // format="webp" 
+                format="webp"
               />
             </div>
           )}

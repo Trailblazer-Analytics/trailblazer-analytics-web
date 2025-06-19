@@ -1,0 +1,244 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.jsx';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  
+  // HOOK: Extract all unique tags for static generation
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+    return uniqueTags.map((tag: string) => ({
+    params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+    props: { tag, allPosts }
+  }));
+}
+
+type Props = {
+  tag: string;
+  allPosts: CollectionEntry<'blog'>[];
+};
+
+const { tag, allPosts } = Astro.props as Props;
+
+// HOOK: Filter posts by current tag, sort by date (newest first)
+const taggedPosts = allPosts.filter(post => 
+  post.data.tags?.some(t => t.toLowerCase().replace(/\s+/g, '-') === Astro.params.tag)
+).sort((a, b) => {
+  // HOOK: Handle both date and publishDate fields
+  const dateA = new Date(a.data.date || a.data.publishDate || 0);
+  const dateB = new Date(b.data.date || b.data.publishDate || 0);
+  return dateB.getTime() - dateA.getTime();
+});
+
+// HOOK: Tag personality system - customize these to match your vibe
+const tagPersonalities = {
+  'analytics': { emoji: '📊', color: 'from-blue-600 to-indigo-700', vibe: 'analytical genius mode' },
+  'data': { emoji: '🔢', color: 'from-green-500 to-teal-600', vibe: 'swimming in numbers' },
+  'sql': { emoji: '🗃️', color: 'from-gray-600 to-gray-800', vibe: 'query wizard energy' },
+  'python': { emoji: '🐍', color: 'from-yellow-500 to-orange-600', vibe: 'snake charmer vibes' },
+  'bi': { emoji: '💡', color: 'from-purple-500 to-pink-600', vibe: 'illuminating insights' },
+  'powerbi': { emoji: '⚡', color: 'from-yellow-400 to-red-500', vibe: 'Microsoft magic' },
+  'tableau': { emoji: '📈', color: 'from-blue-500 to-purple-600', vibe: 'viz master mode' },
+  'strategy': { emoji: '🎯', color: 'from-red-500 to-pink-600', vibe: 'big picture thinking' },
+  'career': { emoji: '🚀', color: 'from-indigo-500 to-purple-700', vibe: 'growth mindset activated' },
+  'tools': { emoji: '🛠️', color: 'from-gray-500 to-blue-600', vibe: 'toolkit explorer' },
+  'rant': { emoji: '🔥', color: 'from-red-600 to-orange-700', vibe: 'truth bomb incoming' },
+  'story': { emoji: '📚', color: 'from-emerald-500 to-teal-600', vibe: 'storytelling mode' },
+  'insight': { emoji: '💭', color: 'from-cyan-500 to-blue-600', vibe: 'eureka moment' }
+};
+
+function getTagPersonality(tagName: string) {
+  const key = tagName.toLowerCase();
+  return tagPersonalities[key] || { 
+    emoji: '🏷️', 
+    color: 'from-gray-500 to-gray-700', 
+    vibe: 'exploring the unknown' 
+  };
+}
+
+const personality = getTagPersonality(tag);
+
+// HOOK: Format date with personality
+function formatDate(dateString: string | Date | null | undefined): string {
+  if (!dateString) return 'Date TBD';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+}
+
+// HOOK: Format reading time helper to handle both strings and numbers
+function formatReadingTime(readingTime: string | number | undefined): string | null {
+  if (!readingTime) return null;
+  if (typeof readingTime === 'string') return readingTime;
+  return `${readingTime} min read`;
+}
+---
+
+<Base 
+  title={`${tag} Posts | Raw Data Insights`}
+  description={`Deep dive into ${tag} - unfiltered thoughts, insights, and occasionally brilliant observations`}
+>
+  <Navbar />
+  
+  <!-- HOOK: Raw, personality-driven tag page -->
+  <div class={`min-h-screen bg-gradient-to-br ${personality.color}`}>
+    <div class="container mx-auto px-4 py-16">
+      
+      <!-- HOOK: Header with serious personality -->
+      <div class="text-center mb-16">
+        <div class="text-8xl mb-6 drop-shadow-lg">{personality.emoji}</div>
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-lg">
+          <span class="bg-white/20 backdrop-blur px-8 py-4 rounded-2xl border-2 border-white/30">
+            #{tag}
+          </span>
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-4 font-medium">
+          <!-- HOOK: Dynamic personality-based descriptions -->
+          Currently in <span class="text-yellow-300 font-bold">{personality.vibe}</span>
+        </p>
+        <p class="text-lg text-white/80 mb-8">
+          Found {taggedPosts.length} post{taggedPosts.length !== 1 ? 's' : ''} where the vibes align perfectly.
+        </p>
+        
+        <!-- HOOK: Navigation with style -->
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a 
+            href="/tags" 
+            class="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-6 py-3 rounded-xl text-white font-semibold hover:bg-white/30 transition-all border border-white/30"
+          >
+            ← All Tags
+          </a>
+          <a 
+            href="/blog" 
+            class="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-6 py-3 rounded-xl text-white font-semibold hover:bg-white/30 transition-all border border-white/30"
+          >
+            All Posts →
+          </a>
+        </div>
+      </div>
+
+      <!-- HOOK: Post cards with handmade, organic styling -->
+      <div class="space-y-8 md:space-y-12">
+        {taggedPosts.length === 0 ? (
+          <!-- HOOK: Empty state with personality -->
+          <div class="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-12 text-center border-4 border-white/50">
+            <div class="text-6xl mb-6">🤷‍♂️</div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              No posts found for this tag yet!
+            </h3>
+            <p class="text-gray-600 text-lg mb-8">
+              Looks like this corner of the internet is still under construction. 
+              Check back later for some spicy content!
+            </p>
+            <a 
+              href="/blog" 
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all"
+            >
+              Browse All Posts Instead
+            </a>
+          </div>
+        ) : (
+          taggedPosts.map((post, index) => {
+            const rotation = (index % 2 === 0) ? 'md:rotate-1' : 'md:-rotate-1';
+            const bgColor = index % 3 === 0 ? 'bg-white' : index % 3 === 1 ? 'bg-yellow-50' : 'bg-blue-50';
+            
+            return (
+              <article class={`
+                ${bgColor} rounded-3xl shadow-xl p-8 md:p-12 transform transition-all duration-300
+                hover:shadow-2xl hover:scale-105 border-4 border-gray-100 hover:border-gray-200
+                ${rotation}
+              `}>
+                <div class="flex flex-col md:flex-row md:items-start gap-6">                  <!-- HOOK: Post metadata with personality -->
+                  <div class="md:w-32 flex-shrink-0">
+                    <div class="text-sm text-gray-500 font-medium mb-2">
+                      {formatDate(post.data.date || post.data.publishDate)}
+                    </div>
+                    {post.data.vibe && (
+                      <div class="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold mb-2">
+                        {post.data.vibe}
+                      </div>                    )}
+                    {post.data.readingTime && (
+                      <div class="text-xs text-gray-500">
+                        📖 {formatReadingTime(post.data.readingTime)}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <!-- HOOK: Post content -->
+                  <div class="flex-1">
+                    <h3 class="text-2xl md:text-3xl font-black text-gray-800 mb-4 leading-tight">
+                      <a 
+                        href={`/blog/${post.slug}`}
+                        class="hover:text-blue-600 transition-colors"
+                      >
+                        {post.data.title}
+                      </a>
+                    </h3>
+                    
+                    {post.data.description && (
+                      <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        {post.data.description}
+                      </p>
+                    )}
+                    
+                    <!-- HOOK: Tag display -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                      {post.data.tags?.map(postTag => (
+                        <a
+                          href={`/tags/${postTag.toLowerCase().replace(/\s+/g, '-')}`}
+                          class={`
+                            px-3 py-1 rounded-full text-sm font-semibold transition-all
+                            ${postTag === tag 
+                              ? 'bg-blue-600 text-white' 
+                              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                            }
+                          `}
+                        >
+                          #{postTag}
+                        </a>
+                      ))}
+                    </div>
+                    
+                    <!-- HOOK: Read more CTA -->
+                    <a 
+                      href={`/blog/${post.slug}`}
+                      class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors text-lg"
+                    >
+                      Read the full story
+                      <span class="transform transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        )}
+      </div>
+
+      <!-- HOOK: Bottom CTA with personality -->
+      <div class="mt-16 text-center">
+        <div class="bg-white/20 backdrop-blur rounded-3xl p-8 border-2 border-white/30">
+          <h3 class="text-2xl font-bold text-white mb-4">
+            Enjoyed diving into #{tag}?
+          </h3>
+          <p class="text-white/90 mb-6">
+            There's more where that came from. The rabbit hole goes deeper.
+          </p>
+          <a 
+            href="/tags" 
+            class="inline-flex items-center gap-2 bg-white text-gray-800 px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all"
+          >
+            🏷️ Explore More Tags
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Base>

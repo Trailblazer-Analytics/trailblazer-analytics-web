@@ -12,30 +12,50 @@ const caseStudies = await getCollection('case-studies');
 
 // SEO data
 const seoData = {
-  title: "Resources - Analytics Tools, Downloads & Research",
-  description: "Comprehensive collection of free analytics tools, white papers, case studies, and downloadable resources for data professionals and business leaders.",
+  title: "Resources - Trailblazer Analytics Tools, Downloads & Research",
+  description: "Comprehensive collection of free analytics tools, white papers, case studies, and downloadable resources for data trailblazers and business leaders. Find everything by topic!",
   image: "/og-image-resources.png"
 };
 ---
 
 <Base {...seoData}>
   <Navbar />
-  
-  <!-- Header Section -->
-  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
-    <div class="container mx-auto px-6">
+    <!-- Header Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 text-white py-20 relative overflow-hidden">
+    <!-- Creative Background Elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-brandGold rounded-full transform rotate-45 animate-pulse"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-brandGreen rounded-full transform -rotate-12 animate-bounce"></div>
+      <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-pink-400 rounded-full transform rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">
-          <span class="text-brandGold">Resources</span>
-        </h1>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-5xl">📚</span>
+          <h1 class="text-5xl md:text-6xl font-bold">
+            <span class="text-brandGold">Trailblazer</span> Resources
+          </h1>
+        </div>
         <p class="text-xl md:text-2xl text-gray-300 mb-8">
-          Everything you need to excel in analytics and business intelligence. Free tools, guides, research, and real-world case studies.
+          Everything you need to blaze your own analytics trail. Free tools, guides, research, and real-world insights - all designed to make your data journey more exciting and successful.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span class="bg-brandGreen/20 text-brandGreen px-4 py-2 rounded-full">Free Downloads</span>
-          <span class="bg-brandGold/20 text-brandGold px-4 py-2 rounded-full">Research Papers</span>
-          <span class="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full">Case Studies</span>
-          <span class="bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full">Analytics Tools</span>
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          <span class="bg-green-500/20 text-green-400 px-4 py-2 rounded-full">✓ Free Downloads</span>
+          <span class="bg-brandGold/20 text-brandGold px-4 py-2 rounded-full">✓ Research Papers</span>
+          <span class="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full">✓ Case Studies</span>
+          <span class="bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full">✓ Analytics Tools</span>
+        </div>
+        
+        <!-- Quick Topic Navigation -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <p class="text-brandGold font-semibold mb-4">🎯 Browse by Topic</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <a href="/tags/analytics" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Analytics</a>
+            <a href="/tags/business-intelligence" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">BI</a>
+            <a href="/tags/data-strategy" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Strategy</a>
+            <a href="/tags/tools" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Tools</a>
+          </div>
         </div>
       </div>
     </div>
@@ -120,11 +140,10 @@ const seoData = {
   <!-- YouTube Section -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">🎥 YouTube Channel</h2>
-          <p class="text-lg text-gray-600">Video tutorials, insights, and analytics content delivered weekly</p>
-        </div>
+      <div class="max-w-6xl mx-auto">          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">🎥 Trailblazer YouTube</h2>
+            <p class="text-lg text-gray-600">Video tutorials, insights, and analytics content for the trailblazing community</p>
+          </div>
         
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <!-- YouTube Info -->
@@ -306,29 +325,85 @@ const seoData = {
       </div>
     </section>
   )}
-
   <!-- CTA Section -->
-  <section class="py-16 bg-gradient-to-r from-brandGold to-yellow-600">
-    <div class="container mx-auto px-6">
+  <section class="py-16 bg-gradient-to-r from-brandGold via-yellow-500 to-orange-500 relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-10 left-10 w-16 h-16 bg-white rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-10 right-10 w-20 h-20 bg-white rounded-full transform -rotate-12"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-black mb-4">Need Custom Analytics Solutions?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">🚀 Ready to Blaze Your Own Trail?</h2>
         <p class="text-black text-opacity-80 mb-8 text-lg">
-          Looking for tailored analytics strategies, custom implementations, or strategic consulting? Let's discuss your specific needs.
+          Looking for tailored analytics strategies, custom implementations, or strategic consulting? Let's discuss how we can accelerate your data journey together.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
             href="/connect"
-            class="bg-black text-brandGold font-semibold px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+            class="bg-black text-brandGold font-semibold px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors inline-flex items-center gap-2"
           >
+            <span>🎯</span>
             Get In Touch
           </a>
           <a 
             href="/support"
-            class="border-2 border-black text-black font-semibold px-8 py-3 rounded-lg hover:bg-black hover:text-brandGold transition-colors"
+            class="border-2 border-black text-black font-semibold px-8 py-3 rounded-lg hover:bg-black hover:text-brandGold transition-colors inline-flex items-center gap-2"
           >
+            <span>☕</span>
             Support This Work
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-link to Tags Experience -->
+  <section class="py-16 bg-gradient-to-br from-green-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-brandGold rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-brandGreen rounded-full transform -rotate-12"></div>
+      <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-20"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-4xl">🎯</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            <span class="inline-block transform rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+              Find by Topic
+            </span>
+          </h2>
+          <span class="bg-yellow-400 text-black px-3 py-2 rounded-full text-sm font-bold transform -rotate-12">HOT</span>
+        </div>
+        
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+          Navigate our entire resource library by topic.
+          <br />
+          <span class="text-brandGold font-semibold">
+            From tools to insights to white papers - discover everything through our beautiful topic explorer.
+          </span>
+        </p>
+        
+        <!-- Resource-focused topic bubbles -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📚 Resources</span>
+          <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📊 Analytics</span>
+          <span class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🛠️ Tools</span>
+          <span class="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎯 Strategy</span>
+          <span class="bg-gradient-to-r from-yellow-400 to-green-500 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📈 BI</span>
+        </div>
+        
+        <a 
+          href="/tags" 
+          class="inline-flex items-center gap-3 bg-brandGold hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+        >
+          Explore Topics
+          <span class="transform rotate-12 text-xl">→</span>
+        </a>
       </div>
     </div>
   </section>

@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.jsx';
+import CaseStudyCard from '../../components/CaseStudyCard.jsx';
+
+// HOOK: Fetch all case studies and sort by date
+const allCaseStudies = await getCollection('case-studies');
+const sortedCaseStudies = allCaseStudies.sort((a, b) => {
+  const dateA = new Date(a.data.date || 0);
+  const dateB = new Date(b.data.date || 0);
+  return dateB.getTime() - dateA.getTime(); // Newest first
+});
+
+// HOOK: Extract featured case studies for special treatment
+const featuredCaseStudies = sortedCaseStudies.filter(caseStudy => caseStudy.data.featured);
+const regularCaseStudies = sortedCaseStudies.filter(caseStudy => !caseStudy.data.featured);
+
+// HOOK: Get popular industries for filtering
+const allIndustries = [...new Set(allCaseStudies
+  .map(caseStudy => caseStudy.data.industry)
+  .filter(Boolean)
+)];
+---
+
+<Base title="Case Studies | Trailblazer Analytics" 
+      description="Explore our real-world analytics implementations and data transformation success stories. Learn how we help organizations unlock insights from their data.">
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <Navbar />
+    
+    <main class="pt-16">
+      <!-- HOOK: Hero section - customize your case studies introduction -->
+      <section class="bg-gradient-to-br from-brandGreen to-brandGold py-16">
+        <div class="container mx-auto px-6">
+          <div class="max-w-4xl mx-auto text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+              Real-World Success Stories
+            </h1>
+            <p class="text-xl md:text-2xl text-white/90 mb-8">
+              Discover how organizations transformed their data into actionable insights with our proven analytics solutions.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+              {allIndustries.slice(0, 5).map(industry => (
+                <span class="px-4 py-2 bg-white/20 rounded-full text-sm font-medium backdrop-blur-sm">
+                  {industry}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOOK: Featured case studies section -->
+      {featuredCaseStudies.length > 0 && (
+        <section class="py-16 bg-white dark:bg-gray-800">
+          <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Featured Case Studies
+              </h2>
+              <p class="text-xl text-gray-600 dark:text-gray-400">
+                Our most impactful data transformation projects
+              </p>
+            </div>            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">              {featuredCaseStudies.map(caseStudy => (
+                <CaseStudyCard
+                  title={caseStudy.data.title}
+                  summary={caseStudy.data.summary || caseStudy.data.description}
+                  client={caseStudy.data.client}
+                  industry={caseStudy.data.industry}
+                  date={caseStudy.data.date}
+                  slug={caseStudy.slug}
+                  results={caseStudy.data.results}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- HOOK: All case studies grid -->
+      <section class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              All Case Studies
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400">
+              Browse our complete portfolio of analytics implementations
+            </p>
+          </div>
+          
+          <!-- HOOK: Case studies grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">            {regularCaseStudies.map(caseStudy => (
+              <CaseStudyCard
+                title={caseStudy.data.title}
+                summary={caseStudy.data.summary || caseStudy.data.description}
+                client={caseStudy.data.client}
+                industry={caseStudy.data.industry}
+                date={caseStudy.data.date}
+                slug={caseStudy.slug}
+                results={caseStudy.data.results}
+              />
+            ))}
+          </div>
+
+          <!-- HOOK: Empty state if no case studies -->
+          {allCaseStudies.length === 0 && (
+            <div class="text-center py-16">
+              <div class="text-6xl mb-4">📊</div>
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Case Studies Coming Soon
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+                We're currently documenting our latest success stories. Check back soon for detailed case studies of our data transformation projects.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <!-- HOOK: CTA section -->
+      <section class="py-16 bg-brandGreen">
+        <div class="container mx-auto px-6 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Create Your Success Story?
+          </h2>
+          <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Let's discuss how we can help transform your data into actionable insights and measurable business value.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" 
+               class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-medium rounded-md text-brandGreen bg-white hover:bg-gray-50 transition-colors">
+              Start Your Project
+            </a>
+            <a href="/services" 
+               class="inline-flex items-center px-8 py-3 border-2 border-white text-lg font-medium rounded-md text-white hover:bg-white hover:text-brandGreen transition-colors">
+              View Our Services
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</Base>

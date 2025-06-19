@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
-pnpm-lock.yaml
+# Ignore npm lock file if accidentally created
+package-lock.json
+# Keep pnpm-lock.yaml for reproducible builds
 
 # Production
 dist/

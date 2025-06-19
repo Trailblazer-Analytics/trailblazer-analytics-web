@@ -231,18 +231,17 @@ const seoData = {
     const errorMessage = document.getElementById('error-message');
     const errorText = document.getElementById('error-text');
     
-    if (form) {
-      form.addEventListener('submit', async function(e) {
+    if (form) {      form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Check honeypot for spam protection
-        const honeypot = form.querySelector('input[name="honeypot"]');
+        const honeypot = form.querySelector('input[name="honeypot"]') as HTMLInputElement;
         if (honeypot && honeypot.value) {
           return; // Likely spam, ignore submission
         }
         
         // Show loading state
-        submitBtn.disabled = true;
+        (submitBtn as HTMLButtonElement).disabled = true;
         submitText.classList.add('hidden');
         submitLoading.classList.remove('hidden');
         
@@ -253,7 +252,7 @@ const seoData = {
         
         try {
           // Collect form data
-          const formData = new FormData(form);
+          const formData = new FormData(form as HTMLFormElement);
           const data = Object.fromEntries(formData);
           
           // Submit to API
@@ -271,7 +270,7 @@ const seoData = {
             // Success
             successMessage.classList.remove('hidden');
             formMessages.classList.remove('hidden');
-            form.reset();
+            (form as HTMLFormElement).reset();
           } else {
             // Error
             errorText.textContent = result.error || 'Something went wrong. Please try again.';
@@ -285,7 +284,7 @@ const seoData = {
           formMessages.classList.remove('hidden');
         } finally {
           // Reset button state
-          submitBtn.disabled = false;
+          (submitBtn as HTMLButtonElement).disabled = false;
           submitText.classList.remove('hidden');
           submitLoading.classList.add('hidden');
         }

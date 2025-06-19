@@ -5,28 +5,57 @@ import Footer from '../components/Footer.jsx';
 ---
 
 <Base
-  title="YouTube Channel - Trailblazer Analytics" 
-  description="Watch analytics tutorials, data strategy insights, and business intelligence content on the Trailblazer Analytics YouTube channel."
+  title="YouTube Channel - Trailblazer Analytics Community" 
+  description="Watch analytics tutorials, data strategy insights, and business intelligence content on the Trailblazer Analytics YouTube channel. Join our community of data trailblazers! Find videos by topic."
 >
   <Navbar />
-  
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-24">
-    <div class="container mx-auto px-6">
+    <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-red-900 to-gray-900 text-white py-24 relative overflow-hidden">
+    <!-- Creative Background Elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-red-500 rounded-full transform rotate-45 animate-pulse"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-brandGold rounded-full transform -rotate-12 animate-bounce"></div>
+      <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-pink-400 rounded-full transform rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
         <div class="flex items-center justify-center gap-4 mb-6">
           <svg class="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 24 24">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
-          <h1 class="text-5xl font-bold">YouTube Channel</h1>
+          <h1 class="text-5xl font-bold">
+            <span class="text-red-500">Trailblazer</span> YouTube
+          </h1>
         </div>
         <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-          Join me on YouTube for in-depth analytics tutorials, data strategy insights, and practical business intelligence content. 
-          From beginner-friendly guides to advanced techniques, there's something for every level of analytics professional.
+          Join our community of data trailblazers on YouTube! In-depth analytics tutorials, data strategy insights, and practical business intelligence content. 
+          From beginner-friendly guides to advanced techniques - we're blazing the trail together.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        
+        <!-- Channel Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-red-400">50+</div>
+            <div class="text-sm text-gray-400">Videos</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-brandGold">Weekly</div>
+            <div class="text-sm text-gray-400">New Content</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-brandGreen">2K+</div>
+            <div class="text-sm text-gray-400">Subscribers</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="text-2xl font-bold text-purple-400">100%</div>
+            <div class="text-sm text-gray-400">Free</div>
+          </div>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <a 
-            href="https://www.youtube.com/@trailblazeranalytics" 
+            href="https://www.youtube.com/@trailblazeranalytics?sub_confirmation=1" 
             target="_blank" 
             rel="noopener noreferrer"
             class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-lg hover:bg-red-700 transition-colors font-semibold text-lg"
@@ -34,7 +63,7 @@ import Footer from '../components/Footer.jsx';
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
             </svg>
-            Subscribe to Channel
+            Subscribe & Ring the Bell 🔔
           </a>
           <a 
             href="https://www.youtube.com/@trailblazeranalytics/videos" 
@@ -47,6 +76,18 @@ import Footer from '../components/Footer.jsx';
             </svg>
             Browse All Videos
           </a>
+        </div>
+        
+        <!-- Quick Topic Navigation -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <p class="text-brandGold font-semibold mb-4">🎯 Find Videos by Topic</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <a href="/tags/tutorials" class="bg-gradient-to-r from-red-500 to-pink-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Tutorials</a>
+            <a href="/tags/power-bi" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Power BI</a>
+            <a href="/tags/excel" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Excel</a>
+            <a href="/tags/sql" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">SQL</a>
+            <a href="/tags/data-strategy" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Strategy</a>
+          </div>
         </div>
       </div>
     </div>
@@ -179,7 +220,7 @@ import Footer from '../components/Footer.jsx';
           <div class="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-2xl border border-teal-100">
             <div class="w-12 h-12 bg-teal-600 rounded-lg flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
               </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-3">Case Studies</h3>
@@ -217,17 +258,90 @@ import Footer from '../components/Footer.jsx';
     </div>
   </section>
 
-  <!-- Call to Action -->
-  <section class="py-16 bg-gray-900 text-white">
-    <div class="container mx-auto px-6">
+  <!-- Cross-link to Tags Experience -->
+  <section class="py-16 bg-gradient-to-br from-red-900 via-purple-900 to-blue-900 text-white relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-brandGold rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-red-500 rounded-full transform -rotate-12"></div>
+      <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-pink-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-20"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-6">Ready to Level Up Your Analytics Skills?</h2>
-        <p class="text-xl text-gray-300 mb-8">
-          Subscribe to the channel and turn on notifications to never miss new content.
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-4xl">🎯</span>
+          <h2 class="text-4xl md:text-5xl font-black">
+            <span class="inline-block transform rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
+              Find Videos by Topic
+            </span>
+          </h2>
+        </div>
+        
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+          Navigate our entire video library by topic and skill level.
+          <br />
+          <span class="text-brandGold font-semibold">
+            From Power BI tutorials to data strategy deep-dives - find exactly what you need.
+          </span>
+        </p>
+        
+        <!-- Video-focused topic bubbles -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="bg-gradient-to-r from-red-500 to-pink-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎥 Tutorials</span>
+          <span class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">⚡ Power BI</span>
+          <span class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">📊 Excel</span>
+          <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🗃️ SQL</span>
+          <span class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🎯 Strategy</span>
+        </div>
+        
+        <a 
+          href="/tags" 
+          class="inline-flex items-center gap-3 bg-brandGold hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+        >
+          Explore Video Topics
+          <span class="transform rotate-12 text-xl">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- Call to Action -->
+  <section class="py-16 bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 text-white relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-10 left-10 w-16 h-16 bg-white rounded-full transform rotate-45"></div>
+      <div class="absolute bottom-10 right-10 w-20 h-20 bg-white rounded-full transform -rotate-12"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">🚀 Ready to Join the Trailblazer Community?</h2>
+        <p class="text-xl text-red-100 mb-8">
+          Subscribe to the channel and turn on notifications to never miss new content. Let's blaze the analytics trail together!
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
             href="https://www.youtube.com/@trailblazeranalytics?sub_confirmation=1" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 bg-white text-red-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-bold text-lg"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            Subscribe & Ring the Bell 🔔
+          </a>
+          <a 
+            href="/connect" 
+            class="inline-flex items-center gap-3 border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-red-600 transition-colors font-bold text-lg"
+          >
+            <span>💬</span>
+            Connect with Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
             target="_blank" 
             rel="noopener noreferrer"
             class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-lg hover:bg-red-700 transition-colors font-semibold text-lg"

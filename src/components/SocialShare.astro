@@ -179,10 +179,9 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedSummary}%0A%0A${
     shareButtons.forEach(button => {
       button.addEventListener('click', () => {
         const platform = button.getAttribute('data-share-platform');
-        
-        // If you have analytics, you can track the share event
-        if (window.gtag) {
-          window.gtag('event', 'share', {
+          // If you have analytics, you can track the share event
+        if ((window as any).gtag) {
+          (window as any).gtag('event', 'share', {
             method: platform,
             content_type: 'article',
             item_id: window.location.pathname

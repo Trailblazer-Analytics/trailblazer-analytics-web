@@ -12,7 +12,6 @@ const description = "Find articles, white papers, tech notes, downloads, and oth
   description={description}
   image="/images/search-cover.jpg"
   type="website"
-  schemaType="SearchResultsPage"
 >
   <div class="container mx-auto px-6 py-12">
     <h1 class="text-4xl font-bold mb-8 text-center">Search Results</h1>
@@ -42,13 +41,12 @@ const description = "Find articles, white papers, tech notes, downloads, and oth
       <!-- Results will be inserted here -->
     </div>
     
-    <div id="no-results" class="text-center py-12 hidden">
-      <OptimizedImage
+    <div id="no-results" class="text-center py-12 hidden">      <OptimizedImage
         src="/images/no-results.svg"
         alt="No results found"
         width={300}
         height={300}
-        className="mx-auto mb-6 w-48 h-48"
+        class="mx-auto mb-6 w-48 h-48"
       />
       <h2 class="text-2xl font-bold mb-2">No results found</h2>
       <p class="text-gray-600 mb-6">Try different keywords or browse our content categories below</p>
@@ -87,16 +85,15 @@ const description = "Find articles, white papers, tech notes, downloads, and oth
   document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('q');
-    
-    if (query && query.length >= 2) {
-      searchInput.value = query;
+      if (query && query.length >= 2) {
+      (searchInput as HTMLInputElement).value = query;
       performSearch(query);
     }
   });
   
   // Debounced search
   searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.trim();
+    const query = (e.target as HTMLInputElement).value.trim();
     currentSearchQuery = query;
     
     // Clear previous timeout
@@ -105,7 +102,7 @@ const description = "Find articles, white papers, tech notes, downloads, and oth
     }
     
     // Update URL
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     if (query.length >= 2) {
       url.searchParams.set('q', query);
     } else {

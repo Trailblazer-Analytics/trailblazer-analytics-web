@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.jsx';
@@ -11,7 +11,11 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry } = Astro.props;
+type Props = {
+  entry: CollectionEntry<'downloads'>;
+};
+
+const { entry } = Astro.props as Props;
 const { Content } = await entry.render();
 
 // SEO meta data

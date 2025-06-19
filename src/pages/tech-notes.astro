@@ -196,17 +196,16 @@ const seoData = {
         });
         this.classList.remove('bg-white', 'text-gray-600', 'border');
         this.classList.add('bg-brandGreen', 'text-white');
-        
-        // Filter tech note cards
+          // Filter tech note cards
         techNoteCards.forEach(card => {
           if (filterValue === 'all') {
-            card.style.display = 'block';
+            (card as HTMLElement).style.display = 'block';
           } else {
-            const cardTags = card.getAttribute('data-tags').split(',');
+            const cardTags = card.getAttribute('data-tags')?.split(',') || [];
             if (cardTags.some(tag => tag.trim().toLowerCase().includes(filterValue.toLowerCase()))) {
-              card.style.display = 'block';
+              (card as HTMLElement).style.display = 'block';
             } else {
-              card.style.display = 'none';
+              (card as HTMLElement).style.display = 'none';
             }
           }
         });

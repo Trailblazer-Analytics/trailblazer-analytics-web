@@ -1,17 +1,21 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.jsx';
 
 export async function getStaticPaths() {
-  const techNoteEntries = await getCollection('techNotes');
+  const techNoteEntries = await getCollection('tech-notes');
   return techNoteEntries.map(entry => ({
     params: { slug: entry.slug }, props: { entry },
   }));
 }
 
-const { entry } = Astro.props;
+type Props = {
+  entry: CollectionEntry<'tech-notes'>;
+};
+
+const { entry } = Astro.props as Props;
 const { Content } = await entry.render();
 
 // SEO meta data

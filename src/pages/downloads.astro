@@ -26,29 +26,49 @@ const downloadsByCategory = downloads.reduce((acc, download) => {
 
 // SEO meta data
 const seoData = {
-  title: "Free Downloads - Data Strategy Templates & Analytics Tools",
-  description: "Get free data strategy templates, analytics checklists, and BI tools. Instantly download frameworks, canvases, and guides to accelerate your data transformation journey.",
+  title: "Free Downloads - Trailblazer Data Strategy Templates & Analytics Tools",
+  description: "Get free data strategy templates, analytics checklists, and BI tools for trailblazers. Instantly download frameworks, canvases, and guides to accelerate your data transformation journey. Find by topic!",
   image: "/og-image-downloads.png"
 };
 ---
 
 <Base {...seoData}>
   <Navbar />
-  
-  <!-- Header Section -->
-  <section class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20">
-    <div class="container mx-auto px-6">
+    <!-- Header Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-green-900 to-blue-900 text-white py-20 relative overflow-hidden">
+    <!-- Creative Background Elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-16 right-16 w-20 h-20 bg-brandGold rounded-full transform rotate-45 animate-pulse"></div>
+      <div class="absolute bottom-16 left-16 w-16 h-16 bg-brandGreen rounded-full transform -rotate-12 animate-bounce"></div>
+      <div class="absolute top-1/2 right-1/4 w-12 h-12 bg-yellow-400 rounded-full transform rotate-45"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">
-          Free <span class="text-brandGold">Downloads</span>
-        </h1>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="text-5xl">📥</span>
+          <h1 class="text-5xl md:text-6xl font-bold">
+            Free <span class="text-brandGold">Trailblazer</span> Downloads
+          </h1>
+        </div>
         <p class="text-xl md:text-2xl text-gray-300 mb-8">
-          Professional templates, frameworks, and tools to accelerate your data journey. All completely free.
+          Professional templates, frameworks, and tools to accelerate your data journey. All completely free for fellow trailblazers.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
           <span class="bg-green-500/20 text-green-400 px-4 py-2 rounded-full">✓ No Email Required</span>
           <span class="bg-brandGold/20 text-brandGold px-4 py-2 rounded-full">✓ Instant Download</span>
           <span class="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full">✓ Commercial Use OK</span>
+        </div>
+        
+        <!-- Quick Topic Navigation -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+          <p class="text-brandGold font-semibold mb-4">🎯 Find Downloads by Topic</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <a href="/tags/templates" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Templates</a>
+            <a href="/tags/frameworks" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Frameworks</a>
+            <a href="/tags/checklists" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Checklists</a>
+            <a href="/tags/tools" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-2 rounded-full text-sm hover:scale-105 transition-all duration-300">Tools</a>
+          </div>
         </div>
       </div>
     </div>
@@ -100,8 +120,7 @@ const seoData = {
           ))}
         </div>
         
-        <div class="space-y-16">
-          {Object.entries(downloadsByCategory).map(([categoryName, categoryDownloads]) => (
+        <div class="space-y-16">          {Object.entries(downloadsByCategory).map(([categoryName, categoryDownloads]) => (
             <div class="category-section" data-category-section={categoryName}>
               <div class="text-center mb-8">
                 <h3 class="text-2xl font-bold text-gray-900 mb-2">{categoryName}</h3>
@@ -109,7 +128,7 @@ const seoData = {
               </div>
               
               <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                {categoryDownloads.map((download) => (
+                {(categoryDownloads as any[]).map((download) => (
                   <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                     <div class="h-48 bg-gray-100 flex items-center justify-center">
                       <div class="text-center">
@@ -382,10 +401,9 @@ const seoData = {
     const form = modal.querySelector('#email-form');
     const emailInput = modal.querySelector('#download-email');
     const skipButton = modal.querySelector('#skip-email');
-    
-    form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = emailInput.value.trim();
+      const email = (emailInput as HTMLInputElement).value.trim();
       document.body.removeChild(modal);
       resolve(email || null);
     });
@@ -477,15 +495,14 @@ const seoData = {
         this.classList.add('bg-brandGreen', 'text-white');
         
         // Filter category sections
-        categorySections.forEach(section => {
-          if (filterCategory === 'all') {
-            section.style.display = 'block';
+        categorySections.forEach(section => {          if (filterCategory === 'all') {
+            (section as HTMLElement).style.display = 'block';
           } else {
             const sectionCategory = section.getAttribute('data-category-section');
             if (sectionCategory === filterCategory) {
-              section.style.display = 'block';
+              (section as HTMLElement).style.display = 'block';
             } else {
-              section.style.display = 'none';
+              (section as HTMLElement).style.display = 'none';
             }
           }
         });

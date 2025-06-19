@@ -8,7 +8,27 @@
           "type": "string"
         },
         "date": {
-          "type": "string"
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "integer",
+                  "format": "unix-time"
+                }
+              ]
+            }
+          ]
         },
         "description": {
           "type": "string"
@@ -17,12 +37,67 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "default": []
         },
         "featured": {
           "type": "boolean"
         },
         "image": {
+          "type": "string"
+        },
+        "vibe": {
+          "type": "string",
+          "enum": [
+            "technical",
+            "rant",
+            "insight",
+            "story",
+            "hot-take"
+          ]
+        },
+        "readingTime": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": [
+            "beginner",
+            "intermediate",
+            "advanced",
+            "expert"
+          ]
+        },
+        "publishDate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "integer",
+                  "format": "unix-time"
+                }
+              ]
+            }
+          ]
+        },
+        "author": {
+          "type": "string"
+        },
+        "category": {
           "type": "string"
         },
         "$schema": {

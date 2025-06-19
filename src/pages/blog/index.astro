@@ -1,0 +1,331 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.jsx';
+
+// HOOK: Fetch all blog posts and sort by date
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => {
+  // HOOK: Handle both date and publishDate fields
+  const dateA = new Date(a.data.date || a.data.publishDate || 0);
+  const dateB = new Date(b.data.date || b.data.publishDate || 0);
+  return dateB.getTime() - dateA.getTime(); // Newest first
+});
+
+// HOOK: Extract featured posts for special treatment
+const featuredPosts = sortedPosts.filter(post => post.data.featured);
+const regularPosts = sortedPosts.filter(post => !post.data.featured);
+
+// HOOK: Get popular tags for the sidebar
+const tagCounts: Record<string, number> = {};
+allPosts.forEach(post => {
+  post.data.tags?.forEach((tag: string) => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+const popularTags = Object.entries(tagCounts)
+  .sort(([,a], [,b]) => b - a)
+  .slice(0, 10) // Top 10 tags
+  .map(([tag, count]) => ({ tag, count }));
+
+// HOOK: Format date helper
+function formatDate(dateString) {
+  if (!dateString) return 'Coming Soon';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+}
+
+// HOOK: Format reading time helper to handle both strings and numbers
+function formatReadingTime(readingTime) {
+  if (!readingTime) return null;
+  if (typeof readingTime === 'string') return readingTime;
+  return `${readingTime} min read`;
+}
+
+// HOOK: Tag color system
+function getTagColor(index) {
+  const colors = [
+    'bg-blue-100 text-blue-800 hover:bg-blue-200',
+    'bg-green-100 text-green-800 hover:bg-green-200',
+    'bg-purple-100 text-purple-800 hover:bg-purple-200',
+    'bg-orange-100 text-orange-800 hover:bg-orange-200',
+    'bg-pink-100 text-pink-800 hover:bg-pink-200',
+    'bg-teal-100 text-teal-800 hover:bg-teal-200',
+  ];
+  return colors[index % colors.length];
+}
+---
+
+<Base 
+  title="Blog | Raw Data Insights & Analytics Wisdom"
+  description="Unfiltered thoughts on analytics, BI, data strategy, and the beautiful chaos of turning numbers into insights"
+>
+  <Navbar />
+  
+  <!-- HOOK: Raw, personality-driven blog index -->
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div class="container mx-auto px-4 py-16">
+      
+      <!-- HOOK: Hero section with attitude -->
+      <div class="text-center mb-16">
+        <h1 class="text-5xl md:text-7xl font-black text-gray-800 mb-6 tracking-tight">
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Raw Data
+          </span>
+          <br />
+          <span class="text-gray-700">Insights</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+          <!-- HOOK: Add your personality to this intro -->
+          Unfiltered thoughts on analytics, BI, career pivots, and the beautiful chaos 
+          of turning numbers into actionable insights.
+        </p>
+        
+        <!-- HOOK: Quick stats -->
+        <div class="flex flex-wrap gap-8 justify-center text-gray-600">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-blue-600">{allPosts.length}</div>
+            <div class="text-sm uppercase tracking-wide">Posts</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-purple-600">{Object.keys(tagCounts).length}</div>
+            <div class="text-sm uppercase tracking-wide">Topics</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-green-600">∞</div>
+            <div class="text-sm uppercase tracking-wide">Caffeine</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-4 gap-8">
+        
+        <!-- HOOK: Main content area -->
+        <div class="lg:col-span-3">
+          
+          <!-- HOOK: Featured posts section -->
+          {featuredPosts.length > 0 && (
+            <div class="mb-16">
+              <h2 class="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+                ⭐ Featured Posts
+              </h2>
+              <div class="grid md:grid-cols-2 gap-8">
+                {featuredPosts.slice(0, 2).map((post, index) => (
+                  <article class={`
+                    bg-white rounded-3xl shadow-xl p-8 border-4 border-yellow-400
+                    transform transition-all duration-300 hover:shadow-2xl hover:scale-105
+                    ${index % 2 === 0 ? 'md:rotate-1' : 'md:-rotate-1'}
+                  `}>
+                    <div class="text-sm text-yellow-600 font-bold mb-2 uppercase tracking-wide">
+                      Featured
+                    </div>
+                    <h3 class="text-2xl font-black text-gray-800 mb-4 leading-tight">
+                      <a href={`/blog/${post.slug}`} class="hover:text-blue-600 transition-colors">
+                        {post.data.title}
+                      </a>
+                    </h3>
+                    {post.data.description && (
+                      <p class="text-gray-600 mb-6 leading-relaxed">
+                        {post.data.description}
+                      </p>
+                    )}
+                    
+                    <!-- HOOK: Tag display for featured posts -->
+                    {post.data.tags && post.data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-2 mb-6">
+                        {post.data.tags.slice(0, 3).map((tag, tagIndex) => (
+                          <a
+                            href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                            class={`px-3 py-1 rounded-full text-sm font-semibold transition-all ${getTagColor(tagIndex)}`}
+                          >
+                            #{tag}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                    
+                    <div class="flex justify-between items-center">                      <span class="text-sm text-gray-500">
+                        {formatDate(post.data.date || post.data.publishDate)}
+                      </span>
+                      <a 
+                        href={`/blog/${post.slug}`}
+                        class="text-blue-600 font-bold hover:text-blue-800 transition-colors"
+                      >
+                        Read More →
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- HOOK: All posts section -->
+          <div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+              📚 All Posts
+            </h2>
+            
+            {regularPosts.length === 0 ? (
+              <!-- HOOK: Empty state with personality -->
+              <div class="bg-white rounded-3xl shadow-lg p-12 text-center border-4 border-dashed border-gray-300">
+                <div class="text-6xl mb-6">🚧</div>
+                <h3 class="text-2xl font-bold text-gray-700 mb-4">
+                  Content Pipeline Under Construction
+                </h3>
+                <p class="text-gray-600 text-lg">
+                  The insights are brewing, the keyboards are clicking. 
+                  Great content takes time to ferment properly.
+                </p>
+              </div>
+            ) : (
+              <div class="space-y-8">
+                {regularPosts.map((post, index) => {
+                  const rotation = (index % 3 === 0) ? 'md:rotate-1' : (index % 3 === 1) ? 'md:-rotate-1' : '';
+                  
+                  return (
+                    <article class={`
+                      bg-white rounded-2xl shadow-lg hover:shadow-xl p-8 
+                      transform transition-all duration-300 hover:scale-102
+                      border-l-4 border-blue-500 ${rotation}
+                    `}>
+                      <div class="flex flex-col md:flex-row md:items-start gap-6">
+                          <!-- HOOK: Post metadata -->
+                        <div class="md:w-32 flex-shrink-0">
+                          <div class="text-sm text-gray-500 font-medium mb-2">
+                            {formatDate(post.data.date || post.data.publishDate)}
+                          </div>
+                          {post.data.vibe && (
+                            <div class="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                              {post.data.vibe}
+                            </div>
+                          )}
+                        </div>
+                        
+                        <!-- HOOK: Post content -->
+                        <div class="flex-1">
+                          <h3 class="text-2xl md:text-3xl font-black text-gray-800 mb-4 leading-tight">
+                            <a 
+                              href={`/blog/${post.slug}`}
+                              class="hover:text-blue-600 transition-colors"
+                            >
+                              {post.data.title}
+                            </a>
+                          </h3>
+                          
+                          {post.data.description && (
+                            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                              {post.data.description}
+                            </p>
+                          )}
+                          
+                          <!-- HOOK: Tags for regular posts -->
+                          {post.data.tags && post.data.tags.length > 0 && (
+                            <div class="flex flex-wrap gap-2 mb-4">
+                              {post.data.tags.map((tag, tagIndex) => (
+                                <a
+                                  href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                                  class={`px-3 py-1 rounded-full text-sm font-semibold transition-all ${getTagColor(tagIndex)}`}
+                                >
+                                  #{tag}
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                          
+                          <a 
+                            href={`/blog/${post.slug}`}
+                            class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors"
+                          >
+                            Read the full story
+                            <span class="transform transition-transform group-hover:translate-x-1">→</span>
+                          </a>
+                        </div>
+                      </div>
+                    </article>
+                  );                })
+              }
+            </div>
+          )}
+        </div>
+
+        <!-- HOOK: Sidebar with tag cloud and navigation -->
+        <div class="lg:col-span-1 space-y-8">
+          
+          <!-- HOOK: Popular tags widget -->
+          <div class="bg-white rounded-2xl shadow-lg p-6 border-4 border-blue-100">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+              🏷️ Popular Tags
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {popularTags.map((tagData, index) => (
+                <a
+                  href={`/tags/${tagData.tag.toLowerCase().replace(/\s+/g, '-')}`}
+                  class={`
+                    inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-semibold
+                    transition-all hover:scale-105 ${getTagColor(index)}
+                  `}
+                >
+                  #{tagData.tag}
+                  <span class="bg-white/50 px-2 py-1 rounded-full text-xs font-bold">
+                    {tagData.count}
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div class="mt-4">
+              <a 
+                href="/tags" 
+                class="text-blue-600 hover:text-blue-800 font-semibold text-sm"
+              >
+                View all tags →
+              </a>
+            </div>
+          </div>
+
+          <!-- HOOK: Quick links -->
+          <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl shadow-lg p-6 border-4 border-purple-200">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              🚀 Quick Links
+            </h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="/rss.xml" class="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-medium transition-colors">
+                  📡 RSS Feed
+                </a>
+              </li>
+              <li>
+                <a href="/about" class="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-medium transition-colors">
+                  👋 About Me
+                </a>
+              </li>
+              <li>
+                <a href="/connect" class="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-medium transition-colors">
+                  📬 Get in Touch
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- HOOK: Fun data fact -->
+          <div class="bg-yellow-100 border-4 border-yellow-300 rounded-2xl p-6">
+            <div class="text-3xl mb-2">☕</div>
+            <p class="text-gray-700 text-sm font-medium">
+              <!-- HOOK: Rotate through different data facts -->
+              <strong>Data Fact:</strong> The average data analyst drinks 3.7 cups of coffee 
+              per insight generated. This blog is powered by approximately ∞ cups.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Base>

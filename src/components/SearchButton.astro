@@ -164,11 +164,10 @@
       }
     }, 300);
   });
-  
-  // Perform search request
+    // Perform search request
   async function performSearch(query) {
     try {
-      const response = await fetch(\`\${base}/api/search?q=\${encodeURIComponent(query)}\`);
+      const response = await fetch(`${base}/api/search?q=${encodeURIComponent(query)}`);
       
       if (!response.ok) {
         throw new Error('Search request failed');
@@ -203,17 +202,16 @@
             const date = new Date(result.date);
             dateDisplay = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
           }
-          
-          resultItem.innerHTML = \`
+            resultItem.innerHTML = `
             <div class="flex items-start">
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 mr-2">
-                \${result.type}
+                ${result.type}
               </span>
-              \${dateDisplay ? \`<span class="text-xs text-gray-500 dark:text-gray-400">\${dateDisplay}</span>\` : ''}
+              ${dateDisplay ? `<span class="text-xs text-gray-500 dark:text-gray-400">${dateDisplay}</span>` : ''}
             </div>
-            <h4 class="text-lg font-medium text-gray-900 dark:text-white mt-1">\${result.title}</h4>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">\${result.description}</p>
-          \`;
+            <h4 class="text-lg font-medium text-gray-900 dark:text-white mt-1">${result.title}</h4>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">${result.description}</p>
+          `;
           
           resultsContainer.appendChild(resultItem);
         });

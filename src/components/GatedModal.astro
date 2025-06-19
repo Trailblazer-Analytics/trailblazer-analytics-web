@@ -184,36 +184,35 @@ const { title, description, downloadUrl = "#" } = Astro.props;
 
 <script>
   // Global functions for modal management
-  window.openGatedModal = function(title, description, downloadUrl = "#") {
+  (window as any).openGatedModal = function(title, description, downloadUrl = "#") {
     const modal = document.getElementById('gatedModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
-    const directDownload = document.getElementById('directDownload');
+    const directDownload = document.getElementById('directDownload') as HTMLAnchorElement;
     
     if (modalTitle) modalTitle.textContent = title;
     if (modalDescription) modalDescription.textContent = description;
     if (directDownload) directDownload.href = downloadUrl;
     
-    modal.classList.add('show');
+    modal?.classList.add('show');
     document.body.style.overflow = 'hidden';
   };
 
-  window.closeGatedModal = function() {
+  (window as any).closeGatedModal = function() {
     const modal = document.getElementById('gatedModal');
-    modal.classList.remove('show');
+    modal?.classList.remove('show');
     document.body.style.overflow = 'auto';
     
     // Reset form
-    const form = document.getElementById('gatedForm');
+    const form = document.getElementById('gatedForm') as HTMLFormElement;
     const successMessage = document.getElementById('successMessage');
     if (form) form.style.display = 'block';
     if (successMessage) successMessage.classList.add('hidden');
     if (form) form.reset();
   };
-
   // Form submission handling
   document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('gatedForm');
+    const form = document.getElementById('gatedForm') as HTMLFormElement;
     if (form) {
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -243,19 +242,18 @@ const { title, description, downloadUrl = "#" } = Astro.props;
       });
     }
   });
-
   // Close modal when clicking outside
   window.addEventListener('click', function(event) {
     const modal = document.getElementById('gatedModal');
     if (event.target === modal) {
-      closeGatedModal();
+      (window as any).closeGatedModal();
     }
   });
 
   // Close modal with Escape key
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
-      closeGatedModal();
+      (window as any).closeGatedModal();
     }
   });
 </script>
