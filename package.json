@@ -21,11 +21,11 @@
     "pre-build": "node scripts/pre-build.js",
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "fix:md": "markdownlint \"**/*.md\" --ignore node_modules --fix",
-    "validate-content": "node scripts/validate-content.js",
-    "tags:build": "astro build && echo 'Tag pages generated successfully'",
+    "validate-content": "node scripts/validate-content.js",    "tags:build": "astro build && echo 'Tag pages generated successfully'",
     "tags:dev": "astro dev --host 0.0.0.0",
     "content:validate": "node scripts/pre-build.js",
-    "deploy:preview": "pnpm run build && pnpm run preview"
+    "deploy:preview": "pnpm run build && pnpm run preview",
+    "deploy": "pnpm run build"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

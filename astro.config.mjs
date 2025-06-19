@@ -6,5 +6,6 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   integrations: [react(), tailwind(), mdx()],
   output: "static",
-  site: "https://trailblazeranalytics.com"
+  site: "https://trailblazeranalytics.github.io",
+  base: "/trailblazer-analytics-devkit"
 });
