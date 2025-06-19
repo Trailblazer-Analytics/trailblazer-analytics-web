@@ -2,11 +2,10 @@
   "name": "trailblazer-analytics",
   "version": "0.0.1",
   "type": "module",
-  "scripts": {
-    "preinstall": "node scripts/enforce-pnpm.js",
+  "scripts": {    "preinstall": "node scripts/enforce-pnpm.js",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/build.js",
     "preview": "astro preview",
     "check": "astro check",
     "lighthouse": "lhci autorun",
@@ -21,11 +20,11 @@
     "pre-build": "node scripts/pre-build.js",
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "fix:md": "markdownlint \"**/*.md\" --ignore node_modules --fix",
-    "validate-content": "node scripts/validate-content.js",    "tags:build": "astro build && echo 'Tag pages generated successfully'",
-    "tags:dev": "astro dev --host 0.0.0.0",
+    "validate-content": "node scripts/validate-content.js",    "tags:build": "astro build && echo 'Tag pages generated successfully'",    "tags:dev": "astro dev --host 0.0.0.0",
     "content:validate": "node scripts/pre-build.js",
     "deploy:preview": "pnpm run build && pnpm run preview",
-    "deploy": "pnpm run build"
+    "deploy": "pnpm run build",
+    "deploy:gh-pages": "touch dist/.nojekyll && gh-pages -d dist -t"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
