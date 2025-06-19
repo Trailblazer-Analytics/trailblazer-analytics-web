@@ -10,7 +10,8 @@ function buildAssetUrl(path: string): string {
     return path.startsWith('/') ? path : `/${path}`;
   }
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  return `${base}${cleanPath}`;
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
+  return `${cleanBase}${cleanPath}`;
 }
 
 // Default meta data
