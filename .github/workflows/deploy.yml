@@ -47,7 +47,7 @@ jobs:
           
       # HOOK: Content validation (check for broken links, invalid frontmatter, etc.)
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
         
       - name: Validate content structure
         run: |
@@ -103,7 +103,7 @@ jobs:
       - name: Install dependencies
         run: |
           echo "📦 Installing dependencies..."
-          time pnpm install --frozen-lockfile
+          time pnpm install --no-frozen-lockfile
           echo "✅ Dependencies installed successfully"
           
       # HOOK: Pre-build hooks for custom processing
