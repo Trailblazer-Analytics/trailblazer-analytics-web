@@ -1,16 +1,28 @@
+---
+// Helper function to build proper URLs
+function buildUrl(path: string): string {
+  const base = import.meta.env.BASE_URL;
+  if (base === '/') {
+    return path.startsWith('/') ? path : `/${path}`;
+  }
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${base}${cleanPath}`;
+}
+---
+
 <nav class="w-full px-6 py-4 bg-gray-900 border-b border-gray-800 text-white sticky top-0 z-50">
   <div class="container mx-auto flex justify-between items-center">
-    <a href="/" class="font-bold text-xl flex items-center gap-3">
+    <a href={buildUrl('/')} class="font-bold text-xl flex items-center gap-3">
       <div class="w-8 h-8 bg-brandGreen rounded-full flex items-center justify-center">
         <span class="text-white font-bold text-sm">TA</span>
       </div>
       Trailblazer Analytics
     </a>    <!-- Desktop Navigation -->    <div class="hidden md:flex items-center space-x-6">
-      <a href="/blog" class="hover:text-brandGold transition-colors">Blog</a>
-      <a href="/insights" class="hover:text-brandGold transition-colors">Insights</a>
+      <a href={buildUrl('/blog')} class="hover:text-brandGold transition-colors">Blog</a>
+      <a href={buildUrl('/insights')} class="hover:text-brandGold transition-colors">Insights</a>
       
       <!-- Featured Tags Experience -->
-      <a href="/tags" class="relative hover:text-brandGold transition-colors flex items-center gap-2 group">
+      <a href={buildUrl('/tags')} class="relative hover:text-brandGold transition-colors flex items-center gap-2 group">
         <span>🏷️ Topics</span>
         <span class="bg-brandGold text-black text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">HOT</span>
       </a>
@@ -25,7 +37,7 @@
         </button>
         <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
           <div class="p-2">
-            <a href="/resources" class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
+            <a href={`${import.meta.env.BASE_URL}resources`} class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
               <svg class="w-4 h-4 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
               </svg>

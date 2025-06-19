@@ -3,10 +3,20 @@ import '../styles/global.css';
 import siteConfig from '../site.config.js';
 import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget.astro';
 
+// Helper function to build proper asset URLs
+function buildAssetUrl(path: string): string {
+  const base = import.meta.env.BASE_URL;
+  if (base === '/') {
+    return path.startsWith('/') ? path : `/${path}`;
+  }
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${base}${cleanPath}`;
+}
+
 // Default meta data
 const defaultTitle = "Trailblazer Analytics";
 const defaultDescription = "Transforming data into actionable insight with BI expertise, AI innovation, and clear storytelling.";
-const defaultImage = "/og-image.png";
+const defaultImage = buildAssetUrl('og-image.png');
 
 // Props for customization
 export interface Props {
@@ -27,37 +37,38 @@ const {
 
 // Construct full title
 const fullTitle = title === defaultTitle ? title : `${title} | ${defaultTitle}`;
+
+// Fix image path if it's not an absolute URL
+const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />    <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
     
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={type} />
-    <meta property="og:url" content="https://trailblazer-analytics.com" />
-    <meta property="og:image" content={image} />
+    <meta property="og:url" content="https://anykolaiszyn.github.io/trailblazer-analytics-devkit" />
+    <meta property="og:image" content={imageSrc} />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
-      <!-- Favicon and Icons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="twitter:image" content={imageSrc} />      <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href={buildAssetUrl('favicon.ico')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={buildAssetUrl('apple-touch-icon.png')} />
+    <link rel="icon" type="image/png" sizes="32x32" href={buildAssetUrl('favicon-32x32.png')} />
+    <link rel="icon" type="image/png" sizes="16x16" href={buildAssetUrl('favicon-16x16.png')} />
+    <link rel="manifest" href={buildAssetUrl('site.webmanifest')} />
     
     <!-- RSS Feed -->
-    <link rel="alternate" type="application/rss+xml" title="Trailblazer Analytics RSS Feed" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Trailblazer Analytics RSS Feed" href={buildAssetUrl('rss.xml')} />
     
     <!-- Structured Data -->
     <script type="application/ld+json">
