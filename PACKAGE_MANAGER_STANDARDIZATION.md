@@ -59,12 +59,14 @@ pnpm run dev
 
 ## 🔄 Migration Notes
 
-### For existing developers:
+### For existing developers
+
 1. Delete your `node_modules` folder
 2. Run `pnpm install` to reinstall with pnpm
 3. Use `pnpm run <script>` instead of `npm run <script>`
 
-### CI/CD Changes:
+### CI/CD Changes
+
 - GitHub Actions now uses pnpm for faster, more reliable builds
 - Lock file is now `pnpm-lock.yaml` (committed to repo)
 - Cache keys updated to use pnpm lock file
@@ -107,4 +109,4 @@ pnpm run pre-build    # Run pre-build scripts
 
 ---
 
-*Last updated: June 18, 2025*
+**Last Updated:** June 18, 2025

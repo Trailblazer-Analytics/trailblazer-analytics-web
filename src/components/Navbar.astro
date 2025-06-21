@@ -78,8 +78,11 @@ function buildUrl(path: string): string {
           </div>
         </div>
       </div>
-      
-      <a href={buildUrl('/podcast')} class="hover:text-brandGold transition-colors">Podcast</a>
+        <a href={buildUrl('/podcast')} class="hover:text-brandGold transition-colors">Podcast</a>
+      <a href={buildUrl('/blaze-the-trail')} class="relative hover:text-brandGold transition-colors flex items-center gap-2 group">
+        <span>🔥 Blaze the Trail</span>
+        <span class="bg-brandGold text-black text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">SOON</span>
+      </a>
       <a href={buildUrl('/support')} class="hover:text-brandGold transition-colors">Support</a>
       <a href={buildUrl('/about')} class="hover:text-brandGold transition-colors">About</a>
       <a href={buildUrl('/connect')} class="bg-brandGold text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">Connect</a>
@@ -117,9 +120,18 @@ function buildUrl(path: string): string {
           <a href={buildUrl('/case-studies')} class="block text-gray-300 hover:text-brandGold transition-colors py-1 text-sm">📊 Case Studies</a>
           <a href={buildUrl('/youtube')} class="block text-gray-300 hover:text-brandGold transition-colors py-1 text-sm">🎥 YouTube</a>
         </div>
-      </div>
-      
+      </div>      
       <a href={buildUrl('/podcast')} class="block text-white hover:text-brandGold transition-colors py-2">Podcast</a>
+      
+      <!-- Blaze the Trail Section in Mobile -->
+      <a href={buildUrl('/blaze-the-trail')} class="flex items-center justify-between text-white hover:text-brandGold transition-colors py-2 group">
+        <span class="flex items-center gap-2">
+          <span>🔥</span>
+          <span>Blaze the Trail</span>
+        </span>
+        <span class="bg-brandGold text-black text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">SOON</span>
+      </a>
+      
       <a href={buildUrl('/support')} class="block text-white hover:text-brandGold transition-colors py-2">Support</a>
       <a href={buildUrl('/about')} class="block text-white hover:text-brandGold transition-colors py-2">About</a>
       <a href={buildUrl('/connect')} class="block bg-brandGold text-gray-900 px-4 py-3 rounded-lg hover:bg-yellow-500 transition-colors font-medium text-center mt-4">Connect</a>

@@ -1,16 +1,19 @@
 # Trailblazer Analytics Content Management Guide
 
 ## Overview
+
 This guide provides step-by-step instructions for managing content on the Trailblazer Analytics site. The site uses Astro with Markdown files for content management, making it easy to add and update content without coding knowledge.
 
 ## Quick Start Checklist
-- [ ] Site is deployed at: https://anykolaiszyn.github.io/trailblazer-analytics-devkit/
-- [ ] GitHub repository: https://github.com/anykolaiszyn/trailblazer-analytics-devkit
+
+- [ ] Site is deployed at: <https://anykolaiszyn.github.io/trailblazer-analytics-devkit/>
+- [ ] GitHub repository: <https://github.com/anykolaiszyn/trailblazer-analytics-devkit>
 - [ ] All files are stored in Git (no external storage needed - files are small)
 - [ ] Changes auto-deploy via GitHub Actions when pushed to main branch
 
 ## File Structure Overview
-```
+
+```text
 src/
 ├── content/
 │   ├── blog/           # Blog posts (.md files)
@@ -34,8 +37,10 @@ public/
 **Location:** `src/content/blog/`
 
 **Steps:**
+
 1. Create a new `.md` file with filename format: `YYYY-MM-DD-post-title.md`
 2. Add frontmatter at the top:
+
 ```yaml
 ---
 title: "Your Blog Post Title"
@@ -48,9 +53,10 @@ featured: false
 image: "/images/blog/your-image.jpg"
 ---
 ```
-3. Write your content in Markdown below the frontmatter
-4. Save the file
-5. Commit and push to GitHub (auto-deploys)
+
+1. Write your content in Markdown below the frontmatter
+2. Save the file
+3. Commit and push to GitHub (auto-deploys)
 
 **Example filename:** `2025-01-15-data-strategy-trends.md`
 
@@ -59,8 +65,10 @@ image: "/images/blog/your-image.jpg"
 **Location:** `src/content/insights/`
 
 **Steps:**
+
 1. Create a new `.md` file with descriptive filename
 2. Add frontmatter:
+
 ```yaml
 ---
 title: "Analytics Insight Title"
@@ -72,16 +80,19 @@ featured: false
 image: "/images/insights/your-image.jpg"
 ---
 ```
-3. Write content with focus on actionable insights
-4. Save, commit, and push
+
+1. Write content with focus on actionable insights
+2. Save, commit, and push
 
 ### 3. Adding Podcast Episodes
 
 **Location:** `src/content/podcast/`
 
 **Steps:**
+
 1. Create `.md` file: `episode-XXX-title.md`
 2. Add frontmatter:
+
 ```yaml
 ---
 title: "Episode Title"
@@ -97,16 +108,19 @@ appleUrl: "https://podcasts.apple.com/episode/xxx"
 image: "/images/podcast/episode-xxx.jpg"
 ---
 ```
-3. Add episode notes and transcript
-4. Save, commit, and push
+
+1. Add episode notes and transcript
+2. Save, commit, and push
 
 ### 4. Adding Case Studies
 
 **Location:** `src/content/case-studies/`
 
 **Steps:**
+
 1. Create `.md` file with client/project name
 2. Add frontmatter:
+
 ```yaml
 ---
 title: "Case Study Title"
@@ -120,7 +134,8 @@ featured: false
 image: "/images/case-studies/your-image.jpg"
 ---
 ```
-3. Structure content with sections:
+
+1. Structure content with sections:
    - Challenge
    - Approach
    - Implementation
@@ -132,8 +147,10 @@ image: "/images/case-studies/your-image.jpg"
 **Location:** `src/content/tech-notes/`
 
 **Steps:**
+
 1. Create `.md` file with technical topic name
 2. Add frontmatter:
+
 ```yaml
 ---
 title: "Technical Topic"
@@ -145,14 +162,16 @@ tags: ["python", "data-analysis", "automation"]
 featured: false
 ---
 ```
-3. Include code examples, configurations, or technical explanations
-4. Use proper Markdown code blocks with syntax highlighting
+
+1. Include code examples, configurations, or technical explanations
+2. Use proper Markdown code blocks with syntax highlighting
 
 ### 6. Managing Downloads
 
 **Location:** `public/downloads/`
 
 **Current files (all small, <2KB each):**
+
 - AI_Driven_Analytics_Framework_v2025.pdf
 - Analytics_Readiness_Checklist_v2024.pdf
 - Analytics_ROI_Calculator_v2025.xlsx
@@ -162,6 +181,7 @@ featured: false
 - Executives_Guide_Data_Strategy_v2025.pdf
 
 **To add new downloads:**
+
 1. Place PDF, Excel, or other files in `public/downloads/`
 2. Reference in content with: `/downloads/filename.pdf`
 3. Update relevant content pages to link to new resources
@@ -182,6 +202,7 @@ These are Astro component files. Edit the HTML/content directly and commit chang
 Navigation is controlled in `src/components/Navbar.astro`. Current structure:
 
 **Main Navigation:**
+
 - Insights
 - Blog  
 - Podcast
@@ -191,6 +212,7 @@ Navigation is controlled in `src/components/Navbar.astro`. Current structure:
 - Connect
 
 **Resources Dropdown:**
+
 - Tech Notes
 - Case Studies
 - ---- (separator)
@@ -201,14 +223,17 @@ Navigation is controlled in `src/components/Navbar.astro`. Current structure:
 ## Deployment Process
 
 ### Automatic Deployment (Recommended)
+
 1. Make your content changes
 2. Commit to Git: `git add . && git commit -m "Add new blog post"`
 3. Push to GitHub: `git push origin main`
 4. GitHub Actions automatically builds and deploys
-5. Changes appear at https://anykolaiszyn.github.io/trailblazer-analytics-devkit/ within 2-3 minutes
+5. Changes appear at <https://anykolaiszyn.github.io/trailblazer-analytics-devkit/> within 2-3 minutes
 
 ### Manual Deployment (Backup)
+
 If automatic deployment fails:
+
 ```bash
 npm run build
 npm run deploy:clean
@@ -217,12 +242,14 @@ npm run deploy:clean
 ## SEO and Content Best Practices
 
 ### Frontmatter Best Practices
+
 - Always include `title`, `description`, and `publishDate`
 - Keep descriptions under 160 characters for SEO
 - Use relevant tags and categories consistently
 - Add featured images when possible
 
 ### Content Writing Tips
+
 - Use clear, descriptive headings (H2, H3)
 - Include relevant keywords naturally
 - Add internal links to related content
@@ -230,6 +257,7 @@ npm run deploy:clean
 - Include actionable takeaways
 
 ### Image Guidelines
+
 - Store images in `public/images/` with descriptive names
 - Use web-optimized formats (JPG for photos, PNG for graphics)
 - Include alt text in Markdown: `![Alt text](image-url)`
@@ -238,16 +266,19 @@ npm run deploy:clean
 ## Troubleshooting
 
 ### Build Errors
+
 - Check frontmatter YAML syntax (proper indentation, quotes)
 - Ensure all referenced images exist
 - Validate Markdown syntax
 
 ### Deployment Issues
+
 - Check GitHub Actions tab for error logs
 - Verify all files are committed and pushed
 - Try manual deployment as backup
 
 ### Content Not Appearing
+
 - Verify file is in correct directory
 - Check frontmatter format
 - Ensure file extension is `.md`
@@ -256,6 +287,7 @@ npm run deploy:clean
 ## Content Planning
 
 ### Regular Content Schedule
+
 - **Blog Posts:** 2-3 per month
 - **Insights:** 1-2 per month  
 - **Podcast Episodes:** Weekly/bi-weekly
@@ -263,6 +295,7 @@ npm run deploy:clean
 - **Tech Notes:** As needed for updates
 
 ### Content Calendar Template
+
 | Week | Blog | Insights | Podcast | Other |
 |------|------|----------|---------|-------|
 | Week 1 | Industry Trends | Market Analysis | Episode X | - |
@@ -272,8 +305,8 @@ npm run deploy:clean
 
 ## Support and Maintenance
 
-- **Site URL:** https://anykolaiszyn.github.io/trailblazer-analytics-devkit/
-- **Repository:** https://github.com/anykolaiszyn/trailblazer-analytics-devkit
+- **Site URL:** <https://anykolaiszyn.github.io/trailblazer-analytics-devkit/>
+- **Repository:** <https://github.com/anykolaiszyn/trailblazer-analytics-devkit>
 - **Build Status:** Check GitHub Actions tab
 - **Issues:** Create GitHub issues for problems or feature requests
 

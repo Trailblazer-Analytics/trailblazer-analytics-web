@@ -25,6 +25,7 @@ This creates a `dist/` folder with all the static files.
 ## Step 2: Upload Files
 
 ### Option A: cPanel File Manager
+
 1. Log in to your HostGator cPanel
 2. Open "File Manager"
 3. Navigate to `public_html` (or your domain's folder)
@@ -33,6 +34,7 @@ This creates a `dist/` folder with all the static files.
 6. Extract if needed
 
 ### Option B: FTP Client
+
 1. Connect to your hosting via FTP
 2. Navigate to `public_html`
 3. Upload all files and folders from `dist/`
@@ -43,7 +45,8 @@ If your site uses API features:
 
 1. Create a `.env` file in the root directory
 2. Add your environment variables:
-   ```
+
+   ```text
    CONTACT_EMAIL=your-email@domain.com
    BEEHIIV_API_KEY=your_api_key
    ```
@@ -56,7 +59,7 @@ If your site uses API features:
 
 ## File Structure After Deployment
 
-```
+```text
 public_html/
 ├── index.html
 ├── about/
@@ -74,20 +77,24 @@ public_html/
 ## Troubleshooting
 
 ### 404 Errors
+
 - Ensure all files are uploaded to the correct directory
 - Check that `index.html` exists in the root
 
 ### API Not Working
+
 - Verify environment variables are set
 - Check server logs in cPanel
 
 ### Images Not Loading
+
 - Verify image files are uploaded
 - Check file permissions (755 for directories, 644 for files)
 
 ## Updates
 
 To update the site:
+
 1. Make changes locally
 2. Run `pnpm run build`
 3. Upload new `dist/` contents

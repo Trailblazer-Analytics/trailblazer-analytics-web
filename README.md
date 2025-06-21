@@ -2,10 +2,6 @@
 
 A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, YouTube integration, resource consolidation, and automated deployment.
 
-# Trailblazer Analytics - Professional Data Strategy Hub
-
-A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, YouTube integration, resource consolidation, and automated deployment.
-
 ## 🚀 Current Features (December 2024)
 
 ### 🎨 Enhanced User Experience
@@ -58,6 +54,7 @@ pnpm run preview
 ```
 
 ### Environment Configuration
+
 1. Copy `.env.example` to `.env`
 2. Fill in your API keys and configuration values
 3. See `DEPLOYMENT_CHECKLIST.md` for production setup
@@ -82,7 +79,7 @@ Complete documentation is available in the [`docs/`](./docs/) folder:
 
 ## 🏗️ Project Structure
 
-```
+```text
 src/
 ├── components/          # React/Astro components
 ├── content/            # MDX content files (case studies, blog posts, etc.)
@@ -98,19 +95,23 @@ dist/                   # Built site files (for deployment)
 ## 🚀 Live Site & Deployment
 
 ### Current Deployment Status
+
 - **Live Site**: [https://anykolaiszyn.github.io/trailblazer-analytics-devkit/](https://anykolaiszyn.github.io/trailblazer-analytics-devkit/)
 - **Custom Domain Ready**: [https://trailblazeranalytics.com](https://trailblazeranalytics.com) (CNAME configured)
 - **Build Status**: ✅ All 45+ pages building successfully
 - **Auto-Deploy**: GitHub Actions triggers on every push to main branch
 
 ### GitHub Actions Deployment
+
 The site automatically deploys via GitHub Actions with:
+
 - **Latest Action Versions**: checkout@v4, setup-node@v4, pnpm/action-setup@v3
 - **Optimized Build Process**: pnpm with frozen lockfile for consistent builds
 - **GitHub Pages Deploy**: JamesIves/github-pages-deploy-action@v4.6.1
 - **Custom Domain Support**: CNAME configured for seamless domain activation
 
 ### Alternative Hosting Options
+
 - **Netlify**: Connect repository for automatic deployment
 - **Vercel**: Connect repository for automatic deployment  
 - **Traditional Hosting**: Upload `dist/` folder to web root

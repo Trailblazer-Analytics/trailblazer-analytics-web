@@ -1,11 +1,13 @@
 # Spotify Integration Configuration
 
 ## Overview
+
 The Trailblazer Analytics DevKit now includes enhanced Spotify podcast integration that can fetch real episode data from the "Morning Metrics" podcast on Spotify.
 
 ## Integration Methods
 
 ### 1. Live Spotify Web API (Recommended)
+
 To enable real-time episode fetching from Spotify:
 
 1. **Get Spotify API Credentials**:
@@ -14,6 +16,7 @@ To enable real-time episode fetching from Spotify:
    - Get your Client ID and Client Secret
 
 2. **Configure Environment Variables**:
+
    ```bash
    # Add to .env.local (create if doesn't exist)
    SPOTIFY_CLIENT_ID=your_client_id_here
@@ -21,6 +24,7 @@ To enable real-time episode fetching from Spotify:
    ```
 
 3. **Update Astro Config**:
+
    ```javascript
    // In astro.config.mjs, add environment variables access
    export default defineConfig({
@@ -35,14 +39,18 @@ To enable real-time episode fetching from Spotify:
    ```
 
 ### 2. Current Implementation (Active)
+
 The podcast page currently uses:
+
 - **Live show verification** via Spotify oEmbed API
 - **Curated episode content** that reflects the actual podcast topics
 - **Real Spotify embed** for direct playback
 - **Dynamic show title** fetched from Spotify
 
 ### 3. Fallback Strategies
+
 The integration includes multiple fallback methods:
+
 - Spotify Web API (when credentials provided)
 - Alternative RSS services
 - Spotify oEmbed for basic show info
@@ -57,6 +65,7 @@ The integration includes multiple fallback methods:
 ## Current Status
 
 ✅ **Working Features**:
+
 - Live Spotify show verification
 - Real Spotify embed player
 - Dynamic show title from Spotify
@@ -64,6 +73,7 @@ The integration includes multiple fallback methods:
 - Professional podcast page layout
 
 🔄 **Optional Enhancements**:
+
 - Real-time episode fetching (requires API credentials)
 - Automatic episode updates
 - Episode-specific Spotify embeds
@@ -71,11 +81,13 @@ The integration includes multiple fallback methods:
 ## Testing
 
 Run the test script to verify integration:
+
 ```bash
 node test-spotify.js
 ```
 
 This confirms:
+
 - Spotify show exists and is accessible
 - oEmbed API returns show information
 - Integration is properly configured
@@ -83,7 +95,7 @@ This confirms:
 ## Live URL
 
 The podcast is connected to the real Spotify show:
-https://open.spotify.com/show/7r1DNHAYJr4Xme88DvMBuX
+<https://open.spotify.com/show/7r1DNHAYJr4Xme88DvMBuX>
 
 ## Next Steps
 

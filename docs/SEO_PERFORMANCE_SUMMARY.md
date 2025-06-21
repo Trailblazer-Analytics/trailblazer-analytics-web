@@ -131,4 +131,4 @@ To further improve SEO and performance:
 
 ---
 
-*This document was last updated on June 4, 2025*
+**Last Updated:** June 4, 2025

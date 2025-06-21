@@ -1,18 +1,21 @@
 # GitHub Pages Deployment Configuration
 
 ## Overview
+
 The Trailblazer Analytics DevKit has been configured for automated deployment to GitHub Pages.
 
 ## Configuration Details
 
 ### Repository Information
-- **Repository**: https://github.com/anykolaiszyn/trailblazer-analytics-devkit
-- **GitHub Pages URL**: https://anykolaiszyn.github.io/trailblazer-analytics-devkit
+
+- **Repository**: <https://github.com/anykolaiszyn/trailblazer-analytics-devkit>
+- **GitHub Pages URL**: <https://anykolaiszyn.github.io/trailblazer-analytics-devkit>
 - **Deployment Branch**: main
 
 ### Files Modified
 
 #### 1. `astro.config.mjs`
+
 ```javascript
 export default defineConfig({
   integrations: [react(), tailwind(), mdx()],
@@ -23,17 +26,20 @@ export default defineConfig({
 ```
 
 #### 2. `src/site.config.js`
+
 - Updated `url` to GitHub Pages URL
 - Updated `plausibleDomain` for analytics
 - Updated `corsOrigins` for API calls
 
 #### 3. `.github/workflows/deploy.yml`
+
 - Created automated deployment workflow
 - Triggers on push to main branch
 - Uses Node.js 20 and npm for builds
 - Deploys to GitHub Pages using official actions
 
 #### 4. `.nojekyll` File Handling
+
 - Added to `.gitignore` to prevent tracking
 - Automatically created during GitHub Actions build process
 - Prevents Jekyll processing on GitHub Pages
@@ -41,13 +47,16 @@ export default defineConfig({
 ## Deployment Process
 
 ### Automatic Deployment
+
 1. Push changes to the `main` branch
 2. GitHub Actions automatically builds the site
 3. Deploys to GitHub Pages
-4. Site is available at: https://anykolaiszyn.github.io/trailblazer-analytics-devkit
+4. Site is available at: <https://anykolaiszyn.github.io/trailblazer-analytics-devkit>
 
 ### Manual Deployment
+
 You can also trigger deployment manually:
+
 1. Go to the Actions tab in your GitHub repository
 2. Select "Deploy to GitHub Pages" workflow
 3. Click "Run workflow"
@@ -56,7 +65,7 @@ You can also trigger deployment manually:
 
 To complete the setup, you need to enable GitHub Pages in your repository:
 
-1. Go to your repository: https://github.com/anykolaiszyn/trailblazer-analytics-devkit
+1. Go to your repository: <https://github.com/anykolaiszyn/trailblazer-analytics-devkit>
 2. Click on **Settings** tab
 3. Scroll down to **Pages** section
 4. Under **Source**, select "GitHub Actions"
@@ -65,9 +74,10 @@ To complete the setup, you need to enable GitHub Pages in your repository:
 ## First Deployment
 
 After enabling GitHub Pages:
+
 1. Push these configuration changes to your repository
 2. The GitHub Actions workflow will automatically run
-3. Your site will be live at: https://anykolaiszyn.github.io/trailblazer-analytics-devkit
+3. Your site will be live at: <https://anykolaiszyn.github.io/trailblazer-analytics-devkit>
 
 ## Features Enabled
 
@@ -82,6 +92,7 @@ After enabling GitHub Pages:
 ## Local Development
 
 For local development, continue using:
+
 ```bash
 npm run dev        # Development server
 npm run build      # Production build

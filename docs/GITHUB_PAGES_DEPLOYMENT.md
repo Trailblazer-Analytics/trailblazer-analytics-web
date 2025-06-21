@@ -37,11 +37,13 @@ npm run deploy:clean
 If you need to deploy manually without the scripts, follow these steps:
 
 1. Build the site:
+
    ```bash
    npm run build
    ```
 
 2. Deploy to GitHub Pages:
+
    ```bash
    npx gh-pages -d dist
    ```
@@ -63,6 +65,7 @@ We've added several debugging tools to help diagnose deployment issues:
 ### Debug Mode in Browser
 
 The site includes debug logging that can be enabled by:
+
 - Running locally in development mode
 - Adding `?debug=true` to any URL of the deployed site
 
@@ -75,6 +78,7 @@ npm run verify-build
 ```
 
 This will:
+
 - Check that all CSS/JS files exist in the assets directory
 - Verify that HTML files correctly reference these assets
 - Report any potential issues
@@ -86,7 +90,7 @@ This will:
 If you're experiencing 404 errors for CSS or JS files:
 
 1. **Check the asset paths**: Ensure that assets are being referenced correctly in the HTML with the correct base path.
-   
+
 2. **Verify the build output**: Use `npm run verify-build` to check if assets are being generated and referenced correctly.
 
 3. **Check browser console**: Look for network errors in the browser console to identify specific missing files.
