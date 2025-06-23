@@ -17,71 +17,98 @@ const seoData = {
 ---
 
 <Base {...seoData}>
-  <Navbar />
-    <!-- Hero Section - Trailblazer Edition -->
-  <section style="background: linear-gradient(135deg, #004225, #1D2E26, #004225); color: #FAFAFA; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;" class="relative bg-gradient-to-br from-trailblazerGreen via-deepGraphLine to-trailblazerGreen text-mutedWhite min-h-screen flex items-center overflow-hidden">
+  <Navbar />  <!-- Hero Section - Trailblazer Edition -->
+  <section style="background: linear-gradient(135deg, #F7F2E7, #FAFAFA, #F7F2E7); color: #111111; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;" class="relative bg-gradient-to-br from-ivorySand via-mutedWhite to-ivorySand text-softBlack min-h-screen flex items-center overflow-hidden">
     <!-- Trailblazer Background Elements -->
-    <div class="absolute inset-0 opacity-20">
+    <div class="absolute inset-0 opacity-15">
       <div class="absolute top-20 left-10 w-32 h-32 bg-goldAccent rounded-full transform rotate-45 animate-pulse"></div>
       <div class="absolute top-40 right-20 w-24 h-24 bg-trailblazerGreen rounded-full transform -rotate-12 animate-bounce"></div>
       <div class="absolute bottom-20 left-1/3 w-28 h-28 bg-goldAccent rounded-full transform rotate-12 opacity-60"></div>
-      <div class="absolute bottom-40 right-1/4 w-20 h-20 bg-ivorySand rounded-full transform -rotate-45 opacity-40"></div>
-      <div class="absolute top-1/2 left-1/2 w-36 h-36 bg-deepGraphLine rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-30"></div>
-    </div>
-      <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">
+      <div class="absolute bottom-40 right-1/4 w-20 h-20 bg-deepGraphLine rounded-full transform -rotate-45 opacity-40"></div>
+      <div class="absolute top-1/2 left-1/2 w-36 h-36 bg-trailblazerGreen rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-20"></div>
+    </div>      <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-6xl mx-auto">
         
-        <!-- Basic fallback text that should show even if CSS fails -->
-        <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 2rem;">Trailblazer Analytics</h1>
-        <p style="font-size: 1.5rem; margin-bottom: 2rem;">Where Data Trailblazers Unite</p>
-          <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">
-          <span class="inline-block transform -rotate-2 bg-goldAccent px-6 py-3 text-softBlack rounded-xl shadow-2xl">
-            Where Data
-          </span>
-          <br />
-          <span class="inline-block transform rotate-1 bg-gradient-to-r from-trailblazerGreen to-deepGraphLine px-6 py-3 rounded-xl shadow-2xl mt-4 text-mutedWhite">
-            Trailblazers Unite
-          </span>
-        </h1>
-        <p class="text-xl md:text-2xl mb-8 text-ivorySand max-w-3xl mx-auto leading-relaxed">
-          Welcome to my personal analytics journey! 
-          <br />
-          <span class="text-goldAccent font-semibold">
-            Creative insights, practical tools, and frameworks that actually work.
-          </span>
-        </p>        <!-- Trailblazer Stats Dashboard -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-          <div class="bg-ivorySand/10 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/20 transform hover:scale-105 transition-all duration-300">
-            <div class="text-2xl font-bold text-goldAccent">100%</div>
-            <div class="text-xs text-ivorySand font-medium">AUTHENTIC</div>
+        <!-- Hero Content Grid -->
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          
+          <!-- Left Side - Text Content -->
+          <div class="text-center lg:text-left">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight">
+              <span class="inline-block transform -rotate-2 bg-goldAccent px-6 py-3 text-softBlack rounded-xl shadow-2xl">
+                Where Data
+              </span>
+              <br />
+              <span class="inline-block transform rotate-1 bg-gradient-to-r from-trailblazerGreen to-deepGraphLine px-6 py-3 rounded-xl shadow-2xl mt-4 text-mutedWhite">
+                Trailblazers Unite
+              </span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-deepGraphLine max-w-3xl mx-auto lg:mx-0 leading-relaxed">
+              Welcome to my personal analytics journey! 
+              <br />
+              <span class="text-goldAccent font-semibold">
+                Creative insights, practical tools, and frameworks that actually work.
+              </span>
+            </p>
+            
+            <!-- Call to Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+              <a href="/blog" class="bg-goldAccent hover:bg-goldAccent/80 text-softBlack font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
+                Join the Journey
+              </a>
+              <a href="/tags" class="border-2 border-goldAccent text-goldAccent hover:bg-goldAccent hover:text-softBlack font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+                <span>🏷️</span>
+                Explore Topics
+                <span class="bg-ivorySand text-softBlack px-2 py-1 rounded-full text-xs font-bold transform -rotate-12">HOT</span>
+              </a>
+            </div>
+            
+            <!-- Tag Pills -->
+            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+              <span class="bg-trailblazerGreen text-mutedWhite px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🧭 Strategic Analytics</span>
+              <span class="bg-goldAccent text-softBlack px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">☕ Experience Driven</span>
+              <span class="bg-deepGraphLine text-mutedWhite px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🚀 Authentic Journey</span>
+            </div>
           </div>
-          <div class="bg-ivorySand/10 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/20 transform hover:scale-105 transition-all duration-300">
-            <div class="text-2xl font-bold text-goldAccent">100%</div>
-            <div class="text-xs text-ivorySand font-medium">REAL RESULTS</div>
+          
+          <!-- Right Side - Headshot & Stats -->
+          <div class="text-center">
+            <!-- Hero Headshot -->
+            <div class="relative inline-block mb-8">
+              <img 
+                src="/images/alexander-headshot-hero.png" 
+                alt="Alexander Nikolaiszyn - Analytics Trailblazer" 
+                class="w-80 h-80 lg:w-96 lg:h-96 object-cover rounded-full shadow-2xl border-4 border-goldAccent/30"
+              />
+              <!-- Compass Ring Overlay -->
+              <div class="absolute inset-0 rounded-full border-4 border-goldAccent/50 animate-spin-slow"></div>
+              <!-- Floating Badge -->
+              <div class="absolute -bottom-4 -right-4 bg-goldAccent text-softBlack px-4 py-2 rounded-full font-bold text-sm transform rotate-12 shadow-lg">
+                15+ Years Trailblazing
+              </div>
+            </div>
+            
+            <!-- Stats Dashboard -->
+            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="text-2xl font-bold text-goldAccent">100%</div>
+                <div class="text-xs text-deepGraphLine font-medium">AUTHENTIC</div>
+              </div>
+              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="text-2xl font-bold text-goldAccent">100%</div>
+                <div class="text-xs text-deepGraphLine font-medium">REAL RESULTS</div>
+              </div>
+              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="text-2xl font-bold text-goldAccent">∞</div>
+                <div class="text-xs text-deepGraphLine font-medium">COFFEE CUPS</div>
+              </div>
+              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div class="text-2xl font-bold text-goldAccent">24/7</div>
+                <div class="text-xs text-deepGraphLine font-medium">PROBLEM SOLVING</div>
+              </div>
+            </div>
           </div>
-          <div class="bg-ivorySand/10 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/20 transform hover:scale-105 transition-all duration-300">
-            <div class="text-2xl font-bold text-goldAccent">15+</div>
-            <div class="text-xs text-ivorySand font-medium">YEARS TRAILBLAZING</div>
-          </div>
-          <div class="bg-ivorySand/10 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/20 transform hover:scale-105 transition-all duration-300">
-            <div class="text-2xl font-bold text-goldAccent">∞</div>
-            <div class="text-xs text-ivorySand font-medium">COFFEE CUPS</div>
-          </div>
-        </div>
-          <div class="flex flex-wrap justify-center gap-3 mb-8">
-          <span class="bg-trailblazerGreen/20 text-goldAccent px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🧭 Strategic Analytics</span>
-          <span class="bg-deepGraphLine/20 text-ivorySand px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">☕ Experience Driven</span>
-          <span class="bg-goldAccent/20 text-trailblazerGreen px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🚀 Authentic Journey</span>
-        </div>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/blog" class="bg-goldAccent hover:bg-goldAccent/80 text-softBlack font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-            Join the Journey
-          </a>
-          <a href="/tags" class="border-2 border-goldAccent text-goldAccent hover:bg-goldAccent hover:text-softBlack font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
-            <span>🏷️</span>
-            Explore Topics
-            <span class="bg-ivorySand text-softBlack px-2 py-1 rounded-full text-xs font-bold transform -rotate-12">HOT</span>
-          </a>
+          
         </div>
       </div>
     </div>

@@ -16,6 +16,9 @@ export default {
         deepGraphLine: "#1D2E26",       // Chart and line iconography
         softBlack: "#111111",           // Typography on light backgrounds
         mutedWhite: "#FAFAFA"           // Typography on dark backgrounds
+      },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
       }
     }
   },
