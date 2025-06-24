@@ -7,7 +7,7 @@ import Footer from '../components/Footer.jsx';
 const seoData = {
   title: "About the Analytics Trailblazer - Data Journey Navigator | Alexander Nykolaiszyn",
   description: "Meet the human behind the trailblazing analytics journey. 15+ years of turning data chaos into business gold. Leading the charge in data-driven transformation and empowering analytics professionals.",
-  image: "/og-image-about.png"
+  image: "/images/alexander-headshot-hero.png"
 };
 ---
 
@@ -23,13 +23,26 @@ const seoData = {
       <div class="absolute bottom-40 right-1/4 w-16 h-16 bg-pink-400 rounded-full transform -rotate-45"></div>
       <div class="absolute top-1/2 left-1/2 w-28 h-28 bg-purple-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-30"></div>
     </div>
-    
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">
-        <!-- Creative Avatar -->
+      <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">        <!-- Logo Integration -->
+        <div class="flex items-center justify-center mb-8">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-white/10 backdrop-blur-sm border-2 border-brandGold/30 shadow-lg">
+            <img 
+              src="/images/trailblazer-logo.jpg" 
+              alt="Trailblazer Analytics Logo" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        
+        <!-- Professional Headshot -->
         <div class="relative inline-block mb-8">
-          <div class="w-40 h-40 bg-gradient-to-br from-brandGold to-orange-500 rounded-full flex items-center justify-center transform hover:rotate-12 transition-all duration-500 shadow-2xl">
-            <span class="text-black font-black text-5xl">AN</span>
+          <div class="w-40 h-40 rounded-full overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-500 ring-4 ring-brandGold/30">
+            <img 
+              src="/images/alexander-headshot-hero.png" 
+              alt="Alexander Nykolaiszyn - Analytics Trailblazer" 
+              class="w-full h-full object-cover"
+            />
           </div>
           <div class="absolute -top-2 -right-2 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold transform rotate-12">
             Analytics Trailblazer

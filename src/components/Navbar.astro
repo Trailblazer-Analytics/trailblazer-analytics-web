@@ -12,13 +12,16 @@ function buildUrl(path: string): string {
 ---
 
 <nav class="w-full px-6 py-4 bg-trailblazerGreen border-b border-deepGraphLine text-mutedWhite sticky top-0 z-50">
-  <div class="container mx-auto flex justify-between items-center">
-    <a href={buildUrl('')} class="font-bold text-xl flex items-center gap-3">
-      <div class="w-8 h-8 bg-goldAccent rounded-full flex items-center justify-center">
-        <span class="text-softBlack font-bold text-sm">TA</span>
+  <div class="container mx-auto flex justify-between items-center">    <a href={buildUrl('')} class="font-bold text-xl flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full overflow-hidden bg-goldAccent/20 border border-goldAccent/50">
+        <img 
+          src="/images/trailblazer-logo.jpg" 
+          alt="Trailblazer Analytics" 
+          class="w-full h-full object-cover"
+        />
       </div>
       Trailblazer Analytics
-    </a>    <!-- Desktop Navigation -->    <div class="hidden md:flex items-center space-x-6">
+    </a><!-- Desktop Navigation -->    <div class="hidden md:flex items-center space-x-6">
       <a href={buildUrl('/blog')} class="hover:text-goldAccent transition-colors">Blog</a>
       <a href={buildUrl('/insights')} class="hover:text-goldAccent transition-colors">Insights</a>
       
