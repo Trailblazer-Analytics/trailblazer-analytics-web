@@ -231,7 +231,7 @@ Submitted via Trailblazer Analytics contact form
           </div>
           <div class="field">
             <div class="label">Email:</div>
-            <div><a href="mailto:${email}">${email}</a></div>
+            <div><a href="mailto:alexnyk@trailblazeranalytics.com">alexnyk@trailblazeranalytics.com</a></div>
           </div>
           ${company ? `<div class="field"><div class="label">Company:</div><div>${company}</div></div>` : ''}
           ${projectType ? `<div class="field"><div class="label">Project Type:</div><div>${projectType}</div></div>` : ''}
