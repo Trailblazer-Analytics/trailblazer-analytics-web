@@ -1,12 +1,12 @@
 ---
 title: "The Art of Data Storytelling: When Numbers Need Narrative"
 description: "Exploring how to transform cold data into compelling stories that actually drive business decisions. Because spreadsheets don't sell themselves."
-date: "2025-01-15"
+publishDate: "2025-01-15"
+author: "Alexander Nykolaiszyn"
+heroImage: "/images/article-data-viz.jpg"
 tags: ["analytics", "storytelling", "bi", "data", "strategy"]
 featured: true
-vibe: "insight"
-readingTime: "8"
-difficulty: "intermediate"
+draft: false
 ---
 
 <!-- HOOK: Add your authentic voice and personality here -->

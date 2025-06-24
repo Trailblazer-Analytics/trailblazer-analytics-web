@@ -1,10 +1,10 @@
 ---
 title: "Building Disaster Intelligence: Future-Proofing Business Operations"
 description: "The COVID-19 pandemic revealed how unprepared many organizations were for long-term disruption. Learn how Disaster Intelligence can help build operational resilience through data-driven foresight and strategic planning."
-pubDate: 2020-05-19
+publishDate: 2020-05-19
 author: "Alexander Nykolaiszyn"
 tags: ["disaster-intelligence", "business-continuity", "data-strategy", "resilience", "covid-19", "business-intelligence", "remote-work", "digital-transformation"]
-image: "/images/article-data-strategy.jpg"
+heroImage: "/images/article-data-strategy.jpg"
 featured: false
 draft: false
 ---

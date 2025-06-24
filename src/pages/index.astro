@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import CaseStudyCard from '../components/CaseStudyCard.jsx';
 import NewsletterSignup from '../components/NewsletterSignup.jsx';
 
+// Force rebuild trigger - fix deployment issue
 const caseStudies = await getCollection('case-studies');
 
 // SEO meta data

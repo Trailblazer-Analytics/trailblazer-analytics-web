@@ -3,7 +3,7 @@ title: "From Continuity to Resilience: Using Disaster Intelligence to Strengthen
 description: "Transform your Business Continuity Plan from reactive crisis response to proactive resilience engine through Disaster Intelligence and data-driven scenario planning."
 publishDate: 2020-05-27
 author: "Alexander Nykolaiszyn"
-image: "/images/article-data-strategy.jpg"
+heroImage: "/images/article-data-strategy.jpg"
 tags: ["disaster-intelligence", "business-continuity", "resilience", "strategy", "data-strategy", "analytics"]
 featured: false
 ---
