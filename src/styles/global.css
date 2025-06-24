@@ -75,3 +75,52 @@
     @apply inline-block w-4 h-4 border-2 border-current border-r-transparent rounded-full animate-spin;
   }
 }
+
+/* Blog/Markdown Content Readability Improvements */
+.blog-content {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem 1rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  margin-top: 2.2em;
+  margin-bottom: 1em;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.blog-content p,
+.blog-content ul,
+.blog-content ol,
+.blog-content pre,
+.blog-content blockquote {
+  margin-bottom: 1.25em;
+}
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.5em;
+}
+.blog-content li + li {
+  margin-top: 0.4em;
+}
+.blog-content hr {
+  margin: 2.5em 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+.blog-content strong {
+  font-weight: 600;
+}
+.blog-content code {
+  background: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
