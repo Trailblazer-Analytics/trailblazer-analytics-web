@@ -37,7 +37,7 @@ const caseStudies = defineCollection({
     results: z.array(z.string()).optional(),
     technologies: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
-    image: z.string().optional(), // Added image field
+    image: z.string().optional(),
   }),
 });
 
@@ -52,7 +52,7 @@ const techNotes = defineCollection({
     category: z.enum(['Python', 'SQL', 'JavaScript', 'ML', 'Data Engineering', 'Visualization']).optional(),
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
-    image: z.string().optional(), // Added image field
+    image: z.string().optional(),
   }),
 });
 
@@ -109,12 +109,9 @@ const tools = defineCollection({
 
 export const collections = {
   blog,
-  caseStudies,
-  techNotes,
+  'case-studies': caseStudies,
+  'tech-notes': techNotes,
   whitepapers,
   downloads,
   tools,
-  // HOOK: Add folder-name aliases to prevent auto-generation warnings
-  'case-studies': caseStudies,
-  'tech-notes': techNotes,
 };

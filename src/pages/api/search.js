@@ -9,7 +9,7 @@ function normalize(text) {
     .replace(/[\u0300-\u036f]/g, '');
 }
 
-export async function get({ request }) {
+export async function GET({ request }) {
   try {
     // Get query from URL
     const url = new URL(request.url);

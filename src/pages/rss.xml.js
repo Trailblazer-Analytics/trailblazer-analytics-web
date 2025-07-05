@@ -40,18 +40,16 @@ export async function GET(context) {
     }
   }
   
-  // Get content from various collections - handle both camelCase and kebab-case
+  // Get content from available collections
   const blogPosts = await safeGetCollection('blog', 'blog');
-  const techNotes = await safeGetCollection('techNotes', 'tech-notes');
-  const caseStudies = await safeGetCollection('caseStudies', 'case-studies');
-  const podcastEpisodes = await safeGetCollection('podcast', 'podcast');
+  const techNotes = await safeGetCollection('tech-notes', 'tech-notes');
+  const caseStudies = await safeGetCollection('case-studies', 'case-studies');
   
   // Combine all content
   allContent = [
     ...blogPosts.map(item => ({ ...item, collectionType: 'blog' })),
     ...techNotes.map(item => ({ ...item, collectionType: 'tech-notes' })),
-    ...caseStudies.map(item => ({ ...item, collectionType: 'case-studies' })),
-    ...podcastEpisodes.map(item => ({ ...item, collectionType: 'podcast' }))
+    ...caseStudies.map(item => ({ ...item, collectionType: 'case-studies' }))
   ];
   
   // Sort content by date (newest first)
@@ -82,9 +80,6 @@ export async function GET(context) {
         break;
       case 'case-studies':
         url = `${cleanSite}/case-studies/${item.slug}`;
-        break;
-      case 'podcast':
-        url = `${cleanSite}/podcast/${item.slug}`;
         break;
       default:
         // Skip if we don't know how to handle this collection

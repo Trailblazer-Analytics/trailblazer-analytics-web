@@ -58,13 +58,12 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
     
     <!-- Preload critical resources -->
     <link rel="preload" href={buildAssetUrl('images/trailblazer-logo.jpg')} as="image" type="image/jpeg" />
-    <link rel="preload" href="/styles/global.css" as="style" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={type} />
-    <meta property="og:url" content="https://anykolaiszyn.github.io/trailblazer-analytics-devkit" />
+    <meta property="og:url" content={siteConfig.url} />
     <meta property="og:image" content={imageSrc} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
