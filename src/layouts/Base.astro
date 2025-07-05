@@ -83,59 +83,57 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
     <link rel="alternate" type="application/rss+xml" title="Trailblazer Analytics RSS Feed" href={buildAssetUrl('rss.xml')} />
     
     <!-- Enhanced Structured Data for Personal Brand -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": ["Person", "Brand"],
-        "name": "Alexander Nykolaiszyn",
-        "alternateName": "Trailblazer Analytics",
-        "description": "Analytics thought leader, data strategy expert, and creator helping professionals transform raw data into strategic insights",
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": ["Person", "Brand"],
+      "name": "Alexander Nykolaiszyn",
+      "alternateName": "Trailblazer Analytics",
+      "description": "Analytics thought leader, data strategy expert, and creator helping professionals transform raw data into strategic insights",
+      "url": siteConfig.url,
+      "image": siteConfig.url + "/images/alexander-headshot-hero.png",
+      "jobTitle": "Manager Business Insights & Analytics Thought Leader",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Lennar Corporation"
+      },
+      "expertise": [
+        "Business Intelligence",
+        "Data Strategy",
+        "Analytics Implementation", 
+        "AI Integration",
+        "Data Visualization",
+        "Business Process Automation"
+      ],
+      "sameAs": [
+        "https://linkedin.com/in/alexnyk",
+        "https://medium.com/@alex.nykolaiszyn",
+        "https://twitter.com/AlexanderKolaiszyn",
+        "https://github.com/anykolaiszyn"
+      ],
+      "knowsAbout": [
+        "Business Intelligence",
+        "Data Analytics", 
+        "Machine Learning",
+        "Data Visualization",
+        "Business Strategy",
+        "Digital Transformation"
+      ],
+      "mainEntity": {
+        "@type": "WebSite",
+        "name": "Trailblazer Analytics",
         "url": siteConfig.url,
-        "image": `${siteConfig.url}/images/alexander-headshot-hero.png`,
-        "jobTitle": "Manager Business Insights & Analytics Thought Leader",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Lennar Corporation"
+        "description": "Where Analytics Meets Rebellion - Unfiltered insights on data strategy, BI, and the art of turning numbers into business value",
+        "author": {
+          "@type": "Person",
+          "name": "Alexander Nykolaiszyn"
         },
-        "expertise": [
-          "Business Intelligence",
-          "Data Strategy",
-          "Analytics Implementation", 
-          "AI Integration",
-          "Data Visualization",
-          "Business Process Automation"
-        ],
-        "sameAs": [
-          "https://linkedin.com/in/alexnyk",
-          "https://medium.com/@alex.nykolaiszyn",
-          "https://twitter.com/AlexanderKolaiszyn",
-          "https://github.com/anykolaiszyn"
-        ],
-        "knowsAbout": [
-          "Business Intelligence",
-          "Data Analytics", 
-          "Machine Learning",
-          "Data Visualization",
-          "Business Strategy",
-          "Digital Transformation"
-        ],
-        "mainEntity": {
-          "@type": "WebSite",
-          "name": "Trailblazer Analytics",
-          "url": siteConfig.url,
-          "description": "Where Analytics Meets Rebellion - Unfiltered insights on data strategy, BI, and the art of turning numbers into business value",
-          "author": {
-            "@type": "Person",
-            "name": "Alexander Nykolaiszyn"
-          },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": `${siteConfig.url}/search?q={search_term_string}`,
-            "query-input": "required name=search_term_string"
-          }
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": siteConfig.url + "/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
         }
       }
-    </script>
+    })}></script>
     
     <!-- Analytics -->
     <script defer data-domain={siteConfig.plausibleDomain} src="https://plausible.io/js/plausible.js"></script>
