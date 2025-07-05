@@ -12,6 +12,7 @@ export default {  // Site Information
   hotjarId: "", // Add when configured// Social Media
   twitter: "@AlexNyk", // Real Twitter handle
   linkedin: "alexnyk", // Real LinkedIn profile
+  github: "alexnyk", // Real Github username
   medium: "@alex.nykolaiszyn", // Real Medium username
   
   // Business Information

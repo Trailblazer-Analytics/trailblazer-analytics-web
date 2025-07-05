@@ -1,0 +1,255 @@
+---
+// SaveForLater.astro - Bookmark functionality for content discovery
+export interface Props {
+  title: string;
+  url?: string;
+  type?: 'article' | 'tool' | 'resource';
+  className?: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const {
+  title,
+  url = '',
+  type = 'article',
+  className = '',
+  size = 'md'
+} = Astro.props;
+
+const currentUrl = url || Astro.url.pathname;
+
+const sizeClasses = {
+  sm: 'w-5 h-5',
+  md: 'w-6 h-6', 
+  lg: 'w-8 h-8'
+};
+
+const buttonSizes = {
+  sm: 'p-1',
+  md: 'p-2',
+  lg: 'p-3'
+};
+---
+
+<button
+  class={`save-for-later-btn ${buttonSizes[size]} rounded-full border border-gray-300 hover:border-blue-500 transition-all duration-200 group ${className}`}
+  data-url={currentUrl}
+  data-title={title}
+  data-type={type}
+  aria-label="Save for later"
+  title="Save this content to read later"
+>
+  <!-- Bookmark Icon -->
+  <svg 
+    class={`bookmark-icon ${sizeClasses[size]} text-gray-400 group-hover:text-blue-500 transition-colors duration-200`}
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24"
+  >
+    <path 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="2" 
+      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+    />
+  </svg>
+  
+  <!-- Saved Icon (filled) -->
+  <svg 
+    class={`bookmark-saved-icon ${sizeClasses[size]} text-blue-500 hidden`}
+    fill="currentColor" 
+    viewBox="0 0 24 24"
+  >
+    <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+  </svg>
+</button>
+
+<!-- Saved confirmation tooltip -->
+<div 
+  class="save-confirmation fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300 z-50"
+  role="alert"
+>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </svg>
+    <span class="save-message">Saved for later!</span>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const STORAGE_KEY = 'trailblazer_saved_content';
+    
+    // Load saved items from localStorage
+    function getSavedItems() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : [];
+      } catch (error) {
+        console.error('Error loading saved items:', error);
+        return [];
+      }
+    }
+    
+    // Save items to localStorage
+    function setSavedItems(items) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        // Dispatch custom event to update navbar count
+        window.dispatchEvent(new CustomEvent('savedItemsChanged'));
+      } catch (error) {
+        console.error('Error saving items:', error);
+      }
+    }
+    
+    // Check if item is already saved
+    function isItemSaved(url) {
+      const savedItems = getSavedItems();
+      return savedItems.some(item => item.url === url);
+    }
+    
+    // Add item to saved list
+    function saveItem(url, title, type) {
+      const savedItems = getSavedItems();
+      const newItem = {
+        url,
+        title,
+        type,
+        savedAt: new Date().toISOString(),
+        id: Date.now() // Simple ID generation
+      };
+      
+      // Check if already saved
+      if (!isItemSaved(url)) {
+        savedItems.push(newItem);
+        setSavedItems(savedItems);
+        return true;
+      }
+      return false;
+    }
+    
+    // Remove item from saved list
+    function removeItem(url) {
+      const savedItems = getSavedItems();
+      const filteredItems = savedItems.filter(item => item.url !== url);
+      setSavedItems(filteredItems);
+    }
+    
+    // Show confirmation message
+    function showConfirmation(message = 'Saved for later!') {
+      const confirmation = document.querySelector('.save-confirmation');
+      const messageEl = confirmation?.querySelector('.save-message');
+      
+      if (confirmation && messageEl) {
+        messageEl.textContent = message;
+        confirmation.classList.remove('translate-y-full', 'opacity-0');
+        confirmation.classList.add('translate-y-0', 'opacity-100');
+        
+        setTimeout(() => {
+          confirmation.classList.add('translate-y-full', 'opacity-0');
+          confirmation.classList.remove('translate-y-0', 'opacity-100');
+        }, 3000);
+      }
+    }
+    
+    // Update button appearance
+    function updateButtonState(button, isSaved) {
+      const bookmarkIcon = button.querySelector('.bookmark-icon');
+      const savedIcon = button.querySelector('.bookmark-saved-icon');
+      
+      if (isSaved) {
+        bookmarkIcon?.classList.add('hidden');
+        savedIcon?.classList.remove('hidden');
+        button.setAttribute('aria-label', 'Remove from saved');
+        button.setAttribute('title', 'Remove from saved items');
+        button.classList.add('bg-blue-50', 'border-blue-500');
+      } else {
+        bookmarkIcon?.classList.remove('hidden');
+        savedIcon?.classList.add('hidden');
+        button.setAttribute('aria-label', 'Save for later');
+        button.setAttribute('title', 'Save this content to read later');
+        button.classList.remove('bg-blue-50', 'border-blue-500');
+      }
+    }
+    
+    // Initialize buttons
+    const saveButtons = document.querySelectorAll('.save-for-later-btn');
+    
+    saveButtons.forEach(button => {
+      const url = button.dataset.url;
+      const title = button.dataset.title;
+      const type = button.dataset.type;
+      
+      if (!url || !title) return;
+      
+      // Set initial state
+      const isSaved = isItemSaved(url);
+      updateButtonState(button, isSaved);
+      
+      // Handle click
+      button.addEventListener('click', () => {
+        const currentlySaved = isItemSaved(url);
+        
+        if (currentlySaved) {
+          // Remove from saved
+          removeItem(url);
+          updateButtonState(button, false);
+          showConfirmation('Removed from saved items');
+        } else {
+          // Add to saved
+          const success = saveItem(url, title, type);
+          if (success) {
+            updateButtonState(button, true);
+            showConfirmation('Saved for later!');
+            
+            // Analytics tracking
+            if ((window as any).gtag) {
+              (window as any).gtag('event', 'content_save', {
+                content_type: type,
+                item_id: url,
+                content_title: title
+              });
+            }
+          }
+        }
+      });
+    });
+    
+    // Expose global functions for other components
+    (window as any).TrailblazerSaved = {
+      getSavedItems,
+      isItemSaved,
+      saveItem,
+      removeItem
+    };
+  });
+</script>
+
+<style>
+  .save-for-later-btn {
+    @apply transform hover:scale-110;
+  }
+  
+  .save-for-later-btn:active {
+    @apply scale-95;
+  }
+  
+  .save-confirmation {
+    @apply pointer-events-none select-none;
+  }
+  
+  /* Pulse animation for saved state */
+  .save-for-later-btn.bg-blue-50 {
+    animation: pulse-blue 2s infinite;
+  }
+  
+  @keyframes pulse-blue {
+    0%, 100% {
+      background-color: rgb(239 246 255); /* bg-blue-50 */
+    }
+    50% {
+      background-color: rgb(219 234 254); /* bg-blue-100 */
+    }
+  }
+</style>

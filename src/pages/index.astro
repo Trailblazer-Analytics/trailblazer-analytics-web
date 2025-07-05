@@ -4,7 +4,8 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
 import { getCollection } from 'astro:content';
 import CaseStudyCard from '../components/CaseStudyCard.jsx';
-import NewsletterSignup from '../components/NewsletterSignup.jsx';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import SocialShare from '../components/SocialShare.astro';
 
 // Force rebuild trigger - fix deployment issue
 const caseStudies = await getCollection('case-studies');
@@ -18,108 +19,49 @@ const seoData = {
 ---
 
 <Base {...seoData}>
-  <Navbar />  <!-- Hero Section - Trailblazer Edition -->
-  <section style="background: linear-gradient(135deg, #F7F2E7, #FAFAFA, #F7F2E7); color: #111111; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;" class="relative bg-gradient-to-br from-ivorySand via-mutedWhite to-ivorySand text-softBlack min-h-screen flex items-center overflow-hidden">
-    <!-- Trailblazer Background Elements -->
-    <div class="absolute inset-0 opacity-15">
-      <div class="absolute top-20 left-10 w-32 h-32 bg-goldAccent rounded-full transform rotate-45 animate-pulse"></div>
-      <div class="absolute top-40 right-20 w-24 h-24 bg-trailblazerGreen rounded-full transform -rotate-12 animate-bounce"></div>
-      <div class="absolute bottom-20 left-1/3 w-28 h-28 bg-goldAccent rounded-full transform rotate-12 opacity-60"></div>
-      <div class="absolute bottom-40 right-1/4 w-20 h-20 bg-deepGraphLine rounded-full transform -rotate-45 opacity-40"></div>
-      <div class="absolute top-1/2 left-1/2 w-36 h-36 bg-trailblazerGreen rounded-full transform -translate-x-1/2 -translate-y-1/2 rotate-45 opacity-20"></div>
-    </div>      <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-6xl mx-auto">
+  <Navbar />  <!-- Hero Section - Simplified & Professional -->
+  <section class="bg-gradient-to-br from-ivorySand via-mutedWhite to-ivorySand text-softBlack py-20 md:py-32">
+    <div class="container mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
         
-        <!-- Hero Content Grid -->
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <!-- Left Side - Text Content -->
-          <div class="text-center lg:text-left">            <!-- Logo Integration -->
-            <div class="flex justify-center lg:justify-start mb-6">
-              <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-white/20 backdrop-blur-sm border-2 border-goldAccent/50 shadow-lg">
-                <img 
-                  src="/images/trailblazer-logo.jpg" 
-                  alt="Trailblazer Analytics Logo" 
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight">
-              <span class="inline-block transform -rotate-2 bg-goldAccent px-6 py-3 text-softBlack rounded-xl shadow-2xl">
-                Where Data
-              </span>
-              <br />
-              <span class="inline-block transform rotate-1 bg-gradient-to-r from-trailblazerGreen to-deepGraphLine px-6 py-3 rounded-xl shadow-2xl mt-4 text-mutedWhite">
-                Trailblazers Unite
-              </span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 text-deepGraphLine max-w-3xl mx-auto lg:mx-0 leading-relaxed">
-              Welcome to my personal analytics journey! 
-              <br />
-              <span class="text-goldAccent font-semibold">
-                Creative insights, practical tools, and frameworks that actually work.
-              </span>
-            </p>
-            
-            <!-- Call to Action Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-              <a href="/blog" class="bg-goldAccent hover:bg-goldAccent/80 text-softBlack font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-                Join the Journey
-              </a>
-              <a href="/tags" class="border-2 border-goldAccent text-goldAccent hover:bg-goldAccent hover:text-softBlack font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
-                <span>🏷️</span>
-                Explore Topics
-                <span class="bg-ivorySand text-softBlack px-2 py-1 rounded-full text-xs font-bold transform -rotate-12">HOT</span>
-              </a>
-            </div>
-            
-            <!-- Tag Pills -->
-            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
-              <span class="bg-trailblazerGreen text-mutedWhite px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🧭 Strategic Analytics</span>
-              <span class="bg-goldAccent text-softBlack px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">☕ Experience Driven</span>
-              <span class="bg-deepGraphLine text-mutedWhite px-4 py-2 rounded-full transform hover:scale-110 transition-all duration-300">🚀 Authentic Journey</span>
-            </div>
-          </div>
+        <!-- Left Side - Text Content -->
+        <div class="text-center lg:text-left">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-deepGraphLine">
+            Where Analytics Meets <span class="text-goldAccent">Rebellion</span> 🔥
+          </h1>
+          <p class="text-lg md:text-xl mb-8 text-deepGraphLine max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            15+ years of turning data chaos into gold ✨ Join the journey where boring dashboards come to die and insights actually spark joy.
+          </p>
           
-          <!-- Right Side - Headshot & Stats -->
-          <div class="text-center">
-            <!-- Hero Headshot -->
-            <div class="relative inline-block mb-8">
-              <img 
-                src="/images/alexander-headshot-hero.png" 
-                alt="Alexander Nikolaiszyn - Analytics Trailblazer" 
-                class="w-80 h-80 lg:w-96 lg:h-96 object-cover rounded-full shadow-2xl border-4 border-goldAccent/30"
-              />
-              <!-- Compass Ring Overlay -->
-              <div class="absolute inset-0 rounded-full border-4 border-goldAccent/50 animate-spin-slow"></div>
-              <!-- Floating Badge -->
-              <div class="absolute -bottom-4 -right-4 bg-goldAccent text-softBlack px-4 py-2 rounded-full font-bold text-sm transform rotate-12 shadow-lg">
-                15+ Years Trailblazing
-              </div>
-            </div>
-            
-            <!-- Stats Dashboard -->
-            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
-              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
-                <div class="text-2xl font-bold text-goldAccent">100%</div>
-                <div class="text-xs text-deepGraphLine font-medium">AUTHENTIC</div>
-              </div>
-              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
-                <div class="text-2xl font-bold text-goldAccent">100%</div>
-                <div class="text-xs text-deepGraphLine font-medium">REAL RESULTS</div>
-              </div>
-              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
-                <div class="text-2xl font-bold text-goldAccent">∞</div>
-                <div class="text-xs text-deepGraphLine font-medium">COFFEE CUPS</div>
-              </div>
-              <div class="bg-mutedWhite/80 backdrop-blur-sm rounded-xl p-4 border border-goldAccent/30 shadow-lg transform hover:scale-105 transition-all duration-300">
-                <div class="text-2xl font-bold text-goldAccent">24/7</div>
-                <div class="text-xs text-deepGraphLine font-medium">PROBLEM SOLVING</div>
-              </div>
-            </div>
+          <!-- Call to Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a href="/blog" class="bg-goldAccent hover:bg-goldAccent/80 text-softBlack font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg">
+              🚀 Join the Rebellion
+            </a>
+            <a href="/tags" class="border-2 border-goldAccent text-goldAccent hover:bg-goldAccent hover:text-softBlack font-bold py-3 px-8 rounded-lg transition-all flex items-center gap-2">
+              <span>🏷️ Explore Topics</span>
+              <span class="bg-goldAccent text-softBlack px-2 py-1 rounded-full text-xs font-bold transform -rotate-12">HOT</span>
+            </a>
           </div>
-          
         </div>
+        
+        <!-- Right Side - Headshot -->
+        <div class="flex justify-center lg:justify-end">
+          <div class="relative w-64 h-64 md:w-80 md:h-80">
+            <img 
+              src="/images/alexander-headshot-hero.png" 
+              alt="Alexander Nikolaiszyn" 
+              class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-goldAccent/50"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <div class="absolute -bottom-4 -right-4 bg-trailblazerGreen text-mutedWhite px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
+              Analytics Rebel ⚡
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>  <!-- Value Proposition Section - Trailblazer Edition -->
@@ -190,7 +132,15 @@ const seoData = {
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Insights & Resources</h2>
-        <p class="text-xl text-gray-600">Stay ahead with expert analysis, tools, and strategies.</p>
+        <p class="text-xl text-gray-600 mb-6">Stay ahead with expert analysis, tools, and strategies.</p>
+        
+        <!-- Random Insight Button -->
+        <button 
+          id="random-insight-btn"
+          class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2 mx-auto"
+        >
+          🎲 Surprise Me with an Insight!
+        </button>
       </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
           <div class="p-6">
@@ -264,8 +214,9 @@ const seoData = {
       <div class="max-w-md mx-auto">
         <NewsletterSignup 
           title="Join the Rebellion"
-          description="Get weekly doses of rebellious insights, creative tools, and career-boosting tips."
-          theme="light"
+          description="Get weekly doses of rebellious insights, creative tools, and career-boosting tips. No boring corporate newsletters here!"
+          leadMagnet="Free Download: Analytics ROI Calculator + 5 Data Strategy Templates"
+          variant="inline"
         />
       </div>
     </div>
@@ -273,3 +224,35 @@ const seoData = {
 
   <Footer />
 </Base>
+
+<script>
+  // Random Insight Button Functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const randomBtn = document.getElementById('random-insight-btn');
+    
+    // Array of popular blog posts and insights
+    const insights = [
+      '/blog/data-transformation-journey',
+      '/blog/analytics-automation-guide',
+      '/blog/bi-dashboard-best-practices',
+      '/tags',
+      '/downloads',
+      '/tools',
+      '/podcast',
+      '/case-studies'
+    ];
+    
+    if (randomBtn) {
+      randomBtn.addEventListener('click', function() {
+        // Add some fun animation
+        randomBtn.style.transform = 'scale(0.95)';
+        randomBtn.textContent = '🎲 Loading magic...';
+        
+        setTimeout(() => {
+          const randomInsight = insights[Math.floor(Math.random() * insights.length)];
+          window.location.href = randomInsight;
+        }, 800);
+      });
+    }
+  });
+</script>

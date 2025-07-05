@@ -1,4 +1,7 @@
 ---
+import siteConfig from '../site.config.js';
+import OptimizedImage from './OptimizedImage.astro';
+
 // Helper function to build proper URLs
 function buildUrl(path: string): string {
   const base = import.meta.env.BASE_URL;
@@ -14,80 +17,90 @@ function buildUrl(path: string): string {
 <nav class="w-full px-6 py-4 bg-trailblazerGreen border-b border-deepGraphLine text-mutedWhite sticky top-0 z-50">
   <div class="container mx-auto flex justify-between items-center">    <a href={buildUrl('')} class="font-bold text-xl flex items-center gap-3">
       <div class="w-8 h-8 rounded-full overflow-hidden bg-goldAccent/20 border border-goldAccent/50">
-        <img 
+        <OptimizedImage
           src="/images/trailblazer-logo.jpg" 
           alt="Trailblazer Analytics" 
+          width={32}
+          height={32}
           class="w-full h-full object-cover"
+          priority={true}
+          format="webp"
         />
       </div>
       Trailblazer Analytics
-    </a><!-- Desktop Navigation -->    <div class="hidden md:flex items-center space-x-6">
-      <a href={buildUrl('/blog')} class="hover:text-goldAccent transition-colors">Blog</a>
-      <a href={buildUrl('/insights')} class="hover:text-goldAccent transition-colors">Insights</a>
+    </a>    <!-- Desktop Navigation -->    <div class="hidden md:flex items-center space-x-6">
+      <!-- Content Dropdown -->
+      <div class="relative group">
+        <button class="flex items-center gap-1 hover:text-goldAccent transition-colors">
+          📚 Content
+          <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute top-full left-0 mt-2 w-56 bg-trailblazerGreen rounded-lg shadow-lg border border-deepGraphLine opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+          <div class="p-2">
+            <a href={buildUrl('/blog')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              ✍️ Blog Posts
+            </a>
+            <a href={buildUrl('/case-studies')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              🏆 Success Stories
+            </a>
+            <a href={buildUrl('/tech-notes')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              ⚡ Pro Tips
+            </a>
+            <a href={buildUrl('/whitepapers')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              📖 Deep Dives
+            </a>
+          </div>
+        </div>
+      </div>
       
-      <!-- Featured Tags Experience -->
+      <a href={buildUrl('/podcast')} class="hover:text-goldAccent transition-colors">🎙️ Podcast</a>
+      <a href={buildUrl('/youtube')} class="hover:text-goldAccent transition-colors">📺 YouTube</a>
       <a href={buildUrl('/tags')} class="relative hover:text-goldAccent transition-colors flex items-center gap-2 group">
         <span>🏷️ Topics</span>
         <span class="bg-goldAccent text-softBlack text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">HOT</span>
       </a>
       
-      <!-- Resources Dropdown -->
+      <!-- Tools Dropdown -->
       <div class="relative group">
-        <button class="flex items-center gap-1 hover:text-brandGold transition-colors">
-          Resources
+        <button class="flex items-center gap-1 hover:text-goldAccent transition-colors">
+          🛠️ Tools
           <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-        <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+        <div class="absolute top-full left-0 mt-2 w-48 bg-trailblazerGreen rounded-lg shadow-lg border border-deepGraphLine opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
           <div class="p-2">
-            <a href={buildUrl('/resources')} class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-              </svg>
-              All Resources
+            <a href={buildUrl('/downloads')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              📥 Downloads
             </a>
-            <div class="border-t border-gray-100 my-2"></div>
-            <a href={buildUrl('/downloads')} class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              Downloads
-            </a>
-            <a href={buildUrl('/tools')} class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              Tools
-            </a>
-            <a href={buildUrl('/white-papers')} class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-              </svg>
-              White Papers
-            </a>            <a href={buildUrl('/case-studies')} class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-              </svg>
-              Case Studies
-            </a>
-            <a href={buildUrl('/youtube')} class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
-              <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136C4.495 20.455 12 20.455 12 20.455s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-              YouTube
+            <a href={buildUrl('/tools')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              🔧 Calculators
             </a>
           </div>
         </div>
-      </div>        <a href={buildUrl('/podcast')} class="hover:text-goldAccent transition-colors">Podcast</a>
+      </div>
+      
+      <a href={buildUrl('/support')} class="hover:text-goldAccent transition-colors">☕ Support</a>
       <a href={buildUrl('/blaze-the-trail')} class="relative hover:text-goldAccent transition-colors flex items-center gap-2 group">
-        <span>🔥 Blaze the Trail</span>
+        <span>🔥 Community</span>
         <span class="bg-goldAccent text-softBlack text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">SOON</span>
       </a>
-      <a href={buildUrl('/support')} class="hover:text-goldAccent transition-colors">Support</a>
       <a href={buildUrl('/about')} class="hover:text-goldAccent transition-colors">About</a>
+      
+      <!-- Personal Tools -->
+      <a href={buildUrl('/saved')} class="relative hover:text-goldAccent transition-colors flex items-center gap-2" title="Your saved content">
+        <span>📚 Saved</span>
+        <span id="saved-count" class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-bold hidden"></span>
+      </a>
+      
       <a href={buildUrl('/connect')} class="bg-goldAccent text-softBlack px-4 py-2 rounded-lg font-semibold hover:bg-goldAccent/80 transition-colors">Connect</a>
+      <a href={`https://github.com/${siteConfig.github}`} target="_blank" rel="noopener noreferrer" aria-label="github" class="text-mutedWhite hover:text-goldAccent transition-colors">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
     </div>
       <!-- Mobile Menu Button -->
     <button id="mobile-menu-button" class="md:hidden text-mutedWhite hover:text-goldAccent transition-colors">
@@ -99,44 +112,37 @@ function buildUrl(path: string): string {
       </svg>
     </button>
   </div>
-  <!-- Mobile Navigation Menu -->  <div id="mobile-menu" class="hidden md:hidden border-t border-deepGraphLine bg-trailblazerGreen">    <div class="container mx-auto px-6 py-4 space-y-4">
-      <a href={buildUrl('/blog')} class="block text-mutedWhite hover:text-goldAccent transition-colors py-2">Blog</a>
-      <a href={buildUrl('/insights')} class="block text-mutedWhite hover:text-goldAccent transition-colors py-2">Insights</a>
+  <!-- Mobile Navigation Menu -->  <div id="mobile-menu" class="hidden absolute top-16 right-6 w-56 bg-trailblazerGreen border border-deepGraphLine rounded-lg shadow-lg p-4 md:hidden">      
+      <!-- Content Section -->
+      <div class="mb-4">
+        <h4 class="text-goldAccent font-semibold mb-2">📚 Content</h4>
+        <a href={buildUrl('/blog')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">✍️ Blog Posts</a>
+        <a href={buildUrl('/case-studies')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">🏆 Success Stories</a>
+        <a href={buildUrl('/tech-notes')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">⚡ Pro Tips</a>
+        <a href={buildUrl('/whitepapers')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">📖 Deep Dives</a>
+      </div>
       
-      <!-- Featured Tags Experience -->
-      <a href={buildUrl('/tags')} class="flex items-center justify-between text-mutedWhite hover:text-goldAccent transition-colors py-2 group">
-        <span class="flex items-center gap-2">
-          <span>🏷️</span>
-          <span>Topics</span>
-        </span>
-        <span class="bg-goldAccent text-softBlack text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">HOT</span>
+      <a href={buildUrl('/podcast')} class="block py-2 hover:text-goldAccent transition-colors">🎙️ Podcast</a>
+      <a href={buildUrl('/youtube')} class="block py-2 hover:text-goldAccent transition-colors">📺 YouTube</a>
+      <a href={buildUrl('/tags')} class="block py-2 hover:text-goldAccent transition-colors">🏷️ Topics</a>
+      
+      <!-- Tools Section -->
+      <div class="mb-4 mt-4">
+        <h4 class="text-goldAccent font-semibold mb-2">🛠️ Tools</h4>
+        <a href={buildUrl('/downloads')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">📥 Downloads</a>
+        <a href={buildUrl('/tools')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">🔧 Calculators</a>
+      </div>
+      
+      <a href={buildUrl('/support')} class="block py-2 hover:text-goldAccent transition-colors">☕ Support</a>
+      <a href={buildUrl('/blaze-the-trail')} class="block py-2 hover:text-goldAccent transition-colors">🔥 Community</a>
+      <a href={buildUrl('/about')} class="block py-2 hover:text-goldAccent transition-colors">About</a>
+      <a href={buildUrl('/connect')} class="block mt-2 text-center bg-goldAccent text-softBlack px-4 py-2 rounded-lg font-semibold hover:bg-goldAccent/80 transition-colors">Connect</a>
+      <a href={`https://github.com/${siteConfig.github}`} target="_blank" rel="noopener noreferrer" aria-label="github" class="block mt-4 text-center text-mutedWhite hover:text-goldAccent transition-colors">
+        <svg class="w-6 h-6 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
       </a>
-        <!-- Resources Section in Mobile -->
-      <div class="py-2">
-        <a href={buildUrl('/resources')} class="block text-mutedWhite hover:text-goldAccent transition-colors pb-2 font-medium">Resources</a>
-        <div class="pl-4 space-y-2 border-l-2 border-deepGraphLine">
-          <a href={buildUrl('/downloads')} class="block text-ivorySand hover:text-goldAccent transition-colors py-1 text-sm">📥 Downloads</a>
-          <a href={buildUrl('/tools')} class="block text-ivorySand hover:text-goldAccent transition-colors py-1 text-sm">🛠️ Tools</a>          <a href={buildUrl('/white-papers')} class="block text-ivorySand hover:text-goldAccent transition-colors py-1 text-sm">📄 White Papers</a>
-          <a href={buildUrl('/case-studies')} class="block text-ivorySand hover:text-goldAccent transition-colors py-1 text-sm">📊 Case Studies</a>
-          <a href={buildUrl('/youtube')} class="block text-ivorySand hover:text-goldAccent transition-colors py-1 text-sm">🎥 YouTube</a>
-        </div>
-      </div>      
-      <a href={buildUrl('/podcast')} class="block text-mutedWhite hover:text-goldAccent transition-colors py-2">Podcast</a>
-      
-      <!-- Blaze the Trail Section in Mobile -->
-      <a href={buildUrl('/blaze-the-trail')} class="flex items-center justify-between text-mutedWhite hover:text-goldAccent transition-colors py-2 group">
-        <span class="flex items-center gap-2">
-          <span>🔥</span>
-          <span>Blaze the Trail</span>
-        </span>
-        <span class="bg-goldAccent text-softBlack text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">SOON</span>
-      </a>
-      
-      <a href={buildUrl('/support')} class="block text-mutedWhite hover:text-goldAccent transition-colors py-2">Support</a>
-      <a href={buildUrl('/about')} class="block text-mutedWhite hover:text-goldAccent transition-colors py-2">About</a>
-      <a href={buildUrl('/connect')} class="block bg-goldAccent text-softBlack px-4 py-3 rounded-lg hover:bg-goldAccent/80 transition-colors font-medium text-center mt-4">Connect</a>
     </div>
-  </div>
 </nav>
 
 <script>
@@ -165,4 +171,36 @@ function buildUrl(path: string): string {
       });
     }
   });
+  
+  // Update saved items count in navbar
+  function updateSavedCount() {
+    const STORAGE_KEY = 'trailblazer_saved_content';
+    const savedCountEl = document.getElementById('saved-count');
+    
+    if (savedCountEl) {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const items = saved ? JSON.parse(saved) : [];
+        const count = items.length;
+        
+        if (count > 0) {
+          savedCountEl.textContent = count;
+          savedCountEl.classList.remove('hidden');
+        } else {
+          savedCountEl.classList.add('hidden');
+        }
+      } catch (error) {
+        console.error('Error reading saved items count:', error);
+      }
+    }
+  }
+  
+  // Update count on page load
+  updateSavedCount();
+  
+  // Listen for storage changes (when items are saved/removed)
+  window.addEventListener('storage', updateSavedCount);
+  
+  // Also listen for custom events from the SaveForLater component
+  window.addEventListener('savedItemsChanged', updateSavedCount);
 </script>

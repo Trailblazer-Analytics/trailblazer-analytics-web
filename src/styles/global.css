@@ -74,6 +74,47 @@
   .spinner {
     @apply inline-block w-4 h-4 border-2 border-current border-r-transparent rounded-full animate-spin;
   }
+
+  /* Mobile touch improvements */
+  @media (max-width: 768px) {
+    /* Ensure buttons are minimum 44px for touch */
+    button,
+    [role="button"],
+    .btn,
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Better spacing for mobile */
+    .mobile-spacing {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Larger text for readability */
+    body {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+
+  /* Fun animations for the rebellious vibe */
+  .hover-dance:hover {
+    animation: dance 0.5s ease-in-out;
+  }
+
+  @keyframes dance {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(1deg);
+    }
+    75% {
+      transform: rotate(-1deg);
+    }
+  }
 }
 
 /* Blog/Markdown Content Readability Improvements */

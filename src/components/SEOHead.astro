@@ -1,0 +1,115 @@
+---
+// SEOHead.astro - Enhanced SEO component for different content types
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article' | 'profile';
+  publishDate?: string;
+  author?: string;
+  tags?: string[];
+  canonicalUrl?: string;
+  noIndex?: boolean;
+  readingTime?: string | number;
+  category?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/og-image.png',
+  type = 'website',
+  publishDate,
+  author = 'Alexander Nykolaiszyn',
+  tags = [],
+  canonicalUrl,
+  noIndex = false,
+  readingTime,
+  category
+} = Astro.props;
+
+// Build URLs
+function buildUrl(path: string): string {
+  const base = 'https://anykolaiszyn.github.io/trailblazer-analytics-devkit';
+  return `${base}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
+const fullTitle = `${title} | Trailblazer Analytics`;
+const imageUrl = image.startsWith('http') ? image : buildUrl(image);
+const currentUrl = canonicalUrl || buildUrl(Astro.url.pathname);
+
+// Structured data for articles
+const articleStructuredData = type === 'article' ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "image": imageUrl,
+  "author": {
+    "@type": "Person",
+    "name": author,
+    "url": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Alexander Nykolaiszyn",
+    "logo": {
+      "@type": "ImageObject",
+      "url": buildUrl("/images/trailblazer-logo.jpg")
+    }
+  },
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": currentUrl
+  },
+  "keywords": tags.join(', '),
+  ...(readingTime && { "timeRequired": `PT${readingTime}M` }),
+  ...(category && { "articleSection": category })
+} : null;
+---
+
+<!-- Enhanced Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={currentUrl} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Enhanced Open Graph -->
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Trailblazer Analytics" />
+<meta property="og:locale" content="en_US" />
+
+{type === 'article' && publishDate && (
+  <>
+    <meta property="article:published_time" content={publishDate} />
+    <meta property="article:author" content={author} />
+    {tags.map(tag => <meta property="article:tag" content={tag} />)}
+    {category && <meta property="article:section" content={category} />}
+  </>
+)}
+
+<!-- Enhanced Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:site" content="@TrailblazerAnalytics" />
+<meta name="twitter:creator" content="@AlexanderKolaiszyn" />
+
+<!-- Additional SEO Meta -->
+<meta name="author" content={author} />
+{tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
+{readingTime && <meta name="reading-time" content={`${readingTime} minutes`} />}
+
+<!-- Structured Data -->
+{articleStructuredData && (
+  <script type="application/ld+json" set:html={JSON.stringify(articleStructuredData)} />
+)}

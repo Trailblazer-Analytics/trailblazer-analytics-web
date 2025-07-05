@@ -1,0 +1,205 @@
+---
+// NewsletterSignup.astro - Newsletter signup with lead magnet for engagement
+export interface Props {
+  title?: string;
+  description?: string;
+  leadMagnet?: string;
+  className?: string;
+  variant?: 'inline' | 'modal' | 'sidebar';
+  placeholder?: string;
+}
+
+const {
+  title = "Join the Rebellion 🔥",
+  description = "Get exclusive analytics insights, data strategy secrets, and the tools that actually work. No fluff, just results.",
+  leadMagnet = "Free: Analytics ROI Calculator + 5 Data Strategy Templates",
+  className = "",
+  variant = "inline",
+  placeholder = "your.email@domain.com"
+} = Astro.props;
+
+const variantClasses = {
+  inline: "p-6 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200",
+  modal: "p-8 bg-white border border-gray-200 shadow-xl",
+  sidebar: "p-4 bg-gray-50 border border-gray-200"
+};
+---
+
+<div class={`newsletter-signup ${variantClasses[variant]} rounded-lg ${className}`}>
+  <div class="max-w-md mx-auto text-center">
+    <!-- Header -->
+    <div class="mb-4">
+      <h3 class="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">{description}</p>
+    </div>
+
+    <!-- Lead Magnet -->
+    {leadMagnet && (
+      <div class="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg">
+        <div class="flex items-center justify-center gap-2 text-yellow-800">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+          </svg>
+          <span class="font-medium text-sm">{leadMagnet}</span>
+        </div>
+      </div>
+    )}
+
+    <!-- Signup Form -->
+    <form class="newsletter-form" data-variant={variant}>
+      <div class="flex gap-2 mb-3">
+        <input
+          type="email"
+          required
+          placeholder={placeholder}
+          class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          name="email"
+          id={`newsletter-email-${variant}`}
+        />
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 text-sm"
+        >
+          Join
+        </button>
+      </div>
+      
+      <!-- Status Messages -->
+      <div class="status-message hidden" role="alert">
+        <div class="success-message hidden text-green-700 text-sm">
+          🎉 Welcome to the rebellion! Check your email for goodies.
+        </div>
+        <div class="error-message hidden text-red-700 text-sm">
+          Oops! Something went wrong. Please try again.
+        </div>
+      </div>
+      
+      <!-- Privacy Note -->
+      <p class="text-xs text-gray-500 mt-2">
+        No spam, ever. Unsubscribe anytime. 
+        <a href="/privacy" class="text-blue-600 hover:underline">Privacy Policy</a>
+      </p>
+    </form>
+
+    <!-- Social Proof (if applicable) -->
+    <div class="mt-4 text-xs text-gray-500">
+      <span class="flex items-center justify-center gap-1">
+        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        Join 500+ data rebels getting actionable insights
+      </span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('.newsletter-form');
+    
+    forms.forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form as HTMLFormElement);
+        const email = formData.get('email') as string;
+        const variant = form.getAttribute('data-variant');
+        
+        // Get status elements
+        const statusContainer = form.querySelector('.status-message');
+        const successMessage = form.querySelector('.success-message');
+        const errorMessage = form.querySelector('.error-message');
+        const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+        
+        if (!email || !statusContainer || !successMessage || !errorMessage || !submitButton) return;
+        
+        // Reset status
+        statusContainer.classList.add('hidden');
+        successMessage.classList.add('hidden');
+        errorMessage.classList.add('hidden');
+        
+        // Loading state
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'Joining...';
+        submitButton.disabled = true;
+        
+        try {
+          // Simulate API call - Replace with actual newsletter service
+          // For now, we'll just simulate a successful signup
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // TODO: Replace with actual newsletter service integration
+          // Examples: Mailchimp, ConvertKit, EmailOctopus, etc.
+          console.log('Newsletter signup:', { email, variant });
+          
+          // Success
+          statusContainer.classList.remove('hidden');
+          successMessage.classList.remove('hidden');
+          (form as HTMLFormElement).reset();
+          
+          // Analytics tracking
+          if ((window as any).gtag) {
+            (window as any).gtag('event', 'newsletter_signup', {
+              method: variant,
+              value: 1
+            });
+          }
+          
+        } catch (error) {
+          console.error('Newsletter signup error:', error);
+          statusContainer.classList.remove('hidden');
+          errorMessage.classList.remove('hidden');
+        } finally {
+          // Reset button
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .newsletter-signup {
+    @apply transition-all duration-300;
+  }
+  
+  .newsletter-signup:hover {
+    @apply shadow-md;
+  }
+  
+  .newsletter-form input:focus {
+    @apply outline-none;
+  }
+  
+  /* Animation for status messages */
+  .status-message:not(.hidden) {
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 640px) {
+    .newsletter-signup {
+      @apply text-center;
+    }
+    
+    .newsletter-form .flex {
+      @apply flex-col gap-3;
+    }
+    
+    .newsletter-form button {
+      @apply w-full;
+    }
+  }
+</style>

@@ -8,5 +8,8 @@ package-lock.json
 dist/
 trailblazer-analytics-dist.zip
 
+# Archive
+archive/
+
 # Env
 .env

@@ -123,6 +123,9 @@ const displayContent = await Promise.all(finalContentList.map(async ({ item, sco
                 height={225}
                 class="object-cover w-full h-full"
                 format="webp"
+                loading="lazy"
+                placeholder={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             </div>
           )}

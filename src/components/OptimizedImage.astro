@@ -1,22 +1,25 @@
 ---
-// OptimizedImage.astro - A responsive image component using astro:assets
+// OptimizedImage.astro - Enhanced responsive image component with performance optimizations
 import { Image } from 'astro:assets';
 
-// Props definition with defaults
+// Props definition with enhanced defaults for performance
 export interface Props {
   src: ImageMetadata | string; // ImageMetadata for local images, string for remote or public/
   alt: string;
   width?: number;
   height?: number;
   class?: string;
-  // sizes?: string; // astro:assets <Image> handles sizes automatically based on widths or a densities prop
   loading?: "lazy" | "eager";
   decoding?: "async" | "sync" | "auto";
-  format?: "webp" | "avif" | "jpeg" | "png" | "svg" | "gif"; // Supported formats by astro:assets
+  format?: "webp" | "avif" | "jpeg" | "png" | "svg" | "gif";
   quality?: number | "low" | "mid" | "high" | "max";
-  aspectRatio?: string | number; // e.g., "16:9" or 1.77
+  aspectRatio?: string | number;
   densities?: number[];
   widths?: number[];
+  // Performance enhancements
+  priority?: boolean; // For hero images and above-the-fold content
+  placeholder?: boolean; // Enable blur placeholder
+  sizes?: string; // Custom sizes attribute for responsive images
 }
 
 const {
@@ -27,45 +30,78 @@ const {
   class: className = "",
   loading = "lazy",
   decoding = "async",
-  format,
-  quality,
+  format = "webp", // Default to WebP for better compression
+  quality = "high",
   aspectRatio,
   densities,
-  widths
+  widths,
+  priority = false,
+  placeholder = true,
+  sizes
 } = Astro.props;
+
+// Override loading for priority images
+const actualLoading = priority ? "eager" : loading;
 
 const base = import.meta.env.BASE_URL;
 
-// Determine if src is a string (remote or public path) or ImageMetadata (local import)
+// Enhanced image properties with performance optimizations
 let imageProps: any = {
   src,
   alt,
-  loading,
+  loading: actualLoading,
   decoding,
   class: className,
 };
 
+// Add fetchpriority for priority images
+if (priority) {
+  imageProps.fetchpriority = "high";
+}
+
 if (typeof src === 'string') {
-  // Handle public or remote images - astro:assets <Image> doesn't optimize these directly
-  // but we can still use it as a regular <img> tag wrapper with benefits like loading/decoding.
-  // For public images, ensure the path is correct.
+  // Handle public or remote images
   imageProps.src = src.startsWith('http') || src.startsWith('/') ? src : `${base}${src}`;
   if (width) imageProps.width = width;
   if (height) imageProps.height = height;
-  // astro:assets specific props like format, quality, widths, densities are not applicable here
+  if (sizes) imageProps.sizes = sizes;
+  
+  // Add placeholder for non-priority images
+  if (!priority && placeholder && width && height) {
+    imageProps.style = `background-color: #f3f4f6; aspect-ratio: ${width}/${height};`;
+  }
 } else {
-  // Local images (ImageMetadata)
+  // Local images (ImageMetadata) - full optimization
   if (width) imageProps.width = width;
   if (height) imageProps.height = height;
   if (format) imageProps.format = format;
   if (quality) imageProps.quality = quality;
   if (aspectRatio) imageProps.aspectRatio = aspectRatio;
-  if (densities) imageProps.densities = densities;
-  if (widths) imageProps.widths = widths;
+  if (sizes) imageProps.sizes = sizes;
+  
+  // Enhanced responsive image settings
+  if (densities) {
+    imageProps.densities = densities;
+  } else if (widths) {
+    imageProps.widths = widths;
+  } else {
+    // Default responsive widths for better performance
+    imageProps.widths = [320, 640, 960, 1280, 1920];
+  }
 }
+
+// Generate blur placeholder for better UX (only for local images)
+const shouldShowPlaceholder = !priority && placeholder && typeof src !== 'string';
 ---
 
-{typeof src === 'string' ? (
+{shouldShowPlaceholder ? (
+  <div class={`relative overflow-hidden ${className}`} style={`aspect-ratio: ${width}/${height}`}>
+    <!-- Blur placeholder -->
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse"></div>
+    <!-- Actual image -->
+    <Image {...imageProps} class={`${className} transition-opacity duration-300`} />
+  </div>
+) : typeof src === 'string' ? (
   <img {...imageProps} />
 ) : (
   <Image {...imageProps} />

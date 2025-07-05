@@ -1,34 +1,15 @@
-# Trailblazer Analytics - Professional Data Strategy Hub
+# Trailblazer Analytics - Personal Branding Website
 
-A modern, responsive website built with Astro + React + Tailwind CSS for data strategy consulting and analytics expertise. Features comprehensive content management, YouTube integration, resource consolidation, and automated deployment.
+This repository contains the source code for my personal branding website, [trailblazeranalytics.com](https://trailblazeranalytics.com). Built with Astro, React, and Tailwind CSS, this site serves as a central hub for my work as a thought leader in the data analytics space.
 
-## 🚀 Current Features (December 2024)
+## 🚀 Key Features
 
-### 🎨 Enhanced User Experience
+- **Content Hub**: A collection of my articles, case studies, and tech notes.
+- **Podcast & YouTube Integration**: Featuring my podcast episodes and YouTube content.
+- **Resource Downloads**: A curated list of my whitepapers, guides, and other resources.
+- **Personal Branding**: A modern, responsive design that reflects my personal brand.
 
-- **Professional Navigation**: Resource-centric structure with clean dropdown menus
-- **YouTube Integration**: Dedicated channel page with full social media integration
-- **Enhanced Blog**: White cards, improved readability, and mobile optimization
-- **Resource Consolidation**: All downloads, tools, white papers unified under `/resources`
-- **Mobile-First Design**: Responsive navigation with hamburger menu and touch-friendly UX
-
-### 📱 Content Management
-
-- **Unified Resource Hub**: Tech notes, case studies, white papers, downloads, and tools
-- **Blog System**: Enhanced blog with improved typography and tag system
-- **YouTube Content**: Video tutorials and channel integration throughout site
-- **Podcast Integration**: Spotify embed with episode management
-- **Newsletter Integration**: Multi-provider support (Beehiiv, Mailchimp, ConvertKit)
-
-### 🚀 Technical Excellence
-
-- **GitHub Actions Deployment**: Automated CI/CD with latest action versions
-- **Custom Domain Ready**: CNAME configured for trailblazeranalytics.com
-- **Asset Optimization**: Efficient loading and GitHub Pages compatibility
-- **SEO Optimization**: Complete meta tags, structured data, and performance optimization
-- **Performance Monitoring**: Built-in analytics and Lighthouse CI integration
-
-## 🛠️ Quick Start
+## 🛠️ Development
 
 ### Prerequisites
 
@@ -53,29 +34,9 @@ pnpm run build
 pnpm run preview
 ```
 
-### Environment Configuration
+## 📚 Internal Documentation
 
-1. Copy `.env.example` to `.env`
-2. Fill in your API keys and configuration values
-3. See `DEPLOYMENT_CHECKLIST.md` for production setup
-
-## 📚 Documentation
-
-Complete documentation is available in the [`docs/`](./docs/) folder:
-
-- **[Documentation Hub](./docs/README.md)** - Main documentation index
-- **[Quick Reference](./docs/QUICK_REFERENCE.md)** - Common tasks and quick fixes
-- **[Content Management Guide](./docs/CONTENT_MANAGEMENT_GUIDE.md)** - Step-by-step content creation
-- **[Development Setup](./docs/DEV_SETUP.md)** - Development environment configuration
-- **[Deployment Guide](./docs/GITHUB_PAGES_DEPLOYMENT.md)** - Production deployment
-- **[Project Status](./docs/PROJECT_COMPLETE.md)** - Complete project achievements
-
-### Additional Resources
-
-- **[Site Dashboard](./docs/SITE_DASHBOARD.md)** - Site management overview
-- **[RSS Feed Implementation](./docs/RSS_FEED_IMPLEMENTATION.md)** - RSS feed setup
-- **[Build Warnings Guide](./docs/BUILD_WARNINGS.md)** - Troubleshooting
-- **[Features Summary](./docs/FEATURES_SUMMARY.md)** - Complete feature list
+For internal documentation, including development guides, content management procedures, and project status reports, please see the `INTERNAL_DOCS/` directory.
 
 ## 🏗️ Project Structure
 
@@ -87,59 +48,15 @@ src/
 ├── pages/              # Route pages and API endpoints
 └── styles/             # Global CSS and Tailwind config
 
-docs/                   # User and admin documentation
+INTERNAL_DOCS/          # User and admin documentation
 public/                 # Static assets and downloads
 dist/                   # Built site files (for deployment)
 ```
 
-## 🚀 Live Site & Deployment
+## 🌐 Connect with Me
 
-### Current Deployment Status
-
-- **Live Site**: [https://anykolaiszyn.github.io/trailblazer-analytics-devkit/](https://anykolaiszyn.github.io/trailblazer-analytics-devkit/)
-- **Custom Domain Ready**: [https://trailblazeranalytics.com](https://trailblazeranalytics.com) (CNAME configured)
-- **Build Status**: ✅ All 45+ pages building successfully
-- **Auto-Deploy**: GitHub Actions triggers on every push to main branch
-
-### GitHub Actions Deployment
-
-The site automatically deploys via GitHub Actions with:
-
-- **Latest Action Versions**: checkout@v4, setup-node@v4, pnpm/action-setup@v3
-- **Optimized Build Process**: pnpm with frozen lockfile for consistent builds
-- **GitHub Pages Deploy**: JamesIves/github-pages-deploy-action@v4.6.1
-- **Custom Domain Support**: CNAME configured for seamless domain activation
-
-### Alternative Hosting Options
-
-- **Netlify**: Connect repository for automatic deployment
-- **Vercel**: Connect repository for automatic deployment  
-- **Traditional Hosting**: Upload `dist/` folder to web root
-- **CDN Options**: Cloudflare Pages, AWS S3 + CloudFront
-
-## 🔧 Built With
-
-- **[Astro](https://astro.build/)** - Static site generator
-- **[React](https://reactjs.org/)** - UI components
-- **[Tailwind CSS](https://tailwindcss.com/)** - Styling
-- **[MDX](https://mdxjs.com/)** - Content management
-- **[Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)** - Performance monitoring
-
-## 📈 Performance & SEO
-
-- Lighthouse scores optimized for 90+ across all metrics
-- SEO-optimized with structured data and meta tags
-- Mobile-first responsive design
-- Fast loading with optimized assets
-- Accessibility compliant (WCAG 2.1)
-
-## 🤝 Contributing
-
-1. Follow the guides in `docs/` for content management
-2. Use the development setup in `DEV_SETUP.md`
-3. Check `TODO.md` for current priorities
-4. Run tests and performance checks before deploying
-
----
-
-For questions or support, see the documentation in `docs/` or check the TODO list for known issues and planned improvements.
+- **Website**: [trailblazeranalytics.com](https://trailblazeranalytics.com)
+- **GitHub**: [github.com/alexnyk](https://github.com/alexnyk)
+- **LinkedIn**: [linkedin.com/in/alexnyk](https://linkedin.com/in/alexnyk)
+- **Twitter**: [@AlexNyk](https://twitter.com/AlexNyk)
+- **Medium**: [@alex.nykolaiszyn](https://medium.com/@alex.nykolaiszyn)

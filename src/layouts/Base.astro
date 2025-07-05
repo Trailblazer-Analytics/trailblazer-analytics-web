@@ -50,75 +50,135 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
     <meta name="description" content={description} />    <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
     
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.github.com" />
+    <link rel="dns-prefetch" href="https://medium.com" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href={buildAssetUrl('images/trailblazer-logo.jpg')} as="image" type="image/jpeg" />
+    <link rel="preload" href="/styles/global.css" as="style" />
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={type} />
     <meta property="og:url" content="https://anykolaiszyn.github.io/trailblazer-analytics-devkit" />
     <meta property="og:image" content={imageSrc} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Trailblazer Analytics" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={imageSrc} />    <!-- Favicon and Icons -->
+    <meta property="twitter:image" content={imageSrc} />
+    <meta property="twitter:site" content="@TrailblazerAnalytics" />
+    <meta property="twitter:creator" content="@AlexanderKolaiszyn" />    <!-- Favicon and Icons -->
     <link rel="icon" type="image/svg+xml" href={buildAssetUrl('favicon.svg')} />
     <link rel="manifest" href={buildAssetUrl('site.webmanifest')} />
     
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Trailblazer Analytics RSS Feed" href={buildAssetUrl('rss.xml')} />
     
-    <!-- Structured Data -->
+    <!-- Enhanced Structured Data for Personal Brand -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Trailblazer Analytics",
-        "description": "Data strategy consulting, analytics implementation, and AI transformation services",
-        "url": "https://trailblazer-analytics.com",
-        "logo": "https://trailblazer-analytics.com/logo.png",
-        "image": "https://trailblazer-analytics.com/og-image.png",
-        "founder": {
-          "@type": "Person",
-          "name": "Alexander Nykolaiszyn",
-          "jobTitle": "Manager Business Insights",
-          "description": "15+ years transforming raw data into strategic business value through BI, automation, and AI integrations",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "Lennar Corporation"
-          },
-          "alumniOf": "15+ years in business intelligence and analytics",
-          "sameAs": [
-            "https://linkedin.com/in/alexnyk",
-            "https://medium.com/@alex.nykolaiszyn",
-            "https://twitter.com/AlexNyk"
-          ]
+        "@type": ["Person", "Brand"],
+        "name": "Alexander Nykolaiszyn",
+        "alternateName": "Trailblazer Analytics",
+        "description": "Analytics thought leader, data strategy expert, and creator helping professionals transform raw data into strategic insights",
+        "url": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit",
+        "image": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit/images/alexander-headshot-hero.png",
+        "jobTitle": "Manager Business Insights & Analytics Thought Leader",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Lennar Corporation"
         },
-        "serviceType": [
-          "Data Strategy Consulting",
+        "expertise": [
           "Business Intelligence",
-          "Analytics Implementation",
-          "AI Transformation"
+          "Data Strategy",
+          "Analytics Implementation", 
+          "AI Integration",
+          "Data Visualization",
+          "Business Process Automation"
         ],
-        "areaServed": "Worldwide",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "business",
-          "url": "https://trailblazer-analytics.com/contact"
+        "sameAs": [
+          "https://linkedin.com/in/alexnyk",
+          "https://medium.com/@alex.nykolaiszyn",
+          "https://twitter.com/AlexanderKolaiszyn",
+          "https://github.com/anykolaiszyn"
+        ],
+        "knowsAbout": [
+          "Business Intelligence",
+          "Data Analytics", 
+          "Machine Learning",
+          "Data Visualization",
+          "Business Strategy",
+          "Digital Transformation"
+        ],
+        "mainEntity": {
+          "@type": "WebSite",
+          "name": "Trailblazer Analytics",
+          "url": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit",
+          "description": "Where Analytics Meets Rebellion - Unfiltered insights on data strategy, BI, and the art of turning numbers into business value",
+          "author": {
+            "@type": "Person",
+            "name": "Alexander Nykolaiszyn"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
         }
       }
     </script>
+    
+    <!-- Analytics -->
     <script defer data-domain={siteConfig.plausibleDomain} src="https://plausible.io/js/plausible.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts (optimized) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
       html { font-family: 'Inter', 'Outfit', sans-serif; }
-    </style>  </head>
+    </style>
+    
+    <!-- Service Worker Registration for Offline Support -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </head>
   <body class="min-h-screen flex flex-col">
     <slot />
     
     <!-- Global Buy Me a Coffee Widget -->
     <BuyMeCoffeeWidget />
+    
+    <!-- Performance monitoring (simplified) -->
+    <script>
+      // Simple performance monitoring
+      window.addEventListener('load', () => {
+        if ('performance' in window) {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          if (perfData) {
+            console.log('Page Load Time:', Math.round(perfData.loadEventEnd - perfData.fetchStart), 'ms');
+          }
+        }
+      });
+    </script>
   </body>
 </html>
