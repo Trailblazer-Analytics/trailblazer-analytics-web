@@ -1,4 +1,5 @@
 # 🛠️ SQL Analyst Pack
+
 *Essential SQL tools and frameworks for data trailblazers*
 
 A battle-tested collection of SQL scripts, templates, and analytical frameworks developed through real-world implementations. Perfect for analysts, data scientists, and anyone blazing their trail in data analytics.
@@ -36,6 +37,7 @@ sql-analyst-pack/
 ## 🔍 **Featured Scripts**
 
 ### 📊 **Customer Segmentation Analysis**
+
 ```sql
 -- RFM Analysis for customer behavioral segmentation
 -- Perfect for e-commerce and subscription businesses
@@ -43,6 +45,7 @@ sql-analyst-pack/
 ```
 
 ### 🛠️ **Data Quality Checker**
+
 ```sql
 -- Comprehensive data profiling and quality assessment
 -- Identifies nulls, duplicates, and anomalies
@@ -50,6 +53,7 @@ sql-analyst-pack/
 ```
 
 ### 📋 **Monthly Reporting Template**
+
 ```sql
 -- Standardized monthly business metrics template
 -- Easily customizable for different business models
@@ -69,12 +73,14 @@ sql-analyst-pack/
 Every analyst has solved a problem that someone else is struggling with. Share your solutions!
 
 ### **How to Contribute:**
+
 1. Fork this repository
 2. Add your script with clear documentation
 3. Include sample data or test cases
 4. Submit a pull request with description
 
 ### **Code Standards:**
+
 - **Readable:** Clear variable names, proper formatting
 - **Commented:** Explain the WHY, not just the WHAT
 - **Tested:** Include sample data or test cases when possible
@@ -83,6 +89,7 @@ Every analyst has solved a problem that someone else is struggling with. Share y
 ## 🐛 **Found an Issue?**
 
 **Create an issue with:**
+
 - Which script has the problem
 - Your database platform (PostgreSQL, SQL Server, etc.)
 - Error message (if any)
@@ -91,12 +98,14 @@ Every analyst has solved a problem that someone else is struggling with. Share y
 ## 📞 **Connect & Learn More**
 
 **Connect with the Creator:**
+
 - 🌐 **Website:** [Trailblazer Analytics](https://trailblazer-analytics.github.io/)
 - 💼 **LinkedIn:** Alexander Nikolaiszyn
 - 🎧 **Podcast:** Analytics Trailblazers Podcast *(Coming Soon)*
 - ✍️ **Blog:** Latest Insights
 
 **Join the Journey:**
+
 - 🔥 **Blaze the Trail:** Discord community for data professionals *(Coming Soon)*
 - 📧 **Newsletter:** Analytics insights and new resources *(Coming Soon)*
 - 🤝 **Collaborate:** Always open to contributions and new ideas
