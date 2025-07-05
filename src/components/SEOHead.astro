@@ -28,9 +28,11 @@ const {
   category
 } = Astro.props;
 
+import siteConfig from '../site.config.js';
+
 // Build URLs
 function buildUrl(path: string): string {
-  const base = 'https://anykolaiszyn.github.io/trailblazer-analytics-devkit';
+  const base = siteConfig.url;
   return `${base}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
@@ -48,7 +50,7 @@ const articleStructuredData = type === 'article' ? {
   "author": {
     "@type": "Person",
     "name": author,
-    "url": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit"
+    "url": siteConfig.url
   },
   "publisher": {
     "@type": "Person",

@@ -7,6 +7,7 @@ import SocialShare from '../../components/SocialShare.astro';
 import SaveForLater from '../../components/SaveForLater.astro';
 import NewsletterSignup from '../../components/NewsletterSignup.astro';
 import SEOHead from '../../components/SEOHead.astro';
+import siteConfig from '../../site.config.js';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -111,7 +112,7 @@ const postDate = entry.data.date || entry.data.publishDate;
             </div>
             <SocialShare 
               title={entry.data.title}
-              url={`https://anykolaiszyn.github.io/trailblazer-analytics-devkit/blog/${entry.slug}`}
+              url={`${siteConfig.url}/blog/${entry.slug}`}
               summary={entry.data.description || entry.data.excerpt}
               twitterHandle="AlexanderKolaiszyn"
               showLabels={false}

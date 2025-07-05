@@ -90,8 +90,8 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
         "name": "Alexander Nykolaiszyn",
         "alternateName": "Trailblazer Analytics",
         "description": "Analytics thought leader, data strategy expert, and creator helping professionals transform raw data into strategic insights",
-        "url": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit",
-        "image": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit/images/alexander-headshot-hero.png",
+        "url": siteConfig.url,
+        "image": `${siteConfig.url}/images/alexander-headshot-hero.png`,
         "jobTitle": "Manager Business Insights & Analytics Thought Leader",
         "worksFor": {
           "@type": "Organization",
@@ -122,7 +122,7 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
         "mainEntity": {
           "@type": "WebSite",
           "name": "Trailblazer Analytics",
-          "url": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit",
+          "url": siteConfig.url,
           "description": "Where Analytics Meets Rebellion - Unfiltered insights on data strategy, BI, and the art of turning numbers into business value",
           "author": {
             "@type": "Person",
@@ -130,7 +130,7 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
           },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://anykolaiszyn.github.io/trailblazer-analytics-devkit/search?q={search_term_string}",
+            "target": `${siteConfig.url}/search?q={search_term_string}`,
             "query-input": "required name=search_term_string"
           }
         }
