@@ -6,10 +6,10 @@ This repository contains the source code for my personal branding website, [trai
 
 ## 🚀 Key Features
 
-- **Content Hub**: A collection of my articles, case studies, and tech notes.
-- **Podcast & YouTube Integration**: Featuring my podcast episodes and YouTube content.
-- **Resource Downloads**: A curated list of my whitepapers, guides, and other resources.
-- **Personal Branding**: A modern, responsive design that reflects my personal brand.
+- **Content Hub**: Articles (Medium-backed), blog posts, case studies, and tech notes.
+- **Resource Downloads**: Free downloads including whitepapers, guides, and templates.
+- **Premium Tools**: Gated content and premium resources for advanced users.
+- **Personal Branding**: A modern, responsive design that reflects my expertise in data analytics.
 
 ## 🛠️ Development
 

@@ -23,95 +23,69 @@ const blog = defineCollection({
   }),
 });
 
-const caseStudies = defineCollection({
+// Articles collection for Medium-backed content
+const articles = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    date: z.string().optional(),
-    client: z.string().optional(),
-    industry: z.string().optional(),
-    summary: z.string().optional(),
+    date: z.union([z.string(), z.date()]).optional(),
     description: z.string().optional(),
-    challenge: z.string().optional(),
-    solution: z.string().optional(),
-    results: z.array(z.string()).optional(),
-    technologies: z.array(z.string()).optional(),
+    tags: z.array(z.string()).default([]),
     featured: z.boolean().optional(),
     image: z.string().optional(),
+    mediumUrl: z.string().optional(), // Link to original Medium article
+    readingTime: z.union([z.number(), z.string()]).optional(),
+    author: z.string().optional(),
+    published: z.boolean().default(true),
   }),
 });
 
-const techNotes = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.string().optional(),
-    description: z.string().optional(),
-    difficulty: z.enum(['Beginner', 'Intermediate', 'Advanced']).optional(),
-    readTime: z.string().optional(),
-    category: z.enum(['Python', 'SQL', 'JavaScript', 'ML', 'Data Engineering', 'Visualization']).optional(),
-    tags: z.array(z.string()).optional(),
-    featured: z.boolean().optional(),
-    image: z.string().optional(),
-  }),
-});
 
-const whitepapers = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.string().optional(),
-    description: z.string().optional(),
-    category: z.string().optional(),
-    pages: z.number().optional(),
-    downloadUrl: z.string().optional(),
-    gated: z.boolean().optional(),
-    featured: z.boolean().optional(),
-    rating: z.number().optional(),
-    downloads: z.number().optional(),
-    image: z.string().optional(), // Added image field
-  }),
-});
 
+// Downloads collection for free downloads (including whitepapers)
 const downloads = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.string().optional(),
     description: z.string().optional(),
-    category: z.enum(['Templates', 'Tools', 'Guides', 'Checklists', 'Frameworks']).optional(),
+    category: z.enum(['Templates', 'Tools', 'Guides', 'Checklists', 'Frameworks', 'Whitepapers']).optional(),
     fileType: z.string().optional(),
     fileSize: z.string().optional(),
     downloadUrl: z.string().optional(),
     featured: z.boolean().optional(),
     rating: z.number().optional(),
     downloads: z.number().optional(),
-    image: z.string().optional(), // Added image field
+    image: z.string().optional(),
+    // For whitepaper-specific fields
+    pages: z.number().optional(),
+    free: z.boolean().default(true), // Mark as free content
   }),
 });
 
+// Tools collection for gated/paid content
 const tools = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.string().optional(),
     description: z.string().optional(),
-    category: z.enum(['Frameworks', 'Templates', 'Calculators', 'Courses']).optional(),
+    category: z.enum(['Frameworks', 'Templates', 'Calculators', 'Courses', 'Premium Tools']).optional(),
     price: z.string().optional(),
     demoUrl: z.string().optional(),
     purchaseUrl: z.string().optional(),
     featured: z.boolean().optional(),
     rating: z.number().optional(),
     technologies: z.array(z.string()).optional(),
-    image: z.string().optional(), // Added image field
+    image: z.string().optional(),
+    gated: z.boolean().default(true), // Mark as gated content
+    premium: z.boolean().default(false), // For paid content
   }),
 });
 
 export const collections = {
   blog,
-  'case-studies': caseStudies,
-  'tech-notes': techNotes,
-  whitepapers,
+  articles,
   downloads,
   tools,
 };

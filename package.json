@@ -27,7 +27,9 @@
     "content:validate": "node scripts/maintenance/pre-build.js",
     "deploy:preview": "pnpm run build && pnpm run preview",
     "deploy": "pnpm run build",
-    "deploy:gh-pages": "touch dist/.nojekyll && gh-pages -d dist -t"
+    "deploy:gh-pages": "touch dist/.nojekyll && gh-pages -d dist -t",
+    "fetch-medium": "node scripts/fetch-medium.js",
+    "content:sync": "node scripts/fetch-medium.js && node scripts/validation/validate-content.js"
   },  "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.2.6",

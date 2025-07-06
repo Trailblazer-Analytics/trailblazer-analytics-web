@@ -42,21 +42,20 @@ function buildUrl(path: string): string {
             <a href={buildUrl('/blog')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
               ✍️ Blog Posts
             </a>
+            <a href={buildUrl('/articles')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              📰 Articles
+            </a>
             <a href={buildUrl('/case-studies')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
               🏆 Success Stories
             </a>
             <a href={buildUrl('/tech-notes')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
               ⚡ Pro Tips
             </a>
-            <a href={buildUrl('/whitepapers')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
-              📖 Deep Dives
-            </a>
           </div>
         </div>
       </div>
       
       <a href={buildUrl('/podcast')} class="hover:text-goldAccent transition-colors">🎙️ Podcast</a>
-      <a href={buildUrl('/youtube')} class="hover:text-goldAccent transition-colors">📺 YouTube</a>
       <a href={buildUrl('/tags')} class="relative hover:text-goldAccent transition-colors flex items-center gap-2 group">
         <span>🏷️ Topics</span>
         <span class="bg-goldAccent text-softBlack text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">HOT</span>
@@ -73,10 +72,10 @@ function buildUrl(path: string): string {
         <div class="absolute top-full left-0 mt-2 w-48 bg-trailblazerGreen rounded-lg shadow-lg border border-deepGraphLine opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
           <div class="p-2">
             <a href={buildUrl('/downloads')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
-              📥 Downloads
+              📥 Free Downloads
             </a>
             <a href={buildUrl('/tools')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
-              🔧 Calculators
+              🔧 Premium Tools
             </a>
           </div>
         </div>
@@ -117,20 +116,19 @@ function buildUrl(path: string): string {
       <div class="mb-4">
         <h4 class="text-goldAccent font-semibold mb-2">📚 Content</h4>
         <a href={buildUrl('/blog')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">✍️ Blog Posts</a>
+        <a href={buildUrl('/articles')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">📰 Articles</a>
         <a href={buildUrl('/case-studies')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">🏆 Success Stories</a>
         <a href={buildUrl('/tech-notes')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">⚡ Pro Tips</a>
-        <a href={buildUrl('/whitepapers')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">📖 Deep Dives</a>
       </div>
       
       <a href={buildUrl('/podcast')} class="block py-2 hover:text-goldAccent transition-colors">🎙️ Podcast</a>
-      <a href={buildUrl('/youtube')} class="block py-2 hover:text-goldAccent transition-colors">📺 YouTube</a>
       <a href={buildUrl('/tags')} class="block py-2 hover:text-goldAccent transition-colors">🏷️ Topics</a>
       
       <!-- Tools Section -->
       <div class="mb-4 mt-4">
         <h4 class="text-goldAccent font-semibold mb-2">🛠️ Tools</h4>
-        <a href={buildUrl('/downloads')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">📥 Downloads</a>
-        <a href={buildUrl('/tools')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">🔧 Calculators</a>
+        <a href={buildUrl('/downloads')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">📥 Free Downloads</a>
+        <a href={buildUrl('/tools')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">🔧 Premium Tools</a>
       </div>
       
       <a href={buildUrl('/support')} class="block py-2 hover:text-goldAccent transition-colors">☕ Support</a>

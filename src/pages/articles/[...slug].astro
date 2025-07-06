@@ -1,0 +1,329 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.jsx';
+import SocialShare from '../../components/SocialShare.astro';
+import SaveForLater from '../../components/SaveForLater.astro';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
+import SEOHead from '../../components/SEOHead.astro';
+import siteConfig from '../../site.config.js';
+
+export async function getStaticPaths() {
+  const articleEntries = await getCollection('articles');
+  return articleEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+type Props = {
+  entry: CollectionEntry<'articles'>;
+};
+
+const { entry } = Astro.props as Props;
+const { Content } = await entry.render();
+
+// SEO meta data
+const seoData = {
+  title: entry.data.title,
+  description: entry.data.description || 'Read this insightful article about data analytics and business intelligence.',
+  image: entry.data.image || '/og-image.png',
+  type: 'article',
+  publishDate: entry.data.date,
+  author: 'Alexander Nykolaiszyn',
+  tags: entry.data.tags || [],
+  readingTime: entry.data.readingTime || '5 min read'
+};
+
+// Format date
+function formatDate(dateString: string | Date | null | undefined): string {
+  if (!dateString) return 'Date TBD';
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Format reading time helper
+function formatReadingTime(readingTime) {
+  if (!readingTime) return null;
+  if (typeof readingTime === 'string') return readingTime;
+  return `${readingTime} min read`;
+}
+
+const postDate = entry.data.date;
+---
+
+<Base 
+  title={`${entry.data.title} | Trailblazer Analytics`}
+  description={seoData.description}
+  image={seoData.image}
+  type="article"
+>
+  <SEOHead
+    title={seoData.title}
+    description={seoData.description}
+    image={seoData.image}
+    type="article"
+    publishDate={seoData.publishDate}
+    author={seoData.author}
+    tags={seoData.tags}
+    readingTime={seoData.readingTime}
+  />
+  
+  <Navbar />
+  
+  <main class="min-h-screen bg-softBlack text-mutedWhite">
+    <!-- Article Header -->
+    <header class="py-16 px-6 bg-gradient-to-br from-trailblazerGreen to-deepGraphGreen">
+      <div class="container mx-auto">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Article Meta -->
+          <div class="flex flex-wrap justify-center gap-4 mb-6">
+            {entry.data.tags?.slice(0, 3).map(tag => (
+              <a href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} 
+                 class="bg-goldAccent/20 text-goldAccent px-3 py-1 rounded-full text-sm hover:bg-goldAccent/30 transition-colors">
+                {tag}
+              </a>
+            ))}
+          </div>
+          
+          <!-- Title -->
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 text-mutedWhite leading-tight">
+            {entry.data.title}
+          </h1>
+          
+          <!-- Description -->
+          {entry.data.description && (
+            <p class="text-xl text-mutedWhite/90 mb-8 max-w-3xl mx-auto">
+              {entry.data.description}
+            </p>
+          )}
+          
+          <!-- Article Info -->
+          <div class="flex flex-wrap justify-center items-center gap-6 text-mutedWhite/80">
+            <span class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              {formatDate(postDate)}
+            </span>
+            
+            {entry.data.readingTime && (
+              <span class="flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                {formatReadingTime(entry.data.readingTime)}
+              </span>
+            )}
+            
+            <span class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              Alexander Nykolaiszyn
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Article Body -->
+    <article class="py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-4 gap-8">
+          <!-- Main Content -->
+          <div class="lg:col-span-3">
+            <div class="max-w-4xl mx-auto">
+              
+              <!-- Featured Image -->
+              {entry.data.image && (
+                <div class="mb-8">
+                  <img 
+                    src={entry.data.image} 
+                    alt={entry.data.title}
+                    class="w-full h-64 md:h-96 object-cover rounded-lg"
+                    loading="eager"
+                  />
+                </div>
+              )}
+
+              <!-- Medium Link -->
+              {entry.data.mediumUrl && (
+                <div class="mb-8 p-4 bg-deepGraphGreen rounded-lg border border-deepGraphLine">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-mutedWhite rounded-full flex items-center justify-center">
+                      <span class="text-softBlack font-bold text-sm">M</span>
+                    </div>
+                    <div>
+                      <p class="text-mutedWhite/80 text-sm">Originally published on Medium</p>
+                      <a href={entry.data.mediumUrl} target="_blank" rel="noopener noreferrer" 
+                         class="text-goldAccent hover:text-goldAccent/80 transition-colors font-semibold">
+                        Read on Medium →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <!-- Article Content -->
+              <div class="prose prose-lg prose-invert max-w-none">
+                <Content />
+              </div>
+              
+              <!-- Article Actions -->
+              <div class="mt-12 pt-8 border-t border-deepGraphLine">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                  <SocialShare 
+                    title={entry.data.title}
+                    url={`${siteConfig.url}/articles/${entry.slug}`}
+                  />
+                  <SaveForLater 
+                    item={{
+                      id: entry.slug,
+                      title: entry.data.title,
+                      description: entry.data.description || '',
+                      url: `/articles/${entry.slug}`,
+                      type: 'article',
+                      image: entry.data.image || '/og-image.png',
+                      date: postDate
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Sidebar -->
+          <aside class="lg:col-span-1">
+            <div class="sticky top-8 space-y-6">
+              
+              <!-- Author Card -->
+              <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
+                <div class="flex items-center gap-4 mb-4">
+                  <img 
+                    src="/images/alexander-profile.jpg" 
+                    alt="Alexander Nykolaiszyn"
+                    class="w-16 h-16 rounded-full object-cover"
+                    loading="lazy"
+                  />
+                  <div>
+                    <h3 class="font-bold text-mutedWhite">Alexander Nykolaiszyn</h3>
+                    <p class="text-sm text-mutedWhite/70">Analytics Leader</p>
+                  </div>
+                </div>
+                <p class="text-sm text-mutedWhite/80 mb-4">
+                  Manager Business Insights at Lennar | 15+ years transforming data into strategic value.
+                </p>
+                <a href="/about" class="text-goldAccent hover:text-goldAccent/80 transition-colors text-sm font-semibold">
+                  Learn More →
+                </a>
+              </div>
+
+              <!-- Tags -->
+              {entry.data.tags && entry.data.tags.length > 0 && (
+                <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
+                  <h3 class="font-bold mb-4 text-goldAccent">Topics</h3>
+                  <div class="flex flex-wrap gap-2">
+                    {entry.data.tags.map(tag => (
+                      <a href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} 
+                         class="bg-mutedWhite/10 hover:bg-goldAccent/20 text-mutedWhite hover:text-goldAccent px-3 py-1 rounded-full text-sm transition-colors">
+                        {tag}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              <!-- More Articles CTA -->
+              <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
+                <h3 class="font-bold mb-3 text-goldAccent">More Articles</h3>
+                <p class="text-sm text-mutedWhite/80 mb-4">
+                  Discover more insights on analytics, data strategy, and business intelligence.
+                </p>
+                <a href="/articles" 
+                   class="block w-full bg-goldAccent text-softBlack text-center py-2 rounded-lg font-semibold hover:bg-goldAccent/80 transition-colors">
+                  Browse Articles
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </article>
+
+    <!-- Newsletter Signup -->
+    <section class="py-12 bg-deepGraphGreen">
+      <div class="container mx-auto px-6">
+        <NewsletterSignup />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* Enhanced prose styles for article content */
+  .prose {
+    @apply text-mutedWhite;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    @apply text-goldAccent font-bold mb-4;
+  }
+  
+  .prose h2 {
+    @apply text-2xl mt-8;
+  }
+  
+  .prose h3 {
+    @apply text-xl mt-6;
+  }
+  
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  
+  .prose a {
+    @apply text-goldAccent hover:text-goldAccent/80 transition-colors;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-goldAccent pl-4 py-2 bg-deepGraphGreen/50 rounded-r-lg my-6;
+  }
+  
+  .prose code {
+    @apply bg-deepGraphGreen px-2 py-1 rounded text-goldAccent text-sm;
+  }
+  
+  .prose pre {
+    @apply bg-deepGraphGreen p-4 rounded-lg overflow-x-auto my-6;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-4 pl-6;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+  
+  .prose img {
+    @apply rounded-lg my-6;
+  }
+  
+  .prose table {
+    @apply w-full border-collapse border border-deepGraphLine my-6;
+  }
+  
+  .prose th, .prose td {
+    @apply border border-deepGraphLine px-4 py-2;
+  }
+  
+  .prose th {
+    @apply bg-deepGraphGreen font-semibold;
+  }
+</style>

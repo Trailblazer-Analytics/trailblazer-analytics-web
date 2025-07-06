@@ -19,8 +19,8 @@ const urlsToCache = [
 // Critical pages that should always be fresh but fallback to cache
 const dynamicCacheUrls = [
   '/blog/',
+  '/articles/',
   '/case-studies/',
-  '/whitepapers/',
   '/tools/',
   '/downloads/'
 ];

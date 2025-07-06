@@ -36,10 +36,8 @@ export async function GET({ request }) {
     
     // Import all content collections
     const blogPosts = await import.meta.glob('../../content/blog/*.{md,mdx}', { eager: true });
-    const techNotes = await import.meta.glob('../../content/techNotes/*.{md,mdx}', { eager: true });
-    const whitepapers = await import.meta.glob('../../content/whitepapers/*.{md,mdx}', { eager: true });
+    const articles = await import.meta.glob('../../content/articles/*.{md,mdx}', { eager: true });
     const downloads = await import.meta.glob('../../content/downloads/*.{md,mdx}', { eager: true });
-    const caseStudies = await import.meta.glob('../../content/caseStudies/*.{md,mdx}', { eager: true });
     const tools = await import.meta.glob('../../content/tools/*.{md,mdx}', { eager: true });
     
     // Array to hold all content
@@ -63,38 +61,20 @@ export async function GET({ request }) {
       }
     });
     
-    // Process tech notes
-    Object.keys(techNotes).forEach((path) => {
-      const note = techNotes[path];
+    // Process articles
+    Object.keys(articles).forEach((path) => {
+      const article = articles[path];
       const slug = path.split('/').pop().replace(/\.(md|mdx)$/, '');
       
-      if (note.frontmatter) {
+      if (article.frontmatter) {
         allContent.push({
-          title: note.frontmatter.title,
-          description: note.frontmatter.description || '',
-          slug: `/tech-notes/${slug}`,
-          type: 'Tech Note',
-          date: note.frontmatter.date || null,
-          keywords: note.frontmatter.keywords || [],
-          content: note.rawContent ? note.rawContent() : ''
-        });
-      }
-    });
-    
-    // Process whitepapers
-    Object.keys(whitepapers).forEach((path) => {
-      const whitepaper = whitepapers[path];
-      const slug = path.split('/').pop().replace(/\.(md|mdx)$/, '');
-      
-      if (whitepaper.frontmatter) {
-        allContent.push({
-          title: whitepaper.frontmatter.title,
-          description: whitepaper.frontmatter.description || '',
-          slug: `/white-papers/${slug}`,
-          type: 'White Paper',
-          date: whitepaper.frontmatter.date || null,
-          keywords: whitepaper.frontmatter.keywords || [],
-          content: whitepaper.rawContent ? whitepaper.rawContent() : ''
+          title: article.frontmatter.title,
+          description: article.frontmatter.description || '',
+          slug: `/articles/${slug}`,
+          type: 'Article',
+          date: article.frontmatter.date || null,
+          keywords: article.frontmatter.keywords || [],
+          content: article.rawContent ? article.rawContent() : ''
         });
       }
     });
@@ -113,24 +93,6 @@ export async function GET({ request }) {
           date: download.frontmatter.date || null,
           keywords: download.frontmatter.keywords || [],
           content: download.rawContent ? download.rawContent() : ''
-        });
-      }
-    });
-    
-    // Process case studies
-    Object.keys(caseStudies).forEach((path) => {
-      const caseStudy = caseStudies[path];
-      const slug = path.split('/').pop().replace(/\.(md|mdx)$/, '');
-      
-      if (caseStudy.frontmatter) {
-        allContent.push({
-          title: caseStudy.frontmatter.title,
-          description: caseStudy.frontmatter.description || '',
-          slug: `/case-studies/${slug}`,
-          type: 'Case Study',
-          date: caseStudy.frontmatter.date || null,
-          keywords: caseStudy.frontmatter.keywords || [],
-          content: caseStudy.rawContent ? caseStudy.rawContent() : ''
         });
       }
     });

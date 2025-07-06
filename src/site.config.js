@@ -9,10 +9,10 @@ export default {  // Site Information
   // Analytics & Tracking
   plausibleDomain: "trailblazeranalytics.com", // Custom domain
   googleAnalyticsId: "", // Add when configured
-  hotjarId: "", // Add when configured// Social Media
+  hotjarId: "", // Add when configured  // Social Media
   twitter: "@AlexNyk", // Real Twitter handle
   linkedin: "alexnyk", // Real LinkedIn profile
-  github: "alexnyk", // Real Github username
+  github: "Trailblazer-Analytics", // GitHub organization
   medium: "@alex.nykolaiszyn", // Real Medium username
   
   // Business Information
