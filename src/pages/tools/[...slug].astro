@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.jsx';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 
 export async function getStaticPaths() {
   const toolEntries = await getCollection('tools');
@@ -21,9 +22,15 @@ const { Content } = await entry.render();
 // SEO meta data
 const seoData = {
   title: `${entry.data.title} - Analytics Tool`,
-  description: entry.data.description || entry.data.excerpt || 'Use this powerful analytics tool to improve your data strategy.',
+  description: entry.data.description || 'Use this powerful analytics tool to improve your data strategy.',
   image: entry.data.image || '/og-image.png'
 };
+
+// Determine access level
+const isGated = entry.data.gated !== false;
+const isPremium = entry.data.premium === true;
+const isNewsletterGated = isGated && !isPremium;
+const isFree = !isGated;
 
 // Format date
 function formatDate(date) {
@@ -42,12 +49,22 @@ function formatDate(date) {
     <div class="container mx-auto px-6">
       <div class="max-w-4xl mx-auto">
         
-        <!-- Article Header -->
+        <!-- Tool Header -->
         <header class="mb-12">
           <div class="text-center mb-8">
-            <span class="bg-brandGold text-black px-4 py-2 rounded-full text-sm font-semibold">
-              Analytics Tool
-            </span>
+            {isPremium ? (
+              <span class="bg-brandGold text-black px-4 py-2 rounded-full text-sm font-semibold">
+                Premium Tool
+              </span>
+            ) : isNewsletterGated ? (
+              <span class="bg-brandGreen text-white px-4 py-2 rounded-full text-sm font-semibold">
+                Free with Newsletter
+              </span>
+            ) : (
+              <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                Free Tool
+              </span>
+            )}
           </div>
           
           <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center">
@@ -60,38 +77,198 @@ function formatDate(date) {
             </p>
           )}
           
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-gray-500 mb-8">
-            {entry.data.price && (
-              <div class="text-center">
-                <span class="text-3xl font-bold text-brandGreen">{entry.data.price}</span>
-                {entry.data.priceNote && (
-                  <p class="text-sm text-gray-500">{entry.data.priceNote}</p>
+          <!-- Tool Features & Pricing -->
+          <div class="bg-gray-50 rounded-2xl p-8 mb-8">
+            <div class="grid md:grid-cols-2 gap-8">
+              <!-- Features Column -->
+              <div>
+                <h3 class="text-lg font-bold text-gray-900 mb-4">What You'll Get:</h3>
+                {entry.data.features ? (
+                  <ul class="space-y-2">
+                    {entry.data.features.map(feature => (
+                      <li class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-brandGreen flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <ul class="space-y-2 text-gray-700">
+                    <li class="flex items-start gap-2">
+                      <svg class="w-5 h-5 text-brandGreen flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                      </svg>
+                      Professional-grade analytics tool
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <svg class="w-5 h-5 text-brandGreen flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                      </svg>
+                      Step-by-step instructions
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <svg class="w-5 h-5 text-brandGreen flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                      </svg>
+                      Ready-to-use templates
+                    </li>
+                  </ul>
                 )}
+              </div>
+              
+              <!-- Pricing/Access Column -->
+              <div class="text-center">
+                {isPremium ? (
+                  <!-- Premium Tool Purchase -->
+                  <div>
+                    <div class="text-3xl font-bold text-brandGold mb-2">
+                      {entry.data.price || 'Premium'}
+                    </div>
+                    <p class="text-gray-600 mb-6">One-time purchase</p>
+                    {entry.data.purchaseUrl ? (
+                      <a 
+                        href={entry.data.purchaseUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="bg-brandGold text-black px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-colors inline-flex items-center gap-2 mb-4"
+                      >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-3 8m3-8h10m0 0v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z"></path>
+                        </svg>
+                        {entry.data.price ? `Buy ${entry.data.price}` : 'Purchase Now'}
+                      </a>
+                    ) : (
+                      <button 
+                        disabled
+                        class="bg-gray-400 text-white px-8 py-4 rounded-lg font-semibold cursor-not-allowed inline-flex items-center gap-2 mb-4"
+                      >
+                        Purchase Link Coming Soon
+                      </button>
+                    )}
+                  </div>
+                ) : isNewsletterGated ? (
+                  <!-- Newsletter Gated -->
+                  <div>
+                    <div class="text-3xl font-bold text-brandGreen mb-2">Free</div>
+                    <p class="text-gray-600 mb-6">With newsletter signup</p>
+                    <div class="bg-white rounded-lg p-6 border-2 border-brandGreen">
+                      <h4 class="font-bold text-gray-900 mb-4">Get Instant Access</h4>
+                      <NewsletterSignup 
+                        placeholder="Enter your email for free access"
+                        buttonText="Get Free Tool"
+                        successRedirect={`/tools/${entry.slug}?access=granted`}
+                      />
+                      <p class="text-xs text-gray-500 mt-3">
+                        Join 2,000+ analytics professionals. Unsubscribe anytime.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <!-- Free Access -->
+                  <div>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">Free</div>
+                    <p class="text-gray-600 mb-6">No signup required</p>
+                    <div class="text-4xl mb-4">🎉</div>
+                    <p class="text-brandGreen font-semibold">Tool content available below!</p>
+                  </div>
+                )}
+                
+                {/* Demo Link */}
+                {entry.data.demoUrl && (
+                  <div class="mt-4">
+                    <a 
+                      href={entry.data.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-sm text-gray-600 hover:text-brandGreen transition-colors"
+                    >
+                      View Demo →
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </header>
+        
+        <!-- Tool Content (Gated or Free) -->
+        {isFree ? (
+          <!-- Free Tool: Show Content Immediately -->
+          <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg">
+            <Content />
+          </div>
+        ) : isPremium ? (
+          <!-- Premium Tool: Show Purchase Info -->
+          <div class="bg-gradient-to-br from-brandGold/10 to-yellow-100 rounded-2xl p-8 text-center">
+            <div class="w-16 h-16 bg-brandGold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-brandGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Premium Tool</h3>
+            <p class="text-lg text-gray-700 mb-6">
+              This professional-grade tool is available for purchase. Get immediate access after payment.
+            </p>
+            {entry.data.purchaseUrl ? (
+              <a 
+                href={entry.data.purchaseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-brandGold text-black px-8 py-4 rounded-lg font-semibold hover:bg-yellow-600 transition-colors inline-flex items-center gap-2"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-3 8m3-8h10m0 0v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z"></path>
+                </svg>
+                {entry.data.price ? `Purchase ${entry.data.price}` : 'Purchase Now'}
+              </a>
+            ) : (
+              <p class="text-gray-600">Purchase option coming soon. <a href="/contact" class="text-brandGold hover:underline">Contact us</a> for early access.</p>
+            )}
+          </div>
+        ) : (
+          <!-- Newsletter Gated: Check for Access -->
+          <div>
+            {Astro.url.searchParams.get('access') === 'granted' ? (
+              <!-- Show content after newsletter signup -->
+              <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg">
+                <div class="bg-brandGreen/10 border border-brandGreen rounded-lg p-4 mb-8">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brandGreen" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <p class="text-brandGreen font-semibold">Thanks for subscribing! Your tool access is ready.</p>
+                  </div>
+                </div>
+                <Content />
+              </div>
+            ) : (
+              <!-- Show newsletter gate -->
+              <div class="bg-gray-50 rounded-2xl p-8 text-center">
+                <div class="w-16 h-16 bg-brandGreen/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Free Tool - Email Required</h3>
+                <p class="text-lg text-gray-700 mb-6">
+                  Join our newsletter to get instant access to this tool and stay updated with the latest analytics insights.
+                </p>
+                <div class="max-w-md mx-auto">
+                  <NewsletterSignup 
+                    placeholder="Enter your email for free access"
+                    buttonText="Get Free Access"
+                    successRedirect={`/tools/${entry.slug}?access=granted`}
+                  />
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                  Join 2,000+ analytics professionals. Unsubscribe anytime.
+                </p>
               </div>
             )}
           </div>
-          
-          {entry.data.downloadUrl && (
-            <div class="text-center">
-              <a 
-                href={entry.data.downloadUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-brandGreen text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center gap-2"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Download Tool
-              </a>
-            </div>
-          )}
-        </header>
-        
-        <!-- Article Content -->
-        <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg">
-          <Content />
-        </div>
+        )}
         
         <!-- Navigation -->
         <div class="mt-12 flex justify-center">

@@ -76,7 +76,7 @@ const postDate = entry.data.date;
   
   <main class="min-h-screen bg-softBlack text-mutedWhite">
     <!-- Article Header -->
-    <header class="py-16 px-6 bg-gradient-to-br from-trailblazerGreen to-deepGraphGreen">
+    <header class="py-16 px-6 bg-gradient-to-br from-trailblazerGreen to-deepGraphLine">
       <div class="container mx-auto">
         <div class="max-w-4xl mx-auto text-center">
           <!-- Article Meta -->
@@ -152,7 +152,7 @@ const postDate = entry.data.date;
 
               <!-- Medium Link -->
               {entry.data.mediumUrl && (
-                <div class="mb-8 p-4 bg-deepGraphGreen rounded-lg border border-deepGraphLine">
+                <div class="mb-8 p-4 bg-deepGraphLine rounded-lg border border-deepGraphLine">
                   <div class="flex items-center gap-3">
                     <div class="w-8 h-8 bg-mutedWhite rounded-full flex items-center justify-center">
                       <span class="text-softBlack font-bold text-sm">M</span>
@@ -201,7 +201,7 @@ const postDate = entry.data.date;
             <div class="sticky top-8 space-y-6">
               
               <!-- Author Card -->
-              <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
+              <div class="bg-deepGraphLine rounded-lg p-6 border border-deepGraphLine">
                 <div class="flex items-center gap-4 mb-4">
                   <img 
                     src="/images/alexander-profile.jpg" 
@@ -224,7 +224,7 @@ const postDate = entry.data.date;
 
               <!-- Tags -->
               {entry.data.tags && entry.data.tags.length > 0 && (
-                <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
+                <div class="bg-deepGraphLine rounded-lg p-6 border border-deepGraphLine">
                   <h3 class="font-bold mb-4 text-goldAccent">Topics</h3>
                   <div class="flex flex-wrap gap-2">
                     {entry.data.tags.map(tag => (
@@ -238,7 +238,7 @@ const postDate = entry.data.date;
               )}
               
               <!-- More Articles CTA -->
-              <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
+              <div class="bg-deepGraphLine rounded-lg p-6 border border-deepGraphLine">
                 <h3 class="font-bold mb-3 text-goldAccent">More Articles</h3>
                 <p class="text-sm text-mutedWhite/80 mb-4">
                   Discover more insights on analytics, data strategy, and business intelligence.
@@ -255,7 +255,7 @@ const postDate = entry.data.date;
     </article>
 
     <!-- Newsletter Signup -->
-    <section class="py-12 bg-deepGraphGreen">
+    <section class="py-12 bg-deepGraphLine">
       <div class="container mx-auto px-6">
         <NewsletterSignup />
       </div>
@@ -292,15 +292,15 @@ const postDate = entry.data.date;
   }
   
   .prose blockquote {
-    @apply border-l-4 border-goldAccent pl-4 py-2 bg-deepGraphGreen/50 rounded-r-lg my-6;
+    @apply border-l-4 border-goldAccent pl-4 py-2 bg-deepGraphLine/50 rounded-r-lg my-6;
   }
   
   .prose code {
-    @apply bg-deepGraphGreen px-2 py-1 rounded text-goldAccent text-sm;
+    @apply bg-deepGraphLine px-2 py-1 rounded text-goldAccent text-sm;
   }
   
   .prose pre {
-    @apply bg-deepGraphGreen p-4 rounded-lg overflow-x-auto my-6;
+    @apply bg-deepGraphLine p-4 rounded-lg overflow-x-auto my-6;
   }
   
   .prose ul, .prose ol {
@@ -324,6 +324,6 @@ const postDate = entry.data.date;
   }
   
   .prose th {
-    @apply bg-deepGraphGreen font-semibold;
+    @apply bg-deepGraphLine font-semibold;
   }
 </style>

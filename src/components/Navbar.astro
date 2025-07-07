@@ -45,17 +45,14 @@ function buildUrl(path: string): string {
             <a href={buildUrl('/articles')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
               📰 Articles
             </a>
-            <a href={buildUrl('/case-studies')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
-              🏆 Success Stories
-            </a>
-            <a href={buildUrl('/tech-notes')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
-              ⚡ Pro Tips
+            <a href={buildUrl('/youtube')} class="flex items-center gap-3 px-3 py-2 text-mutedWhite hover:bg-goldAccent/20 rounded-md transition-colors">
+              � YouTube
             </a>
           </div>
         </div>
       </div>
       
-      <a href={buildUrl('/podcast')} class="hover:text-goldAccent transition-colors">🎙️ Podcast</a>
+      <a href={buildUrl('/podcast')} class="hover:text-goldAccent transition-colors">�️ Podcast</a>
       <a href={buildUrl('/tags')} class="relative hover:text-goldAccent transition-colors flex items-center gap-2 group">
         <span>🏷️ Topics</span>
         <span class="bg-goldAccent text-softBlack text-xs px-2 py-1 rounded-full font-bold transform -rotate-12 group-hover:rotate-0 transition-all duration-300">HOT</span>
@@ -88,12 +85,6 @@ function buildUrl(path: string): string {
       </a>
       <a href={buildUrl('/about')} class="hover:text-goldAccent transition-colors">About</a>
       
-      <!-- Personal Tools -->
-      <a href={buildUrl('/saved')} class="relative hover:text-goldAccent transition-colors flex items-center gap-2" title="Your saved content">
-        <span>📚 Saved</span>
-        <span id="saved-count" class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-bold hidden"></span>
-      </a>
-      
       <a href={buildUrl('/connect')} class="bg-goldAccent text-softBlack px-4 py-2 rounded-lg font-semibold hover:bg-goldAccent/80 transition-colors">Connect</a>
       <a href={`https://github.com/${siteConfig.github}`} target="_blank" rel="noopener noreferrer" aria-label="github" class="text-mutedWhite hover:text-goldAccent transition-colors">
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -117,8 +108,7 @@ function buildUrl(path: string): string {
         <h4 class="text-goldAccent font-semibold mb-2">📚 Content</h4>
         <a href={buildUrl('/blog')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">✍️ Blog Posts</a>
         <a href={buildUrl('/articles')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">📰 Articles</a>
-        <a href={buildUrl('/case-studies')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">🏆 Success Stories</a>
-        <a href={buildUrl('/tech-notes')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">⚡ Pro Tips</a>
+        <a href={buildUrl('/youtube')} class="block py-1 pl-4 text-sm hover:text-goldAccent transition-colors">🎥 YouTube</a>
       </div>
       
       <a href={buildUrl('/podcast')} class="block py-2 hover:text-goldAccent transition-colors">🎙️ Podcast</a>
@@ -170,35 +160,4 @@ function buildUrl(path: string): string {
     }
   });
   
-  // Update saved items count in navbar
-  function updateSavedCount() {
-    const STORAGE_KEY = 'trailblazer_saved_content';
-    const savedCountEl = document.getElementById('saved-count');
-    
-    if (savedCountEl) {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        const items = saved ? JSON.parse(saved) : [];
-        const count = items.length;
-        
-        if (count > 0) {
-          savedCountEl.textContent = count;
-          savedCountEl.classList.remove('hidden');
-        } else {
-          savedCountEl.classList.add('hidden');
-        }
-      } catch (error) {
-        console.error('Error reading saved items count:', error);
-      }
-    }
-  }
-  
-  // Update count on page load
-  updateSavedCount();
-  
-  // Listen for storage changes (when items are saved/removed)
-  window.addEventListener('storage', updateSavedCount);
-  
-  // Also listen for custom events from the SaveForLater component
-  window.addEventListener('savedItemsChanged', updateSavedCount);
 </script>

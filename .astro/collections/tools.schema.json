@@ -19,7 +19,8 @@
             "Frameworks",
             "Templates",
             "Calculators",
-            "Courses"
+            "Courses",
+            "Premium Tools"
           ]
         },
         "price": {
@@ -43,8 +44,36 @@
             "type": "string"
           }
         },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "image": {
           "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "gated": {
+          "type": "boolean",
+          "default": true
+        },
+        "premium": {
+          "type": "boolean",
+          "default": false
+        },
+        "gatewayType": {
+          "type": "string",
+          "enum": [
+            "newsletter",
+            "purchase"
+          ]
         },
         "$schema": {
           "type": "string"

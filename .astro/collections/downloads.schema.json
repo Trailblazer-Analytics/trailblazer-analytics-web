@@ -20,7 +20,13 @@
             "Tools",
             "Guides",
             "Checklists",
-            "Frameworks"
+            "Frameworks",
+            "Whitepapers",
+            "AI & Advanced Analytics",
+            "AI & Machine Learning",
+            "Architecture & Strategy",
+            "Data Strategy",
+            "Sustainability & Strategy"
           ]
         },
         "fileType": {
@@ -43,6 +49,22 @@
         },
         "image": {
           "type": "string"
+        },
+        "pages": {
+          "type": "number"
+        },
+        "free": {
+          "type": "boolean",
+          "default": true
+        },
+        "gated": {
+          "type": "boolean"
+        },
+        "tableOfContents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "$schema": {
           "type": "string"

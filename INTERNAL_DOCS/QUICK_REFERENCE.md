@@ -4,49 +4,97 @@
 
 - **Live Site:** [https://anykolaiszyn.github.io/trailblazer-analytics-devkit/](https://anykolaiszyn.github.io/trailblazer-analytics-devkit/)
 - **GitHub Repo:** [https://github.com/anykolaiszyn/trailblazer-analytics-devkit](https://github.com/anykolaiszyn/trailblazer-analytics-devkit)
-- **Status:** ✅ Deployed and Operational (45 pages building successfully)
+- **Status:** ✅ Clean and Operational (Simplified static architecture)
 
-## 📝 Common Tasks
+## 📝 Current Content Collections
+
+### Active Collections
+
+- **Blog Posts** (`src/content/blog/`) - Local blog content
+- **Downloads** (`src/content/downloads/`) - Free resources and downloads
+- **Tools** (`src/content/tools/`) - Premium/gated tools and courses
+
+### Medium Integration
+
+- **Articles** - Integrated via Medium RSS feed (no local storage)
+- **Medium Profile:** [@alex.nykolaiszyn](https://medium.com/@alex.nykolaiszyn)
+- **RSS Feed:** <https://medium.com/feed/@alex.nykolaiszyn>
+
+## 🔧 Common Tasks
 
 ### Add New Blog Post
 
-1. Create: `src/content/blog/YYYY-MM-DD-title.md`
+1. Create: `src/content/blog/YYYY-MM-DD-title-slug.md`
 2. Add frontmatter:
 
 ```yaml
 ---
 title: "Your Post Title"
 description: "SEO description"
-publishDate: 2025-01-XX
-author: "Your Name"
-category: "Category"
+date: "2025-01-XX"
+author: "Alexander Nykolaiszyn"
 tags: ["tag1", "tag2"]
+featured: false
+vibe: "insight"
+difficulty: "intermediate"
 ---
 ```
 
-1. Write content in Markdown
-2. Commit and push → Auto-deploys
+3. Write content in Markdown
+4. Test with `npm run build` (optional)
+5. Commit and push → Auto-deploys
 
-### Add New Insight Article
+### Add New Download
 
-1. Create: `src/content/insights/insight-title.md`
-2. Add frontmatter with `category: "Market Analysis"` etc.
-3. Focus on actionable insights
+1. Place file in: `public/downloads/filename.pdf`
+2. Create: `src/content/downloads/resource-name.md`
+3. Add frontmatter:
+
+```yaml
+---
+title: "Resource Title"
+description: "What this provides"
+date: "2025-01-XX"
+category: "Templates"
+fileType: "PDF"
+downloadUrl: "/downloads/filename.pdf"
+featured: false
+free: true
+---
+```
+
+4. Test with `npm run build` (optional)
+5. Commit and push → Auto-deploys
+
+### Add New Tool
+
+1. Create: `src/content/tools/tool-name.md`
+2. Add frontmatter:
+
+```yaml
+---
+title: "Tool Name"
+description: "Tool description"
+date: "2025-01-XX"
+category: "Frameworks"
+price: "$99"
+demoUrl: "https://example.com/demo"
+purchaseUrl: "https://example.com/buy"
+gated: true
+premium: true
+---
+```
+
+3. Test with `npm run build` (optional)
 4. Commit and push → Auto-deploys
 
-### Add Podcast Episode
+### Update Articles (Medium)
 
-1. Create: `src/content/podcast/episode-XXX-title.md`
-2. Include audio URLs (Spotify, Apple, etc.)
-3. Add episode notes and guest info
-4. Commit and push → Auto-deploys
+Articles are automatically pulled from Medium RSS. No local management needed.
 
-### Add Downloads/Resources
-
-1. Place files in: `public/downloads/`
-2. Link in content: `/downloads/filename.pdf`
-3. Current files are small (<2KB) - no storage issues
-4. Commit and push → Auto-deploys
+- Publish new articles on Medium
+- They automatically appear on the `/articles` page
+- No manual sync required
 
 ## 🔧 Deployment
 
@@ -60,28 +108,34 @@ git push origin main
 
 → Site updates in 2-3 minutes automatically
 
-### Manual Deploy (Emergency)
+### Manual Build (for testing)
 
 ```bash
 npm run build
-npm run deploy:clean
 ```
 
 ## 📁 Key Directories
 
 - `src/content/blog/` → Blog posts
-- `src/content/insights/` → Analytics insights  
-- `src/content/podcast/` → Podcast episodes
-- `src/content/case-studies/` → Case studies
-- `src/content/tech-notes/` → Technical notes
-- `public/downloads/` → PDFs and resources
+- `src/content/downloads/` → Free resources and downloads
+- `src/content/tools/` → Premium tools and courses
+- `public/downloads/` → PDF files and resources
 - `public/images/` → Images and media
 
 ## 🎯 Navigation Structure
 
-**Main Nav:** Insights | Blog | Podcast | About | Resources ↓ | Support | Connect
+**Main Nav:** About | Blog | Articles | Downloads | Tools | Support | Connect
 
-**Resources Dropdown:**
+**Current Pages:**
+
+- `/` - Homepage
+- `/about` - About page
+- `/blog` - Local blog posts
+- `/articles` - Medium RSS integration
+- `/downloads` - Free resources
+- `/tools` - Premium offerings
+- `/support` - Support page with dynamic coffee counter
+- `/connect` - Contact and social links
 
 - Tech Notes
 - Case Studies  

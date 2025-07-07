@@ -23,23 +23,6 @@ const blog = defineCollection({
   }),
 });
 
-// Articles collection for Medium-backed content
-const articles = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.union([z.string(), z.date()]).optional(),
-    description: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    featured: z.boolean().optional(),
-    image: z.string().optional(),
-    mediumUrl: z.string().optional(), // Link to original Medium article
-    readingTime: z.union([z.number(), z.string()]).optional(),
-    author: z.string().optional(),
-    published: z.boolean().default(true),
-  }),
-});
-
 
 
 // Downloads collection for free downloads (including whitepapers)
@@ -49,7 +32,19 @@ const downloads = defineCollection({
     title: z.string(),
     date: z.string().optional(),
     description: z.string().optional(),
-    category: z.enum(['Templates', 'Tools', 'Guides', 'Checklists', 'Frameworks', 'Whitepapers']).optional(),
+    category: z.enum([
+      'Templates', 
+      'Tools', 
+      'Guides', 
+      'Checklists', 
+      'Frameworks', 
+      'Whitepapers',
+      'AI & Advanced Analytics',
+      'AI & Machine Learning',
+      'Architecture & Strategy',
+      'Data Strategy',
+      'Sustainability & Strategy'
+    ]).optional(),
     fileType: z.string().optional(),
     fileSize: z.string().optional(),
     downloadUrl: z.string().optional(),
@@ -60,6 +55,8 @@ const downloads = defineCollection({
     // For whitepaper-specific fields
     pages: z.number().optional(),
     free: z.boolean().default(true), // Mark as free content
+    gated: z.boolean().optional(), // For gated content
+    tableOfContents: z.array(z.string()).optional(), // For complex content
   }),
 });
 
@@ -77,15 +74,17 @@ const tools = defineCollection({
     featured: z.boolean().optional(),
     rating: z.number().optional(),
     technologies: z.array(z.string()).optional(),
+    features: z.array(z.string()).optional(),
     image: z.string().optional(),
+    tags: z.array(z.string()).default([]),
     gated: z.boolean().default(true), // Mark as gated content
     premium: z.boolean().default(false), // For paid content
+    gatewayType: z.enum(['newsletter', 'purchase']).optional(), // Access method
   }),
 });
 
 export const collections = {
   blog,
-  articles,
   downloads,
   tools,
 };

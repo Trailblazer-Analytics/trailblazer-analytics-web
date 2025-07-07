@@ -2,13 +2,14 @@
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import { getCollection } from 'astro:content';
 import CaseStudyCard from '../components/CaseStudyCard.jsx';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
 import SocialShare from '../components/SocialShare.astro';
 
-// Force rebuild trigger - fix deployment issue
-const caseStudies = await getCollection('case-studies');
+// Get blog content to showcase instead of case studies
+const blogPosts = await getCollection('blog');
 
 // SEO meta data
 const seoData = {
@@ -27,7 +28,7 @@ const seoData = {
         <!-- Left Side - Text Content -->
         <div class="text-center lg:text-left">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-deepGraphLine">
-            Where Analytics Meets <span class="text-goldAccent">Rebellion</span> 🔥
+            Where Analytics Meets <span class="text-goldAccent">Innovation</span> �
           </h1>
           <p class="text-lg md:text-xl mb-8 text-deepGraphLine max-w-xl mx-auto lg:mx-0 leading-relaxed">
             15+ years of turning data chaos into gold ✨ Join the journey where boring dashboards come to die and insights actually spark joy.
@@ -36,7 +37,7 @@ const seoData = {
           <!-- Call to Action Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <a href="/blog" class="bg-goldAccent hover:bg-goldAccent/80 text-softBlack font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg">
-              🚀 Join the Rebellion
+              🚀 Join the Journey
             </a>
             <a href="/tags" class="border-2 border-goldAccent text-goldAccent hover:bg-goldAccent hover:text-softBlack font-bold py-3 px-8 rounded-lg transition-all flex items-center gap-2">
               <span>🏷️ Explore Topics</span>
@@ -48,13 +49,14 @@ const seoData = {
         <!-- Right Side - Headshot -->
         <div class="flex justify-center lg:justify-end">
           <div class="relative w-64 h-64 md:w-80 md:h-80">
-            <img 
+            <OptimizedImage 
               src="/images/alexander-headshot-hero.png" 
               alt="Alexander Nikolaiszyn" 
+              width={320}
+              height={320}
               class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-goldAccent/50"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
+              priority={true}
+              format="webp"
             />
             <div class="absolute -bottom-4 -right-4 bg-trailblazerGreen text-mutedWhite px-4 py-2 rounded-lg font-semibold text-sm shadow-lg">
               Analytics Rebel ⚡
@@ -74,7 +76,7 @@ const seoData = {
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-black text-softBlack mb-4">
           <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Your Analytics Rebellion HQ
+            Your Analytics Trailblazing HQ
           </span>
         </h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -176,9 +178,9 @@ const seoData = {
         
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
           <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Tech Notes</h3>
-            <p class="text-gray-600 mb-4">Technical tutorials, code snippets, and developer resources.</p>
-            <a href="/tech-notes" class="text-brandGreen font-semibold hover:text-green-700">Browse Notes →</a>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Articles</h3>
+            <p class="text-gray-600 mb-4">In-depth articles from my Medium blog covering analytics, data strategy, and leadership insights.</p>
+            <a href="/articles" class="text-brandGreen font-semibold hover:text-green-700">Read Articles →</a>
           </div>
         </div>
         
@@ -203,18 +205,18 @@ const seoData = {
     <div class="container mx-auto px-6 text-center relative z-10">
       <h2 class="text-4xl md:text-5xl font-black mb-4">
         <span class="inline-block transform -rotate-1 bg-brandGold px-6 py-3 text-gray-900 rounded-xl shadow-2xl">
-          Join the Rebellion
+          Blaze the Trail Forward
         </span>
       </h2>
       <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
-        Get weekly doses of rebellious insights, creative tools, and career-boosting tips.
+        Get weekly doses of trailblazing insights, innovative tools, and career-boosting tips.
         <br />
         <span class="text-brandGold font-semibold">No boring corporate newsletters here!</span>
       </p>
       <div class="max-w-md mx-auto">
         <NewsletterSignup 
-          title="Join the Rebellion"
-          description="Get weekly doses of rebellious insights, creative tools, and career-boosting tips. No boring corporate newsletters here!"
+          title="Blaze the Trail Forward"
+          description="Get weekly doses of trailblazing insights, innovative tools, and career-boosting tips. No boring corporate newsletters here!"
           leadMagnet="Free Download: Analytics ROI Calculator + 5 Data Strategy Templates"
           variant="inline"
         />
@@ -239,7 +241,7 @@ const seoData = {
       '/downloads',
       '/tools',
       '/podcast',
-      '/case-studies'
+      '/articles'
     ];
     
     if (randomBtn) {

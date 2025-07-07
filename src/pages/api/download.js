@@ -12,68 +12,16 @@ export async function POST({ request }) {
       );
     }
 
-    // Download tracking data
+    // Download tracking data (empty for now - will be populated as new downloads are added)
     const downloads = {
-      'data-strategy-canvas': {
-        filename: 'Data_Strategy_Canvas_v2024.pdf',
-        title: 'Data Strategy Canvas',
-        size: '2.3 MB',
-        type: 'PDF'
-      },
-      'analytics-readiness-checklist': {
-        filename: 'Analytics_Readiness_Checklist_v2024.pdf',
-        title: 'Analytics Readiness Checklist',
-        size: '1.8 MB',
-        type: 'PDF'
-      },
-      'data-strategy-starter-kit': {
-        filename: 'Data_Strategy_Starter_Kit_v2024.zip',
-        title: 'Data Strategy Starter Kit',
-        size: '15 MB',
-        type: 'ZIP'
-      },
-      'dashboard-design-kit': {
-        filename: 'Dashboard_Design_Kit_v2024.zip',
-        title: 'Dashboard Design Kit',
-        size: '22 MB',
-        type: 'ZIP'
-      },
-      'data-governance-toolkit': {
-        filename: 'Data_Governance_Toolkit_v2024.zip',
-        title: 'Data Governance Toolkit',
-        size: '18 MB',
-        type: 'ZIP'
-      },
-      'analytics-requirements-template': {
-        filename: 'Analytics_Requirements_Template_v2024.docx',
-        title: 'Analytics Requirements Template',
-        size: '2.5 MB',
-        type: 'DOCX'
-      },
-      'data-quality-framework': {
-        filename: 'Data_Quality_Assessment_Framework_v2024.xlsx',
-        title: 'Data Quality Assessment Framework',
-        size: '4.2 MB',
-        type: 'XLSX'
-      },
-      'bi-roadmap-template': {
-        filename: 'BI_Roadmap_Template_v2024.pptx',
-        title: 'Business Intelligence Roadmap Template',
-        size: '3.8 MB',
-        type: 'PPTX'
-      },
-      'data-project-checklist': {
-        filename: 'Data_Project_Checklist_v2024.pdf',
-        title: 'Data Project Checklist',
-        size: '1.2 MB',
-        type: 'PDF'
-      },
-      'analytics-ethics-guidelines': {
-        filename: 'Analytics_Ethics_Guidelines_v2024.pdf',
-        title: 'Analytics Ethics Guidelines',
-        size: '2.1 MB',
-        type: 'PDF'
-      }
+      // Downloads will be added here as they become available
+      // Example format:
+      // 'download-slug': {
+      //   filename: 'Download_File_Name.pdf',
+      //   title: 'Download Title',
+      //   size: '2.3 MB',
+      //   type: 'PDF'
+      // }
     };
 
     const download = downloads[downloadId];

@@ -46,12 +46,11 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg text-white mb-4">Resources</h3>
             <ul className="space-y-2">
-              <li><a href="/insights" className="text-gray-400 hover:text-brandGold transition-colors">Insights & Analysis</a></li>
-              <li><a href="/podcast" className="text-gray-400 hover:text-brandGold transition-colors">Podcast</a></li>
-              <li><a href="/tech-notes" className="text-gray-400 hover:text-brandGold transition-colors">Tech Notes</a></li>
+              <li><a href="/articles" className="text-gray-400 hover:text-brandGold transition-colors">Articles</a></li>
+              <li><a href="/blog" className="text-gray-400 hover:text-brandGold transition-colors">Blog</a></li>
               <li><a href="/tools" className="text-gray-400 hover:text-brandGold transition-colors">Tools & Software</a></li>
               <li><a href="/downloads" className="text-gray-400 hover:text-brandGold transition-colors">Free Downloads</a></li>
-              <li><a href="/white-papers" className="text-gray-400 hover:text-brandGold transition-colors">White Papers</a></li>
+              <li><a href="https://medium.com/@alex.nykolaiszyn" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-brandGold transition-colors">Medium Articles</a></li>
             </ul>
           </div>          {/* Community */}
           <div>
@@ -59,9 +58,8 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><a href="/about" className="text-gray-400 hover:text-brandGold transition-colors">About Alexander</a></li>
               <li><a href="/tools" className="text-gray-400 hover:text-brandGold transition-colors">Analytics Tools</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-brandGold transition-colors">Connect</a></li>
-              <li><a href="/speaking" className="text-gray-400 hover:text-brandGold transition-colors">Speaking</a></li>
-              <li><a href="/newsletter" className="text-gray-400 hover:text-brandGold transition-colors">Newsletter</a></li>
+              <li><a href="/connect" className="text-gray-400 hover:text-brandGold transition-colors">Connect</a></li>
+              <li><a href="/support" className="text-gray-400 hover:text-brandGold transition-colors">Support</a></li>
             </ul>
           </div>
 

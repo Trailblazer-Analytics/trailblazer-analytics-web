@@ -1,22 +1,10 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.jsx';
-
+// Redirect: /whitepapers/[slug] -> /downloads (whitepapers are now part of downloads)
 export async function getStaticPaths() {
-  const whitepaperEntries = await getCollection('whitepapers');
-  return whitepaperEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+  return [];
 }
 
-type Props = {
-  entry: CollectionEntry<'whitepapers'>;
-};
 
-const { entry } = Astro.props as Props;
-const { Content } = await entry.render();
 
 // SEO meta data
 const seoData = {

@@ -4,15 +4,15 @@
 
 **Production URL:** <https://anykolaiszyn.github.io/trailblazer-analytics-devkit/>
 **Repository:** <https://github.com/anykolaiszyn/trailblazer-analytics-devkit>
-**Build Status:** ✅ All 45 pages building successfully
-**Last Updated:** June 2025
+**Build Status:** ✅ All pages building successfully
+**Last Updated:** January 2025
 
 ## 📊 Site Analytics
 
-- **Total Pages:** 45
-- **Content Types:** Blog, Insights, Podcast, Case Studies, Tech Notes
-- **Download Resources:** 7 files (all <2KB - no storage concerns)
-- **Navigation:** Clean, professional structure with Resources dropdown
+- **Current Architecture:** Simplified static site with Medium RSS integration
+- **Content Types:** Blog (local), Downloads (resources), Tools (premium), Articles (Medium RSS)
+- **Navigation:** Clean, professional structure focusing on core content
+- **Performance:** Optimized for speed and SEO
 
 ## 🚀 Quick Actions
 
@@ -21,10 +21,9 @@
 | Content Type | Directory | Command |
 |--------------|-----------|---------|
 | Blog Post | `src/content/blog/` | Create `YYYY-MM-DD-title.md` |
-| Insight | `src/content/insights/` | Create `insight-title.md` |
-| Podcast | `src/content/podcast/` | Create `episode-XXX-title.md` |
-| Case Study | `src/content/case-studies/` | Create `case-study-title.md` |
-| Tech Note | `src/content/tech-notes/` | Create `tech-note-title.md` |
+| Download | `src/content/downloads/` | Create `resource-name.md` + add file to `public/downloads/` |
+| Tool | `src/content/tools/` | Create `tool-name.md` |
+| Article | Medium | Publish on Medium (@alex.nykolaiszyn) - auto-syncs via RSS |
 
 ### Deploy Changes
 
@@ -35,9 +34,8 @@ git commit -m "Your update description"
 git push origin main
 # Auto-deploys in 2-3 minutes
 
-# Manual (emergency)
+# Manual build (for testing)
 npm run build
-npm run deploy:clean
 ```
 
 ## 📚 Documentation Hub
@@ -59,21 +57,10 @@ npm run deploy:clean
 
 **Current navigation is clean and professional:**
 
-**Main Navigation:**
+**Current Navigation:**
 
 ```text
-Insights | Blog | Podcast | About | Resources ↓ | Support | Connect
-```
-
-**Resources Dropdown:**
-
-```text
-Tech Notes
-Case Studies
-────────────
-Downloads
-Tools
-Templates
+About | Blog | Articles | Downloads | Tools | Support | Connect
 ```
 
 ## 📁 File Organization
@@ -82,18 +69,22 @@ Templates
 
 ```text
 src/content/
-├── blog/           # Blog posts (2-3 per month)
-├── insights/       # Analytics insights (1-2 per month) 
-├── podcast/        # Podcast episodes (weekly/bi-weekly)
-├── case-studies/   # Case studies (monthly)
-└── tech-notes/     # Technical notes (as needed)
+├── blog/           # Blog posts (local content)
+├── downloads/      # Free resources and downloads
+└── tools/          # Premium tools and courses
 ```
+
+### Articles Integration
+
+- **Medium RSS:** Automatic syndication from <https://medium.com/@alex.nykolaiszyn>
+- **Articles Page:** `/articles` - displays RSS feed info and links
+- **No local storage:** Articles managed entirely through Medium
 
 ### Static Assets
 
 ```text
 public/
-├── downloads/      # PDFs and resources (7 files, <2KB each)
+├── downloads/      # PDF files and resources (ready for new content)
 └── images/         # Images and media files
 ```
 

@@ -11,14 +11,12 @@ const pages = [
   { url: '/about', name: 'About', priority: 0.8, changefreq: 'monthly' },
   { url: '/services', name: 'Services', priority: 0.8, changefreq: 'monthly' },
   { url: '/blog', name: 'Blog', priority: 0.9, changefreq: 'weekly' },
-
+  { url: '/articles', name: 'Articles', priority: 0.9, changefreq: 'weekly' },
   { url: '/downloads', name: 'Downloads', priority: 0.9, changefreq: 'weekly' },
   { url: '/white-papers', name: 'White Papers', priority: 0.9, changefreq: 'monthly' },
   { url: '/whitepapers', name: 'White Papers (Alias)', priority: 0.9, changefreq: 'monthly' },
   { url: '/tools', name: 'Tools', priority: 0.7, changefreq: 'monthly' },
   { url: '/podcast', name: 'Podcast', priority: 0.7, changefreq: 'weekly' },
-  { url: '/tech-notes', name: 'Tech Notes', priority: 0.7, changefreq: 'weekly' },
-  { url: '/case-studies', name: 'Case Studies', priority: 0.8, changefreq: 'monthly' },
   { url: '/contact', name: 'Contact', priority: 0.6, changefreq: 'monthly' },
   { url: '/connect', name: 'Connect', priority: 0.6, changefreq: 'monthly' },
   { url: '/support', name: 'Support', priority: 0.6, changefreq: 'monthly' },
@@ -31,9 +29,15 @@ const pages = [
 
 // Get blog posts
 const blogPosts = await getCollection('blog');
-const whitepapers = await getCollection('whitepapers');
-const downloads = await getCollection('downloads');
-const caseStudies = await getCollection('case-studies');
+
+// Get downloads with error handling for empty collection
+let downloads = [];
+try {
+  downloads = await getCollection('downloads');
+} catch (error) {
+  console.warn('Downloads collection not found or empty for sitemap:', error.message);
+  downloads = [];
+}
 
 // Merge all content for the sitemap
 const allContent = [
@@ -45,26 +49,12 @@ const allContent = [
     changefreq: 'monthly',
     lastmod: post.data.lastModified || post.data.date
   })),
-  ...whitepapers.map(whitepaper => ({ 
-    url: `/whitepapers/${whitepaper.slug}`, 
-    name: whitepaper.data.title, 
-    priority: 0.6, 
-    changefreq: 'monthly',
-    lastmod: whitepaper.data.date
-  })),
   ...downloads.map(download => ({ 
     url: `/downloads/${download.slug}`, 
     name: download.data.title, 
     priority: 0.6, 
     changefreq: 'monthly',
     lastmod: download.data.date
-  })),
-  ...caseStudies.map(caseStudy => ({ 
-    url: `/case-studies/${caseStudy.slug}`, 
-    name: caseStudy.data.title, 
-    priority: 0.7, 
-    changefreq: 'monthly',
-    lastmod: caseStudy.data.date
   }))
 ];
 
@@ -106,29 +96,19 @@ const seoData = {
             ))}
           </ul>
           
-          <h2>White Papers</h2>
-          <ul>
-            {whitepapers.map(whitepaper => (
-              <li>
-                <a href={`/whitepapers/${whitepaper.slug}`}>{whitepaper.data.title}</a>
-              </li>
-            ))}
-          </ul>
+          
+          <h2>Articles</h2>
+          <div class="bg-gray-50 p-4 rounded">
+            <p class="text-gray-600">Articles are published on Medium.</p>
+            <a href="https://medium.com/@alex.nykolaiszyn" target="_blank" rel="noopener noreferrer" 
+               class="text-blue-600 hover:text-blue-700">Visit Medium Profile →</a>
+          </div>
           
           <h2>Downloads</h2>
           <ul>
             {downloads.map(download => (
               <li>
                 <a href={`/downloads/${download.slug}`}>{download.data.title}</a>
-              </li>
-            ))}
-          </ul>
-          
-          <h2>Case Studies</h2>
-          <ul>
-            {caseStudies.map(caseStudy => (
-              <li>
-                <a href={`/case-studies/${caseStudy.slug}`}>{caseStudy.data.title}</a>
               </li>
             ))}
           </ul>

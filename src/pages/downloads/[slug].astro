@@ -6,11 +6,24 @@ import Footer from '../../components/Footer.jsx';
 import siteConfig from '../../site.config.js';
 
 export async function getStaticPaths() {
-  const downloadEntries = await getCollection('downloads');
-  return downloadEntries.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  try {
+    const downloadEntries = await getCollection('downloads');
+    
+    // If no downloads exist, return empty array
+    if (!downloadEntries || downloadEntries.length === 0) {
+      console.log('No downloads found, skipping route generation');
+      return [];
+    }
+    
+    return downloadEntries.map(entry => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }));
+  } catch (error) {
+    // Return empty array if downloads collection doesn't exist or is empty
+    console.warn('Downloads collection not found or empty:', error.message);
+    return [];
+  }
 }
 
 type Props = {
@@ -38,6 +51,7 @@ const enableTracking = siteConfig.downloadTrackingEnabled;
 
 // Format date for display
 function formatDate(dateString) {
+  if (!dateString) return 'Recently';
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -68,11 +82,15 @@ function formatDate(dateString) {
           {entry.data.description}
         </p>
         <div class="flex flex-wrap gap-4 items-center text-sm text-gray-400">
-          <span>Added: {formatDate(entry.data.date)}</span>
-          <span>•</span>
+          {entry.data.date && <span>Added: {formatDate(entry.data.date)}</span>}
+          {entry.data.date && <span>•</span>}
           <span>{entry.data.fileType} • {entry.data.fileSize}</span>
-          <span>•</span>
-          <span>{entry.data.downloads.toLocaleString()} downloads</span>
+          {entry.data.downloads && (
+            <>
+              <span>•</span>
+              <span>{entry.data.downloads.toLocaleString()} downloads</span>
+            </>
+          )}
         </div>
       </div>
     </div>

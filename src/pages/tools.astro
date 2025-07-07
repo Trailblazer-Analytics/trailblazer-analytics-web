@@ -40,7 +40,7 @@ const seoData = {
           Powerful tools and frameworks to accelerate your data analytics journey. Interactive calculators, assessment frameworks, and strategic planning tools - all designed for trailblazers.
         </p>
         <div class="flex flex-wrap justify-center gap-4 mb-8">
-          <span class="bg-brandGreen/20 text-brandGreen px-4 py-2 rounded-full">Interactive Tools</span>
+          <span class="bg-brandGreen/20 text-white px-4 py-2 rounded-full">Interactive Tools</span>
           <span class="bg-brandGold/20 text-brandGold px-4 py-2 rounded-full">Calculators</span>
           <span class="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full">Templates</span>
           <span class="bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full">Frameworks</span>
@@ -182,6 +182,15 @@ const seoData = {
                   {tool.data.price && (
                     <span class="text-lg font-bold text-gray-900">{tool.data.price}</span>
                   )}
+                  {!tool.data.price && tool.data.premium && (
+                    <span class="text-lg font-bold text-brandGold">Premium</span>
+                  )}
+                  {!tool.data.price && !tool.data.premium && tool.data.gated && (
+                    <span class="text-sm font-bold text-brandGreen">Free*</span>
+                  )}
+                  {!tool.data.gated && (
+                    <span class="text-sm font-bold text-blue-600">Free</span>
+                  )}
                 </div>
                 
                 <h3 class="text-xl font-bold text-gray-900 mb-2">{tool.data.title}</h3>
@@ -196,18 +205,64 @@ const seoData = {
                 )}
                 
                 <div class="flex gap-2">
-                  <a 
-                    href={`/tools/${tool.slug}`}
-                    class="flex-1 bg-brandGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm text-center"
-                  >
-                    Learn More
-                  </a>
+                  {/* Gating Logic for Primary Button */}
+                  {!tool.data.gated ? (
+                    /* Free Access */
+                    <a 
+                      href={`/tools/${tool.slug}`}
+                      class="flex-1 bg-brandGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm text-center"
+                    >
+                      Access Tool
+                    </a>
+                  ) : tool.data.premium && tool.data.purchaseUrl ? (
+                    /* External Purchase */
+                    <a 
+                      href={tool.data.purchaseUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex-1 bg-brandGold hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded-lg transition-colors text-sm text-center"
+                    >
+                      {tool.data.price ? `Buy ${tool.data.price}` : 'Buy Now'}
+                    </a>
+                  ) : (
+                    /* Newsletter Gate */
+                    <a 
+                      href={`/tools/${tool.slug}`}
+                      class="flex-1 bg-brandGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm text-center"
+                    >
+                      Get Free Access
+                    </a>
+                  )}
+                  
+                  {/* Demo/Preview Button */}
                   {tool.data.demoUrl && (
-                    <a href={tool.data.demoUrl} class="border-2 border-brandGreen text-brandGreen px-4 py-2 rounded-lg hover:bg-brandGreen hover:text-white transition-colors text-sm">
+                    <a 
+                      href={tool.data.demoUrl} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="border-2 border-brandGreen text-brandGreen px-4 py-2 rounded-lg hover:bg-brandGreen hover:text-white transition-colors text-sm"
+                    >
                       Demo
                     </a>
                   )}
+                  
+                  {/* Learn More for Premium without Demo */}
+                  {!tool.data.demoUrl && tool.data.gated && (
+                    <a 
+                      href={`/tools/${tool.slug}`} 
+                      class="border-2 border-gray-300 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm"
+                    >
+                      Details
+                    </a>
+                  )}
                 </div>
+                
+                {/* Access Notice */}
+                {tool.data.gated && !tool.data.premium && (
+                  <p class="text-xs text-gray-500 mt-2">
+                    * Free with newsletter signup
+                  </p>
+                )}
               </div>
             </div>
           ))}
@@ -216,28 +271,65 @@ const seoData = {
     </div>
   </section>
 
-  <!-- Coming Soon -->
+  <!-- Coming Soon / Setup Instructions -->
   {tools.length === 0 && (
     <section class="py-16 bg-white">
       <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-          <div class="bg-gray-50 rounded-2xl p-12">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gray-50 rounded-2xl p-12 text-center mb-12">
             <div class="w-20 h-20 bg-brandGreen/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg class="w-10 h-10 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
               </svg>
             </div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Tools Coming Soon!</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Premium Tools Coming Soon!</h2>
             <p class="text-lg text-gray-600 mb-8">
-              We're building an amazing collection of analytics tools, templates, and frameworks. Stay tuned for powerful resources to accelerate your data journey.
+              We're building an amazing collection of analytics tools, templates, and frameworks. Professional-grade resources to accelerate your data journey.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a href="/contact" class="bg-brandGreen text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
                 Request a Tool
               </a>
-              <a href="/tech-notes" class="border-2 border-brandGreen text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-brandGreen hover:text-white transition-colors">
-                Read Tech Notes
+              <a href="/articles" class="border-2 border-brandGreen text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-brandGreen hover:text-white transition-colors">
+                Read Articles
               </a>
+            </div>
+          </div>
+          
+          <!-- Setup Instructions for Admins -->
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-8">
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-blue-900 mb-3">For Site Administrators</h3>
+                <p class="text-blue-800 mb-4">
+                  Ready to add premium tools? Follow our comprehensive setup guide to create gated content with newsletter signups or external purchase options.
+                </p>
+                <div class="bg-white rounded-lg p-4 mb-4">
+                  <h4 class="font-semibold text-blue-900 mb-2">Quick Start:</h4>
+                  <ol class="text-sm text-blue-800 space-y-1">
+                    <li>1. Create tool file in <code class="bg-blue-100 px-2 py-1 rounded">src/content/tools/</code></li>
+                    <li>2. Add frontmatter with gating options (<code class="bg-blue-100 px-2 py-1 rounded">gated</code>, <code class="bg-blue-100 px-2 py-1 rounded">premium</code>, <code class="bg-blue-100 px-2 py-1 rounded">gatewayType</code>)</li>
+                    <li>3. Configure newsletter or purchase integration</li>
+                    <li>4. Test the tool access flow</li>
+                  </ol>
+                </div>
+                <a 
+                  href="https://github.com/AlexMercer-MA/trailblazer-analytics-devkit/blob/main/PREMIUM_TOOLS_SETUP_GUIDE.md" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                  View Setup Guide
+                </a>
+              </div>
             </div>
           </div>
         </div>

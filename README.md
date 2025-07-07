@@ -1,15 +1,18 @@
 # Trailblazer Analytics - Personal Branding Website
 
-This repository contains the source code for my personal branding website, [trailblazeranalytics.com](https://trailblazeranalytics.com). Built with Astro, React, and Tailwind CSS, this site serves as a central hub for my work as a thought leader in the data analytics space.
+This repository contains the source code for my personal branding website. Built with Astro, React, and Tailwind CSS, this site serves as a central hub for my work as a thought leader in the data analytics space.
 
-**🎉 Phase 2 Complete**: Enhanced with performance optimizations, SEO improvements, and engagement features including social sharing, newsletter signup, and save-for-later functionality. Domain and CSS issues resolved.
+**🎉 Cleanup Complete**: Simplified static architecture with clean navigation, Medium RSS integration for articles, and robust empty state handling.
+
+**Live Site**: [https://anykolaiszyn.github.io/trailblazer-analytics-devkit/](https://anykolaiszyn.github.io/trailblazer-analytics-devkit/)
 
 ## 🚀 Key Features
 
-- **Content Hub**: Articles (Medium-backed), blog posts, case studies, and tech notes.
-- **Resource Downloads**: Free downloads including whitepapers, guides, and templates.
-- **Premium Tools**: Gated content and premium resources for advanced users.
-- **Personal Branding**: A modern, responsive design that reflects my expertise in data analytics.
+- **Content Hub**: Blog posts, case studies, and tech notes hosted locally.
+- **Articles Integration**: Clean RSS feed integration with Medium publication.
+- **Resource Downloads**: Ready for new downloads (currently empty, awaiting content).
+- **Interactive Tools**: Premium calculators and frameworks for analytics professionals.
+- **Modern Design**: Responsive, accessible design with dynamic features like coffee counter.
 
 ## 🛠️ Development
 
@@ -30,24 +33,32 @@ pnpm install
 pnpm run dev   # http://localhost:4321
 
 # Build for production
-pnpm run build
+pnpm build
 
 # Preview production build
 pnpm run preview
 ```
 
-## 📚 Internal Documentation
+## 📚 Documentation
 
-For internal documentation, including development guides, content management procedures, and project status reports, please see the `INTERNAL_DOCS/` directory.
+- `USER_GUIDE_UPLOADS.md` - How to add downloads and tools
+- `INTERNAL_DOCS/` - Internal development documentation
 
-## 🏗️ Project Structure
+## 🏗️ Current Structure
 
 ```text
 src/
 ├── components/          # React/Astro components
-├── content/            # MDX content files (case studies, blog posts, etc.)
+├── content/            # Content collections
+│   ├── blog/          # Blog posts (local)
+│   ├── downloads/     # Downloads (empty - ready for content)
+│   └── tools/         # Interactive tools
 ├── layouts/            # Page layouts
 ├── pages/              # Route pages and API endpoints
+│   ├── articles.astro # Medium RSS integration
+│   ├── downloads.astro # Downloads with empty state
+│   └── tools.astro    # Interactive tools
+└── styles/            # Tailwind CSS
 └── styles/             # Global CSS and Tailwind config
 
 INTERNAL_DOCS/          # User and admin documentation

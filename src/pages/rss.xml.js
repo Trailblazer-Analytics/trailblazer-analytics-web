@@ -42,14 +42,10 @@ export async function GET(context) {
   
   // Get content from available collections
   const blogPosts = await safeGetCollection('blog', 'blog');
-  const techNotes = await safeGetCollection('tech-notes', 'tech-notes');
-  const caseStudies = await safeGetCollection('case-studies', 'case-studies');
   
   // Combine all content
   allContent = [
-    ...blogPosts.map(item => ({ ...item, collectionType: 'blog' })),
-    ...techNotes.map(item => ({ ...item, collectionType: 'tech-notes' })),
-    ...caseStudies.map(item => ({ ...item, collectionType: 'case-studies' }))
+    ...blogPosts.map(item => ({ ...item, collectionType: 'blog' }))
   ];
   
   // Sort content by date (newest first)
@@ -74,12 +70,6 @@ export async function GET(context) {
     switch (item.collectionType) {
       case 'blog':
         url = `${cleanSite}/blog/${item.slug}`;
-        break;
-      case 'tech-notes':
-        url = `${cleanSite}/tech-notes/${item.slug}`;
-        break;
-      case 'case-studies':
-        url = `${cleanSite}/case-studies/${item.slug}`;
         break;
       default:
         // Skip if we don't know how to handle this collection

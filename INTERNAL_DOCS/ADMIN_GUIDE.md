@@ -2,7 +2,7 @@
 
 ## 🎯 Overview
 
-This guide covers site administration, content management, and maintenance for the Trailblazer Analytics website.
+This guide covers site administration, content management, and maintenance for the Trailblazer Analytics website. The site uses a simplified static architecture with Medium RSS integration.
 
 ## 🏗️ Architecture Overview
 
@@ -10,19 +10,26 @@ This guide covers site administration, content management, and maintenance for t
 
 - **Framework**: Astro 5.x with React components
 - **Styling**: Tailwind CSS with custom utilities
-- **Content**: Markdown collections + MDX
-- **APIs**: Node.js serverless functions
-- **Hosting**: Ready for Netlify/Vercel deployment
-- **Analytics**: Plausible Analytics integration
+- **Content**: Markdown collections (blog, downloads, tools)
+- **Articles**: Medium RSS feed integration
+- **Hosting**: GitHub Pages
+- **Deployment**: GitHub Actions
 
-### File Structure
+### Current File Structure
 
 ```text
 src/
 ├── components/       # Reusable UI components
 ├── content/         # Markdown content collections
+│   ├── blog/        # Local blog posts
+│   ├── downloads/   # Free resources
+│   └── tools/       # Premium/gated content
 ├── layouts/         # Page layout templates
-├── pages/           # Site pages and API routes
+├── pages/           # Site pages
+│   ├── articles.astro  # Medium RSS integration
+│   ├── downloads.astro # Downloads listing
+│   ├── tools.astro     # Tools listing
+│   └── ...
 ├── styles/          # CSS and styling
 └── site.config.js   # Site configuration
 ```
@@ -34,31 +41,16 @@ src/
 Create `.env` file with these settings:
 
 ```bash
-# Newsletter Provider (choose one)
-BEEHIIV_API_KEY=your_beehiiv_key
-BEEHIIV_PUBLICATION_ID=your_publication_id
-MAILCHIMP_API_KEY=your_mailchimp_key
-MAILCHIMP_LIST_ID=your_list_id
-CONVERTKIT_API_KEY=your_convertkit_key
-CONVERTKIT_FORM_ID=your_form_id
-BUTTONDOWN_API_KEY=your_buttondown_key
-
-# Email Provider (choose one)
-RESEND_API_KEY=your_resend_key
-SENDGRID_API_KEY=your_sendgrid_key
-MAILGUN_API_KEY=your_mailgun_key
-MAILGUN_DOMAIN=your_mailgun_domain
-
 # Site Settings
 CONTACT_EMAIL=alexander@trailblazer-analytics.com
-SITE_URL=https://trailblazer-analytics.com
-PLAUSIBLE_DOMAIN=trailblazer-analytics.com
+SITE_URL=https://anykolaiszyn.github.io/trailblazer-analytics-devkit/
 
 # Medium Integration
-MEDIUM_USERNAME=@alexandertrailblazer
+MEDIUM_USERNAME=@alex.nykolaiszyn
 MEDIUM_RSS_URL=https://medium.com/feed/@alex.nykolaiszyn
 
 # Optional Analytics
+PLAUSIBLE_DOMAIN=your-domain.com
 GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
 ```
 
@@ -69,8 +61,7 @@ Central configuration for:
 - Site metadata and SEO
 - Social media links
 - Business information
-- Feature toggles
-- API settings
+- Medium RSS feed settings
 
 ## 📝 Content Management
 
@@ -82,22 +73,60 @@ Central configuration for:
 ---
 title: "Your Post Title"
 description: "Brief description"
-publishDate: "2025-05-31"
+date: "2025-01-15"
 author: "Alexander Nykolaiszyn"
 tags: ["data-strategy", "analytics"]
 featured: true
+vibe: "insight"
+difficulty: "intermediate"
 ---
 
 Your content here...
 ```
 
-#### White Papers (`src/content/whitepapers/`)
+#### Downloads (`src/content/downloads/`)
 
 ```markdown
 ---
-title: "White Paper Title"
-description: "Executive summary"
-pages: 45
+title: "Resource Title"
+description: "What this download provides"
+date: "2025-01-15"
+category: "Templates"
+fileType: "PDF"
+fileSize: "2.5 MB"
+downloadUrl: "/downloads/your-file.pdf"
+featured: false
+free: true
+---
+
+Description of the resource...
+```
+
+#### Tools (`src/content/tools/`)
+
+```markdown
+---
+title: "Tool Title"
+description: "What this tool provides"
+date: "2025-01-15"
+category: "Frameworks"
+price: "$99"
+demoUrl: "https://example.com/demo"
+purchaseUrl: "https://example.com/buy"
+featured: false
+gated: true
+premium: true
+---
+
+Tool description...
+```
+
+#### Articles (Medium Integration)
+
+Articles are automatically pulled from Medium RSS feed. No local management required.
+- Publish on Medium (@alex.nykolaiszyn)
+- Articles appear automatically on `/articles` page
+- RSS feed: https://medium.com/feed/@alex.nykolaiszyn
 publishDate: "2025-05-31"
 category: "Strategy"
 featured: true

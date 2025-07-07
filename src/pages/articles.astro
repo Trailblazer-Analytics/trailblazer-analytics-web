@@ -1,275 +1,429 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.jsx';
 
-// Fetch all articles and sort by date
-const allArticles = await getCollection('articles');
-const sortedArticles = allArticles.sort((a, b) => {
-  const dateA = new Date(a.data.date || 0);
-  const dateB = new Date(b.data.date || 0);
-  return dateB.getTime() - dateA.getTime(); // Newest first
-});
+// SEO meta data
+const seoData = {
+  title: "Articles - Trailblazer Perspectives on Analytics & Data Strategy",
+  description: "Discover cutting-edge insights on data strategy, analytics implementation, and business intelligence from a trailblazer's perspective. Fresh takes on data transformation and AI adoption.",
+  image: "/og-image-articles.png"
+};
 
-// Extract featured articles for special treatment
-const featuredArticles = sortedArticles.filter(article => article.data.featured);
-const regularArticles = sortedArticles.filter(article => !article.data.featured);
+// Medium RSS feed URL
+const MEDIUM_RSS_URL = 'https://medium.com/feed/@alex.nykolaiszyn';
 
-// Get popular tags for the sidebar
-const tagCounts: Record<string, number> = {};
-allArticles.forEach(article => {
-  article.data.tags?.forEach((tag: string) => {
-    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-  });
-});
+// Function to fetch and parse Medium RSS feed
+async function fetchMediumPosts() {
+  try {
+    // Using a CORS proxy for RSS parsing in production
+    const rssToJsonAPI = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(MEDIUM_RSS_URL)}`;
+    const response = await fetch(rssToJsonAPI);
+    const data = await response.json();
+    
+    if (data.status === 'ok') {
+      return data.items.slice(0, 12); // Get latest 12 posts for better pagination
+    }
+    return [];
+  } catch (error) {
+    console.error('Error fetching Medium posts:', error);
+    return [];
+  }
+}
 
-const popularTags = Object.entries(tagCounts)
-  .sort(([,a], [,b]) => b - a)
-  .slice(0, 10) // Top 10 tags
-  .map(([tag, count]) => ({ tag, count }));
+const mediumPosts = await fetchMediumPosts();
 
-// Format date helper
+// Extract excerpt from content
+function getExcerpt(content, maxLength = 150) {
+  const text = content.replace(/<[^>]*>/g, ''); // Strip HTML
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+// Format date
 function formatDate(dateString) {
-  if (!dateString) return 'Coming Soon';
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
   });
 }
 
-// Format reading time helper
-function formatReadingTime(readingTime) {
-  if (!readingTime) return null;
-  if (typeof readingTime === 'string') return readingTime;
-  return `${readingTime} min read`;
+// Get reading time estimate
+function getReadingTime(content) {
+  const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+  const readingTimeMinutes = Math.ceil(words / 200); // Average reading speed
+  return readingTimeMinutes;
+}
+
+// Extract categories from content (basic implementation)
+function extractCategories(content, title) {
+  const categories = [];
+  const keywordMap = {
+    'Data Strategy': ['strategy', 'governance', 'planning', 'roadmap'],
+    'Analytics': ['analytics', 'analysis', 'insights', 'metrics'],
+    'AI & ML': ['ai', 'artificial intelligence', 'machine learning', 'ml', 'model'],
+    'Business Intelligence': ['bi', 'business intelligence', 'reporting', 'dashboard'],
+    'Technology': ['technology', 'tech', 'tools', 'platform', 'cloud']
+  };
+  
+  const combinedText = (title + ' ' + content).toLowerCase();
+  
+  for (const [category, keywords] of Object.entries(keywordMap)) {
+    if (keywords.some(keyword => combinedText.includes(keyword))) {
+      categories.push(category);
+    }
+  }
+  
+  return categories.length > 0 ? categories : ['General'];
 }
 ---
 
-<Base 
-  title="Articles | Trailblazer Analytics"
-  description="Explore insights from my Medium publication - analytics thought leadership, data strategy guides, and industry perspectives that shape the future of business intelligence."
->
+<Base {...seoData}>
   <Navbar />
-  
-  <main class="min-h-screen bg-softBlack text-mutedWhite">
-    <!-- Hero Section -->
-    <section class="py-16 px-6 bg-gradient-to-br from-trailblazerGreen to-deepGraphGreen">
-      <div class="container mx-auto text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-mutedWhite">
-          📰 Articles
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white py-20 relative overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-brandGold rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+      <div class="absolute top-20 right-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+      <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-6">
+          <span class="inline-block px-4 py-2 bg-brandGold text-gray-900 rounded-full text-sm font-bold uppercase tracking-wide">
+            📰 Trailblazer Articles
+          </span>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">
+          Articles & <span class="text-brandGold">Insights</span>
         </h1>
-        <p class="text-xl md:text-2xl text-mutedWhite/90 max-w-3xl mx-auto mb-8">
-          Medium-backed insights on analytics, data strategy, and industry trends. 
-          Thought leadership from the front lines of business intelligence.
+        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+          🚀 Trailblazer perspectives on data strategy, analytics trends, and technology innovations that are shaping the future of intelligent business decisions.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span class="bg-goldAccent text-softBlack px-4 py-2 rounded-full font-semibold">
-            {allArticles.length} Articles
-          </span>
-          <span class="bg-mutedWhite/20 text-mutedWhite px-4 py-2 rounded-full">
-            Medium Integration
-          </span>
+        
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+          <div class="relative">
+            <input 
+              type="text" 
+              id="article-search"
+              placeholder="Search articles..." 
+              class="w-full px-6 py-4 pl-12 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:bg-white/20 focus:border-brandGold transition-all"
+            />
+            <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+        
+        <!-- Category Filter Tags -->
+        <div class="flex flex-wrap justify-center gap-4 mb-6">
+          <button class="category-filter active bg-brandGreen/20 text-brandGreen px-4 py-2 rounded-full hover:bg-brandGreen/30 transition-colors" data-category="all">All Articles</button>
+          <button class="category-filter bg-brandGold/20 text-brandGold px-4 py-2 rounded-full hover:bg-brandGold/30 transition-colors" data-category="Data Strategy">Data Strategy</button>
+          <button class="category-filter bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full hover:bg-blue-500/30 transition-colors" data-category="Analytics">Analytics</button>
+          <button class="category-filter bg-purple-500/20 text-purple-400 px-4 py-2 rounded-full hover:bg-purple-500/30 transition-colors" data-category="AI & ML">AI & ML</button>
+          <button class="category-filter bg-green-500/20 text-green-400 px-4 py-2 rounded-full hover:bg-green-500/30 transition-colors" data-category="Business Intelligence">Business Intelligence</button>
+          <button class="category-filter bg-orange-500/20 text-orange-400 px-4 py-2 rounded-full hover:bg-orange-500/30 transition-colors" data-category="Technology">Technology</button>
+        </div>
+
+        <!-- External Medium Link -->
+        <div class="mt-6">
+          <a 
+            href="https://medium.com/@alex.nykolaiszyn" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-brandGold hover:text-yellow-300 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+            </svg>
+            Follow on Medium for more insights
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Article Section -->
+  {mediumPosts.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gradient-to-r from-brandGreen to-green-600 rounded-2xl p-8 text-white relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-4 -translate-x-4"></div>
+            
+            <div class="relative z-10">
+              <div class="flex flex-wrap items-center gap-3 mb-4">
+                <span class="bg-brandGold text-black px-3 py-1 rounded-full text-sm font-semibold">Featured Article</span>
+                {extractCategories(mediumPosts[0].description, mediumPosts[0].title).slice(0, 2).map(category => (
+                  <span class="bg-white/20 text-white px-3 py-1 rounded-full text-sm">
+                    {category}
+                  </span>
+                ))}
+              </div>
+              
+              <h2 class="text-3xl font-bold mb-4">{mediumPosts[0].title}</h2>
+              <p class="text-xl mb-6 opacity-90">{getExcerpt(mediumPosts[0].description, 200)}</p>
+              
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-4 text-sm opacity-75">
+                  <span>{formatDate(mediumPosts[0].pubDate)}</span>
+                  <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    {getReadingTime(mediumPosts[0].description)} min read
+                  </span>
+                </div>
+                
+                <a 
+                  href={mediumPosts[0].link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 bg-white text-brandGreen px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Read Full Article
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  )}
 
-    <div class="container mx-auto py-12 px-6">
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Main Content -->
-        <div class="md:col-span-2">
-          
-          {featuredArticles.length > 0 && (
-            <section class="mb-12">
-              <h2 class="text-3xl font-bold mb-8 text-goldAccent">Featured Articles</h2>
-              <div class="grid gap-8">
-                {featuredArticles.map(article => (
-                  <article class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine hover:border-goldAccent/50 transition-all group">
-                    <div class="flex flex-col md:flex-row gap-6">
-                      {article.data.image && (
-                        <div class="md:w-1/3">
-                          <img 
-                            src={article.data.image} 
-                            alt={article.data.title}
-                            class="w-full h-48 object-cover rounded-lg"
-                            loading="lazy"
-                          />
-                        </div>
-                      )}
-                      <div class={article.data.image ? 'md:w-2/3' : 'w-full'}>
-                        <div class="flex flex-wrap gap-2 mb-3">
-                          {article.data.tags?.slice(0, 3).map(tag => (
-                            <span class="bg-goldAccent/20 text-goldAccent px-2 py-1 rounded-full text-sm">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3 group-hover:text-goldAccent transition-colors">
-                          <a href={`/articles/${article.slug}`}>
-                            {article.data.title}
-                          </a>
-                        </h3>
-                        {article.data.description && (
-                          <p class="text-mutedWhite/80 mb-4 line-clamp-3">
-                            {article.data.description}
-                          </p>
-                        )}
-                        <div class="flex items-center gap-4 text-sm text-mutedWhite/60">
-                          <span>{formatDate(article.data.date)}</span>
-                          {article.data.readingTime && (
-                            <span>• {formatReadingTime(article.data.readingTime)}</span>
-                          )}
-                          {article.data.mediumUrl && (
-                            <a href={article.data.mediumUrl} target="_blank" rel="noopener noreferrer" 
-                               class="text-goldAccent hover:text-goldAccent/80 transition-colors">
-                              • Read on Medium
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Regular Articles */}
-          <section>
-            <h2 class="text-3xl font-bold mb-8 text-goldAccent">
-              {featuredArticles.length > 0 ? 'All Articles' : 'Latest Articles'}
-            </h2>
-            <div class="grid gap-6">
-              {regularArticles.map(article => (
-                <article class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine hover:border-goldAccent/50 transition-all group">
-                  <div class="flex flex-col sm:flex-row gap-4">
-                    {article.data.image && (
-                      <div class="sm:w-1/4">
-                        <img 
-                          src={article.data.image} 
-                          alt={article.data.title}
-                          class="w-full h-32 object-cover rounded-lg"
-                          loading="lazy"
-                        />
-                      </div>
-                    )}
-                    <div class={article.data.image ? 'sm:w-3/4' : 'w-full'}>
-                      <div class="flex flex-wrap gap-2 mb-2">
-                        {article.data.tags?.slice(0, 2).map(tag => (
-                          <span class="bg-goldAccent/20 text-goldAccent px-2 py-1 rounded-full text-xs">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 class="text-xl font-bold mb-2 group-hover:text-goldAccent transition-colors">
-                        <a href={`/articles/${article.slug}`}>
-                          {article.data.title}
-                        </a>
-                      </h3>
-                      {article.data.description && (
-                        <p class="text-mutedWhite/80 mb-3 line-clamp-2 text-sm">
-                          {article.data.description}
-                        </p>
-                      )}
-                      <div class="flex items-center gap-3 text-xs text-mutedWhite/60">
-                        <span>{formatDate(article.data.date)}</span>
-                        {article.data.readingTime && (
-                          <span>• {formatReadingTime(article.data.readingTime)}</span>
-                        )}
-                        {article.data.mediumUrl && (
-                          <a href={article.data.mediumUrl} target="_blank" rel="noopener noreferrer" 
-                             class="text-goldAccent hover:text-goldAccent/80 transition-colors">
-                            • Medium
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            {allArticles.length === 0 && (
-              <div class="text-center py-12">
-                <div class="text-6xl mb-4">📰</div>
-                <h3 class="text-2xl font-bold mb-4">Articles Coming Soon</h3>
-                <p class="text-mutedWhite/80 max-w-md mx-auto">
-                  I'm working on integrating my Medium articles. Check back soon for insights on analytics, data strategy, and industry trends.
-                </p>
-              </div>
-            )}
-          </section>
-        </div>
-
-        <!-- Sidebar -->
-        <aside class="space-y-6">
-          <!-- Newsletter CTA -->
-          <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
-            <h3 class="text-xl font-bold mb-3 text-goldAccent">Stay Updated</h3>
-            <p class="text-sm text-mutedWhite/80 mb-4">
-              Get notified when new articles are published. No spam, just quality insights.
+  <!-- Articles Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-900">Latest Articles</h2>
+            <p class="text-gray-600 mt-2" id="article-count">
+              {mediumPosts.length > 0 ? `Showing ${mediumPosts.length} articles` : 'No articles found'}
             </p>
-            <a href="/connect" 
-               class="block w-full bg-goldAccent text-softBlack text-center py-2 rounded-lg font-semibold hover:bg-goldAccent/80 transition-colors">
-              Subscribe
+          </div>
+          <div class="flex items-center gap-4">
+            <!-- Sort Dropdown -->
+            <select id="sort-articles" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandGreen focus:border-transparent">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="title">Title A-Z</option>
+            </select>
+            <a 
+              href="https://medium.com/@alex.nykolaiszyn" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-brandGreen hover:text-green-700 font-semibold transition-colors"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+              </svg>
+              View All on Medium
             </a>
           </div>
+        </div>
 
-          <!-- Popular Tags -->
-          {popularTags.length > 0 && (
-            <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
-              <h3 class="text-xl font-bold mb-4 text-goldAccent">Popular Topics</h3>
-              <div class="flex flex-wrap gap-2">
-                {popularTags.map(({ tag, count }) => (
-                  <a href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} 
-                     class="bg-mutedWhite/10 hover:bg-goldAccent/20 text-mutedWhite hover:text-goldAccent px-3 py-1 rounded-full text-sm transition-colors">
-                    {tag} ({count})
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <!-- Quick Links -->
-          <div class="bg-deepGraphGreen rounded-lg p-6 border border-deepGraphLine">
-            <h3 class="text-xl font-bold mb-4 text-goldAccent">More Content</h3>
-            <div class="space-y-3">
-              <a href="/blog" class="flex items-center gap-3 text-mutedWhite hover:text-goldAccent transition-colors">
-                <span>✍️</span> Blog Posts
-              </a>
-              <a href="/case-studies" class="flex items-center gap-3 text-mutedWhite hover:text-goldAccent transition-colors">
-                <span>🏆</span> Success Stories
-              </a>
-              <a href="/tech-notes" class="flex items-center gap-3 text-mutedWhite hover:text-goldAccent transition-colors">
-                <span>⚡</span> Pro Tips
-              </a>
-              <a href="/podcast" class="flex items-center gap-3 text-mutedWhite hover:text-goldAccent transition-colors">
-                <span>🎙️</span> Podcast
+        {mediumPosts.length > 0 ? (
+          <div id="articles-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {mediumPosts.slice(1).map((post) => {
+              const categories = extractCategories(post.description, post.title);
+              const readingTime = getReadingTime(post.description);
+              
+              return (
+                <article class="article-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1" 
+                         data-categories={categories.join(',').toLowerCase()}
+                         data-title={post.title.toLowerCase()}
+                         data-date={post.pubDate}>
+                  <div class="p-6">
+                    <!-- Article Categories -->
+                    <div class="flex flex-wrap gap-2 mb-3">
+                      {categories.slice(0, 2).map(category => (
+                        <span class="text-xs px-2 py-1 bg-brandGreen/10 text-brandGreen rounded-full">
+                          {category}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-brandGreen transition-colors">
+                      {post.title}
+                    </h3>
+                    
+                    <p class="text-gray-600 mb-4 line-clamp-3">
+                      {getExcerpt(post.description)}
+                    </p>
+                    
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                      <span>{formatDate(post.pubDate)}</span>
+                      <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        {readingTime} min read
+                      </span>
+                    </div>
+                    
+                    <a 
+                      href={post.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 bg-brandGreen text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium"
+                    >
+                      Read Article
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <div class="bg-white rounded-xl shadow-lg p-12 max-w-2xl mx-auto">
+              <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Articles Coming Soon</h3>
+              <p class="text-gray-600 mb-6">We're preparing insightful content on data strategy, analytics, and business intelligence. Check back soon or follow us on Medium for updates.</p>
+              <a
+                href="https://medium.com/@alex.nykolaiszyn" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-brandGreen text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                </svg>
+                Follow on Medium
               </a>
             </div>
           </div>
-        </aside>
+        )}
+        
+        <!-- Load More Button for future pagination -->
+        {mediumPosts.length > 9 && (
+          <div class="text-center mt-12">
+            <button 
+              id="load-more-articles"
+              class="bg-white border-2 border-brandGreen text-brandGreen px-8 py-3 rounded-lg hover:bg-brandGreen hover:text-white transition-colors font-semibold"
+            >
+              Load More Articles
+            </button>
+          </div>
+        )}
       </div>
     </div>
-  </main>
+  </section>
 
   <Footer />
 </Base>
 
-<style>
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
+<script>
+  // Article filtering and search functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('article-search');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const sortSelect = document.getElementById('sort-articles');
+    const articlesGrid = document.getElementById('articles-grid');
+    const articleCount = document.getElementById('article-count');
+    
+    let allArticles = [];
+    let filteredArticles = [];
+    
+    // Initialize articles array
+    if (articlesGrid) {
+      allArticles = Array.from(articlesGrid.querySelectorAll('.article-card'));
+      filteredArticles = [...allArticles];
+    }
+    
+    // Search functionality
+    if (searchInput) {
+      searchInput.addEventListener('input', filterArticles);
+    }
+    
+    // Category filtering
+    categoryFilters.forEach(filter => {
+      filter.addEventListener('click', function() {
+        // Update active state
+        categoryFilters.forEach(f => f.classList.remove('active', 'bg-brandGreen/20', 'text-brandGreen'));
+        this.classList.add('active', 'bg-brandGreen/20', 'text-brandGreen');
+        
+        filterArticles();
+      });
+    });
+    
+    // Sorting
+    if (sortSelect) {
+      sortSelect.addEventListener('change', sortArticles);
+    }
+    
+    function filterArticles() {
+      const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+      const activeCategory = document.querySelector('.category-filter.active')?.dataset.category || 'all';
+      
+      filteredArticles = allArticles.filter(article => {
+        const title = article.dataset.title || '';
+        const categories = article.dataset.categories || '';
+        
+        const matchesSearch = title.includes(searchTerm);
+        const matchesCategory = activeCategory === 'all' || categories.includes(activeCategory.toLowerCase());
+        
+        return matchesSearch && matchesCategory;
+      });
+      
+      displayArticles();
+    }
+    
+    function sortArticles() {
+      const sortValue = sortSelect.value;
+      
+      filteredArticles.sort((a, b) => {
+        switch (sortValue) {
+          case 'newest':
+            return new Date(b.dataset.date) - new Date(a.dataset.date);
+          case 'oldest':
+            return new Date(a.dataset.date) - new Date(b.dataset.date);
+          case 'title':
+            return (a.dataset.title || '').localeCompare(b.dataset.title || '');
+          default:
+            return 0;
+        }
+      });
+      
+      displayArticles();
+    }
+    
+    function displayArticles() {
+      if (!articlesGrid) return;
+      
+      // Hide all articles
+      allArticles.forEach(article => {
+        article.style.display = 'none';
+      });
+      
+      // Show filtered articles
+      filteredArticles.forEach(article => {
+        article.style.display = 'block';
+      });
+      
+      // Update count
+      if (articleCount) {
+        const count = filteredArticles.length;
+        articleCount.textContent = count === 1 ? 'Showing 1 article' : `Showing ${count} articles`;
+      }
+    }
+  });
+</script>

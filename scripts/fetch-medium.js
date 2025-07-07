@@ -111,13 +111,15 @@ async function createArticleFile(article) {
   const filename = `${slug}.mdx`;
   const filepath = path.join(ARTICLES_DIR, filename);
   
-  // Check if file already exists
+  // Check if file already exists and decide whether to update
+  let fileExists = false;
   try {
     await fs.access(filepath);
-    console.log(`⏭️  Article "${article.title}" already exists, skipping...`);
-    return;
+    fileExists = true;
+    console.log(`🔄 Article "${article.title}" exists, updating with latest data...`);
   } catch (error) {
-    // File doesn't exist, create it
+    // File doesn't exist, will create it
+    console.log(`📝 Creating new article: "${article.title}"`);
   }
   
   const frontmatter = `---
@@ -152,9 +154,13 @@ ${article.content.split('\n').slice(0, 10).join('\n')}
 
   try {
     await fs.writeFile(filepath, frontmatter, 'utf8');
-    console.log(`✅ Created article: ${filename}`);
+    if (fileExists) {
+      console.log(`✅ Updated article: ${filename}`);
+    } else {
+      console.log(`✅ Created article: ${filename}`);
+    }
   } catch (error) {
-    console.error(`❌ Error creating article ${filename}:`, error.message);
+    console.error(`❌ Error writing article ${filename}:`, error.message);
   }
 }
 

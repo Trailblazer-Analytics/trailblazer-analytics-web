@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide provides step-by-step instructions for managing content on the Trailblazer Analytics site. The site uses Astro with Markdown files for content management, making it easy to add and update content without coding knowledge.
+This guide provides step-by-step instructions for managing content on the Trailblazer Analytics site. The site uses a simplified static architecture with Astro and three main content types. Articles are sourced from Medium via RSS feed integration.
 
 ## Quick Start Checklist
 
@@ -10,18 +10,18 @@ This guide provides step-by-step instructions for managing content on the Trailb
 - [ ] GitHub repository: <https://github.com/anykolaiszyn/trailblazer-analytics-devkit>
 - [ ] All files are stored in Git (no external storage needed - files are small)
 - [ ] Changes auto-deploy via GitHub Actions when pushed to main branch
+- [ ] Articles are published on Medium and automatically displayed via RSS feed
 
 ## File Structure Overview
 
 ```text
 src/
 ├── content/
-│   ├── blog/           # Blog posts (.md files)
-│   ├── insights/       # Analytics insights (.md files)
-│   ├── podcast/        # Podcast episodes (.md files)
-│   ├── case-studies/   # Case studies (.md files)
-│   └── tech-notes/     # Technical notes (.md files)
+│   ├── blog/           # Blog posts (.md files) - local content
+│   ├── downloads/      # Free downloads/resources (.md files)
+│   └── tools/          # Premium tools/gated content (.md files)
 ├── pages/
+│   ├── articles.astro  # Medium RSS feed integration
 │   ├── about.astro     # About page
 │   ├── support.astro   # Support page
 │   └── connect.astro   # Connect page
@@ -45,59 +45,90 @@ public/
 ---
 title: "Your Blog Post Title"
 description: "Brief description for SEO and previews"
-publishDate: 2025-01-XX
+date: 2025-01-XX
 author: "Your Name"
-category: "Category Name"
 tags: ["tag1", "tag2", "tag3"]
 featured: false
 image: "/images/blog/your-image.jpg"
+vibe: "insight" # Options: technical, rant, insight, story, hot-take
+difficulty: "intermediate" # Options: beginner, intermediate, advanced, expert
 ---
 ```
 
-1. Write your content in Markdown below the frontmatter
-2. Save the file
-3. Commit and push to GitHub (auto-deploys)
+3. Write your content in Markdown below the frontmatter
+4. Save the file
+5. Commit and push to GitHub (auto-deploys)
 
 **Example filename:** `2025-01-15-data-strategy-trends.md`
 
-### 2. Adding Insights Articles
+### 2. Adding Downloads (Free Resources)
 
-**Location:** `src/content/insights/`
+**Location:** `src/content/downloads/`
 
 **Steps:**
 
-1. Create a new `.md` file with descriptive filename
-2. Add frontmatter:
+1. Upload your PDF/file to `public/downloads/`
+2. Create a new `.md` file with descriptive filename
+3. Add frontmatter:
 
 ```yaml
 ---
-title: "Analytics Insight Title"
-description: "Executive summary of the insight"
-publishDate: 2025-01-XX
-category: "Market Analysis" # or "Industry Trends", "Best Practices"
-readTime: "5 min read"
+title: "Resource Title"
+description: "What this download provides"
+date: 2025-01-XX
+category: "Templates" # Options: Templates, Tools, Guides, Checklists, Frameworks, Whitepapers
+fileType: "PDF"
+fileSize: "2.5 MB"
+downloadUrl: "/downloads/your-file.pdf"
 featured: false
-image: "/images/insights/your-image.jpg"
+image: "/images/downloads/your-image.jpg"
+pages: 25 # For PDFs
+free: true
 ---
 ```
 
-1. Write content with focus on actionable insights
-2. Save, commit, and push
+4. Write a description of the download
+5. Save, commit, and push
 
-### 3. Adding Podcast Episodes
+### 3. Adding Tools (Premium/Gated Content)
 
-**Location:** `src/content/podcast/`
+**Location:** `src/content/tools/`
 
 **Steps:**
 
-1. Create `.md` file: `episode-XXX-title.md`
+1. Create `.md` file with descriptive filename
 2. Add frontmatter:
 
 ```yaml
 ---
-title: "Episode Title"
-episodeNumber: XXX
-description: "Episode description"
+title: "Tool/Course Title"
+description: "What this tool provides"
+date: 2025-01-XX
+category: "Frameworks" # Options: Frameworks, Templates, Calculators, Courses, Premium Tools
+price: "$99" # Or "Free" for free tools
+demoUrl: "https://example.com/demo"
+purchaseUrl: "https://example.com/buy"
+featured: false
+technologies: ["Excel", "Python", "Dashboard"]
+image: "/images/tools/your-image.jpg"
+gated: true
+premium: true # For paid content
+---
+```
+
+3. Write a detailed description
+4. Save, commit, and push
+
+### 4. Managing Articles (Medium Integration)
+
+**Important:** Articles are NOT managed locally. They are automatically pulled from your Medium profile.
+
+**To add new articles:**
+1. Publish on Medium using your account (@alex.nykolaiszyn)
+2. Articles automatically appear on the site via RSS feed
+3. The Articles page displays your latest Medium posts
+
+**No local article management needed!**
 publishDate: 2025-01-XX
 duration: "45 min"
 guest: "Guest Name"
@@ -166,86 +197,42 @@ featured: false
 1. Include code examples, configurations, or technical explanations
 2. Use proper Markdown code blocks with syntax highlighting
 
-### 6. Managing Downloads
-
-**Location:** `public/downloads/`
-
-**Current files (all small, <2KB each):**
-
-- AI_Driven_Analytics_Framework_v2025.pdf
-- Analytics_Readiness_Checklist_v2024.pdf
-- Analytics_ROI_Calculator_v2025.xlsx
-- Data_Governance_Framework_Guide_v2025.pdf
-- Data_Mesh_Implementation_Guide_v2025.pdf
-- Data_Strategy_Canvas_v2024.pdf
-- Executives_Guide_Data_Strategy_v2025.pdf
-
-**To add new downloads:**
-
-1. Place PDF, Excel, or other files in `public/downloads/`
-2. Reference in content with: `/downloads/filename.pdf`
-3. Update relevant content pages to link to new resources
-4. Commit and push
-
-**File size note:** Current files are very small (<2KB), so GitHub storage isn't a concern. If you need to add larger files (>100MB), consider using Git LFS or external hosting.
-
-### 7. Updating Static Pages
-
-**About Page:** `src/pages/about.astro`
-**Support Page:** `src/pages/support.astro`  
-**Connect Page:** `src/pages/connect.astro`
-
-These are Astro component files. Edit the HTML/content directly and commit changes.
-
 ## Navigation Management
 
-Navigation is controlled in `src/components/Navbar.astro`. Current structure:
+Navigation is controlled in `src/components/Navbar.astro`. Current simplified structure:
 
 **Main Navigation:**
-
-- Insights
-- Blog  
-- Podcast
 - About
-- Resources (dropdown)
-- Support
-- Connect
-
-**Resources Dropdown:**
-
-- Tech Notes
-- Case Studies
-- ---- (separator)
+- Blog  
+- Articles (Medium RSS)
 - Downloads
 - Tools
-- Templates
+- Support
+- Connect
 
 ## Deployment Process
 
 ### Automatic Deployment (Recommended)
 
 1. Make your content changes
-2. Commit to Git: `git add . && git commit -m "Add new blog post"`
+2. Commit to Git: `git add . && git commit -m "Add new content"`
 3. Push to GitHub: `git push origin main`
 4. GitHub Actions automatically builds and deploys
 5. Changes appear at <https://anykolaiszyn.github.io/trailblazer-analytics-devkit/> within 2-3 minutes
 
-### Manual Deployment (Backup)
-
-If automatic deployment fails:
+### Manual Build (for testing)
 
 ```bash
 npm run build
-npm run deploy:clean
 ```
 
 ## SEO and Content Best Practices
 
 ### Frontmatter Best Practices
 
-- Always include `title`, `description`, and `publishDate`
+- Always include `title`, `description`, and `date`
 - Keep descriptions under 160 characters for SEO
-- Use relevant tags and categories consistently
+- Use relevant tags consistently
 - Add featured images when possible
 
 ### Content Writing Tips
@@ -259,7 +246,7 @@ npm run deploy:clean
 ### Image Guidelines
 
 - Store images in `public/images/` with descriptive names
-- Use web-optimized formats (JPG for photos, PNG for graphics)
+- Use web-optimized formats (WebP preferred, JPG/PNG acceptable)
 - Include alt text in Markdown: `![Alt text](image-url)`
 - Recommended sizes: 1200x630px for featured images
 
@@ -270,38 +257,36 @@ npm run deploy:clean
 - Check frontmatter YAML syntax (proper indentation, quotes)
 - Ensure all referenced images exist
 - Validate Markdown syntax
+- Verify content collection schemas match your frontmatter
 
 ### Deployment Issues
 
 - Check GitHub Actions tab for error logs
 - Verify all files are committed and pushed
-- Try manual deployment as backup
+- Clear browser cache to see changes
 
 ### Content Not Appearing
 
-- Verify file is in correct directory
-- Check frontmatter format
+- Verify file is in correct directory (`blog/`, `downloads/`, or `tools/`)
+- Check frontmatter format matches schema
 - Ensure file extension is `.md`
-- Confirm publishDate is not in future
+- Confirm date is not in future
 
 ## Content Planning
 
 ### Regular Content Schedule
 
-- **Blog Posts:** 2-3 per month
-- **Insights:** 1-2 per month  
-- **Podcast Episodes:** Weekly/bi-weekly
-- **Case Studies:** Monthly
-- **Tech Notes:** As needed for updates
+- **Blog Posts:** 2-3 per month (local content)
+- **Articles:** Publish on Medium (automatic RSS sync)
+- **Downloads:** Add resources as needed
+- **Tools:** Update premium offerings quarterly
 
-### Content Calendar Template
+### Content Strategy
 
-| Week | Blog | Insights | Podcast | Other |
-|------|------|----------|---------|-------|
-| Week 1 | Industry Trends | Market Analysis | Episode X | - |
-| Week 2 | How-to Guide | - | Episode Y | Case Study |
-| Week 3 | Tool Review | Best Practices | Episode Z | - |
-| Week 4 | - | - | Episode A | Tech Notes |
+- **Blog:** Technical insights, tutorials, industry analysis
+- **Articles (Medium):** Thought leadership, broader reach content
+- **Downloads:** Free resources for lead generation
+- **Tools:** Premium offerings and gated content
 
 ## Support and Maintenance
 
@@ -310,4 +295,20 @@ npm run deploy:clean
 - **Build Status:** Check GitHub Actions tab
 - **Issues:** Create GitHub issues for problems or feature requests
 
-For technical assistance with content management or site issues, refer to the repository's issue tracker or documentation.
+## Quick Reference
+
+### Adding Content Types
+
+| Content Type | Location | Filename Format | Key Fields |
+|--------------|----------|-----------------|------------|
+| Blog Post | `src/content/blog/` | `YYYY-MM-DD-title.md` | title, date, description, tags |
+| Download | `src/content/downloads/` | `descriptive-name.md` | title, description, downloadUrl, category |
+| Tool | `src/content/tools/` | `tool-name.md` | title, description, price, category |
+
+### File Paths for Resources
+
+- Images: `/public/images/[type]/filename.ext`
+- Downloads: `/public/downloads/filename.ext`
+- Reference in content: `/images/blog/image.jpg` or `/downloads/file.pdf`
+
+For technical assistance with content management or site issues, refer to the repository's documentation or create an issue.
