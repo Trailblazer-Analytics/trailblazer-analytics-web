@@ -23,6 +23,7 @@ When someone asks for a dashboard, don’t fire up your favorite BI tool just ye
 ## From Pretty Charts to Real Action
 
 A dashboard that’s actually useful does more than inform—it drives action. Here’s the test:
+
 - Can you look at the dashboard and know what to do next?
 - Can you take action and measure the result?
 
@@ -54,6 +55,7 @@ What’s the most valuable dashboard you’ve ever used or built? What made it a
 ### Pro Tip
 
 Before you build your next dashboard, run a “dashboard design interview” with your stakeholders:
+
 - What decision are you trying to make?
 - What would you do differently if you had this information?
-- What’s the business impact of that action? 
+- What’s the business impact of that action?

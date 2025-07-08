@@ -124,17 +124,20 @@ Tool description...
 #### Articles (Medium Integration)
 
 Articles are automatically pulled from Medium RSS feed. No local management required.
+
 - Publish on Medium (@alex.nykolaiszyn)
 - Articles appear automatically on `/articles` page
-- RSS feed: https://medium.com/feed/@alex.nykolaiszyn
+- RSS feed: <https://medium.com/feed/@alex.nykolaiszyn>
 publishDate: "2025-05-31"
 category: "Strategy"
 featured: true
 downloadUrl: "/downloads/filename.pdf"
 previewUrl: "/previews/filename-preview.pdf"
+
 ---
 
 Summary and description...
+
 ```
 
 #### Downloads (`src/content/downloads/`)

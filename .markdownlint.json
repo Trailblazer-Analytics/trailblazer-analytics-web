@@ -2,5 +2,11 @@
   "default": true,
   "line-length": false,
   "no-duplicate-heading": false,
-  "no-inline-html": false
+  "no-inline-html": false,
+  "MD003": false,
+  "MD025": false,
+  "MD028": false,
+  "MD029": false,
+  "MD036": false,
+  "MD040": false
 }

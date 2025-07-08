@@ -69,14 +69,17 @@ This comprehensive template provides a structured approach to developing your or
 1. Run `pnpm build` to verify no errors
 2. Test the download page locally with `pnpm dev`
 3. Commit and push to deploy
+
 - Implementation roadmap
 
 ## Who Should Use This
+
 - Data leaders and executives
 - Strategic planning teams
 - Digital transformation teams
 
 *Download includes fillable PDF template and Excel worksheets.*
+
 ```
 
 ### Step 5: Test and Deploy
@@ -113,6 +116,7 @@ premium: false  # true for paid content
 ```
 
 ### Step 4: Add Content
+
 ```markdown
 # Advanced Analytics ROI Calculator
 
@@ -137,12 +141,14 @@ Calculate the return on investment for your analytics initiatives with precision
 ## 🎨 Adding Preview Images
 
 ### Image Guidelines
+
 - **Size**: 1200x630px for social sharing
 - **Format**: JPG or PNG
 - **Location**: `public/images/`
 - **Naming**: `download-[slug].jpg` or `tool-[slug].jpg`
 
 ### Creating Images
+
 1. Use your preferred design tool
 2. Include the resource title prominently
 3. Use brand colors and fonts
@@ -152,6 +158,7 @@ Calculate the return on investment for your analytics initiatives with precision
 ## ⚙️ Categories and Organization
 
 ### Download Categories
+
 - **Templates**: Fillable documents and frameworks
 - **Tools**: Calculators and interactive resources
 - **Guides**: How-to documents and best practices
@@ -160,6 +167,7 @@ Calculate the return on investment for your analytics initiatives with precision
 - **Whitepapers**: Research and thought leadership
 
 ### Tool Categories  
+
 - **Frameworks**: Strategic planning tools
 - **Templates**: Structured documents
 - **Calculators**: Interactive calculation tools
@@ -169,12 +177,14 @@ Calculate the return on investment for your analytics initiatives with precision
 ## 🔄 Updating Existing Resources
 
 ### To Update Content
+
 1. Edit the `.mdx` file in the appropriate content directory
 2. Update the `date` field to reflect the last modification
 3. Increment version numbers if applicable
 4. Test the changes locally
 
 ### To Replace Files
+
 1. Upload the new file to `public/downloads/`
 2. Update the `downloadUrl` in the frontmatter if filename changed
 3. Update `fileSize` and `pages` as needed
@@ -184,21 +194,25 @@ Calculate the return on investment for your analytics initiatives with precision
 ### Common Issues
 
 **Build Errors**
+
 - Check frontmatter YAML syntax
 - Ensure all required fields are present
 - Verify file paths are correct
 
 **Download Not Working**
+
 - Confirm file exists in `public/downloads/`
 - Check `downloadUrl` path in frontmatter
 - Verify file permissions
 
 **Images Not Displaying**
+
 - Ensure images are in `public/images/`
 - Check file paths in frontmatter
 - Verify image file formats (JPG/PNG)
 
 ### Getting Help
+
 1. Check the browser console for errors
 2. Run `pnpm build` to identify build issues
 3. Review existing working examples in the content directories
@@ -207,11 +221,13 @@ Calculate the return on investment for your analytics initiatives with precision
 ## 📊 Analytics and Tracking
 
 ### Download Tracking
+
 - Downloads are automatically tracked via the `/api/download` endpoint
 - View analytics in the admin dashboard
 - Popular downloads are highlighted on the site
 
 ### SEO Optimization
+
 - Use descriptive titles and descriptions
 - Include relevant keywords naturally
 - Optimize images with alt text
@@ -220,12 +236,14 @@ Calculate the return on investment for your analytics initiatives with precision
 ## 🔐 Security Notes
 
 ### File Security
+
 - Only upload files you have rights to distribute
 - Scan all files for malware before uploading
 - Use appropriate file permissions
 - Regular security audits of uploaded content
 
 ### Content Guidelines
+
 - Ensure all content is original or properly licensed
 - Include appropriate disclaimers
 - Follow brand guidelines for all materials

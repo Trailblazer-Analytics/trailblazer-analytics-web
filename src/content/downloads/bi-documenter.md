@@ -28,7 +28,7 @@ A comprehensive documentation tool for Power BI and Tableau files that automatic
 ## Features
 
 - **Power BI Support**: Document .pbix files with full metadata extraction
-- **Tableau Support**: Document .twb and .twbx files 
+- **Tableau Support**: Document .twb and .twbx files
 - **Automated Documentation**: Generate comprehensive reports automatically
 - **Data Source Mapping**: Track all data sources and their configurations
 - **Relationship Visualization**: Map data model relationships
@@ -70,4 +70,4 @@ doc.document_pbix("path/to/report.pbix", output_dir="./docs")
 - Relationship diagrams
 - Best practices recommendations
 
-Download now and start documenting your BI projects with this powerful tool! 
+Download now and start documenting your BI projects with this powerful tool!

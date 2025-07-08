@@ -171,7 +171,8 @@ const imageSrc = image.startsWith('http') ? image : buildAssetUrl(image);
       // Simple performance monitoring
       window.addEventListener('load', () => {
         if ('performance' in window) {
-          const perfData = performance.getEntriesByType('navigation')[0];
+          // Cast to PerformanceNavigationTiming to access timing properties
+          const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
           if (perfData) {
             console.log('Page Load Time:', Math.round(perfData.loadEventEnd - perfData.fetchStart), 'ms');
           }

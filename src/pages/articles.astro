@@ -334,9 +334,9 @@ function extractCategories(content, title) {
 <script>
   // Article filtering and search functionality
   document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('article-search');
-    const categoryFilters = document.querySelectorAll('.category-filter');
-    const sortSelect = document.getElementById('sort-articles');
+    const searchInput = document.getElementById('article-search') as HTMLInputElement | null;
+    const categoryFilters = document.querySelectorAll('.category-filter') as NodeListOf<HTMLElement>;
+    const sortSelect = document.getElementById('sort-articles') as HTMLSelectElement | null;
     const articlesGrid = document.getElementById('articles-grid');
     const articleCount = document.getElementById('article-count');
     
@@ -345,7 +345,7 @@ function extractCategories(content, title) {
     
     // Initialize articles array
     if (articlesGrid) {
-      allArticles = Array.from(articlesGrid.querySelectorAll('.article-card'));
+      allArticles = Array.from(articlesGrid.querySelectorAll('.article-card')) as HTMLElement[];
       filteredArticles = [...allArticles];
     }
     
@@ -372,11 +372,11 @@ function extractCategories(content, title) {
     
     function filterArticles() {
       const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-      const activeCategory = document.querySelector('.category-filter.active')?.dataset.category || 'all';
+      const activeCategory = (document.querySelector('.category-filter.active') as HTMLElement)?.dataset.category || 'all';
       
       filteredArticles = allArticles.filter(article => {
-        const title = article.dataset.title || '';
-        const categories = article.dataset.categories || '';
+        const title = (article as HTMLElement).dataset.title || '';
+        const categories = (article as HTMLElement).dataset.categories || '';
         
         const matchesSearch = title.includes(searchTerm);
         const matchesCategory = activeCategory === 'all' || categories.includes(activeCategory.toLowerCase());
@@ -388,16 +388,16 @@ function extractCategories(content, title) {
     }
     
     function sortArticles() {
-      const sortValue = sortSelect.value;
+      const sortValue = sortSelect?.value;
       
       filteredArticles.sort((a, b) => {
         switch (sortValue) {
           case 'newest':
-            return new Date(b.dataset.date) - new Date(a.dataset.date);
+            return new Date((b as HTMLElement).dataset.date!).valueOf() - new Date((a as HTMLElement).dataset.date!).valueOf();
           case 'oldest':
-            return new Date(a.dataset.date) - new Date(b.dataset.date);
+            return new Date((a as HTMLElement).dataset.date!).valueOf() - new Date((b as HTMLElement).dataset.date!).valueOf();
           case 'title':
-            return (a.dataset.title || '').localeCompare(b.dataset.title || '');
+            return ((a as HTMLElement).dataset.title || '').localeCompare((b as HTMLElement).dataset.title || '');
           default:
             return 0;
         }

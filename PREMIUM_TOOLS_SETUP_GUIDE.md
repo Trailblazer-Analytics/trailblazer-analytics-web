@@ -7,11 +7,13 @@ This guide explains how to add new premium tools to the Trailblazer Analytics we
 Premium tools are stored in `src/content/tools/` as Markdown files with frontmatter. Each tool needs:
 
 ### File Location
+
 ```
 src/content/tools/tool-name.md
 ```
 
 ### Frontmatter Schema
+
 ```yaml
 ---
 title: "Tool Name"
@@ -46,31 +48,37 @@ This content is shown on the individual tool page after access is granted.
 There are three main access patterns for premium tools:
 
 ### 1. Newsletter Gated (Free with Email)
+
 ```yaml
 gated: true
 premium: false
 gatewayType: "newsletter"
 ```
+
 - User must sign up for newsletter to access
 - Tool content is shown after email capture
 - No payment required
 
 ### 2. External Purchase (Paid)
+
 ```yaml
 gated: true
 premium: true
 gatewayType: "purchase"
 purchaseUrl: "https://store.example.com/tool"
 ```
+
 - User clicks button to external purchase page
 - Tool content may show preview or full description
 - Payment handled externally
 
 ### 3. Free Access (No Gate)
+
 ```yaml
 gated: false
 premium: false
 ```
+
 - Tool content is immediately accessible
 - No email or payment required
 - Good for free tools or promotional content
@@ -80,11 +88,13 @@ premium: false
 The tools page automatically handles different access patterns:
 
 ### Tool Cards
+
 - **Newsletter Gated**: Shows "Get Free Access" button
 - **Premium/Purchase**: Shows "Buy Now" or custom price button
 - **Free**: Shows "Access Tool" button
 
 ### Tool Detail Pages
+
 - **Newsletter Gated**: Shows newsletter signup form before content
 - **Premium**: Shows purchase information and external link
 - **Free**: Shows full content immediately
@@ -92,6 +102,7 @@ The tools page automatically handles different access patterns:
 ## Adding a New Tool
 
 1. **Create the tool file**:
+
    ```bash
    # Create new file in tools directory
    touch src/content/tools/my-new-tool.md
@@ -104,6 +115,7 @@ The tools page automatically handles different access patterns:
    Place tool images in `public/images/tools/`
 
 4. **Test the tool**:
+
    ```bash
    # Run development server
    pnpm dev
@@ -160,17 +172,20 @@ Each tool automatically gets:
 ## Content Guidelines
 
 ### Tool Descriptions
+
 - Keep descriptions concise but compelling (1-2 sentences)
 - Focus on value proposition and outcomes
 - Use action-oriented language
 
 ### Tool Content
+
 - Structure with clear headings
 - Include usage instructions
 - Add screenshots or examples where helpful
 - Provide clear next steps
 
 ### Pricing
+
 - Be transparent about pricing
 - Use clear calls-to-action
 - Consider offering previews for paid tools
@@ -178,6 +193,7 @@ Each tool automatically gets:
 ## Example Tool Files
 
 ### Newsletter Gated Tool
+
 ```markdown
 ---
 title: "Analytics Readiness Assessment"
@@ -203,6 +219,7 @@ A comprehensive tool to evaluate your organization's analytics capabilities...
 ```
 
 ### Premium Tool
+
 ```markdown
 ---
 title: "Advanced ROI Calculator"
@@ -228,17 +245,20 @@ Professional-grade financial modeling tool for analytics investments...
 ## Troubleshooting
 
 ### Tool Not Appearing
+
 - Check file is in `src/content/tools/`
 - Verify frontmatter syntax
 - Ensure required fields are present
 - Check console for schema validation errors
 
 ### Gating Not Working
+
 - Verify `gated` and `premium` boolean values
 - Check `gatewayType` is either "newsletter" or "purchase"
 - Ensure `purchaseUrl` is provided for premium tools
 
 ### Layout Issues
+
 - Check image paths are correct
 - Verify category is from allowed enum
 - Test on different screen sizes

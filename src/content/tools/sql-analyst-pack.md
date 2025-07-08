@@ -44,14 +44,18 @@ Welcome to the most comprehensive SQL toolkit for data analysts! This pack conta
 ## Key Features
 
 ### ✨ Ready-to-Use Scripts
+
 Every query is production-ready and documented with:
+
 - Clear explanations of what it does
 - Expected input parameters
 - Sample output examples
 - Performance considerations
 
 ### 🔧 Cross-Platform Support
+
 Compatible with:
+
 - PostgreSQL
 - MySQL
 - SQL Server
@@ -60,7 +64,9 @@ Compatible with:
 - And more!
 
 ### 📚 Best Practices Guide
+
 Includes comprehensive documentation covering:
+
 - SQL coding standards
 - Performance optimization techniques
 - Security considerations
@@ -69,12 +75,14 @@ Includes comprehensive documentation covering:
 ## Getting Started
 
 ### Quick Start
+
 1. Clone or download the repository
 2. Browse the query categories
 3. Copy and adapt queries for your use case
 4. Follow the naming conventions and documentation patterns
 
 ### Repository Structure
+
 ```
 SQL-Analyst-Pack/
 ├── exploratory/          # Data discovery queries
@@ -90,6 +98,7 @@ SQL-Analyst-Pack/
 ## Example Queries
 
 ### Data Profiling
+
 ```sql
 -- Quick table profile with row counts, null percentages, and data types
 SELECT 
@@ -106,6 +115,7 @@ ORDER BY column_name;
 ```
 
 ### Performance Monitoring
+
 ```sql
 -- Identify slow-running queries
 SELECT 
@@ -124,18 +134,21 @@ LIMIT 20;
 ## Use Cases
 
 ### 🎯 Data Analysts
+
 - Quick data exploration and profiling
 - Standard reporting queries
 - Data quality validation
 - Performance analysis
 
 ### 🔍 Business Intelligence
+
 - Dashboard query templates
 - KPI calculation patterns
 - Trend analysis scripts
 - Comparative analytics
 
 ### ⚡ Database Developers
+
 - Query optimization examples
 - Schema analysis tools
 - Performance monitoring scripts
@@ -144,21 +157,27 @@ LIMIT 20;
 ## Community & Support
 
 ### 📖 Documentation
+
 Each script includes:
+
 - Purpose and use case description
 - Parameter documentation
 - Expected results explanation
 - Performance notes and tips
 
 ### 🤝 Contributing
+
 We welcome contributions! Feel free to:
+
 - Submit new query patterns
 - Improve existing scripts
 - Add documentation
 - Report issues or suggest improvements
 
 ### 🔄 Regular Updates
+
 The pack is actively maintained with:
+
 - New queries added monthly
 - Performance improvements
 - Bug fixes and optimizations
@@ -173,6 +192,7 @@ This toolkit is provided as-is for educational and professional use. Feel free t
 **🚀 Ready to supercharge your SQL analytics?**
 
 Visit the [SQL Analyst Pack repository](https://github.com/Trailblazer-Analytics/SQL-Analyst-Pack) to:
+
 - Browse the complete query collection
 - Download the latest version
 - View documentation and examples

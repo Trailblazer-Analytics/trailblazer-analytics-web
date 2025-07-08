@@ -63,16 +63,19 @@ This is your complete guide to managing and updating the Trailblazer Analytics w
 ## 🔄 Content Workflow
 
 ### 1. Preparation
+
 1. Read relevant section in [USER_GUIDE_UPLOADS.md](./USER_GUIDE_UPLOADS.md)
 2. Prepare files and metadata
 3. Review examples in existing content folders
 
 ### 2. Implementation
+
 1. Follow step-by-step guide
 2. Test locally with `pnpm dev`
 3. Verify build with `pnpm build`
 
 ### 3. Deployment
+
 1. Commit and push changes
 2. Verify live site deployment
 3. Test download/tool functionality
@@ -80,11 +83,13 @@ This is your complete guide to managing and updating the Trailblazer Analytics w
 ## 🆘 Getting Help
 
 ### Quick Answers
+
 - **"How do I add a download?"** → [USER_GUIDE_UPLOADS.md](./USER_GUIDE_UPLOADS.md)
 - **"Site won't build"** → [USER_GUIDE_UPLOADS.md - Troubleshooting](./USER_GUIDE_UPLOADS.md#-troubleshooting)
 - **"What's the current status?"** → [PROJECT_STATUS_CURRENT.md](./PROJECT_STATUS_CURRENT.md)
 
 ### Detailed References
+
 - **File structure questions** → [README.md](./README.md)
 - **Configuration issues** → [ADMIN_GUIDE.md](./INTERNAL_DOCS/ADMIN_GUIDE.md)
 - **Content strategy** → [PROJECT_STATUS_CURRENT.md](./PROJECT_STATUS_CURRENT.md)

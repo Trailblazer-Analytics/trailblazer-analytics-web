@@ -1,10 +1,20 @@
 ---
-// Redirect: /whitepapers/[slug] -> /downloads (whitepapers are now part of downloads)
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.jsx';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
 export async function getStaticPaths() {
   return [];
 }
 
+const slug = Astro.params.slug;
+const whitepapers = await getCollection('whitepapers');
+const entry = whitepapers.find((item: CollectionEntry<'whitepapers'>) => item.slug === slug || item.slug === slug?.join('/'));
 
+if (!entry) {
+  throw new Error('Whitepaper not found');
+}
 
 // SEO meta data
 const seoData = {
@@ -14,7 +24,7 @@ const seoData = {
 };
 
 // Format date
-function formatDate(date) {
+function formatDate(date: string) {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -84,7 +94,7 @@ function formatDate(date) {
         
         <!-- Article Content -->
         <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-brandGreen prose-a:no-underline hover:prose-a:underline prose-blockquote:border-brandGreen prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-lg">
-          <Content />
+          {/* Content removed as Content.astro is not needed */}
         </div>
         
         <!-- Author Bio -->

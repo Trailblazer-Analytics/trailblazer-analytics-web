@@ -255,6 +255,10 @@ const seoData = {
 <script>
   // Dynamic Coffee Counter
   function updateCoffeeCounter() {
+    // Typed DOM elements
+    const coffeeCountEl = document.getElementById('coffeeCount') as HTMLElement | null;
+    const conversionEl = document.getElementById('coffeeConversion') as HTMLElement | null;
+    const progressEl = document.getElementById('coffeeProgress') as HTMLElement | null;
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const dayOfMonth = now.getDate();
@@ -288,10 +292,6 @@ const seoData = {
     const progressPercent = Math.min((totalCoffee / 100) * 100, 100);
     
     // Update the DOM
-    const coffeeCountEl = document.getElementById('coffeeCount');
-    const conversionEl = document.getElementById('coffeeConversion');
-    const progressEl = document.getElementById('coffeeProgress');
-    
     if (coffeeCountEl) {
       // Animate the counter
       let current = 0;
@@ -299,10 +299,10 @@ const seoData = {
       const timer = setInterval(() => {
         current += increment;
         if (current >= totalCoffee) {
-          coffeeCountEl.textContent = totalCoffee;
+          coffeeCountEl.textContent = totalCoffee.toString();
           clearInterval(timer);
         } else {
-          coffeeCountEl.textContent = Math.floor(current);
+          coffeeCountEl.textContent = Math.floor(current).toString();
         }
       }, 30);
     }
@@ -314,7 +314,7 @@ const seoData = {
     if (progressEl) {
       // Animate progress bar
       setTimeout(() => {
-        progressEl.style.width = `${progressPercent}%`;
+        (progressEl as HTMLElement).style.width = `${progressPercent}%`;
       }, 500);
     }
   }
@@ -324,7 +324,7 @@ const seoData = {
   
   // Add some fun interactions
   document.addEventListener('DOMContentLoaded', () => {
-    const coffeeWidget = document.querySelector('.bg-gradient-to-r.from-amber-100');
+    const coffeeWidget = document.querySelector('.bg-gradient-to-r.from-amber-100') as HTMLElement | null;
     if (coffeeWidget) {
       coffeeWidget.addEventListener('click', () => {
         // Add a fun bounce animation when clicked
@@ -334,16 +334,16 @@ const seoData = {
         }, 200);
         
         // Maybe add another cup? 😄
-        const coffeeCount = document.getElementById('coffeeCount');
+        const coffeeCount = document.getElementById('coffeeCount') as HTMLElement | null;
         if (coffeeCount) {
-          const current = parseInt(coffeeCount.textContent) || 0;
-          coffeeCount.textContent = current + 1;
+          const current = parseInt(coffeeCount.textContent || '0', 10) || 0;
+          coffeeCount.textContent = (current + 1).toString();
           
           // Update progress
-          const progressEl = document.getElementById('coffeeProgress');
+          const progressEl = document.getElementById('coffeeProgress') as HTMLElement | null;
           if (progressEl) {
             const newProgress = Math.min(((current + 1) / 100) * 100, 100);
-            progressEl.style.width = `${newProgress}%`;
+            (progressEl as HTMLElement).style.width = `${newProgress}%`;
           }
         }
       });

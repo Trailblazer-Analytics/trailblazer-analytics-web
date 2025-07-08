@@ -55,15 +55,17 @@
 | ~~Articles~~ | ❌ Removed | N/A | ✅ Live Medium RSS Integration |
 
 ### Current Tools
+
 1. **SQL Analyst Pack** - Free access tool linking to GitHub repository
    - 200+ ready-to-use SQL queries
-   - Cross-platform compatibility 
+   - Cross-platform compatibility
    - Complete analytics toolkit
-   - Repository: https://github.com/Trailblazer-Analytics/SQL-Analyst-Pack
+   - Repository: <https://github.com/Trailblazer-Analytics/SQL-Analyst-Pack>
 
 ### Tools System Features
 
 **Gating Options Available:**
+
 - 📧 **Newsletter Gate**: `gated: true, premium: false` - Free with email signup
 - 💳 **Purchase Gate**: `gated: true, premium: true` - External purchase required  
 - 🆓 **Free Access**: `gated: false` - No restrictions

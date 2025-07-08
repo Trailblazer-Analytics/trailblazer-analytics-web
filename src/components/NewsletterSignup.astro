@@ -7,6 +7,8 @@ export interface Props {
   className?: string;
   variant?: 'inline' | 'modal' | 'sidebar';
   placeholder?: string;
+  buttonText?: string;
+  successRedirect?: string;
 }
 
 const {
@@ -15,7 +17,9 @@ const {
   leadMagnet = "Free: Analytics ROI Calculator + 5 Data Strategy Templates",
   className = "",
   variant = "inline",
-  placeholder = "your.email@domain.com"
+  placeholder = "your.email@domain.com",
+  buttonText = "Join",
+  successRedirect = ""
 } = Astro.props;
 
 const variantClasses = {
@@ -46,7 +50,7 @@ const variantClasses = {
     )}
 
     <!-- Signup Form -->
-    <form class="newsletter-form" data-variant={variant}>
+    <form class="newsletter-form" data-variant={variant} data-success-redirect={successRedirect}>
       <div class="flex gap-2 mb-3">
         <input
           type="email"
@@ -60,7 +64,7 @@ const variantClasses = {
           type="submit"
           class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 text-sm"
         >
-          Join
+          {buttonText}
         </button>
       </div>
       
@@ -104,6 +108,7 @@ const variantClasses = {
         const formData = new FormData(form as HTMLFormElement);
         const email = formData.get('email') as string;
         const variant = form.getAttribute('data-variant');
+        const successRedirect = form.getAttribute('data-success-redirect');
         
         // Get status elements
         const statusContainer = form.querySelector('.status-message');
@@ -143,6 +148,11 @@ const variantClasses = {
               method: variant,
               value: 1
             });
+          }
+          
+          // Redirect if successRedirect is provided
+          if (successRedirect) {
+            window.location.href = successRedirect;
           }
           
         } catch (error) {

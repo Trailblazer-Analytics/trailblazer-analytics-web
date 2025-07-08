@@ -1,22 +1,28 @@
 ---
 // SaveForLater.astro - Bookmark functionality for content discovery
 export interface Props {
-  title: string;
-  url?: string;
-  type?: 'article' | 'tool' | 'resource';
+  item: {
+    id: string;
+    title: string;
+    description?: string;
+    url: string;
+    type: string;
+    image?: string;
+    date?: string;
+  };
   className?: string;
   size?: 'sm' | 'md' | 'lg';
 }
 
 const {
-  title,
-  url = '',
-  type = 'article',
+  item,
   className = '',
   size = 'md'
-} = Astro.props;
+} = Astro.props as Props;
 
-const currentUrl = url || Astro.url.pathname;
+// Destructure from passed item
+const { title, url, type } = item;
+const currentUrl = url;
 
 const sizeClasses = {
   sm: 'w-5 h-5',
@@ -33,11 +39,12 @@ const buttonSizes = {
 
 <button
   class={`save-for-later-btn ${buttonSizes[size]} rounded-full border border-gray-300 hover:border-blue-500 transition-all duration-200 group ${className}`}
-  data-url={currentUrl}
-  data-title={title}
-  data-type={type}
   aria-label="Save for later"
   title="Save this content to read later"
+  aria-pressed="false"
+  data-url={url}
+  data-title={title}
+  data-type={type}
 >
   <!-- Bookmark Icon -->
   <svg 
@@ -79,10 +86,19 @@ const buttonSizes = {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const button = document.querySelector('.save-for-later-btn') as HTMLButtonElement;
+    if (!button) return;
+    const item = {
+      url: button.dataset.url,
+      title: button.dataset.title,
+      type: button.dataset.type
+    };
+    const url = item.url;
+    const type = item.type;
     const STORAGE_KEY = 'trailblazer_saved_content';
     
     // Load saved items from localStorage
-    function getSavedItems() {
+    function getSavedItems(): Array<{ url: string; title: string; type: string; savedAt: string; id: number }> {
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
         return saved ? JSON.parse(saved) : [];
@@ -93,7 +109,7 @@ const buttonSizes = {
     }
     
     // Save items to localStorage
-    function setSavedItems(items) {
+    function setSavedItems(items: unknown[]): void {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
         // Dispatch custom event to update navbar count
@@ -104,40 +120,40 @@ const buttonSizes = {
     }
     
     // Check if item is already saved
-    function isItemSaved(url) {
+    function isItemSaved(): boolean {
       const savedItems = getSavedItems();
-      return savedItems.some(item => item.url === url);
-    }
-    
+      return savedItems.some(i => i.url === url);
+     }
+     
     // Add item to saved list
-    function saveItem(url, title, type) {
+    function saveItem(): boolean {
       const savedItems = getSavedItems();
       const newItem = {
-        url,
-        title,
-        type,
+        url: item.url,
+        title: item.title,
+        type: item.type,
         savedAt: new Date().toISOString(),
         id: Date.now() // Simple ID generation
       };
       
       // Check if already saved
-      if (!isItemSaved(url)) {
+      if (!isItemSaved()) {
         savedItems.push(newItem);
         setSavedItems(savedItems);
         return true;
       }
       return false;
-    }
+     }
     
     // Remove item from saved list
-    function removeItem(url) {
+    function removeItem(url: string): void {
       const savedItems = getSavedItems();
       const filteredItems = savedItems.filter(item => item.url !== url);
       setSavedItems(filteredItems);
     }
     
     // Show confirmation message
-    function showConfirmation(message = 'Saved for later!') {
+    function showConfirmation(message: string = 'Saved for later!'): void {
       const confirmation = document.querySelector('.save-confirmation');
       const messageEl = confirmation?.querySelector('.save-message');
       
@@ -154,7 +170,7 @@ const buttonSizes = {
     }
     
     // Update button appearance
-    function updateButtonState(button, isSaved) {
+    function updateButtonState(button: HTMLButtonElement, isSaved: boolean): void {
       const bookmarkIcon = button.querySelector('.bookmark-icon');
       const savedIcon = button.querySelector('.bookmark-saved-icon');
       
@@ -173,49 +189,40 @@ const buttonSizes = {
       }
     }
     
-    // Initialize buttons
-    const saveButtons = document.querySelectorAll('.save-for-later-btn');
-    
-    saveButtons.forEach(button => {
-      const url = button.dataset.url;
-      const title = button.dataset.title;
-      const type = button.dataset.type;
-      
-      if (!url || !title) return;
-      
-      // Set initial state
-      const isSaved = isItemSaved(url);
-      updateButtonState(button, isSaved);
-      
-      // Handle click
-      button.addEventListener('click', () => {
-        const currentlySaved = isItemSaved(url);
-        
-        if (currentlySaved) {
-          // Remove from saved
-          removeItem(url);
-          updateButtonState(button, false);
-          showConfirmation('Removed from saved items');
-        } else {
-          // Add to saved
-          const success = saveItem(url, title, type);
-          if (success) {
-            updateButtonState(button, true);
-            showConfirmation('Saved for later!');
-            
-            // Analytics tracking
-            if ((window as any).gtag) {
-              (window as any).gtag('event', 'content_save', {
-                content_type: type,
-                item_id: url,
-                content_title: title
-              });
-            }
-          }
-        }
-      });
+    // Initialize single button
+    const btn = document.querySelector('.save-for-later-btn') as HTMLButtonElement;
+    if (!btn) return;
+    // Set initial state
+    const isSaved = isItemSaved();
+    updateButtonState(btn, isSaved);
+    // Handle click
+    btn.addEventListener('click', () => {
+      const currentlySaved = isItemSaved();
+       
+         if (currentlySaved) {
+           // Remove from saved
+          removeItem(item.url);
+          updateButtonState(btn, false);
+           showConfirmation('Removed from saved items');
+         } else {
+           // Add to saved
+          const success = saveItem();
+           if (success) {
+            updateButtonState(btn, true);
+             showConfirmation('Saved for later!');
+             
+             // Analytics tracking
+             if ((window as any).gtag) {
+               (window as any).gtag('event', 'content_save', {
+                content_type: item.type,
+                item_id: item.url,
+                content_title: item.title
+               });
+             }
+           }
+         }
     });
-    
+     
     // Expose global functions for other components
     (window as any).TrailblazerSaved = {
       getSavedItems,
@@ -223,7 +230,7 @@ const buttonSizes = {
       saveItem,
       removeItem
     };
-  });
+   });
 </script>
 
 <style>

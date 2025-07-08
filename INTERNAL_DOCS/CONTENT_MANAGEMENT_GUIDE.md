@@ -124,6 +124,7 @@ premium: true # For paid content
 **Important:** Articles are NOT managed locally. They are automatically pulled from your Medium profile.
 
 **To add new articles:**
+
 1. Publish on Medium using your account (@alex.nykolaiszyn)
 2. Articles automatically appear on the site via RSS feed
 3. The Articles page displays your latest Medium posts
@@ -133,11 +134,12 @@ publishDate: 2025-01-XX
 duration: "45 min"
 guest: "Guest Name"
 topics: ["topic1", "topic2"]
-audioUrl: "https://your-podcast-host.com/episode-xxx"
-spotifyUrl: "https://spotify.com/episode/xxx"
-appleUrl: "https://podcasts.apple.com/episode/xxx"
+audioUrl: "<https://your-podcast-host.com/episode-xxx>"
+spotifyUrl: "<https://spotify.com/episode/xxx>"
+appleUrl: "<https://podcasts.apple.com/episode/xxx>"
 image: "/images/podcast/episode-xxx.jpg"
 ---
+
 ```
 
 1. Add episode notes and transcript
@@ -202,6 +204,7 @@ featured: false
 Navigation is controlled in `src/components/Navbar.astro`. Current simplified structure:
 
 **Main Navigation:**
+
 - About
 - Blog  
 - Articles (Medium RSS)

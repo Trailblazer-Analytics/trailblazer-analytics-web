@@ -28,6 +28,7 @@ A comprehensive collection of SQL tools, templates, and utilities designed to bo
 ## What's Included
 
 ### Query Templates
+
 - **Data Exploration**: Standard queries for understanding new datasets
 - **Data Quality Checks**: Validation and profiling queries
 - **Performance Analysis**: Query optimization and monitoring scripts
@@ -35,12 +36,14 @@ A comprehensive collection of SQL tools, templates, and utilities designed to bo
 - **Reporting Queries**: Standard report generation scripts
 
 ### Performance Tools
+
 - **Query Optimization**: Scripts to identify slow queries
 - **Index Analysis**: Tools to optimize database indexing
 - **Execution Plan Analysis**: Templates for query plan review
 - **Resource Monitoring**: Database performance tracking
 
 ### Data Profiling
+
 - **Column Analysis**: Data type and value distribution analysis
 - **Relationship Discovery**: Foreign key and join relationship mapping
 - **Data Quality Metrics**: Completeness, accuracy, and consistency checks
@@ -87,4 +90,4 @@ GROUP BY column_name, data_type;
 - Best practices documentation
 - Regular updates and new templates
 
-Download now and enhance your SQL workflow with these proven templates! 
+Download now and enhance your SQL workflow with these proven templates!
