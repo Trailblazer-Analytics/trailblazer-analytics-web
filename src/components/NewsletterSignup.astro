@@ -49,26 +49,57 @@ const variantClasses = {
       </div>
     )}
 
-    <!-- Signup Form -->
-    <form class="newsletter-form" data-variant={variant} data-success-redirect={successRedirect}>
-      <div class="flex gap-2 mb-3">
+    <!-- Mailchimp Signup Form -->
+    <form action="https://trailblazeranalytics.us15.list-manage.com/subscribe/post?u=a9ec95a9f4ecfadf97b7dace7&amp;id=b361226137&amp;f_id=00dbc2e1f0" method="post" target="_blank" noValidate class="newsletter-form" data-variant={variant}>
+      <div class="flex gap-2 mb-3 flex-wrap">
         <input
           type="email"
           required
           placeholder={placeholder}
           class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-          name="email"
+          name="EMAIL"
           id={`newsletter-email-${variant}`}
         />
-        <button
-          type="submit"
-          class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 text-sm"
-        >
-          {buttonText}
-        </button>
+        <input
+          type="text"
+          placeholder="First Name"
+          class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          name="FNAME"
+          id={`newsletter-fname-${variant}`}
+        />
+        <input
+          type="text"
+          placeholder="MM"
+          size="2"
+          maxlength="2"
+          pattern="[0-9]*"
+          class="w-12 px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          name="BIRTHDAY[month]"
+          id={`newsletter-birthday-month-${variant}`}
+        />
+        <span class="self-center">/</span>
+        <input
+          type="text"
+          placeholder="DD"
+          size="2"
+          maxlength="2"
+          pattern="[0-9]*"
+          class="w-12 px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+          name="BIRTHDAY[day]"
+          id={`newsletter-birthday-day-${variant}`}
+        />
       </div>
-      
-      <!-- Status Messages -->
+      <!-- Hidden bot field -->
+      <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        <input type="text" name="b_a9ec95a9f4ecfadf97b7dace7_b361226137" tabIndex="-1" value="" />
+      </div>
+      <button
+        type="submit"
+        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 text-sm"
+      >
+        {buttonText}
+      </button>
+      <!-- Status Messages (Mailchimp will show its own) -->
       <div class="status-message hidden" role="alert">
         <div class="success-message hidden text-green-700 text-sm">
           🎉 Welcome to the trailblazing journey! Check your email for goodies.
@@ -77,7 +108,6 @@ const variantClasses = {
           Oops! Something went wrong. Please try again.
         </div>
       </div>
-      
       <!-- Privacy Note -->
       <p class="text-xs text-gray-500 mt-2">
         No spam, ever. Unsubscribe anytime. 
@@ -96,78 +126,6 @@ const variantClasses = {
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const forms = document.querySelectorAll('.newsletter-form');
-    
-    forms.forEach(form => {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(form as HTMLFormElement);
-        const email = formData.get('email') as string;
-        const variant = form.getAttribute('data-variant');
-        const successRedirect = form.getAttribute('data-success-redirect');
-        
-        // Get status elements
-        const statusContainer = form.querySelector('.status-message');
-        const successMessage = form.querySelector('.success-message');
-        const errorMessage = form.querySelector('.error-message');
-        const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-        
-        if (!email || !statusContainer || !successMessage || !errorMessage || !submitButton) return;
-        
-        // Reset status
-        statusContainer.classList.add('hidden');
-        successMessage.classList.add('hidden');
-        errorMessage.classList.add('hidden');
-        
-        // Loading state
-        const originalText = submitButton.textContent;
-        submitButton.textContent = 'Joining...';
-        submitButton.disabled = true;
-        
-        try {
-          // Simulate API call - Replace with actual newsletter service
-          // For now, we'll just simulate a successful signup
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          
-          // TODO: Replace with actual newsletter service integration
-          // Examples: Mailchimp, ConvertKit, EmailOctopus, etc.
-          console.log('Newsletter signup:', { email, variant });
-          
-          // Success
-          statusContainer.classList.remove('hidden');
-          successMessage.classList.remove('hidden');
-          (form as HTMLFormElement).reset();
-          
-          // Analytics tracking
-          if ((window as any).gtag) {
-            (window as any).gtag('event', 'newsletter_signup', {
-              method: variant,
-              value: 1
-            });
-          }
-          
-          // Redirect if successRedirect is provided
-          if (successRedirect) {
-            window.location.href = successRedirect;
-          }
-          
-        } catch (error) {
-          console.error('Newsletter signup error:', error);
-          statusContainer.classList.remove('hidden');
-          errorMessage.classList.remove('hidden');
-        } finally {
-          // Reset button
-          submitButton.textContent = originalText;
-          submitButton.disabled = false;
-        }
-      });
-    });
-  });
-</script>
 
 <style>
   .newsletter-signup {
