@@ -1,6 +1,7 @@
 ---
 title: "What Makes a Dashboard Actually Useful?"
 description: "Dashboards are everywhere, but most are just pretty noise. Here’s how to build dashboards that drive real action and business value."
+date: 2025-07-0
 publishDate: 2025-07-07
 author: "Alexander Nykolaiszyn"
 tags: ["dashboards", "data-visualization", "analytics", "business-intelligence", "stakeholder-engagement", "data-strategy"]
