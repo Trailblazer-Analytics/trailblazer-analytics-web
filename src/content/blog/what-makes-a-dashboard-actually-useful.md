@@ -6,7 +6,7 @@ publishDate: 2025-07-07
 author: "Alexander Nykolaiszyn"
 tags: ["dashboards", "data-visualization", "analytics", "business-intelligence", "stakeholder-engagement", "data-strategy"]
 heroImage: "/images/article-analytics.jpg"
-featured: true
+featured: false
 draft: false
 ---
 
