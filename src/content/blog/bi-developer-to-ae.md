@@ -5,7 +5,7 @@ date: 2025-07-10
 publishDate: 2025-07-10
 author: "Alexander Nykolaiszyn"
 tags: ["career transformation", "data engineering", "analytics", "modern data stack"]
-heroImage: "/images/bi-to-ae-transition.jpg"
+heroImage: "/images/article-analytics.jpg"
 featured: true
 draft: false
 ---
