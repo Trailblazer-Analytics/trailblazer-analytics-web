@@ -13,3 +13,10 @@ archive/
 
 # Env
 .env
+
+# Build metadata (generated during builds)
+build-metadata.json
+scripts/build-metadata.json
+
+# Claude workspace
+.claude/
