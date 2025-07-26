@@ -38,7 +38,6 @@ jobs:
       
       - name: Run pre-build
         run: pnpm run pre-build
-        continue-on-error: true
       
       - name: Build site  
         run: |

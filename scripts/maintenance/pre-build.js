@@ -141,6 +141,7 @@ function generateRSSPreview() {
 
 // HOOK: Main execution
 async function runPreBuild() {
+  const startTime = Date.now();
   console.log('🚀 Starting pre-build tasks...');
   
   try {
@@ -154,13 +155,13 @@ async function runPreBuild() {
     
     // HOOK: Add success metrics
     const endTime = Date.now();
-    console.log(`⏱️ Pre-build completed in ${Date.now() - startTime}ms`);
+    console.log(`⏱️ Pre-build completed in ${endTime - startTime}ms`);
     
   } catch (error) {
     console.error('❌ Pre-build failed:', error.message);
+    console.error('Stack trace:', error.stack);
     process.exit(1);
   }
 }
 
-const startTime = Date.now();
 runPreBuild();
